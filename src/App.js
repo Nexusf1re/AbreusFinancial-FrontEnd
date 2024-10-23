@@ -1,13 +1,14 @@
 import './App.css';
-import First from './First';
-import Logo from './Logo';
+import First from './components/study/First';
+
 
 function App() {
   return (
     <div className="App">
-      
-      <First />
-      <Logo />
+      <div className="App">
+      <First texto="Esta é uma mensagem passada como prop!" />
+    </div>
+    
 
     </div>
   );

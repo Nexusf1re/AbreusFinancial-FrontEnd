@@ -1,8 +1,9 @@
 import React from 'react';
 import './First.css'
 
-function First() {
-  return <h1> Abreu's Enterprise </h1>;
+function First(props) {
+  return <h1>{props.texto}</h1>;
 }
+
 
 export default First;
