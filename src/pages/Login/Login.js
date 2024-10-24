@@ -19,6 +19,7 @@ const Login = () => {
     <div className="wrapper">
       <img src={Slogan} alt="Logo" /> {/* Usando a imagem importada */}
       <h1>Login</h1>
+      <h3 id='controle'>Controle Financeiro</h3>
       <form onSubmit={handleSubmit}>
         <div className="input-box">
           <input
@@ -43,7 +44,7 @@ const Login = () => {
         <button type="submit" className="btn">Entrar</button>
       </form>
       <div id="cadastrar">
-        <a href="/register"><i style={{color: 'white'}}>Não tem uma conta?</i> Cadastre-se</a> {/* Link para página de cadastro */}
+        <a href="/register"><i>Não tem uma conta?</i> Cadastre-se</a> {/* Link para página de cadastro */}
       </div>
     </div>
   );
