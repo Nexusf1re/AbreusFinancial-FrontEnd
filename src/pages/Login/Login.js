@@ -44,7 +44,7 @@ const Login = () => {
         <button type="submit" className="btn">Entrar</button>
       </form>
       <div id="cadastrar">
-        <a href="/register"><i>Não tem uma conta?</i> Cadastre-se</a> {/* Link para página de cadastro */}
+        <a href="/register"><p>Não tem uma conta?</p> Cadastre-se</a> {/* Link para página de cadastro */}
       </div>
     </div>
   );
