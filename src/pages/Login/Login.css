@@ -3,7 +3,7 @@
 @media screen and (max-width: 599px) {
     .wrapper {
         /* largura da caixa Para Dispositivos Móveis*/
-        width: 92% !important;
+        width: 94% !important;
         
     }
 }
@@ -20,10 +20,7 @@ body{
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: rgb(12,76,86);
-    background: radial-gradient(circle, rgba(12,76,86,1) 0%, rgba(17,68,84,1) 49%, rgba(10,35,41,1) 100%);
-    /* background: url('images/background2.jpg')no-repeat;*/
-    /* background: url(images/background7.jpg); */ 
+    background: #606060;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -36,7 +33,7 @@ img{
     align-items: center;
     margin-left: auto;
     margin-right: auto;
-    margin-top: -50px;
+    margin-top: -60px;
     margin-bottom: -50px;
 }
 
@@ -49,9 +46,10 @@ form h4{
 
 .wrapper{
     width: 420px;
-    border: 2px solid rgba(255, 255, 255, .4);
+    border: 0px solid rgba(255, 255, 255, .4);
     backdrop-filter: blur(4px);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+    background-color: rgba(255, 255, 255, 60%);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     color: #000000;
     border-radius: 12px;
     padding: 30px 50px;
@@ -65,11 +63,12 @@ form h4{
 .wrapper h1{
     font-size: 36px;
     text-align: center;  
-    color: #fff; 
+    color: black; 
 }
 
 .wrapper h3{
-    color: #fff;
+    color: #2c2c2c;
+    text-align: center;
 }
 
 .wrapper .input-box{
@@ -87,7 +86,7 @@ form h4{
     border: none;
     outline: none;
     border: 2px solid rgba(95, 95, 95, 0.2);
-    border-radius: 40px;
+    border-radius: 18px;
     font-size: 16px;
     color: #000000;
     padding: 20px 45px 20px;
@@ -130,10 +129,10 @@ form h4{
     cursor: pointer;
     margin-right: auto;
     margin-left: auto;
-    width: 70%;
+    width: 60%;
     height: 45px;
     background-image: linear-gradient(to top, #D8D9DB 0%, #fff 80%, #FDFDFD 100%);
-    border-radius: 30px;
+    border-radius: 18px;
     border: 1px solid #8F9092;
     transition: all 0.4s ease;
     font-family: "Source Sans Pro", sans-serif;
@@ -153,8 +152,9 @@ form h4{
   }
 
   #cadastrar a{
+    padding-top: 10px;
     text-decoration: none;
-    color: #727272;
+    color: #707070;
     border-radius: 12px;
     padding-left: 0;
     padding-right: 0;
@@ -166,18 +166,6 @@ form h4{
     font-size: 18px;
   }
 
-  #cadastrar{
-    color: #ffffff;
-    font-weight: 500;
-    font-size: 18px;
-    background-color: transparent;
-    border: none;
-    display: grid;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-    margin-top: 20px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: -30px;
+  #cadastrar i{
+    color: #000000;
   }
