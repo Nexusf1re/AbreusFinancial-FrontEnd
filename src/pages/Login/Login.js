@@ -1,43 +1,50 @@
-import './Login.css';
+// src/pages/Login/Login.js
+
 import React, { useState } from 'react';
+import './Login.css'; // Importando o CSS
+import Slogan from '../../assets/Slogan.png'; // Ajustando o caminho para a imagem
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Aqui você pode adicionar a lógica para enviar os dados ao backend
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Aqui você pode adicionar a lógica para enviar os dados de login
     console.log('Email:', email);
     console.log('Password:', password);
   };
 
   return (
-    <div className="login-container">
+    <div className="wrapper">
+      <img src={Slogan} alt="Logo" /> {/* Usando a imagem importada */}
       <h1>Login</h1>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">Email:</label>
+        <div className="input-box">
           <input
             type="email"
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
             required
           />
         </div>
-        <div>
-          <label htmlFor="password">Senha:</label>
+        <div className="input-box">
           <input
             type="password"
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="Senha"
             required
           />
         </div>
-        <button type="submit">Entrar</button>
+        <button type="submit" className="btn">Entrar</button>
       </form>
+      <div id="cadastrar">
+        <a href="/register">Não tem uma conta? Cadastre-se</a> {/* Link para página de cadastro */}
+      </div>
     </div>
   );
 };
