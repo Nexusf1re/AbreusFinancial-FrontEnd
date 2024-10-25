@@ -1,18 +1,19 @@
-import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Login.css';
 import Slogan from '../../assets/Slogan.png'; 
-import { FaLock } from "react-icons/fa6";
-import { FaRegEnvelope } from "react-icons/fa6";
+import { FaLock, FaRegEnvelope } from "react-icons/fa6";
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Email:', email);
     console.log('Password:', password);
+    navigate('/home');
   };
 
   return (
@@ -22,7 +23,7 @@ const Login = () => {
       <h3 id='controle'>Controle Financeiro</h3>
       <form onSubmit={handleSubmit}>
         <div className="input-box">
-        <FaRegEnvelope className='icon'/>
+          <FaRegEnvelope className='icon'/>
           <input
             type="email"
             id="email"
@@ -33,7 +34,7 @@ const Login = () => {
           />
         </div>
         <div className="input-box">
-        <FaLock className='icon'/>
+          <FaLock className='icon'/>
           <input
             type="password"
             id="password"
@@ -43,7 +44,7 @@ const Login = () => {
             required
           />
         </div>
-        <button type="submit" className="btn">Entrar</button>
+        <button className="btn" type="submit">Entrar</button>
       </form>
       <div id="cadastrar">
         <a href="/sign-up"><p>Não tem uma conta?</p> Cadastre-se</a>

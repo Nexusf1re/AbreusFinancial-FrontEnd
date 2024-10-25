@@ -1,0 +1,89 @@
+@media screen and (max-width: 599px) {
+}
+*{
+    box-sizing: border-box;
+   
+}
+
+body{
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+#date{
+    font-size: 24px;
+    font-weight: bold;
+    background-color: #D9D9D9;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    border-radius: 12px;
+    position: flex;
+    margin: 90px 8px -5vw 8px;
+}
+
+.InOut{
+    padding: 0;
+    margin-top: 0;
+    display: flex;
+    gap: 10px;
+}
+
+.income{
+    background-color: #D9D9D9;
+    border-radius: 10px;
+    width: 50%;
+    height: 80px;
+    margin-top: 10%;
+    position: flex;
+    margin-left: 8px;
+    & p{
+        text-align: center;
+        font-size: 20px;
+        font-weight: 500;
+        color: green;
+    }
+    
+
+}
+
+.outgoing{
+    background-color: #D9D9D9;
+    border-radius: 10px;
+    width: 50%;
+    height: 80px;
+    margin-top: 10%;
+    position: flex;
+    margin-right: 8px;
+    & p{
+        text-align: center;
+        font-size: 20px;
+        font-weight: 500;
+        color: rgb(193, 1, 1);
+    }
+    
+}
+
+.monthBalance{
+    margin: 10px 8px 10px 8px;
+    background-color: #D9D9D9;
+    border-radius: 10px;
+    width: calc(100%-20px);
+    padding: 10px;
+
+    & .name{
+        margin-top: -5px;
+    }
+    
+    & p{
+        text-align: center;
+        font-size: 20px;
+        font-weight: 500;
+        color: rgb(193, 1, 1);
+    }
+}
