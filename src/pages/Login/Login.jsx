@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import styles from './Login.module.css'; // Usando CSS Module
+import styles from './Login.module.css';
 import Slogan from '../../assets/Slogan.png';
 import { FaLock, FaRegEnvelope } from "react-icons/fa6";
 
