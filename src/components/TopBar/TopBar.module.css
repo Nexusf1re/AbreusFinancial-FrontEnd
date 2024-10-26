@@ -9,7 +9,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: "Poppins", sans-serif;
   }
+  
 
   .usericon{
     font-size: 55px;
