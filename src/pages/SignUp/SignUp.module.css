@@ -33,7 +33,7 @@
 .wrapper h1 {
     font-size: 36px;
     text-align: center;  
-    color: black; 
+    color: rgb(0, 0, 0); 
 }
 
 .controle {
@@ -81,7 +81,7 @@
     position: absolute;
     top: 26%;
     right: 15px;
-    color: black;
+    color: rgb(0, 0, 0);
 }
 
 .btn {

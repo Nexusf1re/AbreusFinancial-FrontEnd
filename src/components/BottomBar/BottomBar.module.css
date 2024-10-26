@@ -32,3 +32,20 @@
     color: #7a7878;
    scale: 1.6;
 }
+
+a:focus{
+    background: none !important;
+    text-decoration: none !important;
+    outline: none !important;
+}
+
+a span:focus{
+    background: none !important;
+    text-decoration: none !important;
+    outline: none !important;
+}
+
+a{
+    outline: none !important;
+    background: none !important;
+}

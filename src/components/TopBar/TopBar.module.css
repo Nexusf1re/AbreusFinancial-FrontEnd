@@ -1,6 +1,6 @@
 .topbar{
     background-color: #D9D9D9;
-    color: black;
+    color: rgb(0, 0, 0);
     position: fixed;
     top: 0;
     left: 0;
@@ -19,6 +19,26 @@
     padding-left: 2px !important ;
   }
 
+  .exit{
+    display: inline;
+    position: fixed;
+    right: 10px;
+    text-align: center;
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+  }
+
+  .exit p {
+   margin-top: -5px;
+  }
+
+  .exiticon{
+    
+  }
+
   .welcome{
     font-size: 22px;
     position: fixed;
@@ -28,7 +48,7 @@
   .greeting{
     font-size: 20px;
     position: fixed;
-    right: 10%;
+    right: 20%;
   }
 
   
