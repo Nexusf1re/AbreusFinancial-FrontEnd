@@ -12,12 +12,18 @@
     display: flex;
     padding-left: 5px;
     padding-right: 5px;
-
-    & span{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        
-    }
+    
 }
+
+.bottombar span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.bottombar a{
+    text-decoration: none;
+    color:black;
+}
+
