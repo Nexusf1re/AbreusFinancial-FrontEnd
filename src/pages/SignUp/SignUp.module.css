@@ -1,9 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
-
 @media screen and (max-width: 599px) {
-  .wrapper {
-    max-width: 95vw !important;
-  }
+    .wrapper {
+        margin-top: 5vh!important;
+    }
 }
 
 .signUpPage * {
@@ -20,14 +18,16 @@
 }
 
 .wrapper {
-    width: 420px; 
+    max-width: 420px; 
     backdrop-filter: blur(4px);
     background-color: rgba(255, 255, 255, 0.6);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     color: #000000;
     border-radius: 12px;
-    padding: 30px 25px 50px;
+    padding: 30px 25px 20px 30px;
     margin: auto;
+    justify-content: center;
+    align-items: center;
 }
 
 .wrapper h1 {
@@ -65,6 +65,11 @@
     background-color: rgba(242, 242, 242, 0.304);
     box-shadow: 4px 5px 10px rgba(0, 0, 0, 0.536), 1px 1px 10px rgba(255, 255, 255, 0.3);
 }
+
+.inputBox input:focus {
+    transform: scale(1.01);
+    box-shadow: 6px 6px 8px rgba(0, 0, 0, 0.4), inset 2px 2px 10px rgba(0, 0, 0, 0.446), inset -1px -1px 5px rgba(255, 255, 255, 0.6);
+  }
 
 .inputBox input::placeholder {
     color: #000000;

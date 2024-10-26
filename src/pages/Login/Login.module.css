@@ -11,6 +11,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
+
 }
 
 .logo {
@@ -20,7 +21,7 @@
 }
 
 .wrapper {
-  width: 420px; 
+  max-width: 420px; 
   backdrop-filter: blur(4px);
   background-color: rgba(255, 255, 255, 0.6);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -28,6 +29,9 @@
   border-radius: 12px;
   padding: 30px 25px 50px;
   margin-top: 10vh !important;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
 }
 
 .wrapper h1 {
@@ -72,8 +76,8 @@
 }
 
 .inputBox input:focus {
-  transform: scale(1.05);
-  box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.4), inset 2px 2px 10px rgba(0, 0, 0, 0.6), inset -1px -1px 5px rgba(255, 255, 255, 0.6);
+  transform: scale(1.01);
+  box-shadow: 6px 6px 8px rgba(0, 0, 0, 0.4), inset 2px 2px 10px rgba(0, 0, 0, 0.446), inset -1px -1px 5px rgba(255, 255, 255, 0.6);
 }
 
 .icon {

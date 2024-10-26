@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import styles from './SignUp.module.css'; // Usando CSS Module
 import Slogan from '../../assets/Slogan.png';
-import { FaLock, FaRegEnvelope } from "react-icons/fa6";
+import { FaLock, FaRegEnvelope, FaUser } from "react-icons/fa6";
 
 const SignUp = () => {
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -12,9 +13,10 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log('Username:', username);
     console.log('Email:', email);
     console.log('Password:', password);
-    navigate('/login'); // Redirecionar para login após registro
+    navigate('/login');
   };
 
   return (
@@ -23,6 +25,20 @@ const SignUp = () => {
       <h1>Cadastro</h1>
       <h3 className={styles.controle}>Controle Financeiro</h3>
       <form onSubmit={handleSubmit}>
+
+      <div className={styles.inputBox}>
+          <FaUser className={styles.icon} />
+          <input
+            type="text"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Seu Nome"
+            aria-label="Nome"
+            required
+          />
+        </div>
+
         <div className={styles.inputBox}>
           <FaRegEnvelope className={styles.icon} />
           <input
