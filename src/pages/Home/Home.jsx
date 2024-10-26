@@ -21,18 +21,22 @@ const Home = () => {
       <div className={styles.InOut}>
         <div className={styles.income}>
           <p>Total Entrada</p>
-          <p className={styles.icomeValue}></p>
+          <p className={styles.icomeValue}>R$9.000,00</p>
         </div>
 
         <div className={styles.outgoing}>
           <p>Total Saída</p>
-          <p className={styles.outgoingValue}></p>
+          <p className={styles.outgoingValue}>R$7.500,00</p>
         </div>
       </div>
 
       <div className={styles.monthBalance}>
         <p className={styles.name}>Balanço Mês</p>
-        <p className={styles.balanceValue}> R$1500,00</p>
+        <p className={styles.balanceValue}>R$1.500,00</p>
+      </div>
+
+      <div className={styles.graph}>
+      
       </div>
 
       <BottomBar />
