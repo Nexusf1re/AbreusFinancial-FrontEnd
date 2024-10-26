@@ -6,51 +6,28 @@
   }
 }
 
-* {
+.signUpPage * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
 }
 
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: #606060;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-}
-
-img {
+.logo {
     width: 220px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: -60px;
-    margin-bottom: -50px;
-}
-
-form h4 {
-    color: #adadad !important;
-    font-size: 19px;
+    display: block;
+    margin: -60px auto -50px;
 }
 
 .wrapper {
     width: 420px; 
     backdrop-filter: blur(4px);
-    background-color: rgba(255, 255, 255, 60%);
+    background-color: rgba(255, 255, 255, 0.6);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     color: #000000;
     border-radius: 12px;
-    padding: 30px 25px;
-    padding-bottom: 50px;
-    margin: 0;
-    margin-top: 10vh !important;
+    padding: 30px 25px 50px;
+    margin: auto;
 }
 
 .wrapper h1 {
@@ -59,21 +36,21 @@ form h4 {
     color: black; 
 }
 
-.wrapper h3 {
+.controle {
     color: #2c2c2c;
     text-align: center;
     font-size: 20px;
 }
 
-.wrapper .input-box {
+.inputBox {
     position: relative;
     width: 100%;
     height: 50px;
     background: transparent;
-    margin: 25px 0px;
+    margin: 15px 0;
 }
 
-.input-box input {
+.inputBox input {
     width: 100%;
     height: 100%;
     background: transparent;
@@ -83,82 +60,54 @@ form h4 {
     border-radius: 18px;
     font-size: 18px;
     color: #000000;
-    padding: 20px 20px 20px;
+    padding: 20px;
     padding-right: 16%;
     background-color: rgba(242, 242, 242, 0.304);
     box-shadow: 4px 5px 10px rgba(0, 0, 0, 0.536), 1px 1px 10px rgba(255, 255, 255, 0.3);
 }
 
-.input-box input::placeholder {
+.inputBox input::placeholder {
     color: #000000;
-    text-transform: uppercase;  
-}
-
-.input-box:focus {
-    transform: scale(1.05);
-    box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.365), inset 2px 2px 10px rgba(0, 0, 0, 0.592), inset -1px -1px 5px rgba(255, 255, 255, 0.6);
-}
-
-.input-box i {
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 20px;
-    color: gold;
-}
-
-.wrapper .btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    outline: none;
-    cursor: pointer;
-    margin-right: auto;
-    margin-left: auto;
-    width: 60%;
-    height: 45px;
-    background-image: linear-gradient(to top, #D8D9DB 0%, #fff 80%, #FDFDFD 100%);
-    border-radius: 18px;
-    border: 1px solid #8F9092;
-    transition: all 0.4s ease;
-    font-family: "Source Sans Pro", sans-serif;
-    font-size: 15px;
-    font-weight: bold;
-    color: #000000;
-    text-shadow: 0 1px #fff;
+    text-transform: uppercase;
 }
 
 .icon {
     font-size: 20px;
     position: absolute;
     top: 26%;
-    left: 85%;
+    right: 15px;
+    color: black;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    cursor: pointer;
+    margin: auto;
+    width: 60%;
+    height: 45px;
+    background-image: linear-gradient(to top, #D8D9DB 0%, #fff 80%, #FDFDFD 100%);
+    border-radius: 18px;
+    border: 1px solid #8F9092;
+    transition: all 0.4s ease;
+    font-size: 15px;
+    font-weight: bold;
+    color: #000000;
+    text-shadow: 0 1px #fff;
 }
 
 .btn:hover {
     box-shadow: 0px 0px 3px 10px #0000001b, inset 8px 8px 3px 3px #cecfd110;
 }
 
-.btn:focus {
-    box-shadow: 0 4px 3px 1px #fcfcfc17, 0 3px 4px #d6d7d920, 0 -4px 4px #cecfd138, 0 -6px 4px #fefefe39, inset 0 0 5px 3px #9999993a, inset 0 0 30px #aaaaaa21;
-}
-
-#cadastrar a {
+.cadastrar a {
     padding-top: 10px;
     text-decoration: none;
-    color: #707070;
-    border-radius: 12px;
-    padding-left: 0;
-    padding-right: 0;
-    font-weight: bold;
-    display: grid;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-    font-size: 18px;
-}
-
-#cadastrar p {
     color: #000000;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+    font-size: 18px;
 }

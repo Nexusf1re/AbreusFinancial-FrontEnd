@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import SignUp from './pages/SignUp/SignUp';
 import Home from './pages/Home/Home';
-import { FaCircleUser } from "react-icons/fa6";
+import Form from './pages/Form/Form';
 
 function App() {
   return (
@@ -13,6 +13,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/home" element={<Home />} />
+        <Route path='/form' element={<Form />} />
       </Routes>
     </Router>
   );

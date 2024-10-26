@@ -1,0 +1,103 @@
+.body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.homePage * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+
+.date {
+    font-size: 24px;
+    font-weight: bold;
+    background-color: #D9D9D9;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    border-radius: 12px;
+    margin: 90px 8px -5vw 8px;
+}
+
+.InOut {
+    padding: 0;
+    margin-top: 0;
+    display: flex;
+    gap: 10px;
+}
+
+.income {
+    background-color: #D9D9D9;
+    border-radius: 10px;
+    width: 50%;
+    height: 80px;
+    margin-top: 10%;
+    margin-left: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Select the <p> inside .income */
+.income p {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+    color: green;
+}
+
+.outgoing {
+    background-color: #D9D9D9;
+    border-radius: 10px;
+    width: 50%;
+    height: 80px;
+    margin-top: 10%;
+    margin-right: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Select the <p> inside .outgoing */
+.outgoing p {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+    color: rgb(193, 1, 1);
+}
+
+.monthBalance {
+    margin: 10px 8px 10px 8px;
+    background-color: #D9D9D9;
+    border-radius: 10px;
+    width: calc(100% - 20px);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Style the .name class inside .monthBalance */
+.monthBalance .name {
+    margin-top: -5px;
+}
+
+/* Style all <p> inside .monthBalance */
+.monthBalance p {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+    color: rgb(193, 1, 1);
+}
+
+
+
