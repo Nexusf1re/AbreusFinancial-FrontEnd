@@ -16,7 +16,7 @@
     display: flex;
     left: 0;
     position: fixed;
-    padding-left: 2px;
+    padding-left: 2px !important ;
   }
 
   .welcome{

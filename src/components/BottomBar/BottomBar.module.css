@@ -10,8 +10,9 @@
     justify-content: space-between;
     align-items: center;
     display: flex;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+    transition: all 0.4s ease !important;
     
 }
 
@@ -27,3 +28,7 @@
     color:black;
 }
 
+.activeIcon {
+    color: #7a7878;
+   scale: 1.6;
+}

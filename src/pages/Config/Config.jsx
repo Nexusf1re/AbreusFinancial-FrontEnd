@@ -1,13 +1,12 @@
 import React from 'react';
-import styles from "./Form.module.css";
 import TopBar from '../../components/TopBar/TopBar';
 import BottomBar from '../../components/BottomBar/BottomBar';
+import styles from './Config.module.css';
 
-const Form = ()  => {
-    return (
-        <div className={`${styles.body} ${styles.formPage}`}>
+const Config = () => {
+    return(
+        <div className={`${styles.body} ${styles.configPage}`}> 
         <TopBar />
-
         
 
         <BottomBar />
@@ -15,5 +14,4 @@ const Form = ()  => {
     );
 };
 
-
-export default Form;
+export default Config;

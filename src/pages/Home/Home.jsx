@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from "./Home.module.css";
-import TopBar from '../../components/TopBar/TopBar.jsx';
-import BottomBar from '../../components/BottomBar/BottomBar.jsx';
+import TopBar from '../../components/TopBar/TopBar';
+import BottomBar from '../../components/BottomBar/BottomBar';
 
 const Home = () => {
   const date = new Date().toLocaleDateString('pt-BR', {
