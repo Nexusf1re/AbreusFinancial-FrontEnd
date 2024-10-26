@@ -1,4 +1,4 @@
-// src/App.js
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './pages/Login/Login';
@@ -11,6 +11,7 @@ import Config from './pages/Config/Config';
 function App() {
   return (
     <Router>
+      <SpeedInsights />
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/sign-up" element={<SignUp />} />
