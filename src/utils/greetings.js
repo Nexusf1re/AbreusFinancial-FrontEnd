@@ -1,13 +1,12 @@
 function getHoraLocal() {
     const dataAtual = new Date();
     const horas = dataAtual.getHours();
-    const minutos = dataAtual.getMinutes();
     
-    return { horas, minutos };
+    return { horas };
 }
 
 function saudacao() {
-    const { horas, minutos } = getHoraLocal();
+    const { horas } = getHoraLocal();
 
     if (horas >= 12 && horas < 18) {
         return "Boa Tarde";
