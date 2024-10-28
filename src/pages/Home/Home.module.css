@@ -8,11 +8,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
-
-.homePage * {
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box !important;
     font-family: "Poppins", sans-serif;
 }
 
@@ -91,7 +88,6 @@
     margin: 10px 0px 10px 0px;
     background-color: var(--back-color);
     border-radius: 10px;
-    width: 100%;
     padding: 10px;
     display: flex;
     flex-direction: column;

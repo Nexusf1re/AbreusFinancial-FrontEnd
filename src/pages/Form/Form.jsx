@@ -27,7 +27,7 @@ const FormComponent = () => {
   };
 
   return (
-    <div className={styles.body}>
+    <div className={`${styles.body} ${styles.homePage}`}>
       <TopBar />
       <Form onFinish={handleSubmit} className={styles.form}>
         <Title level={3}>Lançamento de contas</Title>
