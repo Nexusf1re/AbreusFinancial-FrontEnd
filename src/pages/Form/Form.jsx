@@ -11,7 +11,7 @@ const Form = () => {
     tipo: '',
     categoria: '',
     subcategoria: '',
-    data: new Date().toISOString().split('T')[0], // Define a data padrão como a data atual
+    data: new Date().toISOString().split('T')[0],
   });
 
   const handleChange = (e) => {
@@ -21,7 +21,6 @@ const Form = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aqui você pode fazer a chamada à API para enviar os dados do formulário
     console.log(formData);
   };
 
@@ -68,7 +67,6 @@ const Form = () => {
             onChange={handleChange}
           >
             <option disabled selected value="">Selecionar</option>
-            {/* Adicione opções aqui */}
           </select>
         </div>
 
@@ -82,7 +80,6 @@ const Form = () => {
             onChange={handleChange}
           >
             <option disabled selected value="">Selecionar</option>
-            {/* Adicione opções aqui */}
           </select>
         </div>
 
@@ -96,7 +93,6 @@ const Form = () => {
             onChange={handleChange}
           >
             <option disabled selected value="">Selecionar</option>
-            {/* Adicione opções aqui */}
           </select>
         </div>
 
