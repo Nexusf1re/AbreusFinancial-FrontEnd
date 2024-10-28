@@ -1,17 +1,15 @@
 .bottombar{
     position: fixed;
     bottom: -5px;
-    left: 0;
+    left: 0 !important;
     height: 65px;
     width: 100%;
     background-color: var(--bottomBar);
     color: var(--font-color);
     font-size: 18px;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     display: flex;
-    padding-left: 10px !important;
-    padding-right: 10px !important;
     transition: all 0.6s ease !important;
     font-family: "Poppins", sans-serif;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
