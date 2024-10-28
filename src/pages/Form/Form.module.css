@@ -1,165 +1,51 @@
-.body {
+.body{
+    margin-top: 70px;
+}
+
+.title{
+    margin-bottom: 0px !important;
+}
+
+.formInput{
+    font-size: 22px !important;
+    margin-bottom: -2px;
+}
+
+.formInput .ant-input {
+    font-size: 22px !important;       /* Aumenta o tamanho da fonte */
+    padding: 8px !important;          /* Adiciona padding para dar mais espaço */
+}
+
+.formInput .ant-select-selector {
+    font-size: 22px !important;       /* Aumenta o tamanho da fonte */
+    padding: 8px !important;          /* Adiciona padding para dar mais espaço */
+}
+
+.formInput label {
+    font-size: 18px !important;
+    margin-bottom: -10px !important;    
+    margin-top: 5px !important;
+    color: var(--label-color); 
+    font-weight: bold;      
+    display: block;          
+}
+
+
+
+.formSubmit{
     display: flex;
-    flex-direction: column;
     justify-content: center;
-}
-
-.formPage * {
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif !important;
-}
-
-.form{
-    margin-top: 65px;
-}
-
-.legend {
-    padding: 8px;
-    background-color: rgb(207, 207, 207);
-    border-radius: 8px;
-    font-size: 20px;
-    display: flex;
-    text-align: center;
-    justify-content: space-between;
-    text-align: center;
     align-items: center;
-    margin-bottom: 20px;
+    text-align: center;
+    margin: auto;
+    width: 100px;
+    margin-top: 5px;
+    font-size: 22px;
+    padding: 16px;
 }
 
-
-.inputBox {
-    position: relative;
-    font-size: 16px;
-    font-weight: bold;
-    justify-content: center;
-    text-align: justify;
-    align-items: center;
+.formDate{
+    width: 100%;
     margin-bottom: 15px;
-}
-
-.inputBox option select{
-    display: flex;
-    justify-content: center;
-    align-items: center;
     text-align: center;
-}
-.inputBox .selects{
-    font-weight: bold;
-}
-
-.valorinn{
-    margin-bottom: -25px;
-}
-
-.valorinn, .descricao{
-    height: 40px;
-}
-
-.selects {
-    font-size: 14px;
-    width: 100%;
-    height: 40px;
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    border-radius: 10px;
-}
-
-.inputUser {
-    background: none;
-    border: none;
-    border-radius: 5px;
-    padding: 5px;
-    background-color: #ffffffec;
-    outline: none;
-    color: rgb(0, 0, 0);
-    font-size: 18px;
-    width: 100%;
-    font-weight: 550;
-    margin-top: 10px;
-}
-
-.valorinn{
-    padding-left: 27px;
-}
-
-.valorout{
-    margin-top: 0.1em;
-}
-
-.labelInput {
-    color: #fff;
-    position: absolute;
-    top: 8px;
-    left: 5px;
-    pointer-events: none;
-    transition: .5s;
-    margin-top: 8px;
-}
-
-label{
-margin-bottom: 1.5px;
-color: #fff;
-font-size: 15px;
-}
-
-a:hover {
-
-    text-decoration: none;
-}
-
-.inputUser~.labelInput,
-.inputUser:valid~.labelInput {
-    top: -20px;
-    font-size: 15px;
-    color: rgb(255, 255, 255);
-}
-
-.data {
-    border: none;
-    padding: 8px;
-    font-size: 17px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    border-radius: 0px;
-    font-weight: bold;
-}
-
-.submit {
-    font-weight: bold;
-    appearance: none;
-    background-color: #656565;
-    border-radius: 8px;
-    border-width: 0.5px;
-    border-color: #6da4c062;
-    box-sizing: border-box;
-    color: #fff;
-    cursor: pointer;
-    font-family: "JetBrains Mono", monospace;
-    list-style: none;
-    padding-left: 24px;
-    padding-right: 24px;
-    text-decoration: none;
-    transition: box-shadow 0.2s, transform 0.25s;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    white-space: nowrap;
-    will-change: box-shadow, transform;
-    font-size: 20px;
-    display: flex;
-    height: 40px;
-    width: 200px;
-    justify-content: center;
-    margin-left: auto;
-    margin-right: auto;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin-bottom: 30px;
 }

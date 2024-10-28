@@ -20,7 +20,7 @@
 .wrapper {
     max-width: 420px; 
     backdrop-filter: blur(4px);
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: var(--authPages);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     color: #000000;
     border-radius: 12px;

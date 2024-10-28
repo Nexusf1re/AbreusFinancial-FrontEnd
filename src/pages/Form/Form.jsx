@@ -1,119 +1,126 @@
 import React, { useState } from 'react';
+import { Form, Input, Select, Button, DatePicker, Typography } from 'antd';
+import moment from 'moment'; // Importa moment
 import TopBar from '../../components/TopBar/TopBar';
 import BottomBar from '../../components/BottomBar/BottomBar';
 import styles from './Form.module.css';
 
-const Form = () => {
+const { Title } = Typography;
+const { Option } = Select;
+
+const FormComponent = () => {
   const [formData, setFormData] = useState({
-    valor: '',
-    descricao: '',
-    pgto: '',
-    tipo: '',
-    categoria: '',
-    subcategoria: '',
-    data: new Date().toISOString().split('T')[0],
+    value: '',
+    description: '',
+    payment: '',
+    type: '',
+    category: '',
+    date: moment().format('DD-MM-YYYY'), // Formato inicial da data
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const handleChange = (name, value) => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
+  const handleSubmit = (values) => {
+    console.log('Form Data:', values);
   };
 
   return (
-    <div className={`${styles.body} ${styles.formPage}`}>
-    <TopBar />
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <legend className={styles.legend}>
-          <b>Lançamento de Contas</b>
-        </legend>
+    <div className={styles.body}>
+      <TopBar />
+      <Form onFinish={handleSubmit} className={styles.form}>
+        <Title level={3}>Account Entry</Title>
 
-        <div className={styles.inputBox}>
-          <label className={styles.labelInput}></label>
-          <input
+        <Form.Item
+          className={styles.formInput}
+          label="Valor"
+          name="value"
+          rules={[{ required: true, message: 'Please input the value!' }]}>
+          <Input
             type="number"
-            name="valor"
-            className={styles.inputUser}
-            required
-            value={formData.valor}
-            onChange={handleChange}
+            value={formData.value}
+            onChange={(e) => handleChange('value', e.target.value)}
           />
-          <label htmlFor="valor" className={styles.labelInput}>Valor:</label>
-        </div>
+        </Form.Item>
 
-        <div className={styles.inputBox}>
-          <input
-            type="text"
-            name="descricao"
-            className={styles.inputUser}
-            required
-            value={formData.descricao}
-            onChange={handleChange}
+        <Form.Item
+          className={styles.formInput}
+          label="Descrição"
+          name="description"
+          rules={[{ required: true, message: 'Please input the description!' }]}>
+          <Input
+            value={formData.description}
+            onChange={(e) => handleChange('description', e.target.value)}
           />
-          <label htmlFor="descricao" className={styles.labelInput}>Descrição:</label>
-        </div>
+        </Form.Item>
 
-        <div className={styles.inputBox}>
-          <label  htmlFor="pgto">Movimentação:</label>
-          <select
-            name="pgto"
-            className={styles.selects}
-            required
-            value={formData.pgto}
-            onChange={handleChange}
-          >
-            <option disabled selected value="">Selecionar</option>
-          </select>
-        </div>
+        <Form.Item
+          className={styles.formInput}
+          label="Método de movimentação"
+          name="payment"
+          rules={[{ required: true, message: 'Please select a payment type!' }]}>
+          <Select
+            value={formData.payment}
+            onChange={(value) => handleChange('payment', value)}
+            placeholder="Select payment type">
+            <Option value="cash">Cash</Option>
+            <Option value="credit">Credit</Option>
+            <Option value="debit">Debit</Option>
+          </Select>
+        </Form.Item>
 
-        <div className={styles.inputBox}>
-          <label htmlFor="tipo">Tipo:</label>
-          <select
-            name="tipo"
-            className={styles.selects}
-            required
-            value={formData.tipo}
-            onChange={handleChange}
-          >
-            <option disabled selected value="">Selecionar</option>
-          </select>
-        </div>
+        <Form.Item
+          className={styles.formInput}
+          label="Tipo de movimentação"
+          name="type"
+          rules={[{ required: true, message: 'Please select a type!' }]}>
+          <Select
+            value={formData.type}
+            onChange={(value) => handleChange('type', value)}
+            placeholder="Select type">
+            <Option value="income">Entrada</Option>
+            <Option value="expense">Saída</Option>
+          </Select>
+        </Form.Item>
 
-        <div className={styles.inputBox}>
-          <label htmlFor="categoria">Categoria:</label>
-          <select
-            name="categoria"
-            className={styles.selects}
-            required
-            value={formData.categoria}
-            onChange={handleChange}
-          >
-            <option disabled selected value="">Selecionar</option>
-          </select>
-        </div>
+        <Form.Item
+          className={styles.formInput}
+          label="Categoria"
+          name="category"
+          rules={[{ required: true, message: 'Please select a category!' }]}>
+          <Select
+            value={formData.category}
+            onChange={(value) => handleChange('category', value)}
+            placeholder="Select category">
+            <Option value="food">Food</Option>
+            <Option value="transport">Transport</Option>
+          </Select>
+        </Form.Item>
 
+        <Form.Item
+          className={styles.formInput}
+          label="Data da movimentação"
+          name="date"
+          rules={[{ required: true, message: 'Please select a date!' }]}>
 
-        <div className={styles.inputBox}>
-          <label htmlFor="data"><b>Data:</b></label>
-          <input
-            type="date"
-            name="data"
-            className={styles.selects}
-            required
-            value={formData.data}
-            onChange={handleChange}
+          <DatePicker
+          className={styles.formDate}
+            format="DD-MM-YYYY" // Define o formato desejado aqui
+            value={formData.date ? moment(formData.date, 'DD-MM-YYYY') : null}
+            onChange={(date) => handleChange('date', date ? moment(date).format('DD-MM-YYYY') : '')} // Armazena a data formatada
           />
-        </div>
+        </Form.Item>
 
-        <input type="submit" value="Enviar" className={styles.submit} />
-      </form>
+        <Form.Item>
+          <Button className={styles.formSubmit} type="primary" htmlType="submit">
+            Enviar
+          </Button>
+        </Form.Item>
+      </Form>
       <BottomBar />
     </div>
   );
 };
 
-export default Form;
+export default FormComponent;

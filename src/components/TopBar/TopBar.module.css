@@ -1,6 +1,6 @@
 .topbar{
-    background-color: #D9D9D9;
-    color: rgb(0, 0, 0);
+    background-color: var(--topBar);
+    color: var(--font-color);
     position: fixed;
     top: 0;
     left: 0;
@@ -10,6 +10,10 @@
     justify-content: center;
     align-items: center;
     font-family: "Poppins", sans-serif;
+    transition: all 0.6s ease !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    overflow: hidden; 
+    transition: transform 0.3s, box-shadow 0.3s;
   }
   
 
@@ -30,27 +34,26 @@
     margin: 0;
     padding: 0;
     text-decoration: none;
-    color: rgb(0, 0, 0);
+    color: var(--font-color);
   }
 
   .exit p {
    margin-top: -5px;
-  }
-
-  .exiticon{
-    
+   color: var(--font-color);
   }
 
   .welcome{
     font-size: 22px;
     position: fixed;
     left: 18%;
+    color: var(--font-color);
   }
 
   .greeting{
     font-size: 20px;
     position: fixed;
     right: 20%;
+    color: var(--font-color);
   }
 
   

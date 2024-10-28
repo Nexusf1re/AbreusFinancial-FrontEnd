@@ -1,3 +1,25 @@
+:root{
+    /* White Theme*/
+    --authPages: rgb(255, 255, 255, 0.9);
+    --topBar: rgb(255, 255, 255, 0.95);
+    --bottomBar: rgb(255, 255, 255, 0.95);
+    --back-color: rgba(255, 255, 255, 0.95);
+    --font-color: rgba(0, 0, 0, 0.9);
+    --label-color: rgba(51, 51, 51, 1);
+    --mainBackground: rgb(230, 230, 230);
+}
+
+.dark-theme{
+    /* Black Theme*/
+    --authPages: rgb(255, 255, 255, 0.9);
+    --topBar: rgba(21, 21, 21, 0.95);
+    --bottomBar: rgba(21, 21, 21, 0.95);
+    --back-color: rgba(64, 64, 64, 0.95);
+    --font-color: rgba(229, 229, 229, 0.9);
+    --label-color: rgb(218, 218, 218);
+    --mainBackground: rgba(132, 132, 132, 0.9);
+}
+
 body {
-    background-color: rgba(0, 0, 0, 0.9) !important;
+    background-color: var(--mainBackground) !important;
 }
