@@ -30,7 +30,7 @@ const FormComponent = () => {
     <div className={styles.body}>
       <TopBar />
       <Form onFinish={handleSubmit} className={styles.form}>
-        <Title level={3}>Account Entry</Title>
+        <Title level={3}>Lançamento de contas</Title>
 
         <Form.Item
           className={styles.formInput}
@@ -64,9 +64,12 @@ const FormComponent = () => {
             value={formData.payment}
             onChange={(value) => handleChange('payment', value)}
             placeholder="Select payment type">
-            <Option value="cash">Cash</Option>
-            <Option value="credit">Credit</Option>
-            <Option value="debit">Debit</Option>
+            <Option value="cash">Dinheiro</Option>
+            <Option value="credit">Crédito</Option>
+            <Option value="debit">Débito</Option>
+            <Option value="pix">Pix</Option>
+            <Option value="transfer">Em-Conta</Option>
+
           </Select>
         </Form.Item>
 
@@ -93,8 +96,8 @@ const FormComponent = () => {
             value={formData.category}
             onChange={(value) => handleChange('category', value)}
             placeholder="Select category">
-            <Option value="food">Food</Option>
-            <Option value="transport">Transport</Option>
+            <Option value="food">Alimentação</Option>
+            <Option value="transport">Transporte</Option>
           </Select>
         </Form.Item>
 
