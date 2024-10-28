@@ -111,7 +111,10 @@ const FormComponent = () => {
           className={styles.formDate}
             format="DD-MM-YYYY" // Define o formato desejado aqui
             value={formData.date ? moment(formData.date, 'DD-MM-YYYY') : null}
-            onChange={(date) => handleChange('date', date ? moment(date).format('DD-MM-YYYY') : '')} // Armazena a data formatada
+            onChange={(date) => handleChange('date', date ? moment(date).format('DD-MM-YYYY') : '')}
+            onClick={(e) => e.preventDefault()} // Impede o teclado de abrir
+            inputReadOnly // Esta propriedade torna o input somente leitura
+
           />
         </Form.Item>
 
