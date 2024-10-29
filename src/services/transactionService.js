@@ -1,6 +1,6 @@
 // src/services/transactionService.js
 
-const API_URL = process.env.API_URL;
+const API_URL = process.env.REACT_APP_API_URL;
 
 export const fetchFinancialData = async (username) => {
     try {
