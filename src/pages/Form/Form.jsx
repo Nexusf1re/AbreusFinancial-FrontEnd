@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Input, Select, Button, DatePicker, Typography } from 'antd';
-import moment from 'moment'; // Importa moment
+import moment from 'moment';
 import TopBar from '../../components/TopBar/TopBar';
 import BottomBar from '../../components/BottomBar/BottomBar';
 import styles from './Form.module.css';

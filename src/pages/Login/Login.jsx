@@ -4,12 +4,9 @@ import { login } from '../../services/authService';
 import styles from './Login.module.css';
 import Slogan from '../../assets/Slogan.png';
 import { FaLock, FaRegEnvelope } from "react-icons/fa6";
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 
-
-
-
-const Login = () => {
+const Login = ({ onLogin }) => {
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -17,19 +14,19 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
       const response = await login(Email, Password);
       console.log('Login Successful:', response);
-      toast.success("Login bem-sucedido!"); // Mensagem de sucesso
+      toast.success("Login bem-sucedido!"); 
+      onLogin();
       navigate('/home');
     } catch (err) {
       console.error('Login failed:', err);
       setError('Email ou senha incorretos.');
-      toast.error("Email ou senha incorretos."); // Mensagem de erro
+      toast.error("Email ou senha incorretos.");
     }
   };
-  
 
   return (
     <div className={`${styles.wrapper} ${styles.loginPage}`}>

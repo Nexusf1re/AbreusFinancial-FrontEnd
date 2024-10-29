@@ -9,11 +9,18 @@ export const login = async (email, password) => {
       Password: password,
     });
 
-    localStorage.setItem('token', response.data.token);
-    localStorage.setItem('username', response.data.Username);
-    return response.data;
+    // Verifica se a resposta foi bem-sucedida
+    if (response.status === 200) {
+      // Armazena o token e o nome de usuário no localStorage
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('username', response.data.Username);
+      return response.data;
+    } else {
+      throw new Error('Erro ao autenticar.');
+    }
   } catch (error) {
-    throw error;
+    // Lança um erro com uma mensagem específica
+    throw new Error(error.response?.data?.message || 'Erro ao tentar fazer login.');
   }
 };
 
@@ -26,11 +33,19 @@ export const register = async (username, email, password) => {
     });
     return response.data;
   } catch (error) {
-    throw error;
+    throw new Error(error.response?.data?.message || 'Erro ao tentar registrar.');
   }
 };
 
 // Função para remover o token do localStorage
 export const logout = () => {
   localStorage.removeItem('token');
+  localStorage.removeItem('username');
+};
+
+// Função para verificar se o usuário está autenticado
+export const isAuthenticated = () => {
+  // Verifica se o token existe no localStorage
+  const token = localStorage.getItem('token');
+  return !!token; // Retorna true se o token existir, false caso contrário
 };
