@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css'; // Importando estilos do Toast
 import TopBar from '../../components/TopBar/TopBar';
 import BottomBar from '../../components/BottomBar/BottomBar';
 import styles from './Form.module.css';
+import { insertTransaction } from '../../services/formService'; // Importando o serviço
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -18,45 +19,49 @@ const FormComponent = () => {
     payment: '',
     type: '',
     category: '',
-    date: moment().format('DD-MM-YYYY'),
+    date: moment(),
   });
 
   const handleChange = (name, value) => {
     setFormData({ ...formData, [name]: value });
- 
   };
 
   const handleSubmit = async (values) => {
     const userId = localStorage.getItem('UserId');
     const username = localStorage.getItem('username');
-    try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/transactions/insert`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          Value: values.value,
-          PaymentMethod: values.payment,
-          Type: values.type,
-          Date: values.date,
-          Category: values.category,
-          Description: values.description,
-          UserId: userId,
-          Username: username, 
-        }),
-      });
 
-      if (response.ok) {
-        toast.success('Dados inseridos com sucesso!'); // Notificação de sucesso
-      } else {
-        toast.error('Erro ao inserir os dados!'); // Notificação de erro
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      toast.error('Erro ao inserir os dados!'); // Notificação de erro
+    // Verificar se UserId e Username existem
+    if (!userId || !username) {
+        toast.error('Usuário não autenticado. Faça login novamente.');
+        return; // Impedir que a requisição seja enviada
     }
-  };
+
+    // Formatar a data, usando a data atual como padrão se não houver valor
+    const formattedDate = values.date ? moment(values.date, 'DD-MM-YYYY').toISOString() : moment().toISOString();
+
+    const transactionData = {
+        Value: values.value,
+        PaymentMethod: values.payment,
+        Type: values.type,
+        Date: formattedDate,
+        Category: values.category,
+        Description: values.description,
+        UserId: userId,
+        Username: username,
+    };
+
+    console.log("Dados enviados:", transactionData); // Log dos dados
+
+    try {
+        const response = await insertTransaction(transactionData);
+        if (response) {
+            toast.success('Dados inseridos com sucesso!');
+        }
+    } catch (error) {
+        toast.error('Erro ao inserir os dados!');
+        console.error("Erro ao inserir transação:", error); // Log do erro
+    }
+};
 
   return (
     <div className={`${styles.body} ${styles.homePage}`}>
