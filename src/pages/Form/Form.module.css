@@ -1,5 +1,5 @@
 .body{
-    margin-top: 70px;
+    margin-top: 65px;
 }
 
 .title{
@@ -12,13 +12,22 @@
 }
 
 .formInput .ant-input {
-    font-size: 22px !important;       /* Aumenta o tamanho da fonte */
-    padding: 8px !important;          /* Adiciona padding para dar mais espaço */
+    font-size: 30px !important;
+    padding: 8px !important;        
+}
+
+.formInput{
+    font-size: 30px !important;
+}
+
+.formInput .ant-input-number {
+    font-size: 30px !important;
+    padding: 8px !important;
 }
 
 .formInput .ant-select-selector {
-    font-size: 22px !important;       /* Aumenta o tamanho da fonte */
-    padding: 8px !important;          /* Adiciona padding para dar mais espaço */
+    font-size: 30px !important;
+    padding: 8px !important;
 }
 
 .formInput label {

@@ -15,7 +15,7 @@ const FormComponent = () => {
     payment: '',
     type: '',
     category: '',
-    date: moment().format('DD-MM-YYYY'), // Formato inicial da data
+    date: moment().format('DD-MM-YYYY'),
   });
 
   const handleChange = (name, value) => {
@@ -36,7 +36,7 @@ const FormComponent = () => {
           className={styles.formInput}
           label="Valor"
           name="value"
-          rules={[{ required: true, message: 'Please input the value!' }]}>
+          rules={[{ required: true, message: 'Por favor insira um valor!' }]}>
           <Input
             type="number"
             value={formData.value}
@@ -48,7 +48,7 @@ const FormComponent = () => {
           className={styles.formInput}
           label="Descrição"
           name="description"
-          rules={[{ required: true, message: 'Please input the description!' }]}>
+          rules={[{ required: false, message: 'Por favor insira uma descrição!' }]}>
           <Input
             value={formData.description}
             onChange={(e) => handleChange('description', e.target.value)}
@@ -59,15 +59,16 @@ const FormComponent = () => {
           className={styles.formInput}
           label="Método de movimentação"
           name="payment"
-          rules={[{ required: true, message: 'Please select a payment type!' }]}>
+          rules={[{ required: true, message: 'Por favor selecione um método!' }]}>
           <Select
             value={formData.payment}
             onChange={(value) => handleChange('payment', value)}
-            placeholder="Select payment type">
+            placeholder="Selecione um método de movimentação">
             <Option value="cash">Dinheiro</Option>
-            <Option value="credit">Crédito</Option>
-            <Option value="debit">Débito</Option>
             <Option value="pix">Pix</Option>
+            <Option value="debit">Débito</Option>
+            <Option value="credit">Crédito</Option>
+            <Option value="invoice">Boleto</Option>
             <Option value="transfer">Em-Conta</Option>
 
           </Select>
@@ -77,11 +78,11 @@ const FormComponent = () => {
           className={styles.formInput}
           label="Tipo de movimentação"
           name="type"
-          rules={[{ required: true, message: 'Please select a type!' }]}>
+          rules={[{ required: true, message: 'Por favor selecione um tipo!' }]}>
           <Select
             value={formData.type}
             onChange={(value) => handleChange('type', value)}
-            placeholder="Select type">
+            placeholder="Selecione um tipo de movimentação">
             <Option value="income">Entrada</Option>
             <Option value="expense">Saída</Option>
           </Select>
@@ -91,11 +92,11 @@ const FormComponent = () => {
           className={styles.formInput}
           label="Categoria"
           name="category"
-          rules={[{ required: true, message: 'Please select a category!' }]}>
+          rules={[{ required: true, message: 'Por favor selecione uma categoria!' }]}>
           <Select
             value={formData.category}
             onChange={(value) => handleChange('category', value)}
-            placeholder="Select category">
+            placeholder="Selecione uma categoria">
             <Option value="food">Alimentação</Option>
             <Option value="transport">Transporte</Option>
           </Select>
@@ -105,15 +106,15 @@ const FormComponent = () => {
           className={styles.formInput}
           label="Data da movimentação"
           name="date"
-          rules={[{ required: true, message: 'Please select a date!' }]}>
+          rules={[{ required: true, message: 'Por favor selecione uma data!' }]}>
 
           <DatePicker
           className={styles.formDate}
-            format="DD-MM-YYYY" // Define o formato desejado aqui
+            format="DD-MM-YYYY"
             value={formData.date ? moment(formData.date, 'DD-MM-YYYY') : null}
             onChange={(date) => handleChange('date', date ? moment(date).format('DD-MM-YYYY') : '')}
-            onClick={(e) => e.preventDefault()} // Impede o teclado de abrir
-            inputReadOnly // Esta propriedade torna o input somente leitura
+            onClick={(e) => e.preventDefault()}
+            inputReadOnly
 
           />
         </Form.Item>
