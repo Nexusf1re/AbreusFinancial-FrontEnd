@@ -14,6 +14,7 @@ export const login = async (email, password) => {
       // Armazena o token e o nome de usuário no localStorage
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('username', response.data.Username);
+      localStorage.setItem('userId', response.data.UserId);
       return response.data;
     } else {
       throw new Error('Erro ao autenticar.');
@@ -41,6 +42,7 @@ export const register = async (username, email, password) => {
 export const logout = () => {
   localStorage.removeItem('token');
   localStorage.removeItem('username');
+  localStorage.removeItem('userId');
 };
 
 // Função para verificar se o usuário está autenticado
