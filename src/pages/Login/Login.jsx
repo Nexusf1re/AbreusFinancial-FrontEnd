@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { login } from '../../services/authService';
+import { login, isAuthenticated } from '../../services/authService';
 import styles from './Login.module.css';
 import Slogan from '../../assets/Slogan.png';
 import { FaLock, FaRegEnvelope } from "react-icons/fa6";
@@ -11,6 +11,14 @@ const Login = ({ onLogin }) => {
   const [Password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+
+  // Verifica se o usuário já está autenticado ao carregar a página de login
+  useEffect(() => {
+    if (isAuthenticated()) {
+      onLogin(); 
+      navigate('/home'); 
+    }
+  }, [navigate, onLogin]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,6 +38,7 @@ const Login = ({ onLogin }) => {
 
   return (
     <div className={`${styles.wrapper} ${styles.loginPage}`}>
+      <ToastContainer />
       <img src={Slogan} alt="Logo" className={styles.logo} />
       <h1>Login</h1>
       <h3 className={styles.controle}>Controle Financeiro</h3>
