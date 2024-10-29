@@ -47,14 +47,14 @@
   .welcome{
     font-size: 20px;
     position: fixed;
-    left: 18%;
+    left: 14%;
     color: var(--font-color);
   }
 
   .greeting{
     font-size: 19px;
     position: fixed;
-    right: 20%;
+    right: 15%;
     color: var(--font-color);
   }
 
