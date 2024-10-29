@@ -23,9 +23,12 @@ const FormComponent = () => {
 
   const handleChange = (name, value) => {
     setFormData({ ...formData, [name]: value });
+ 
   };
 
   const handleSubmit = async (values) => {
+    const userId = localStorage.getItem('UserId');
+    const username = localStorage.getItem('username');
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/transactions/insert`, {
         method: 'POST',
@@ -39,7 +42,8 @@ const FormComponent = () => {
           Date: values.date,
           Category: values.category,
           Description: values.description,
-          UserId: localStorage.getItem('UserId'), 
+          UserId: userId,
+          Username: username, 
         }),
       });
 
