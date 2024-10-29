@@ -7,6 +7,8 @@ import Home from './pages/Home/Home';
 import Form from './pages/Form/Form';
 import Transactions from './pages/Transactions/Transactions';
 import Config from './pages/Config/Config';
+import { ToastContainer } from 'react-toastify'; // Importando o ToastContainer
+import 'react-toastify/dist/ReactToastify.css'; // Estilos do Toastify
 
 function App() {
   return (
@@ -20,6 +22,7 @@ function App() {
         <Route path='/transactions' element={<Transactions />} />
         <Route path='/config' element={<Config />} />
       </Routes>
+      <ToastContainer />
     </Router>
   );
 }
