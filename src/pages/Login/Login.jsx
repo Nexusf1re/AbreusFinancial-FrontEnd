@@ -22,23 +22,37 @@ const Login = ({ onLogin }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
       const response = await login(Email, Password);
-      console.log('Login Successful:', response);
-      toast.success("Login bem-sucedido!"); 
-      onLogin();
-      navigate('/home');
+      const username = response.Username;
+      localStorage.setItem('username', username);
+      
+      // Exibe o toast de sucesso
+      toast.success("Login bem-sucedido!");
+  
+      // Atrasar a navegação para permitir que o toast apareça
+      setTimeout(() => {
+        onLogin(); 
+        navigate('/home');
+      }, 2000); // Ajuste o tempo conforme necessário
     } catch (err) {
-      console.error('Login failed:', err);
       setError('Email ou senha incorretos.');
       toast.error("Email ou senha incorretos.");
     }
   };
+  
 
   return (
     <div className={`${styles.wrapper} ${styles.loginPage}`}>
-      <ToastContainer />
+      <ToastContainer 
+        position="top-right" 
+        autoClose={3000} 
+        hideProgressBar={false} 
+        closeOnClick 
+        pauseOnHover 
+        draggable 
+      />
       <img src={Slogan} alt="Logo" className={styles.logo} />
       <h1>Login</h1>
       <h3 className={styles.controle}>Controle Financeiro</h3>

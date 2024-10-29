@@ -2,12 +2,12 @@
 import React, { useState } from 'react';
 import { Form, Input, Select, Button, DatePicker, Typography } from 'antd';
 import moment from 'moment';
-import { toast, ToastContainer } from 'react-toastify'; // Importando o Toast
-import 'react-toastify/dist/ReactToastify.css'; // Importando estilos do Toast
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
 import TopBar from '../../components/TopBar/TopBar';
 import BottomBar from '../../components/BottomBar/BottomBar';
 import styles from './Form.module.css';
-import { insertTransaction } from '../../services/formService'; // Importando o serviço
+import { insertTransaction } from '../../services/formService'; 
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -27,15 +27,6 @@ const FormComponent = () => {
   };
 
   const handleSubmit = async (values) => {
-    const userId = localStorage.getItem('UserId');
-    const username = localStorage.getItem('username');
-
-    // Verificar se UserId e Username existem
-    if (!userId || !username) {
-        toast.error('Usuário não autenticado. Faça login novamente.');
-        return; // Impedir que a requisição seja enviada
-    }
-
     // Formatar a data, usando a data atual como padrão se não houver valor
     const formattedDate = values.date ? moment(values.date, 'DD-MM-YYYY').toISOString() : moment().toISOString();
 
@@ -46,8 +37,6 @@ const FormComponent = () => {
         Date: formattedDate,
         Category: values.category,
         Description: values.description,
-        UserId: userId,
-        Username: username,
     };
 
     console.log("Dados enviados:", transactionData); // Log dos dados
