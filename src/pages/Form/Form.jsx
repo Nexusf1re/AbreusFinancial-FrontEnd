@@ -31,16 +31,20 @@ const FormComponent = () => {
       <TopBar />
       <Form onFinish={handleSubmit} className={styles.form}>
         <Title level={3}>Lançamento de contas</Title>
-
+        <hr style={{ marginBottom: '15px', marginTop: '-10px' }}></hr>
+        <div className={styles.formGroup}>
         <Form.Item
+         style={{marginTop: '-15px'}}
           className={styles.formInput}
           label="Valor"
           name="value"
           rules={[{ required: true, message: 'Por favor insira um valor!' }]}>
+            
           <Input
             type="number"
             value={formData.value}
             onChange={(e) => handleChange('value', e.target.value)}
+            style={{ fontSize: '20px', padding: '0 12px', height: '40px' }}
           />
         </Form.Item>
 
@@ -52,6 +56,7 @@ const FormComponent = () => {
           <Input
             value={formData.description}
             onChange={(e) => handleChange('description', e.target.value)}
+            style={{ fontSize: '20px', padding: '0 12px', height: '40px' }}
           />
         </Form.Item>
 
@@ -62,6 +67,7 @@ const FormComponent = () => {
           rules={[{ required: true, message: 'Por favor selecione um método!' }]}>
           <Select
             value={formData.payment}
+            style={{height: '40px' }}
             onChange={(value) => handleChange('payment', value)}
             placeholder="Selecione um método de movimentação">
             <Option value="cash">Dinheiro</Option>
@@ -80,6 +86,7 @@ const FormComponent = () => {
           name="type"
           rules={[{ required: true, message: 'Por favor selecione um tipo!' }]}>
           <Select
+             style={{height: '40px' }}
             value={formData.type}
             onChange={(value) => handleChange('type', value)}
             placeholder="Selecione um tipo de movimentação">
@@ -94,6 +101,7 @@ const FormComponent = () => {
           name="category"
           rules={[{ required: true, message: 'Por favor selecione uma categoria!' }]}>
           <Select
+            style={{height: '40px' }}
             value={formData.category}
             onChange={(value) => handleChange('category', value)}
             placeholder="Selecione uma categoria">
@@ -110,6 +118,7 @@ const FormComponent = () => {
 
           <DatePicker
           className={styles.formDate}
+          style={{height: '40px' }}
             format="DD-MM-YYYY"
             value={formData.date ? moment(formData.date, 'DD-MM-YYYY') : null}
             onChange={(date) => handleChange('date', date ? moment(date).format('DD-MM-YYYY') : '')}
@@ -118,6 +127,7 @@ const FormComponent = () => {
 
           />
         </Form.Item>
+        </div>
 
         <Form.Item>
           <Button className={styles.formSubmit} type="primary" htmlType="submit">

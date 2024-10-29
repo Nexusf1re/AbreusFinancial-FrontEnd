@@ -1,5 +1,5 @@
 .body{
-    margin-top: 65px;
+    margin-top: 62px;
 }
 
 .title{
@@ -7,31 +7,11 @@
 }
 
 .formInput{
-    font-size: 22px !important;
     margin-bottom: -2px;
-}
-
-.formInput .ant-input {
-    font-size: 30px !important;
-    padding: 8px !important;        
-}
-
-.formInput{
-    font-size: 30px !important;
-}
-
-.formInput .ant-input-number {
-    font-size: 30px !important;
-    padding: 8px !important;
-}
-
-.formInput .ant-select-selector {
-    font-size: 30px !important;
-    padding: 8px !important;
-}
+} 
 
 .formInput label {
-    font-size: 18px !important;
+    font-size: 19px !important;
     margin-bottom: -10px !important;    
     margin-top: 5px !important;
     color: var(--label-color); 
@@ -39,7 +19,20 @@
     display: block;          
 }
 
+.selectOption{
+    font-size: 17px !important;
+}
 
+/* Aplica o estilo ao valor selecionado no Select */
+.customSelect .ant-select-selection-item {
+    font-size: 20px; /* Ajusta o tamanho da fonte */
+    padding: 0 12px; /* Ajusta o padding */
+    height: 40px; /* Garante o alinhamento com o Select */
+    display: flex;
+    align-items: center;
+  }
+  
+  
 
 .formSubmit{
     display: flex;
