@@ -1,15 +1,17 @@
+import axios from 'axios';
+
 const API_URL = process.env.REACT_APP_API_URL;
 
-export const fetchFinancialData = async (username) => {
+export const fetchFinancialData = async () => {
+    const username = localStorage.getItem("username");
+    if (!username) {
+        throw new Error('Usuário não encontrado no localStorage');
+    }
+
     try {
-        const response = await fetch(`${API_URL}/transactions/financial?Username=${username}`);
-        if (!response.ok) {
-            throw new Error(`Erro na requisição: ${response.status}`);
-        }
-        const data = await response.json();
-        return data;
+        const response = await axios.get(`${API_URL}/transactions/financial?Username=${username}`);
+        return response.data; // Ajuste conforme a estrutura da resposta da sua API
     } catch (error) {
-        console.error("Erro na chamada da API:", error);
-        throw error;
+        throw new Error('Erro ao buscar dados financeiros: ' + error.message);
     }
 };
