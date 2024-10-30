@@ -27,11 +27,11 @@ export const login = async (email, password) => {
 export const getUsernameFromToken = () => {
     const token = localStorage.getItem("token");
     if (!token) {
-        return null; // Ou lance um erro, se preferir
+        return null;
     }
 
     const decodedToken = jwtDecode(token);
-    return decodedToken.username; // Retorna o username
+    return decodedToken.username; 
 };
 
 // Função para buscar dados financeiros
@@ -41,16 +41,13 @@ export const fetchFinancialData = async () => {
         throw new Error('Token não encontrado no localStorage');
     }
 
-    // Decodificando o token para pegar o username
+  
     const username = getUsernameFromToken();
 
     try {
         const response = await axios.get(`${API_URL}/transactions/financial`, {
             headers: {
-                Authorization: `Bearer ${token}` // Inclui o token no cabeçalho
-            },
-            params: {
-                Username: username // Passa o username como parâmetro
+                Authorization: `Bearer ${token}`
             }
         });
         return response.data;
