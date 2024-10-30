@@ -17,7 +17,6 @@ function App() {
   // Verifica se o usuário está autenticado ao carregar o App
   useEffect(() => {
     const authStatus = isAuthenticated();
-    console.log("User authenticated:", authStatus);
     setIsLoggedIn(authStatus);
   }, []);
 

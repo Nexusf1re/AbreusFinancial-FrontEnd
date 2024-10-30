@@ -17,6 +17,4 @@ function saudacao() {
     }
 }
 
-console.log(saudacao()); // Exibe "Bom Dia", "Boa Tarde" ou "Boa Noite" conforme a hora atual
-
 export default saudacao;
