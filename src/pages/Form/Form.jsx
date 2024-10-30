@@ -1,4 +1,3 @@
-// Form.jsx
 import React, { useState } from 'react';
 import { Form, Input, Select, Button, DatePicker, Typography } from 'antd';
 import moment from 'moment';
@@ -19,7 +18,7 @@ const FormComponent = () => {
   payment: '',
   type: '',
   category: '',
-  date: moment(), // armazena como objeto moment
+  date: moment(),
 });
 
   const handleChange = (name, value) => {
@@ -27,19 +26,18 @@ const FormComponent = () => {
   };
 
   const handleSubmit = async (values) => {
-    // Use a data diretamente do formData
-    const formattedDate = formData.date ? formData.date.toISOString() : moment().toISOString(); // Converte o objeto moment para ISO se houver uma data
+    const formattedDate = formData.date ? formData.date.toISOString() : moment().toISOString();
   
     const transactionData = {
         Value: values.value,
         PaymentMethod: values.payment,
         Type: values.type,
-        Date: formattedDate, // Agora usando a data formatada corretamente
+        Date: formattedDate,
         Category: values.category,
         Description: values.description,
     };
   
-    console.log("Dados enviados:", transactionData); // Log dos dados
+    console.log("Dados enviados:", transactionData); 
   
     try {
         const response = await insertTransaction(transactionData);
@@ -48,7 +46,7 @@ const FormComponent = () => {
         }
     } catch (error) {
         toast.error('Erro ao inserir os dados!');
-        console.error("Erro ao inserir transação:", error); // Log do erro
+        console.error("Erro ao inserir transação:", error);
     }
   };
   
@@ -56,7 +54,7 @@ const FormComponent = () => {
   return (
     <div className={`${styles.body} ${styles.homePage}`}>
       <TopBar />
-      <ToastContainer /> {/* Adicionando o container do Toast */}
+      <ToastContainer />
       <Form onFinish={handleSubmit} className={styles.form}>
         <Title level={3}>Lançamento de contas</Title>
         <hr style={{ marginBottom: '15px', marginTop: '-10px' }} />
@@ -154,8 +152,8 @@ const FormComponent = () => {
           className={styles.formDate}
           style={{ height: '40px' }}
           format="DD-MM-YYYY"
-          value={formData.date} // Mantém como objeto moment
-          onChange={(date) => handleChange('date', date)} // Armazena como objeto moment
+          value={formData.date}
+          onChange={(date) => handleChange('date', date)}
         />
 
           </Form.Item>

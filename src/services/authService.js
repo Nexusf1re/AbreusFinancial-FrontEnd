@@ -10,22 +10,19 @@ export const login = async (email, password) => {
       Password: password,
     });
 
-
+    // Verifica se a resposta foi bem-sucedida
     if (response.status === 200) {
-
       localStorage.setItem('token', response.data.token);
-      
-      localStorage.setItem('username', response.data.Username);
-
-      return response.data;
+      localStorage.setItem('username', response.data.username);
+      return response.data; // Retorna os dados do usuário
     } else {
       throw new Error('Erro ao autenticar.');
     }
   } catch (error) {
+    // Lança um erro se a autenticação falhar
     throw new Error(error.response?.data?.message || 'Erro ao tentar fazer login.');
   }
 };
-
 
 // Função para obter o username do localStorage
 export const getUsername = () => {
@@ -42,4 +39,11 @@ export const logout = () => {
 export const isAuthenticated = () => {
   const token = localStorage.getItem('token');
   return !!token; // Retorna true se o token existir, false caso contrário
+};
+
+// Função para verificar se o usuário está autenticado e obter o username
+export const getAuthUser = () => {
+  const username = getUsername();
+  const authenticated = isAuthenticated();
+  return { authenticated, username };
 };
