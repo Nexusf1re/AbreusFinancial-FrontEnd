@@ -3,11 +3,11 @@ import { FaCircleUser, FaArrowRightFromBracket } from "react-icons/fa6";
 import styles from "./TopBar.module.css";
 import { useNavigate } from 'react-router-dom';
 import greetings from '../../utils/greetings.js';
-import { getUsername, logout } from '../../services/authService';
+import { getUsernameFromToken, logout } from '../../services/authService';
 
 const TopBar = () => {
     const navigate = useNavigate();
-    const username = getUsername(); 
+    const username = getUsernameFromToken(); 
 
     const handleLogout = () => {
         logout(); 
