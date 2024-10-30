@@ -12,14 +12,16 @@ const { Title } = Typography;
 const { Option } = Select;
 
 const FormComponent = () => {
-  const [formData, setFormData] = useState({
-  value: '',
-  description: '',
-  payment: '',
-  type: '',
-  category: '',
-  date: moment(),
-});
+  const initialFormData = {
+    value: '',
+    description: '',
+    payment: '',
+    type: '',
+    category: '',
+    date: moment(),
+  };
+
+  const [formData, setFormData] = useState(initialFormData);
 
   const handleChange = (name, value) => {
     setFormData({ ...formData, [name]: value });
@@ -29,27 +31,28 @@ const FormComponent = () => {
     const formattedDate = formData.date ? formData.date.toISOString() : moment().toISOString();
   
     const transactionData = {
-        Value: values.value,
-        PaymentMethod: values.payment,
-        Type: values.type,
-        Date: formattedDate,
-        Category: values.category,
-        Description: values.description,
+      Value: values.value,
+      PaymentMethod: values.payment,
+      Type: values.type,
+      Date: formattedDate,
+      Category: values.category,
+      Description: values.description,
     };
   
     console.log("Dados enviados:", transactionData); 
   
     try {
-        const response = await insertTransaction(transactionData);
-        if (response) {
-            toast.success('Dados inseridos com sucesso!');
-        }
+      const response = await insertTransaction(transactionData);
+      if (response) {
+        toast.success('Dados inseridos com sucesso!');
+        // Limpar o formulário após o envio
+        setFormData(initialFormData);
+      }
     } catch (error) {
-        toast.error('Erro ao inserir os dados!');
-        console.error("Erro ao inserir transação:", error);
+      toast.error('Erro ao inserir os dados!');
+      console.error("Erro ao inserir transação:", error);
     }
   };
-  
 
   return (
     <div className={`${styles.body} ${styles.homePage}`}>
@@ -148,14 +151,13 @@ const FormComponent = () => {
             name="date"
             rules={[{ required: true, message: 'Por favor selecione uma data!' }]}
           >
-         <DatePicker
-          className={styles.formDate}
-          style={{ height: '40px' }}
-          format="DD-MM-YYYY"
-          value={formData.date}
-          onChange={(date) => handleChange('date', date)}
-        />
-
+            <DatePicker
+              className={styles.formDate}
+              style={{ height: '40px' }}
+              format="DD-MM-YYYY"
+              value={formData.date}
+              onChange={(date) => handleChange('date', date)}
+            />
           </Form.Item>
         </div>
 

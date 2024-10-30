@@ -41,9 +41,6 @@ export const fetchFinancialData = async () => {
         throw new Error('Token não encontrado no localStorage');
     }
 
-  
-    const username = getUsernameFromToken();
-
     try {
         const response = await axios.get(`${API_URL}/transactions/financial`, {
             headers: {

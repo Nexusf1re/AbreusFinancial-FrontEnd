@@ -103,7 +103,7 @@ const Transactions = () => {
                                             <td colSpan={2} className={styles.additionalInfo}>
                                                 <p><strong>Método de Pagamento:</strong> {transaction.PaymentMethod}</p>
                                                 <p><strong>Tipo:</strong> {transaction.Type}</p>
-                                                <p><strong>Usuário:</strong> {transaction.Username}</p>
+                                                <p><strong>Categoria :</strong> {transaction.Category}</p>
                                             </td>
                                         </tr>
                                     )}
