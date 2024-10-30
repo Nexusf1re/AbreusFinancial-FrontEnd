@@ -3,7 +3,7 @@ import axios from 'axios';
 const API_URL = process.env.REACT_APP_API_URL;
 
 export const insertTransaction = async (transactionData) => {
-    const token = localStorage.getItem('authToken');
+    const token = localStorage.getItem('token');
     if (!token) {
         console.error("Token não encontrado. Usuário não autenticado.");
         throw new Error("Usuário não autenticado.");
