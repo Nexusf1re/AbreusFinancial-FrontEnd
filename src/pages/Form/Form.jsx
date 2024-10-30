@@ -1,58 +1,22 @@
-import React, { useState } from 'react';
-import { Form, Input, Select, Button, DatePicker, Typography } from 'antd';
-import moment from 'moment';
-import { toast, ToastContainer } from 'react-toastify';
+import React from 'react';
+import { Form, Input, Select, Button, DatePicker, Typography, Spin } from 'antd';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
 import TopBar from '../../components/TopBar/TopBar';
 import BottomBar from '../../components/BottomBar/BottomBar';
 import styles from './Form.module.css';
-import { insertTransaction } from '../../services/formService'; 
+import useForm from '../../hooks/useForm';
 
 const { Title } = Typography;
 const { Option } = Select;
 
 const FormComponent = () => {
-  const initialFormData = {
-    value: '',
-    description: '',
-    payment: '',
-    type: '',
-    category: '',
-    date: moment(),
-  };
+  const { formData, handleChange, handleSubmit, categories, loading } = useForm(); // Adiciona categories e loading
 
-  const [formData, setFormData] = useState(initialFormData);
-
-  const handleChange = (name, value) => {
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = async (values) => {
-    const formattedDate = formData.date ? formData.date.toISOString() : moment().toISOString();
-  
-    const transactionData = {
-      Value: values.value,
-      PaymentMethod: values.payment,
-      Type: values.type,
-      Date: formattedDate,
-      Category: values.category,
-      Description: values.description,
-    };
-  
-    console.log("Dados enviados:", transactionData); 
-  
-    try {
-      const response = await insertTransaction(transactionData);
-      if (response) {
-        toast.success('Dados inseridos com sucesso!');
-        // Limpar o formulário após o envio
-        setFormData(initialFormData);
-      }
-    } catch (error) {
-      toast.error('Erro ao inserir os dados!');
-      console.error("Erro ao inserir transação:", error);
-    }
-  };
+  // Renderiza um carregador enquanto as categorias estão sendo buscadas
+  if (loading) {
+    return <Spin size="large" style={{ display: 'block', margin: '20px auto' }} />;
+  }
 
   return (
     <div className={`${styles.body} ${styles.homePage}`}>
@@ -102,12 +66,12 @@ const FormComponent = () => {
               onChange={(value) => handleChange('payment', value)}
               placeholder="Selecione um método de movimentação"
             >
-              <Option value="cash">Dinheiro</Option>
-              <Option value="pix">Pix</Option>
-              <Option value="debit">Débito</Option>
-              <Option value="credit">Crédito</Option>
-              <Option value="invoice">Boleto</Option>
-              <Option value="transfer">Em-Conta</Option>
+              <Option value="Dinheiro">Dinheiro</Option>
+              <Option value="Pix">Pix</Option>
+              <Option value="Debito">Débito</Option>
+              <Option value="Credito">Crédito</Option>
+              <Option value="Boleto">Boleto</Option>
+              <Option value="EmConta">Em-Conta</Option>
             </Select>
           </Form.Item>
 
@@ -123,8 +87,8 @@ const FormComponent = () => {
               onChange={(value) => handleChange('type', value)}
               placeholder="Selecione um tipo de movimentação"
             >
-              <Option value="income">Entrada</Option>
-              <Option value="expense">Saída</Option>
+              <Option value="Entrada">Entrada</Option>
+              <Option value="Saida">Saída</Option>
             </Select>
           </Form.Item>
 
@@ -140,8 +104,10 @@ const FormComponent = () => {
               onChange={(value) => handleChange('category', value)}
               placeholder="Selecione uma categoria"
             >
-              <Option value="food">Alimentação</Option>
-              <Option value="transport">Transporte</Option>
+              {/* Mapeia as categorias carregadas para opções */}
+              {categories.map((category) => (
+                <Option key={category.id} value={category.id}>{category.name}</Option>
+              ))}
             </Select>
           </Form.Item>
 
