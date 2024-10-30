@@ -6,24 +6,27 @@ import TopBar from '../../components/TopBar/TopBar';
 import BottomBar from '../../components/BottomBar/BottomBar';
 import styles from './Form.module.css';
 import useForm from '../../hooks/useForm';
+import useCategories from '../../hooks/useCategories';
 
 const { Title } = Typography;
 const { Option } = Select;
 
 const FormComponent = () => {
-  const { formData, handleChange, handleSubmit, categories, loading } = useForm(); // Adiciona categories e loading
+  const { formData, handleChange, handleSubmit, loading } = useForm();
+  const { categories, error } = useCategories();
 
-  // Renderiza um carregador enquanto as categorias estão sendo buscadas
   if (loading) {
     return <Spin size="large" style={{ display: 'block', margin: '20px auto' }} />;
   }
 
-  // Define as opções de pagamento com base no tipo de movimentação selecionado
+  if (error) {
+    return <div>Erro ao carregar categorias: {error}</div>;
+  }
+
   const paymentOptions = formData.type === 'Entrada' 
     ? ['Dinheiro', 'Pix', 'EmConta']
     : ['Dinheiro', 'Pix', 'Debito', 'Credito', 'Boleto', 'EmConta'];
 
-  // Filtra as categorias com base no tipo selecionado
   const filteredCategories = categories.filter(category => category.Type === formData.type);
 
   return (

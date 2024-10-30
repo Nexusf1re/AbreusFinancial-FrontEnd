@@ -1,29 +1,79 @@
-// src/hooks/useForm.js
 import { useState } from 'react';
-import useCategories from './useCategories';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import dayjs from 'dayjs';
 
 const useForm = () => {
   const [formData, setFormData] = useState({
     value: '',
     description: '',
-    payment: '',
     type: '',
+    payment: '',
     category: '',
-    date: null,
+    date: dayjs(), // Inicializa com a data atual
   });
-  
-  const { categories, loading } = useCategories(); // Chama o hook de categorias
+  const [loading, setLoading] = useState(false);
 
-  const handleChange = (field, value) => {
-    setFormData({ ...formData, [field]: value });
+  const handleChange = (name, value) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
-  const handleSubmit = async (values) => {
-    // Aqui você pode adicionar a lógica para enviar os dados do formulário
-    console.log('Dados enviados:', formData);
+  const handleSubmit = async () => {
+    const apiUrl = process.env.REACT_APP_API_URL;
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      console.error("Token não encontrado. Usuário não autenticado.");
+      throw new Error("Usuário não autenticado.");
+    }
+
+    try {
+      setLoading(true);
+      
+      // Formatar a data para "YYYY-MM-DD"
+      const formattedData = {
+        Value: formData.value, // Mapeando para o formato esperado
+        PaymentMethod: formData.payment,
+        Type: formData.type,
+        Date: formData.date.format('YYYY-MM-DD'), // Formata a data
+        Category: formData.category,
+        Description: formData.description,
+      };
+
+      const response = await axios.post(
+        `${apiUrl}/transactions/insert`,
+        formattedData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+          }
+        }
+      );
+      
+      toast.success('Transação inserida com sucesso!');
+      setFormData({
+        value: '',
+        description: '',
+        type: '',
+        payment: '',
+        category: '',
+        date: dayjs(), // Reseta para a data atual após o envio
+      });
+      return response.data;
+    } catch (error) {
+      toast.error('Erro ao inserir transação. Verifique os dados e tente novamente.');
+      console.error("Erro ao inserir transação:", error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
   };
 
-  return { formData, handleChange, handleSubmit, categories, loading };
+  return { formData, handleChange, handleSubmit, loading };
 };
 
 export default useForm;
