@@ -24,7 +24,15 @@ const Transactions = () => {
         fetchData();
     }, []);
 
-    const formatDate = (date) => new Date(date).toLocaleDateString("pt-BR");
+    // Função para formatar a data sem fuso horário
+    const formatDate = (dataString) => {
+        const date = new Date(dataString);
+        const day = String(date.getUTCDate()).padStart(2, '0');
+        const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+        const year = date.getUTCFullYear();
+
+        return `${day}/${month}/${year}`;
+    };
 
     const formatValue = (value) => `R$ ${new Big(value).toFixed(2)}`;
 
