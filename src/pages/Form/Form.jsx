@@ -14,33 +14,33 @@ const { Option } = Select;
 
 const FormComponent = () => {
   const [formData, setFormData] = useState({
-    value: '',
-    description: '',
-    payment: '',
-    type: '',
-    category: '',
-    date: moment(),
-  });
+  value: '',
+  description: '',
+  payment: '',
+  type: '',
+  category: '',
+  date: moment(), // armazena como objeto moment
+});
 
   const handleChange = (name, value) => {
     setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (values) => {
-    // Formatar a data, usando a data atual como padrão se não houver valor
-    const formattedDate = values.date ? moment(values.date, 'DD-MM-YYYY').toISOString() : moment().toISOString();
-
+    // Use a data diretamente do formData
+    const formattedDate = formData.date ? formData.date.toISOString() : moment().toISOString(); // Converte o objeto moment para ISO se houver uma data
+  
     const transactionData = {
         Value: values.value,
         PaymentMethod: values.payment,
         Type: values.type,
-        Date: formattedDate,
+        Date: formattedDate, // Agora usando a data formatada corretamente
         Category: values.category,
         Description: values.description,
     };
-
+  
     console.log("Dados enviados:", transactionData); // Log dos dados
-
+  
     try {
         const response = await insertTransaction(transactionData);
         if (response) {
@@ -50,7 +50,8 @@ const FormComponent = () => {
         toast.error('Erro ao inserir os dados!');
         console.error("Erro ao inserir transação:", error); // Log do erro
     }
-};
+  };
+  
 
   return (
     <div className={`${styles.body} ${styles.homePage}`}>
@@ -149,15 +150,14 @@ const FormComponent = () => {
             name="date"
             rules={[{ required: true, message: 'Por favor selecione uma data!' }]}
           >
-            <DatePicker
-              className={styles.formDate}
-              style={{ height: '40px' }}
-              format="DD-MM-YYYY"
-              value={formData.date ? moment(formData.date, 'DD-MM-YYYY') : null}
-              onChange={(date) => handleChange('date', date ? moment(date).format('DD-MM-YYYY') : '')}
-              onClick={(e) => e.preventDefault()}
-              inputReadOnly
-            />
+         <DatePicker
+          className={styles.formDate}
+          style={{ height: '40px' }}
+          format="DD-MM-YYYY"
+          value={formData.date} // Mantém como objeto moment
+          onChange={(date) => handleChange('date', date)} // Armazena como objeto moment
+        />
+
           </Form.Item>
         </div>
 
