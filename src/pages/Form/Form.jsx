@@ -6,16 +6,21 @@ import TopBar from '../../components/TopBar/TopBar';
 import BottomBar from '../../components/BottomBar/BottomBar';
 import styles from './Form.module.css';
 import useForm from '../../hooks/useForm';
+import useCategories from '../../hooks/useCategories'; // Importa o hook de categorias
 
 const { Title } = Typography;
 const { Option } = Select;
 
 const FormComponent = () => {
-  const { formData, handleChange, handleSubmit, categories, loading } = useForm(); // Adiciona categories e loading
+  const { formData, handleChange, handleSubmit } = useForm();
+  const { categories, error, loading } = useCategories(); // Usa o hook de categorias para obter os dados
 
-  // Renderiza um carregador enquanto as categorias estão sendo buscadas
   if (loading) {
     return <Spin size="large" style={{ display: 'block', margin: '20px auto' }} />;
+  }
+
+  if (error) {
+    return <p style={{ color: 'red', textAlign: 'center' }}>Erro ao carregar categorias: {error}</p>;
   }
 
   return (
@@ -93,23 +98,26 @@ const FormComponent = () => {
           </Form.Item>
 
           <Form.Item
-            className={styles.formInput}
-            label="Categoria"
-            name="category"
-            rules={[{ required: true, message: 'Por favor selecione uma categoria!' }]}
-          >
-            <Select
-              style={{ height: '40px' }}
-              value={formData.category}
-              onChange={(value) => handleChange('category', value)}
-              placeholder="Selecione uma categoria"
-            >
-              {/* Mapeia as categorias carregadas para opções */}
-              {categories.map((category) => (
-                <Option key={category.id} value={category.id}>{category.name}</Option>
-              ))}
-            </Select>
-          </Form.Item>
+  className={styles.formInput}
+  label="Categoria"
+  name="category"
+  rules={[{ required: true, message: 'Por favor selecione uma categoria!' }]}
+>
+  <Select
+    style={{ height: '40px' }}
+    value={formData.category}
+    onChange={(value) => handleChange('category', value)}
+    placeholder="Selecione uma categoria"
+  >
+    {/* Mapeia as categorias carregadas para opções */}
+    {categories.map((category, index) => (
+      <Option key={category.Category || index} value={category.Category} data-type={category.Type}>
+        {category.Category}
+      </Option>
+    ))}
+  </Select>
+</Form.Item>
+
 
           <Form.Item
             className={styles.formInput}

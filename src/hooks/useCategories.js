@@ -1,28 +1,38 @@
-// src/hooks/useCategories.js
 import { useEffect, useState } from 'react';
-import { fetchCategories } from '../services/categoryService';
 
 const useCategories = () => {
   const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(true);
-  
+  const [error, setError] = useState(null);
+
   useEffect(() => {
-    const loadCategories = async () => {
-      const token = localStorage.getItem('token');
+    const fetchCategories = async () => {
       try {
-        const fetchedCategories = await fetchCategories(token);
-        setCategories(fetchedCategories);
-      } catch (error) {
-        console.error('Erro ao carregar categorias:', error);
-      } finally {
-        setLoading(false);
+        const apiUrl = process.env.REACT_APP_API_URL; // URL da API definida no .env
+        const token = localStorage.getItem('token');  // Token de autenticação armazenado no localStorage
+
+        const headers = {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        };
+
+        const response = await fetch(`${apiUrl}/category/list`, { headers });
+
+        if (!response.ok) {
+          throw new Error('Erro ao buscar categorias');
+        }
+
+        const data = await response.json();
+        setCategories(data); // Armazena as categorias recebidas no estado
+      } catch (err) {
+        console.error('Erro:', err);
+        setError(err.message);
       }
     };
 
-    loadCategories();
+    fetchCategories();
   }, []);
 
-  return { categories, loading };
+  return { categories, error };
 };
 
 export default useCategories;
