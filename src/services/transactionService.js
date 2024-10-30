@@ -10,7 +10,7 @@ export const fetchFinancialData = async () => {
 
     try {
         const response = await axios.get(`${API_URL}/transactions/financial?Username=${username}`);
-        return response.data; // Ajuste conforme a estrutura da resposta da sua API
+        return response.data;
     } catch (error) {
         throw new Error('Erro ao buscar dados financeiros: ' + error.message);
     }

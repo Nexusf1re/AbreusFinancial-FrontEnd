@@ -1,9 +1,7 @@
 import axios from 'axios';
-import { jwtDecode } from 'jwt-decode'; // Corrigido para importar corretamente
 
 const API_URL = `${process.env.REACT_APP_API_URL}/auth`;
 
-// Função de login
 // Função de login
 export const login = async (email, password) => {
   try {
@@ -12,9 +10,9 @@ export const login = async (email, password) => {
       Password: password,
     });
 
-    // Verifica se a resposta foi bem-sucedida
+
     if (response.status === 200) {
-      // Armazena o token JWT no localStorage
+
       localStorage.setItem('token', response.data.token);
       
       localStorage.setItem('username', response.data.Username);
@@ -37,7 +35,7 @@ export const getUsername = () => {
 // Função de logout
 export const logout = () => {
   localStorage.removeItem('token');
-  localStorage.removeItem('username'); // Remove o username ao fazer logout
+  localStorage.removeItem('username');
 };
 
 // Função para verificar se o usuário está autenticado
