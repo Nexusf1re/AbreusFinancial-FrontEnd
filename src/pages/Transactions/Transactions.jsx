@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchFinancialData } from '../../services/transactionService';
 import Big from 'big.js';
-import styles from './Transactions.module.css'; // Importa o módulo CSS
+import styles from './Transactions.module.css';
 import TopBar from '../../components/TopBar/TopBar';
 import BottomBar from '../../components/BottomBar/BottomBar';
 import ScrollUp from '../../components/ScrollUp/ScrollUp';
@@ -10,7 +10,7 @@ const Transactions = () => {
     const [transactions, setTransactions] = useState([]);
     const [error, setError] = useState(null);
     const [expandedTransaction, setExpandedTransaction] = useState(null);
-    const [searchTerm, setSearchTerm] = useState(''); // Estado para o termo de pesquisa
+    const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -62,7 +62,6 @@ const Transactions = () => {
         <div className={styles.container}>
             <TopBar />
             <h3 className={styles.title}>Histórico de lançamentos</h3>
-            {/* Contêiner para o campo de pesquisa */}
             <div className={styles.searchContainer}>
                 <input
                     type="text"
