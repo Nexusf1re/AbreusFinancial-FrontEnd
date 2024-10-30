@@ -6,22 +6,25 @@ import TopBar from '../../components/TopBar/TopBar';
 import BottomBar from '../../components/BottomBar/BottomBar';
 import styles from './Form.module.css';
 import useForm from '../../hooks/useForm';
-import useCategories from '../../hooks/useCategories'; // Importa o hook de categorias
 
 const { Title } = Typography;
 const { Option } = Select;
 
 const FormComponent = () => {
-  const { formData, handleChange, handleSubmit } = useForm();
-  const { categories, error, loading } = useCategories(); // Usa o hook de categorias para obter os dados
+  const { formData, handleChange, handleSubmit, categories, loading } = useForm(); // Adiciona categories e loading
 
+  // Renderiza um carregador enquanto as categorias estão sendo buscadas
   if (loading) {
     return <Spin size="large" style={{ display: 'block', margin: '20px auto' }} />;
   }
 
-  if (error) {
-    return <p style={{ color: 'red', textAlign: 'center' }}>Erro ao carregar categorias: {error}</p>;
-  }
+  // Define as opções de pagamento com base no tipo de movimentação selecionado
+  const paymentOptions = formData.type === 'Entrada' 
+    ? ['Dinheiro', 'Pix', 'EmConta']
+    : ['Dinheiro', 'Pix', 'Debito', 'Credito', 'Boleto', 'EmConta'];
+
+  // Filtra as categorias com base no tipo selecionado
+  const filteredCategories = categories.filter(category => category.Type === formData.type);
 
   return (
     <div className={`${styles.body} ${styles.homePage}`}>
@@ -61,27 +64,6 @@ const FormComponent = () => {
 
           <Form.Item
             className={styles.formInput}
-            label="Método de movimentação"
-            name="payment"
-            rules={[{ required: true, message: 'Por favor selecione um método!' }]}
-          >
-            <Select
-              value={formData.payment}
-              style={{ height: '40px' }}
-              onChange={(value) => handleChange('payment', value)}
-              placeholder="Selecione um método de movimentação"
-            >
-              <Option value="Dinheiro">Dinheiro</Option>
-              <Option value="Pix">Pix</Option>
-              <Option value="Debito">Débito</Option>
-              <Option value="Credito">Crédito</Option>
-              <Option value="Boleto">Boleto</Option>
-              <Option value="EmConta">Em-Conta</Option>
-            </Select>
-          </Form.Item>
-
-          <Form.Item
-            className={styles.formInput}
             label="Tipo de movimentação"
             name="type"
             rules={[{ required: true, message: 'Por favor selecione um tipo!' }]}
@@ -98,26 +80,42 @@ const FormComponent = () => {
           </Form.Item>
 
           <Form.Item
-  className={styles.formInput}
-  label="Categoria"
-  name="category"
-  rules={[{ required: true, message: 'Por favor selecione uma categoria!' }]}
->
-  <Select
-    style={{ height: '40px' }}
-    value={formData.category}
-    onChange={(value) => handleChange('category', value)}
-    placeholder="Selecione uma categoria"
-  >
-    {/* Mapeia as categorias carregadas para opções */}
-    {categories.map((category, index) => (
-      <Option key={category.Category || index} value={category.Category} data-type={category.Type}>
-        {category.Category}
-      </Option>
-    ))}
-  </Select>
-</Form.Item>
+            className={styles.formInput}
+            label="Método de movimentação"
+            name="payment"
+            rules={[{ required: true, message: 'Por favor selecione um método!' }]}
+          >
+            <Select
+              value={formData.payment}
+              style={{ height: '40px' }}
+              onChange={(value) => handleChange('payment', value)}
+              placeholder="Selecione um método de movimentação"
+            >
+              {paymentOptions.map((option) => (
+                <Option key={option} value={option}>{option}</Option>
+              ))}
+            </Select>
+          </Form.Item>
 
+          <Form.Item
+            className={styles.formInput}
+            label="Categoria"
+            name="category"
+            rules={[{ required: true, message: 'Por favor selecione uma categoria!' }]}
+          >
+            <Select
+              style={{ height: '40px' }}
+              value={formData.category}
+              onChange={(value) => handleChange('category', value)}
+              placeholder="Selecione uma categoria"
+            >
+              {filteredCategories.map((category, index) => (
+                <Option key={`${category.Category}-${index}`} value={category.Category}>
+                  {category.Category}
+                </Option>
+              ))}
+            </Select>
+          </Form.Item>
 
           <Form.Item
             className={styles.formInput}
