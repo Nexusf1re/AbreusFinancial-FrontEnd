@@ -152,6 +152,7 @@ const FormComponent = () => {
               format="DD-MM-YYYY"
               value={formData.date}
               onChange={(date) => handleChange('date', date)}
+              readOnly
             />
           </Form.Item>
         </div>
