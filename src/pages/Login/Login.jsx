@@ -9,14 +9,12 @@ import { toast, ToastContainer } from 'react-toastify';
 const Login = ({ onLogin }) => {
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  // Verifica se o usuário já está autenticado ao carregar a página de login
   useEffect(() => {
     if (isAuthenticated()) {
-      onLogin(); 
-      navigate('/home'); 
+      onLogin();
+      navigate('/home');
     }
   }, [navigate, onLogin]);
 
@@ -25,19 +23,13 @@ const Login = ({ onLogin }) => {
   
     try {
       const response = await login(Email, Password);
-      const username = response.Username;
-      localStorage.setItem('username', username);
-      
-      // Exibe o toast de sucesso
+      localStorage.setItem('username', response.Username);
       toast.success("Login bem-sucedido!");
-  
-      // Atrasar a navegação para permitir que o toast apareça
       setTimeout(() => {
-        onLogin(); 
+        onLogin();
         navigate('/home');
-      }, 2000); // Ajuste o tempo conforme necessário
+      }, 500); // Reduzido o tempo de espera
     } catch (err) {
-      setError('Email ou senha incorretos.');
       toast.error("Email ou senha incorretos.");
     }
   };
@@ -45,14 +37,29 @@ const Login = ({ onLogin }) => {
 
   return (
     <div className={`${styles.wrapper} ${styles.loginPage}`}>
-      <ToastContainer 
-        position="top-right" 
-        autoClose={3000} 
-        hideProgressBar={false} 
-        closeOnClick 
-        pauseOnHover 
-        draggable 
+      <ToastContainer
+        position="top-center"
+        autoClose={1500}
+        hideProgressBar={false}
+        closeOnClick
+        draggable
+        theme="colored"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+          maxWidth: "300px",
+          position: "absolute",
+          top: "1rem",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          textAlign: "center",
+          borderRadius: "8px",
+        }}
       />
+
       <img src={Slogan} alt="Logo" className={styles.logo} />
       <h1>Login</h1>
       <h3 className={styles.controle}>Controle Financeiro</h3>
@@ -65,7 +72,6 @@ const Login = ({ onLogin }) => {
             value={Email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
-            aria-label="Email"
             required
           />
         </div>
@@ -77,7 +83,6 @@ const Login = ({ onLogin }) => {
             value={Password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Senha"
-            aria-label="Senha"
             required
           />
         </div>

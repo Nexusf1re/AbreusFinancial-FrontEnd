@@ -6,6 +6,10 @@
   }
 }
 
+.customToastContainer{
+  border-radius: 20px !important;
+}
+
 .loginPage * {
   margin: 0;
   padding: 0;
