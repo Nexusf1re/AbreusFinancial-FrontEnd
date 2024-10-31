@@ -28,7 +28,7 @@ const Login = ({ onLogin }) => {
       setTimeout(() => {
         onLogin();
         navigate('/home');
-      }, 500); // Reduzido o tempo de espera
+      }, 500);
     } catch (err) {
       toast.error("Email ou senha incorretos.");
     }

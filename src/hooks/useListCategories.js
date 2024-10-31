@@ -7,8 +7,8 @@ const useCategories = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const apiUrl = process.env.REACT_APP_API_URL; // URL da API definida no .env
-        const token = localStorage.getItem('token');  // Token de autenticação armazenado no localStorage
+        const apiUrl = process.env.REACT_APP_API_URL;
+        const token = localStorage.getItem('token');  
 
         const headers = {
           'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ const useCategories = () => {
         }
 
         const data = await response.json();
-        setCategories(data); // Armazena as categorias recebidas no estado
+        setCategories(data);
       } catch (err) {
         console.error('Erro:', err);
         setError(err.message);

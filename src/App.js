@@ -9,7 +9,7 @@ import Transactions from './pages/Transactions/Transactions';
 import Config from './pages/Config/Config';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import useAuth from './hooks/useAuth'; // Importando o hook de autenticação
+import useAuth from './hooks/useAuth';
 
 function App() {
   const { isLoggedIn, handleLogin, handleLogout } = useAuth();

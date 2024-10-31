@@ -34,10 +34,9 @@ const useForm = () => {
     try {
       setLoading(true);
   
-      // Converte o valor para Big e aplica a lógica de positivo/negativo
       const value = new Big(formData.value);
       const formattedData = {
-        Value: formData.type === 'Saida' ? value.neg() : value.toNumber(), // Usando Big.js para definir o valor
+        Value: formData.type === 'Saida' ? value.neg() : value.toNumber(), 
         PaymentMethod: formData.payment,
         Type: formData.type,
         Date: formData.date.format('YYYY-MM-DD'),
@@ -63,7 +62,7 @@ const useForm = () => {
         type: '',
         payment: '',
         category: '',
-        date: dayjs(), // Reseta para a data atual após o envio
+        date: dayjs(), 
       });
       return response.data;
     } catch (error) {

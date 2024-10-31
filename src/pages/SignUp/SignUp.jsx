@@ -14,7 +14,7 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const handleUsernameChange = (e) => {
-    // Remove espaços e converte para maiúsculas
+   
     const formattedUsername = e.target.value.replace(/\s+/g, '').toUpperCase();
     setUsername(formattedUsername);
   };
@@ -45,7 +45,7 @@ const SignUp = () => {
           <input
             type="text"
             value={username}
-            onChange={handleUsernameChange} // Chama a função personalizada
+            onChange={handleUsernameChange}
             placeholder="Seu Nome"
             aria-label="Nome"
             required

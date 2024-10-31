@@ -5,9 +5,9 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import TopBar from '../../components/TopBar/TopBar';
 import BottomBar from '../../components/BottomBar/BottomBar';
-import useListCategories from '../../hooks/useListCategories'; // Hook para listar categorias
-import useCreateCategory from '../../hooks/useCreateCategory'; // Hook para criar categoria
-import styles from './Config.module.css'; // Estilos do CSS Module
+import useListCategories from '../../hooks/useListCategories';
+import useCreateCategory from '../../hooks/useCreateCategory';
+import styles from './Config.module.css';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -15,24 +15,22 @@ const { Option } = Select;
 const Config = () => {
   const [formNome] = Form.useForm();
   const [formCategoria] = Form.useForm();
-  const { categories, error: listError } = useListCategories(); // Usando o hook de listar categorias
-  const { createCategory, loading: creating, error: createError } = useCreateCategory(); // Usando o hook de criar categoria
+  const { categories, error: listError } = useListCategories(); 
+  const { createCategory, loading: creating, error: createError } = useCreateCategory()
 
   const onFinishNome = async (values) => {
-    // Lógica para salvar o nome, se necessário
     console.log('Nome salvo:', values.nome);
     formNome.resetFields();
   };
 
   const onFinishCategoria = async (values) => {
     const categoryData = {
-      Category: values.Category, // Nome da nova categoria
-      Type: values.Type,          // Tipo da nova categoria
+      Category: values.Category,
+      Type: values.Type,         
     };
 
     const response = await createCategory(categoryData);
     if (response) {
-      // Lógica após a criação da categoria, se necessário
       formCategoria.resetFields();
     }
   };

@@ -1,6 +1,5 @@
-// src/components/ScrollUp/ScrollUp.jsx
 import React, { useEffect, useState } from 'react';
-import styles from './ScrollUp.module.css'; // Estilos para o botão
+import styles from './ScrollUp.module.css';
 
 const ScrollUp = () => {
     const [isVisible, setIsVisible] = useState(false);
