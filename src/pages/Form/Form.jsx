@@ -141,22 +141,24 @@ const FormComponent = () => {
           </Form.Item>
 
           <Form.Item
-            className={styles.formInput}
-            label="Data da movimentação"
-            name="date"
-            rules={[{ required: true, message: 'Por favor selecione uma data!' }]}
-          >
-            <DatePicker
-              className={styles.formDate}
-              style={{ height: '40px' }}
-              format="DD-MM-YYYY"
-              value={formData.date}
-              onChange={(date) => handleChange('date', date)}
-              readOnly
-            />
-          </Form.Item>
-        </div>
+    className={styles.formInput}
+    label="Data da movimentação"
+    name="date"
+    rules={[{ required: true, message: 'Por favor selecione uma data!' }]}
+>
+    <DatePicker
+        className={styles.formDate}
+        style={{ height: '40px' }}
+        format="DD-MM-YYYY"
+        value={formData.date}
+        onChange={(date) => handleChange('date', date)}
+        disabled={false} 
+        allowClear={false}
+        inputReadOnly
+    />
+</Form.Item>
 
+        </div>
         <Form.Item>
           <Button className={styles.formSubmit} type="primary" htmlType="submit">
             Enviar
