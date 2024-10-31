@@ -17,7 +17,7 @@ const TopBar = () => {
     return (
         <div className={styles.topbar}>
             <FaCircleUser className={styles.usericon} />
-            <p className={styles.welcome}>Olá, {username}</p>
+            <p className={styles.welcome}>Olá {username}</p>
             <p className={styles.greeting}>{greetings()}</p>
             <button className={styles.exit} onClick={handleLogout}>
                 <FaArrowRightFromBracket className={styles.exiticon} />
