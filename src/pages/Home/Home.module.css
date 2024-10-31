@@ -38,7 +38,7 @@
 
 .InOut {
     padding: 0;
-    margin-top: 0;
+    margin-top: -7vw !important;
     display: flex;
     gap: 10px;
 }
@@ -84,6 +84,22 @@
     color: rgb(193, 1, 1);
 }
 
+.annualBalance {
+    margin: 10vw 0px 0px 0px;
+    background-color: var(--back-color);
+    border-radius: 10px;
+    padding: 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.annualBalance p{
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+}
+
 .monthBalance {
     margin: 10px 0px 10px 0px;
     background-color: var(--back-color);
@@ -102,7 +118,6 @@
     text-align: center;
     font-size: 20px;
     font-weight: 500;
-    color: rgb(193, 1, 1);
 }
 
 .graph{

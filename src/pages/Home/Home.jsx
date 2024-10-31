@@ -6,7 +6,7 @@ import useFinanceData from '../../hooks/homeData';
 import CountUp from 'react-countup';
 
 const Home = () => {
-  const { totalEntrada, totalSaida, balancoMes } = useFinanceData();
+  const { totalEntrada, totalSaida, balancoMes, balancoAno } = useFinanceData();
 
   const date = new Date().toLocaleDateString('pt-BR', {
     day: 'numeric',
@@ -22,6 +22,20 @@ const Home = () => {
         {date}
       </div>
 
+      <div className={`${styles.annualBalance} ${styles.card}`}>
+        <p className={styles.name}>Balanço Ano Atual</p>
+        <p className={`${styles.balanceValue} ${balancoAno < 0 ? styles.negative : styles.positive}`}>
+          R$
+          <CountUp
+            end={balancoAno}
+            duration={1.5}
+            decimals={2}
+            decimal=","
+            separator="."
+          />
+        </p>
+      </div>
+
       <div className={styles.InOut}>
         <div className={`${styles.income} ${styles.card}`}>
           <p className={styles.name}>Total Entrada</p>
@@ -29,7 +43,7 @@ const Home = () => {
             R$
             <CountUp
               end={totalEntrada}
-              duration={1} // Duração da animação em segundos
+              duration={1}
               decimals={2}
               decimal=","
               separator="."
@@ -67,7 +81,7 @@ const Home = () => {
       </div>
 
       <div className={`${styles.graph} ${styles.card}`}>
-        {/* Gráfico ou conteúdo adicional */}
+       
       </div>
 
       <BottomBar />
