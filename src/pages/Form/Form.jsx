@@ -32,7 +32,27 @@ const FormComponent = () => {
   return (
     <div className={`${styles.body} ${styles.homePage}`}>
       <TopBar />
-      <ToastContainer />
+      <ToastContainer
+        position="top-center"
+        autoClose={1500}
+        hideProgressBar={false}
+        closeOnClick
+        draggable
+        theme="colored"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+          maxWidth: "300px",
+          position: "absolute",
+          top: "1rem",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          textAlign: "center",
+          borderRadius: "8px",
+        }} />
       <Form onFinish={handleSubmit} className={styles.form}>
         <Title level={3}>Lançamento de contas</Title>
         <hr style={{ marginBottom: '15px', marginTop: '-10px' }} />
