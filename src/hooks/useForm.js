@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import dayjs from 'dayjs';
+import Big from 'big.js';
 
 const useForm = () => {
   const [formData, setFormData] = useState({
@@ -10,7 +11,7 @@ const useForm = () => {
     type: '',
     payment: '',
     category: '',
-    date: dayjs(), // Inicializa com a data atual
+    date: dayjs(),
   });
   const [loading, setLoading] = useState(false);
 
@@ -32,13 +33,14 @@ const useForm = () => {
   
     try {
       setLoading(true);
-      
-      // Formatar a data para "YYYY-MM-DD"
+  
+      // Converte o valor para Big e aplica a lógica de positivo/negativo
+      const value = new Big(formData.value);
       const formattedData = {
-        Value: formData.type === 'Saida' ? -Math.abs(formData.value) : Math.abs(formData.value), // Garante que o valor seja negativo para Saida
+        Value: formData.type === 'Saida' ? value.neg() : value.toNumber(), // Usando Big.js para definir o valor
         PaymentMethod: formData.payment,
         Type: formData.type,
-        Date: formData.date.format('YYYY-MM-DD'), // Formata a data
+        Date: formData.date.format('YYYY-MM-DD'),
         Category: formData.category,
         Description: formData.description,
       };
@@ -72,6 +74,7 @@ const useForm = () => {
       setLoading(false);
     }
   };
+  
   
 
   return { formData, handleChange, handleSubmit, loading };
