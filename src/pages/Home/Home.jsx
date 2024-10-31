@@ -68,7 +68,7 @@ const Home = () => {
       </div>
 
       <div className={`${styles.monthBalance} ${styles.card}`}>
-        <p className={styles.name}>Balanço Mês</p>
+        <p className={styles.name}>Balanço Mês Atual</p>
         <p className={`${styles.balanceValue} ${balancoMes < 0 ? styles.negative : styles.positive}`}>
           R$
           <CountUp
@@ -81,10 +81,10 @@ const Home = () => {
         </p>
       </div>
 
-      {/* Renderizando o gráfico na div específica */}
       <div className={`${styles.graph} ${styles.card}`}>
         <CategoryChart />
       </div>
+
 
       <BottomBar />
     </div>
