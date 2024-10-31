@@ -23,3 +23,7 @@
 body {
     background-color: var(--mainBackground) !important;
 }
+
+input, textarea, select {
+    touch-action: manipulation;
+}
