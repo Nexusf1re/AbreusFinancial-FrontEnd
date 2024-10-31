@@ -6,7 +6,7 @@ import TopBar from '../../components/TopBar/TopBar';
 import BottomBar from '../../components/BottomBar/BottomBar';
 import styles from './Form.module.css';
 import useForm from '../../hooks/useForm';
-import useCategories from '../../hooks/useCategories';
+import useCategories from '../../hooks/useListCategories';
 
 const { Title } = Typography;
 const { Option } = Select;
