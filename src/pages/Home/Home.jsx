@@ -2,8 +2,9 @@ import React from 'react';
 import styles from "./Home.module.css";
 import TopBar from '../../components/TopBar/TopBar';
 import BottomBar from '../../components/BottomBar/BottomBar';
-import useFinanceData from '../../hooks/homeData';
+import useFinanceData from '../../hooks/useHome';
 import CountUp from 'react-countup';
+import CategoryChart from '../../components/Charts/CategoryChart';
 
 const Home = () => {
   const { totalEntrada, totalSaida, balancoMes, balancoAno } = useFinanceData();
@@ -80,8 +81,9 @@ const Home = () => {
         </p>
       </div>
 
+      {/* Renderizando o gráfico na div específica */}
       <div className={`${styles.graph} ${styles.card}`}>
-       
+        <CategoryChart />
       </div>
 
       <BottomBar />

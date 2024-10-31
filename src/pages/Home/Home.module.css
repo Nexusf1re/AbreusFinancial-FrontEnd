@@ -1,7 +1,4 @@
 @media screen and (max-width: 599px) {
-    .graph{
-        height: calc(55vh - 30vw) !important;
-    }
 }
 
 .body {
@@ -123,7 +120,6 @@
 .graph{
     background-color: var(--back-color);
     width: 100%;
-    height: 15vw;
     border-radius: 10px;
 }
 
@@ -135,3 +131,7 @@
     color: red !important; /* Cor para balanço negativo */
   }
   
+
+  .graph{
+    padding-left: 15px;
+  }
