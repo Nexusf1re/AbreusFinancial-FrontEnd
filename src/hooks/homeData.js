@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
+import Big from 'big.js';
+import dayjs from 'dayjs';
 
 const useFinanceData = () => {
-  const [totalEntrada, setTotalEntrada] = useState(0);
-  const [totalSaida, setTotalSaida] = useState(0);
-  const [balancoMes, setBalancoMes] = useState(0);
+  const [totalEntrada, setTotalEntrada] = useState(new Big(0));
+  const [totalSaida, setTotalSaida] = useState(new Big(0));
+  const [balancoMes, setBalancoMes] = useState(new Big(0));
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,18 +26,32 @@ const useFinanceData = () => {
         }
 
         const entradas = await entradaResponse.json();
-        const saidas = await saidaResponse.json();
+        const saídas = await saidaResponse.json();
 
-        // Calcular total de entradas
-        const totalEntradaCalc = entradas[0]?.Value || 0; 
+        // Filtrar entradas e saídas para o mês atual
+        const currentMonth = dayjs().month();
+        const currentYear = dayjs().year();
+
+        const totalEntradaCalc = entradas
+          .filter(entry => {
+            const date = dayjs(entry.Date);
+            return date.month() === currentMonth && date.year() === currentYear;
+          })
+          .reduce((acc, entry) => acc.plus(new Big(entry.Value || 0)), new Big(0));
+
+        const totalSaidaCalc = saídas
+          .filter(exit => {
+            const date = dayjs(exit.Date);
+            return date.month() === currentMonth && date.year() === currentYear;
+          })
+          .reduce((acc, exit) => acc.plus(new Big(exit.Value || 0)), new Big(0));
+
+        // Atualizar estados
         setTotalEntrada(totalEntradaCalc);
-
-        // Calcular total de saídas
-        const totalSaidaCalc = saidas[0]?.Value || 0; 
         setTotalSaida(totalSaidaCalc);
 
         // Calcular balanço do mês
-        const balancoCalc = totalEntradaCalc + totalSaidaCalc; // Calcula o balanço
+        const balancoCalc = totalEntradaCalc.plus(totalSaidaCalc);
         setBalancoMes(balancoCalc);
       } catch (error) {
         console.error(error);
