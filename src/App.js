@@ -1,5 +1,5 @@
 import { SpeedInsights } from '@vercel/speed-insights/react';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import SignUp from './pages/SignUp/SignUp';
@@ -9,24 +9,10 @@ import Transactions from './pages/Transactions/Transactions';
 import Config from './pages/Config/Config';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { isAuthenticated } from './services/authService';
+import useAuth from './hooks/useAuth'; // Importando o hook de autenticação
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(isAuthenticated());
-
-  // Verifica se o usuário está autenticado ao carregar o App
-  useEffect(() => {
-    const authStatus = isAuthenticated();
-    setIsLoggedIn(authStatus);
-  }, []);
-
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
-
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-  };
+  const { isLoggedIn, handleLogin, handleLogout } = useAuth();
 
   return (
     <Router>
