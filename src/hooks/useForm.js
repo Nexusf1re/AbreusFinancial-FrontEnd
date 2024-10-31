@@ -24,25 +24,25 @@ const useForm = () => {
   const handleSubmit = async () => {
     const apiUrl = process.env.REACT_APP_API_URL;
     const token = localStorage.getItem('token');
-
+  
     if (!token) {
       console.error("Token não encontrado. Usuário não autenticado.");
       throw new Error("Usuário não autenticado.");
     }
-
+  
     try {
       setLoading(true);
       
       // Formatar a data para "YYYY-MM-DD"
       const formattedData = {
-        Value: formData.value, // Mapeando para o formato esperado
+        Value: formData.type === 'Saida' ? -Math.abs(formData.value) : Math.abs(formData.value), // Garante que o valor seja negativo para Saida
         PaymentMethod: formData.payment,
         Type: formData.type,
         Date: formData.date.format('YYYY-MM-DD'), // Formata a data
         Category: formData.category,
         Description: formData.description,
       };
-
+  
       const response = await axios.post(
         `${apiUrl}/transactions/insert`,
         formattedData,
@@ -72,6 +72,7 @@ const useForm = () => {
       setLoading(false);
     }
   };
+  
 
   return { formData, handleChange, handleSubmit, loading };
 };
