@@ -19,15 +19,27 @@ const useFinanceData = () => {
           Authorization: `Bearer ${token}`,
         };
 
+        console.log("Iniciando fetch de entradas e saídas...");
+        
+        // Fazendo o fetch das entradas e saídas
         const entradaResponse = await fetch(`${apiUrl}/calc/Inflows`, { headers });
         const saidaResponse = await fetch(`${apiUrl}/calc/OutflowsDebit`, { headers });
 
-        if (!entradaResponse.ok || !saidaResponse.ok) {
-          throw new Error('Erro ao buscar dados');
+        if (!entradaResponse.ok) {
+          console.error("Erro ao buscar entradas:", entradaResponse.status, entradaResponse.statusText);
+          throw new Error('Erro ao buscar dados de entradas');
+        }
+
+        if (!saidaResponse.ok) {
+          console.error("Erro ao buscar saídas:", saidaResponse.status, saidaResponse.statusText);
+          throw new Error('Erro ao buscar dados de saídas');
         }
 
         const entradas = await entradaResponse.json();
         const saidas = await saidaResponse.json();
+
+        console.log("Dados de entradas recebidos:", entradas);
+        console.log("Dados de saídas recebidos:", saidas);
 
         // Filtrar entradas e saídas para o mês atual
         const currentMonth = dayjs().month();
@@ -47,6 +59,9 @@ const useFinanceData = () => {
           })
           .reduce((acc, exit) => acc.plus(new Big(exit.Value || 0)), new Big(0));
 
+        console.log("Total entrada calculado para o mês:", totalEntradaCalc.toString());
+        console.log("Total saída calculado para o mês:", totalSaidaCalc.toString());
+
         // Atualizar estados do mês
         setTotalEntrada(totalEntradaCalc);
         setTotalSaida(totalSaidaCalc);
@@ -54,6 +69,7 @@ const useFinanceData = () => {
         // Calcular balanço do mês
         const balancoCalc = totalEntradaCalc.plus(totalSaidaCalc);
         setBalancoMes(balancoCalc);
+        console.log("Balanço calculado para o mês:", balancoCalc.toString());
 
         // Calcular balanço do ano
         const totalEntradaAnoCalc = entradas
@@ -70,12 +86,16 @@ const useFinanceData = () => {
           })
           .reduce((acc, exit) => acc.plus(new Big(exit.Value || 0)), new Big(0));
 
+        console.log("Total entrada calculado para o ano:", totalEntradaAnoCalc.toString());
+        console.log("Total saída calculado para o ano:", totalSaidaAnoCalc.toString());
+
         // Calcular balanço do ano
         const balancoAnoCalc = totalEntradaAnoCalc.plus(totalSaidaAnoCalc);
         setBalancoAno(balancoAnoCalc);
+        console.log("Balanço calculado para o ano:", balancoAnoCalc.toString());
 
       } catch (error) {
-        console.error(error);
+        console.error("Erro ao buscar dados financeiros:", error);
       }
     };
 
