@@ -1,63 +1,86 @@
 import React from 'react';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from 'recharts';
+import { Bar } from 'react-chartjs-2';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js';
 import useGraph from '../../hooks/useGraph';
+
+// Registrar os componentes necessários
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, ChartDataLabels);
 
 const CategoryChart = () => {
   const data = useGraph();
 
-
   const sortedData = data.sort((a, b) => a.valor - b.valor);
 
-  // Define um valor máximo para o eixo X, se necessário
-  const maxValue = Math.max(...sortedData.map(item => item.valor)) || 0;
-  const domain = [0, Math.min(maxValue, 1000)]; 
-
-  const renderLabel = (props) => {
-    const { x, y, value, width } = props;
-    const spaceThreshold = 30; 
-
-  
-    if (width < spaceThreshold) {
-      return (
-        <text x={x} y={y + 13} fill="#000" fontSize={14} textAnchor="start">
-          {value}
-        </text>
-      );
-    }
-    
-    return (
-      <text x={x} y={y + 13} fill="#fff" fontWeight={'bold'} fontSize={12} textAnchor="start">
-        {value}
-      </text>
-    );
+  const chartData = {
+    labels: sortedData.map(item => item.nome), // Rótulos para o eixo Y
+    datasets: [
+      {
+        label: 'Valores',
+        data: sortedData.map(item => item.valor), // Valores para o eixo X
+        backgroundColor: '#8884d8', // Cor das barras
+        borderColor: '#6b5b92',
+        borderWidth: 1,
+      },
+    ],
   };
 
-  return (
-    <BarChart
-      width={340}
-      height={300}
-      data={sortedData}
-      layout="vertical"
-      padding={{left: 50}}
+  const options = {
+    responsive: true,
+    indexAxis: 'y',
+    scales: {
+      x: {
+        beginAtZero: false,
+        min: Math.min(...sortedData.map(item => item.valor)),
+        max: 0,
+        reverse: true,
+        ticks: {
+          font: {
+            size: 14, // Tamanho da fonte dos rótulos do eixo X
+          },
+        },
+      },
+      y: {
+        ticks: {
+          font: {
+            size: 12, // Tamanho da fonte dos rótulos do eixo Y
+          },
+        },
+      },
+    },
+    plugins: {
+      tooltip: {
+        callbacks: {
+          label: function (tooltipItem) {
+            return tooltipItem.dataset.label + ': ' + tooltipItem.raw;
+          },
+        },
+      },
+      datalabels: {
+        anchor: 'end',
+        align: 'end',
+        formatter: (value) => value,
+        color: '#fff',
+        display: (context) => context.dataset.data[context.dataIndex] !== null,
+        font: {
+          size: 16, // Tamanho da fonte dos rótulos de dados
+        },
+      },
+      legend: {
+        labels: {
+          font: {
+            size: 14, // Tamanho da fonte da legenda
+          },
+        },
+      },
+    },
+  };
+  
 
-    >
-      <XAxis type="number" domain={domain} reversed={true} />
-      <YAxis 
-        type="category" 
-        dataKey="nome"  
-        tick={{ fontSize: 10 }} 
-        padding={{left: 50}}
-      />
-      <Tooltip />
-      <Legend />
-      <CartesianGrid strokeDasharray="0 1" />
-      <Bar 
-        dataKey="valor" 
-        fill="#8884d8" 
-        label={renderLabel} 
-        minPointSize={20}
-      />
-    </BarChart>
+  return (
+    <div style={{ width: '100%', height: '600px' }}>
+      <Bar data={chartData} options={options} style={{ height: 'auto' }} />
+    </div>
   );
 };
 

@@ -4,18 +4,17 @@
 .body {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start; /* Inicia do topo */
     padding: 0;
     box-sizing: border-box !important;
     font-family: "Poppins", sans-serif;
-    display: flex;
-    flex-direction: column;
-    height: 90vh; 
+    height: auto; /* Altura auto */
+    min-height: 100vh; /* Altura mínima da tela */
+    overflow-y: auto; /* Rolagem vertical */
 }
 
 
-
-.card{
+.card {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.217);
     overflow: hidden; 
     transition: transform 0.3s, box-shadow 0.3s;
@@ -138,5 +137,5 @@
     flex: 1; /* Faz a div do gráfico ocupar o espaço restante */
     display: flex;
     overflow: hidden; /* Esconde qualquer overflow */
-    height: 0; /* Inicialmente sem altura */
-  }
+    height: auto; /* Altura ajustável */
+}
