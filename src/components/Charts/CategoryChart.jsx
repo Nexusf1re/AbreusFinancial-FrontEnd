@@ -1,85 +1,99 @@
 import React from 'react';
-import { Bar } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js';
+import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from 'chart.js';
 import useGraph from '../../hooks/useGraph';
 
 // Registrar os componentes necessários
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, ChartDataLabels);
+ChartJS.register(Title, Tooltip, Legend, ArcElement, ChartDataLabels);
 
 const CategoryChart = () => {
   const data = useGraph();
 
-  const sortedData = data.sort((a, b) => a.valor - b.valor);
-
   const chartData = {
-    labels: sortedData.map(item => item.nome), // Rótulos para o eixo Y
+    labels: data.map(item => item.nome), // Rótulos para o gráfico
     datasets: [
       {
-        label: 'Valores',
-        data: sortedData.map(item => item.valor), // Valores para o eixo X
-        backgroundColor: '#8884d8', // Cor das barras
-        borderColor: '#6b5b92',
-        borderWidth: 1,
+        label: 'Gastos por Categoria',
+        data: data.map(item => item.valor), // Valores para cada categoria
+        backgroundColor: [
+          '#FF6384',
+          '#36A2EB',
+          '#FFCE56',
+          '#4BC0C0',
+          '#9966FF',
+          '#FF9F40',
+        ], // Cores para cada segmento
+        hoverBackgroundColor: [
+          '#FF6384',
+          '#36A2EB',
+          '#FFCE56',
+          '#4BC0C0',
+          '#9966FF',
+          '#FF9F40',
+        ],
       },
     ],
   };
 
   const options = {
     responsive: true,
-    indexAxis: 'y',
-    scales: {
-      x: {
-        beginAtZero: false,
-        min: Math.min(...sortedData.map(item => item.valor)),
-        max: 0,
-        reverse: true,
-        ticks: {
-          font: {
-            size: 14, // Tamanho da fonte dos rótulos do eixo X
-          },
-        },
-      },
-      y: {
-        ticks: {
-          font: {
-            size: 12, // Tamanho da fonte dos rótulos do eixo Y
-          },
-        },
+    layout: {
+      padding: {
+        bottom: 30, // Ajuste o valor para o padding inferior desejado
       },
     },
     plugins: {
+      title: {
+        display: true,
+        text: 'Gastos por Categoria',
+        font: {
+          size: 20,
+        },
+      },
       tooltip: {
         callbacks: {
           label: function (tooltipItem) {
-            return tooltipItem.dataset.label + ': ' + tooltipItem.raw;
+            return `${tooltipItem.label}: ${tooltipItem.raw.toLocaleString()}`;
           },
         },
       },
       datalabels: {
-        anchor: 'end',
-        align: 'end',
-        formatter: (value) => value,
-        color: '#fff',
-        display: (context) => context.dataset.data[context.dataIndex] !== null,
-        font: {
-          size: 16, // Tamanho da fonte dos rótulos de dados
+        anchor: 'end', // Para ancorar os rótulos no final
+        align: 'end',  // Alinha os rótulos ao final
+        formatter: (value, context) => {
+          const label = context.chart.data.labels[context.dataIndex];
+          return `${label}: ${value.toLocaleString()}`; // Exibe o rótulo e o valor
         },
+        color: 'black', // Cor do texto dos rótulos
+        font: {
+          size: 10,
+        },
+        padding: 2, // Espaçamento
+        borderColor: 'black', // Cor da linha de conexão
+        borderWidth: 1,
+        display: true,
+        offset: 10, // Distância do rótulo até a linha de referência
       },
       legend: {
         labels: {
           font: {
-            size: 14, // Tamanho da fonte da legenda
+            size: 14,
           },
         },
       },
     },
   };
-  
 
   return (
-    <div style={{ width: '100%', height: '600px' }}>
-      <Bar data={chartData} options={options} style={{ height: 'auto' }} />
+    <div style={{ width: '100%', height: '500px' }}>
+      {data.length > 0 ? (
+        <Doughnut data={chartData} options={options} />
+      ) : (
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+          <h4 style={{ color: 'gray' }}>Nenhuma saída este mês!</h4>
+        </div>
+      )}
     </div>
   );
 };
