@@ -70,6 +70,9 @@ const Transactions = () => {
         <div className={styles.container}>
             <TopBar />
             <h3 className={styles.title}>Histórico de lançamentos</h3>
+            
+            {error && <p className={styles.error}>Erro ao carregar transações: {error}</p>}
+            
             <div className={styles.searchContainer}>
                 <input
                     type="text"
