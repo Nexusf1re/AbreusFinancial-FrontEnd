@@ -47,7 +47,7 @@ const FormComponent = () => {
           width: "100%",
           maxWidth: "300px",
           position: "absolute",
-          top: "1rem",
+          top: "10%",
           left: "50%",
           transform: "translate(-50%, -50%)",
           textAlign: "center",
