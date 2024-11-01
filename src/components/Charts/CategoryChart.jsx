@@ -43,6 +43,22 @@ const CategoryChart = () => {
         bottom: 30, // Ajuste o valor para o padding inferior desejado
       },
     },
+    animations: {
+      // Adiciona animação de entrada
+      arc: {
+        type: 'number',
+        duration: 2000,
+        easing: 'easeInOutCubic',
+        from: 0,
+        to: 1,
+      },
+      opacity: {
+        duration: 2000,
+        easing: 'easeInOutCubic',
+        from: 0,
+        to: 1,
+      },
+    },
     plugins: {
       title: {
         display: true,
