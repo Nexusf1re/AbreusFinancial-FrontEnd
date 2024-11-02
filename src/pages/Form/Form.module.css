@@ -1,3 +1,58 @@
+@media (min-width: 768px) {
+    /* Centraliza o container no desktop */
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .body {
+        padding: 25px 25vw 30px 25vw;
+    }
+
+    /* Título */
+    .title {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+    /* Ajusta o grupo de formulários */
+    .formGroup {
+        display: grid;
+        grid-template-columns: 1fr; /* 2 colunas lado a lado */
+        column-gap: 20px;
+        row-gap: 15px;
+    }
+
+    /* Ajustes para campos de input */
+    .formInput label {
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+    }
+
+    .formInput input,
+    .formInput .ant-select,
+    .formInput .ant-picker {
+        font-size: 1rem;
+        height: 45px;
+        padding: 0 12px;
+    }
+
+    /* Alinha o botão de envio centralizado */
+    .formSubmit {
+        margin: 20px auto 0;
+        font-size: 1.2rem;
+        padding: 14px 24px;
+        width: auto;
+    }
+
+    /* Data do formulário */
+    .formDate {
+        width: 100%;
+    }
+}
+
+
+
 .body{
     margin-top: 62px;
 }
