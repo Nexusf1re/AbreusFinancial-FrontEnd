@@ -1,4 +1,4 @@
-@media (min-width: 768px) {
+@media (min-width: 575px) {
     /* Centraliza o container no desktop */
     .container {
         max-width: 800px;

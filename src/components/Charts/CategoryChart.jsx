@@ -3,6 +3,7 @@ import { Doughnut } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from 'chart.js';
 import useGraph from '../../hooks/useGraph';
+import styles from './CategoryChart.module.css';
 
 // Registrar os componentes necessários
 ChartJS.register(Title, Tooltip, Legend, ArcElement, ChartDataLabels);
@@ -40,11 +41,10 @@ const CategoryChart = () => {
     responsive: true,
     layout: {
       padding: {
-        bottom: 30, // Ajuste o valor para o padding inferior desejado
+        bottom: 30,
       },
     },
     animations: {
-      // Adiciona animação de entrada
       arc: {
         type: 'number',
         duration: 2000,
@@ -75,21 +75,22 @@ const CategoryChart = () => {
         },
       },
       datalabels: {
-        anchor: 'end', // Para ancorar os rótulos no final
-        align: 'end',  // Alinha os rótulos ao final
+        anchor: 'end',
+        align: 'end',
         formatter: (value, context) => {
           const label = context.chart.data.labels[context.dataIndex];
-          return `${label}: ${value.toLocaleString()}`; // Exibe o rótulo e o valor
+          return `${label}: ${value.toLocaleString()}`;
         },
-        color: 'black', // Cor do texto dos rótulos
+        color: 'black',
         font: {
-          size: 10,
+          size: "11em",
         },
-        padding: 2, // Espaçamento
-        borderColor: 'black', // Cor da linha de conexão
+        padding: 2,
+        borderColor: 'black',
         borderWidth: 1,
         display: true,
-        offset: 10, // Distância do rótulo até a linha de referência
+        offset: 10,
+        borderRadius: 4,
       },
       legend: {
         labels: {
@@ -102,12 +103,12 @@ const CategoryChart = () => {
   };
 
   return (
-    <div style={{ width: '100%', height: '500px' }}>
+    <div className={styles.container}>
       {data.length > 0 ? (
-        <Doughnut data={chartData} options={options} />
+        <Doughnut data={chartData} options={options} className={styles.canvas} />
       ) : (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-          <h4 style={{ color: 'gray' }}>Nenhuma saída este mês!</h4>
+        <div className={styles.emptyMessage}>
+          <h4>Nenhuma saída este mês!</h4>
         </div>
       )}
     </div>
