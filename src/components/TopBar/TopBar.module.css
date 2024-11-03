@@ -16,6 +16,10 @@
     transition: transform 0.3s, box-shadow 0.3s;
     z-index: 999 !important;
   }
+
+  .topbar .p{
+    margin: auto !important;
+  }
   
 
   .usericon{
@@ -41,7 +45,7 @@
     cursor: pointer;
   }
 
-  .exit p {
+  .exit .p {
    margin-top: -5px;
    color: var(--font-color);
   }

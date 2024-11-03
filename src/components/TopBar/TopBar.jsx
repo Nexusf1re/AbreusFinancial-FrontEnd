@@ -21,7 +21,7 @@ const TopBar = () => {
             <p className={styles.greeting}>{greetings()}</p>
             <button className={styles.exit} onClick={handleLogout}>
                 <FaArrowRightFromBracket className={styles.exiticon} />
-                <p>Sair</p>
+                <p className={styles.p}>Sair</p>
             </button>
         </div>
     );

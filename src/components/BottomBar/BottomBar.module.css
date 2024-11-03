@@ -15,17 +15,17 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     overflow: hidden; 
     transition: transform 0.3s, box-shadow 0.3s;
-    z-index: 999 !important;
+    z-index: 999 !important;  
 }
 
-.bottombar span{
+.bottombar .span{
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
 }
 
-.bottombar a{
+.bottombar .a{
     text-decoration: none;
     color: var(--font-color);
 }
@@ -35,19 +35,19 @@
    scale: 1.6;
 }
 
-a:focus{
+.a:focus{
     background: none !important;
     text-decoration: none !important;
     outline: none !important;
 }
 
-a span:focus{
+.a .span:focus{
     background: none !important;
     text-decoration: none !important;
     outline: none !important;
 }
 
-a{
+.a{
     outline: none !important;
     background: none !important;
 }

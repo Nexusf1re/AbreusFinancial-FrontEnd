@@ -7,6 +7,7 @@ import BottomBar from '../../components/BottomBar/BottomBar';
 import styles from './Form.module.css';
 import useForm from '../../hooks/useForm';
 import useCategories from '../../hooks/useListCategories';
+import Footer from '../../components/Footer/Footer'
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -166,6 +167,7 @@ const FormComponent = () => {
         </Form.Item>
       </Form>
       <BottomBar />
+      <Footer />
     </div>
   );
 };

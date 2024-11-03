@@ -5,6 +5,7 @@ import BottomBar from '../../components/BottomBar/BottomBar';
 import useFinanceData from '../../hooks/useHome';
 import CountUp from 'react-countup';
 import CategoryChart from '../../components/Charts/CategoryChart';
+import Footer from '../../components/Footer/Footer'
 
 const Home = () => {
   const { totalEntrada, totalSaida, balancoMes, balancoAno } = useFinanceData();
@@ -24,8 +25,8 @@ const Home = () => {
       </div>
 
       <div className={`${styles.annualBalance} ${styles.card}`}>
-        <p className={styles.name}>Balanço Ano Atual</p>
-        <p className={`${styles.balanceValue} ${balancoAno < 0 ? styles.negative : styles.positive}`}>
+        <p className={`${styles.name} ${styles.p}`}>Balanço Ano Atual</p>
+        <p className={`${styles.balanceValue} ${styles.p} ${balancoAno < 0 ? styles.negative : styles.positive}`}>
           R$
           <CountUp
             end={balancoAno}
@@ -38,9 +39,9 @@ const Home = () => {
       </div>
 
       <div className={styles.InOut}>
-        <div className={`${styles.income} ${styles.card}`}>
-          <p className={styles.name}>Total Entrada</p>
-          <p className={styles.icomeValue}>
+        <div className={`${styles.income} ${styles.p} ${styles.card}`}>
+          <p className={`${styles.name} ${styles.p}`}>Total Entrada</p>
+          <p className={`${styles.icomeValue} ${styles.p}`}>
             R$
             <CountUp
               end={totalEntrada}
@@ -53,8 +54,8 @@ const Home = () => {
         </div>
 
         <div className={`${styles.outgoing} ${styles.card}`}>
-          <p className={styles.name}>Total Saída</p>
-          <p className={styles.outgoingValue}>
+          <p className={`${styles.name} ${styles.p}`}>Total Saída</p>
+          <p className={`${styles.outgoingValue} ${styles.p}`}>
             R$
             <CountUp
               end={totalSaida}
@@ -68,8 +69,8 @@ const Home = () => {
       </div>
 
       <div className={`${styles.monthBalance} ${styles.card}`}>
-        <p className={styles.name}>Balanço Mês Atual</p>
-        <p className={`${styles.balanceValue} ${balancoMes < 0 ? styles.negative : styles.positive}`}>
+        <p className={`${styles.name} ${styles.p}`}>Balanço Mês Atual</p>
+        <p className={`${styles.balanceValue} ${styles.p} ${balancoMes < 0 ? styles.negative : styles.positive}`}>
           R$
           <CountUp
             end={balancoMes}
@@ -87,6 +88,7 @@ const Home = () => {
 
 
       <BottomBar />
+      <Footer />
     </div>
   );
 };

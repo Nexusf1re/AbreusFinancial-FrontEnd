@@ -7,6 +7,7 @@
 
     .body {
         padding: 25px 25vw 30px 25vw;
+        margin-bottom: 35px;
     }
 
     /* Título */
@@ -52,9 +53,10 @@
 }
 
 
-
+@media screen and (max-width: 574px){
 .body{
     margin-top: 62px;
+    margin-bottom: 85px;
 }
 
 .title{
@@ -105,4 +107,5 @@
     width: 100%;
     margin-bottom: 15px;
     text-align: center;
+}
 }

@@ -5,6 +5,7 @@ import styles from './Transactions.module.css';
 import TopBar from '../../components/TopBar/TopBar';
 import BottomBar from '../../components/BottomBar/BottomBar';
 import ScrollUp from '../../components/ScrollUp/ScrollUp';
+import Footer from '../../components/Footer/Footer'
 
 const Transactions = () => {
     const [transactions, setTransactions] = useState([]);
@@ -118,6 +119,7 @@ const Transactions = () => {
             </table>
             <ScrollUp />
             <BottomBar />
+            <Footer />
         </div>
     );
 };

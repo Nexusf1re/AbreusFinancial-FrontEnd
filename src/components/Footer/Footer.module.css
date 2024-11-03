@@ -1,0 +1,21 @@
+@media screen and (max-width: 574px){
+.footer {
+    text-align: center;
+    padding: 0.5rem;
+    font-size: 0.875rem;
+    color: #777;
+    margin-top: auto;
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (min-width: 575px){
+  .footer {
+    text-align: center;
+    padding: 1rem;
+    font-size: 1.25rem;
+    color: #777;
+    margin-top: auto;
+    margin-bottom: 20px;
+  }
+}

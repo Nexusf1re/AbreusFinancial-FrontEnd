@@ -7,6 +7,8 @@ import BottomBar from '../../components/BottomBar/BottomBar';
 import useListCategories from '../../hooks/useListCategories';
 import useCreateCategory from '../../hooks/useCreateCategory';
 import styles from './Config.module.css';
+import Footer from '../../components/Footer/Footer'
+
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -124,6 +126,7 @@ const Config = () => {
       </div>
       <BottomBar />
       <ToastContainer />
+      <Footer />
     </div>
   );
 };
