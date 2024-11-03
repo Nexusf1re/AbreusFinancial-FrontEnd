@@ -3,8 +3,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import TopBar from '../../components/TopBar/TopBar';
 import BottomBar from '../../components/BottomBar/BottomBar';
-import useListCategories from '../../hooks/useListCategories';
-import useCreateCategory from '../../hooks/useCreateCategory';
+import { DeleteOutlined } from '@ant-design/icons';
+import useConfig from '../../hooks/useConfig';
 import styles from './Config.module.css';
 import Footer from '../../components/Footer/Footer';
 
@@ -12,49 +12,38 @@ const { Title } = Typography;
 const { Option } = Select;
 
 const Config = () => {
-  const [formNome] = Form.useForm();
-  const [formCategoria] = Form.useForm();
-  const { categories, error: listError } = useListCategories();
-  const { createCategory, loading: creating, error: createError } = useCreateCategory();
+  const { 
+    formNome, 
+    formCategoria, 
+    loading, 
+    onFinishNome, 
+    onFinishCategoria, 
+    handleDeleteCategory,
+    categories, 
+    entradas, 
+    saidas, 
+    createError, 
+    listError, 
+    deleteError 
+  } = useConfig();
 
-  const onFinishNome = async (values) => {
-    console.log('Nome salvo:', values.nome);
-    formNome.resetFields();
+  const handleDeleteClick = (categoryId) => {
+    handleDeleteCategory(categoryId);
   };
-
-  const onFinishCategoria = async (values) => {
-    const categoryData = {
-      Category: values.Category,
-      Type: values.Type,
-    };
-
-    const response = await createCategory(categoryData);
-    if (response) {
-      formCategoria.resetFields();
-    }
-  };
-
-  // Separando as categorias por tipo
-  const entradas = categories.filter((item) => item.Type === 'Entrada');
-  const saidas = categories.filter((item) => item.Type === 'Saida');
 
   return (
     <div className={styles.container}>
       <TopBar />
       <div className={styles.content}>
         <Title level={2}>Configurações</Title>
-        {creating ? (
-          <Spin tip="Cadastrando..." />
+        {loading ? (
+          <Spin tip="Carregando..." />
         ) : (
           <>
-            {/* Formulário para o Nome */}
             <Form
               form={formNome}
               layout="vertical"
               onFinish={onFinishNome}
-              initialValues={{
-                // Defina os valores iniciais do formulário aqui, se necessário
-              }}
             >
               <Form.Item
                 name="nome"
@@ -64,7 +53,6 @@ const Config = () => {
               >
                 <Input />
               </Form.Item>
-
               <Form.Item>
                 <Button type="primary" htmlType="submit">
                   Salvar Nome
@@ -73,16 +61,12 @@ const Config = () => {
             </Form>
             <hr />
 
-            {/* Formulário para a Nova Categoria */}
             <Form
               form={formCategoria}
               layout="vertical"
               onFinish={onFinishCategoria}
             >
-              <Form.Item
-                label="Nova Categoria"
-                style={{ display: 'flex', alignItems: 'center' }}
-              >
+              <Form.Item label="Nova Categoria">
                 <Form.Item
                   name="Category"
                   noStyle
@@ -108,31 +92,43 @@ const Config = () => {
               </Form.Item>
             </Form>
 
-            {/* Exibindo categorias cadastradas, separadas por tipo */}
             <div className={styles.categoriesList}>
               <Title level={3}>Categorias Cadastradas</Title>
               {createError && <p style={{ color: 'red' }}>{createError}</p>}
               {listError && <p style={{ color: 'red' }}>{listError}</p>}
-              
-              {/* Lista de Entradas */}
+              {deleteError && <p style={{ color: 'red' }}>{deleteError}</p>}
+
               <Title level={4}>Entradas</Title>
               <List
                 bordered
                 dataSource={entradas}
                 renderItem={(item) => (
-                  <List.Item>
+                  <List.Item
+                    actions={[
+                      <DeleteOutlined 
+                        style={{ color: 'red' }}
+                        onClick={() => handleDeleteClick(item.Id)}
+                      />
+                    ]}
+                  >
                     {item.Category}
                   </List.Item>
                 )}
               />
 
-              {/* Lista de Saídas */}
               <Title level={4}>Saídas</Title>
               <List
                 bordered
                 dataSource={saidas}
                 renderItem={(item) => (
-                  <List.Item>
+                  <List.Item
+                    actions={[
+                      <DeleteOutlined 
+                        style={{ color: 'red' }}
+                        onClick={() => handleDeleteClick(item.Id)} 
+                      />
+                    ]}
+                  >
                     {item.Category}
                   </List.Item>
                 )}
