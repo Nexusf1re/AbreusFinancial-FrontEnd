@@ -1,4 +1,3 @@
-// src/pages/Config/Config.jsx
 import { Form, Input, Select, Button, Typography, Spin, List } from 'antd';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -7,8 +6,7 @@ import BottomBar from '../../components/BottomBar/BottomBar';
 import useListCategories from '../../hooks/useListCategories';
 import useCreateCategory from '../../hooks/useCreateCategory';
 import styles from './Config.module.css';
-import Footer from '../../components/Footer/Footer'
-
+import Footer from '../../components/Footer/Footer';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -16,8 +14,8 @@ const { Option } = Select;
 const Config = () => {
   const [formNome] = Form.useForm();
   const [formCategoria] = Form.useForm();
-  const { categories, error: listError } = useListCategories(); 
-  const { createCategory, loading: creating, error: createError } = useCreateCategory()
+  const { categories, error: listError } = useListCategories();
+  const { createCategory, loading: creating, error: createError } = useCreateCategory();
 
   const onFinishNome = async (values) => {
     console.log('Nome salvo:', values.nome);
@@ -27,7 +25,7 @@ const Config = () => {
   const onFinishCategoria = async (values) => {
     const categoryData = {
       Category: values.Category,
-      Type: values.Type,         
+      Type: values.Type,
     };
 
     const response = await createCategory(categoryData);
@@ -35,6 +33,10 @@ const Config = () => {
       formCategoria.resetFields();
     }
   };
+
+  // Separando as categorias por tipo
+  const entradas = categories.filter((item) => item.Type === 'Entrada');
+  const saidas = categories.filter((item) => item.Type === 'Saida');
 
   return (
     <div className={styles.container}>
@@ -106,17 +108,32 @@ const Config = () => {
               </Form.Item>
             </Form>
 
-            {/* Exibindo categorias cadastradas */}
+            {/* Exibindo categorias cadastradas, separadas por tipo */}
             <div className={styles.categoriesList}>
               <Title level={3}>Categorias Cadastradas</Title>
               {createError && <p style={{ color: 'red' }}>{createError}</p>}
               {listError && <p style={{ color: 'red' }}>{listError}</p>}
+              
+              {/* Lista de Entradas */}
+              <Title level={4}>Entradas</Title>
               <List
                 bordered
-                dataSource={categories}
+                dataSource={entradas}
                 renderItem={(item) => (
                   <List.Item>
-                    {item.Category} - {item.Type}
+                    {item.Category}
+                  </List.Item>
+                )}
+              />
+
+              {/* Lista de Saídas */}
+              <Title level={4}>Saídas</Title>
+              <List
+                bordered
+                dataSource={saidas}
+                renderItem={(item) => (
+                  <List.Item>
+                    {item.Category}
                   </List.Item>
                 )}
               />
