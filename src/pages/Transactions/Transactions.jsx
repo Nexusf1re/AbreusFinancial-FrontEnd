@@ -105,9 +105,9 @@ const Transactions = () => {
                                     {expandedTransaction === transaction && (
                                         <tr className={`${styles.tr} ${styles.expanded}`}>
                                             <td colSpan={2} className={styles.additionalInfo}>
-                                                <p><strong>Método de Pagamento:&nbsp;</strong> {transaction.PaymentMethod}</p>
-                                                <p><strong>Tipo:&nbsp;</strong> {transaction.Type}</p>
-                                                <p><strong>Categoria:&nbsp;</strong> {transaction.Category}</p>
+                                                <p className={styles.p}><strong>Método de Pagamento:&nbsp;</strong> {transaction.PaymentMethod}</p>
+                                                <p className={styles.p}><strong>Tipo:&nbsp;</strong> {transaction.Type}</p>
+                                                <p className={styles.p}><strong>Categoria:&nbsp;</strong> {transaction.Category}</p>
                                             </td>
                                         </tr>
                                     )}
