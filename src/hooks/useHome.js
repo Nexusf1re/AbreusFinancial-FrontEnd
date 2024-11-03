@@ -18,8 +18,6 @@ const useFinanceData = () => {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         };
-
-        console.log("Iniciando fetch de entradas e saídas...");
         
         // Fazendo o fetch das entradas e saídas
         const entradaResponse = await fetch(`${apiUrl}/calc/Inflows`, { headers });
@@ -37,10 +35,6 @@ const useFinanceData = () => {
 
         const entradas = await entradaResponse.json();
         const saidas = await saidaResponse.json();
-
-        console.log("Dados de entradas recebidos:", entradas);
-        console.log("Dados de saídas recebidos:", saidas);
-
         // Filtrar entradas e saídas para o mês atual
         const currentMonth = dayjs().month();
         const currentYear = dayjs().year();
@@ -59,9 +53,6 @@ const useFinanceData = () => {
           })
           .reduce((acc, exit) => acc.plus(new Big(exit.Value || 0)), new Big(0));
 
-        console.log("Total entrada calculado para o mês:", totalEntradaCalc.toString());
-        console.log("Total saída calculado para o mês:", totalSaidaCalc.toString());
-
         // Atualizar estados do mês
         setTotalEntrada(totalEntradaCalc);
         setTotalSaida(totalSaidaCalc);
@@ -69,7 +60,6 @@ const useFinanceData = () => {
         // Calcular balanço do mês
         const balancoCalc = totalEntradaCalc.plus(totalSaidaCalc);
         setBalancoMes(balancoCalc);
-        console.log("Balanço calculado para o mês:", balancoCalc.toString());
 
         // Calcular balanço do ano
         const totalEntradaAnoCalc = entradas
@@ -86,13 +76,9 @@ const useFinanceData = () => {
           })
           .reduce((acc, exit) => acc.plus(new Big(exit.Value || 0)), new Big(0));
 
-        console.log("Total entrada calculado para o ano:", totalEntradaAnoCalc.toString());
-        console.log("Total saída calculado para o ano:", totalSaidaAnoCalc.toString());
-
         // Calcular balanço do ano
         const balancoAnoCalc = totalEntradaAnoCalc.plus(totalSaidaAnoCalc);
         setBalancoAno(balancoAnoCalc);
-        console.log("Balanço calculado para o ano:", balancoAnoCalc.toString());
 
       } catch (error) {
         console.error("Erro ao buscar dados financeiros:", error);
