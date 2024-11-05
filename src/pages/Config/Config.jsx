@@ -40,6 +40,7 @@ const Config = () => {
           <Spin tip="Carregando..." />
         ) : (
           <>
+          {/*
             <Form
               form={formNome}
               layout="vertical"
@@ -57,8 +58,11 @@ const Config = () => {
                 <Button type="primary" htmlType="submit">
                   Salvar Nome
                 </Button>
+              
               </Form.Item>
+              
             </Form>
+            */}
             <hr />
 
             <Form
