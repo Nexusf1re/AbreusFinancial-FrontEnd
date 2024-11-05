@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { fetchFinancialData } from '../../services/transactionService';
+import { fetchFinancialData, editTransaction, deleteTransaction } from '../../services/transactionService';
 import Big from 'big.js';
 import { Button, Input, Modal } from 'antd';
 import styles from './Transactions.module.css';
@@ -17,18 +17,21 @@ const Transactions = () => {
     const [editedDescription, setEditedDescription] = useState('');
     const [editedValue, setEditedValue] = useState('');
     const [editedCategory, setEditedCategory] = useState('');
+    const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+    const [transactionToDelete, setTransactionToDelete] = useState(null);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const data = await fetchFinancialData();
-                setTransactions(data);
-            } catch (err) {
-                setError(err.message);
-            }
-        };
         fetchData();
     }, []);
+
+    const fetchData = async () => {
+        try {
+            const data = await fetchFinancialData();
+            setTransactions(data);
+        } catch (err) {
+            setError(err.message);
+        }
+    };
 
     const formatDate = (dataString) => {
         const date = new Date(dataString);
@@ -72,22 +75,51 @@ const Transactions = () => {
         setEditedCategory(transaction.Category);
     };
 
-    const confirmEdit = () => {
-        // Lógica para editar a transação
-        const updatedTransactions = transactions.map((transaction) => {
-            if (transaction.Username === editingTransaction.Username && transaction.Date === editingTransaction.Date) {
-                return { ...transaction, Description: editedDescription, Value: editedValue, Category: editedCategory };
-            }
-            return transaction;
-        });
-        setTransactions(updatedTransactions);
-        setEditingTransaction(null);
+    const confirmEdit = async () => {
+        try {
+            const updatedData = {
+                Description: editedDescription,
+                Value: editedValue,
+                Category: editedCategory,
+            };
+
+            await editTransaction(editingTransaction.Id, updatedData);
+
+            // Atualiza o estado local após sucesso da API
+            const updatedTransactions = transactions.map((transaction) => {
+                if (transaction.Id === editingTransaction.Id) {
+                    return { 
+                        ...transaction, 
+                        ...updatedData
+                    };
+                }
+                return transaction;
+            });
+            
+            setTransactions(updatedTransactions);
+            setEditingTransaction(null);
+        } catch (err) {
+            setError(err.message);
+        }
     };
 
-    const handleDelete = (transaction) => {
-        // Lógica para deletar a transação
-        const updatedTransactions = transactions.filter((t) => t !== transaction);
-        setTransactions(updatedTransactions);
+    const handleDeleteClick = (transaction) => {
+        setTransactionToDelete(transaction);
+        setShowDeleteConfirm(true);
+    };
+
+    const handleDelete = async () => {
+        try {
+            await deleteTransaction(transactionToDelete.Id);
+
+            // Atualiza o estado local após sucesso da API
+            const updatedTransactions = transactions.filter((t) => t.Id !== transactionToDelete.Id);
+            setTransactions(updatedTransactions);
+            setShowDeleteConfirm(false);
+            setTransactionToDelete(null);
+        } catch (err) {
+            setError(err.message);
+        }
     };
 
     return (
@@ -120,7 +152,7 @@ const Transactions = () => {
                                 <td colSpan={2} className={styles.dateTitle}>{date}</td>
                             </tr>
                             {groupedTransactions[date].map((transaction, index) => (
-                                <React.Fragment key={`${transaction.Username}-${transaction.Date}-${index}`}>
+                                <React.Fragment key={`${transaction.Id}-${index}`}>
                                     <tr className={styles.tr} onClick={() => toggleTransaction(transaction)} style={{ cursor: 'pointer' }}>
                                         <td className={styles.td}>{transaction.Description}</td>
                                         <td className={styles.td}>{formatValue(transaction.Value)}</td>
@@ -131,8 +163,24 @@ const Transactions = () => {
                                                 <p className={styles.p}><strong>Método de Pagamento:&nbsp;</strong> {transaction.PaymentMethod}</p>
                                                 <p className={styles.p}><strong>Tipo:&nbsp;</strong> {transaction.Type}</p>
                                                 <p className={styles.p}><strong>Categoria:&nbsp;</strong> {transaction.Category}</p>
-                                                <Button onClick={() => handleEdit(transaction)} type="primary">Editar</Button>
-                                                <Button onClick={() => handleDelete(transaction)} type="danger">Deletar</Button>
+                                                <Button
+                                                    className={`${styles.expandBtn} ${styles.expandEditBtn}`}
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        handleEdit(transaction);
+                                                    }} 
+                                                    type="primary">
+                                                    Editar
+                                                </Button>
+                                                <Button
+                                                    className={`${styles.expandBtn} ${styles.expandDeleteBtn}`}
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        handleDeleteClick(transaction);
+                                                    }} 
+                                                    type="danger">
+                                                    Deletar
+                                                </Button>
                                             </td>
                                         </tr>
                                     )}
@@ -151,23 +199,38 @@ const Transactions = () => {
                     onCancel={() => setEditingTransaction(null)}
                 >
                     <Input
+                        className={styles.InputModalEdit}
                         placeholder="Descrição"
                         value={editedDescription}
                         onChange={(e) => setEditedDescription(e.target.value)}
                     />
                     <Input
+                        className={styles.InputModalEdit}
                         placeholder="Valor"
                         type="number"
                         value={editedValue}
                         onChange={(e) => setEditedValue(e.target.value)}
                     />
                     <Input
+                        className={styles.InputModalEdit}
                         placeholder="Categoria"
                         value={editedCategory}
                         onChange={(e) => setEditedCategory(e.target.value)}
                     />
                 </Modal>
             )}
+
+            <Modal
+                title="Confirmar Exclusão"
+                visible={showDeleteConfirm}
+                onOk={handleDelete}
+                onCancel={() => {
+                    setShowDeleteConfirm(false);
+                    setTransactionToDelete(null);
+                }}
+            >
+                <p>Tem certeza que deseja excluir esta transação?</p>
+            </Modal>
 
             <ScrollUp />
             <BottomBar />
