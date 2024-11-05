@@ -79,7 +79,7 @@ const Transactions = () => {
         setEditingTransaction(transaction);
         setEditedDescription(transaction.Description);
         setEditedValue(transaction.Value);
-        setEditedCategory(transaction.Category); // Alterado para usar CategoryId
+        setEditedCategory(transaction.Category);
         setEditedDate(dayjs(transaction.Date)); 
     };
 
@@ -89,7 +89,7 @@ const Transactions = () => {
                 ...editingTransaction,
                 Description: editedDescription,
                 Value: editedValue,
-                CategoryId: editedCategory, // Confirme que CategoryId está sendo usado aqui
+                Category: editedCategory,
                 Date: editedDate.toISOString(),
             };
     
@@ -97,7 +97,7 @@ const Transactions = () => {
     
             const updatedTransactions = transactions.map((transaction) => {
                 if (transaction.Id === editingTransaction.Id) {
-                    return updatedData; // Usa o objeto completo atualizado
+                    return updatedData; 
                 }
                 return transaction;
             });
@@ -108,6 +108,7 @@ const Transactions = () => {
             setError(err.message);
         }
     };
+    
 
     const filteredCategories = React.useMemo(() => {
         if (!editingTransaction) return [];
@@ -238,15 +239,14 @@ const Transactions = () => {
                             className={styles.InputModalEdit}
                             placeholder="Selecione a categoria"
                             value={editedCategory}
-                            onChange={(value) => setEditedCategory(value)} // Este 'value' é o CategoryId selecionado
+                            onChange={(value) => setEditedCategory(value)} 
                         >
                             {filteredCategories.map((category) => (
-                                <Option key={category.Id} value={category.Id}> {/* Passando CategoryId como value */}
+                                <Option key={category.Id} value={category.Category}>
                                     {category.Category}
                                 </Option>
                             ))}
                         </Select>
-
 
                         <Input
                             className={styles.InputModalEdit}
