@@ -12,14 +12,11 @@ const { Title } = Typography;
 const { Option } = Select;
 
 const Config = () => {
-  const { 
-    formNome, 
+  const {  
     formCategoria, 
     loading, 
-    onFinishNome, 
     onFinishCategoria, 
     handleDeleteCategory,
-    categories, 
     entradas, 
     saidas, 
     createError, 
