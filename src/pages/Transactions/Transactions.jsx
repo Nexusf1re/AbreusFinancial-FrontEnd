@@ -79,41 +79,43 @@ const Transactions = () => {
         setEditingTransaction(transaction);
         setEditedDescription(transaction.Description);
         setEditedValue(transaction.Value);
-        setEditedCategory(transaction.Category);
-        setEditedDate(dayjs(transaction.Date)); // Usando dayjs para formatar a data
+        setEditedCategory(transaction.Category); // Alterado para usar CategoryId
+        setEditedDate(dayjs(transaction.Date)); 
     };
 
     const confirmEdit = async () => {
         try {
             const updatedData = {
+                ...editingTransaction,
                 Description: editedDescription,
                 Value: editedValue,
-                Category: editedCategory,
+                CategoryId: editedCategory, // Confirme que CategoryId está sendo usado aqui
                 Date: editedDate.toISOString(),
             };
-
+    
             await editTransaction(editingTransaction.Id, updatedData);
-
+    
             const updatedTransactions = transactions.map((transaction) => {
                 if (transaction.Id === editingTransaction.Id) {
-                    return { 
-                        ...transaction, 
-                        ...updatedData
-                    };
+                    return updatedData; // Usa o objeto completo atualizado
                 }
                 return transaction;
             });
-            
+    
             setTransactions(updatedTransactions);
             setEditingTransaction(null);
         } catch (err) {
             setError(err.message);
         }
     };
-    
-    const filteredCategories = categories.filter(
-        category => category.Type === editingTransaction?.Type
-    );
+
+    const filteredCategories = React.useMemo(() => {
+        if (!editingTransaction) return [];
+        
+        return categories.filter(category => 
+            category.Type?.toLowerCase() === editingTransaction.Type?.toLowerCase()
+        );
+    }, [categories, editingTransaction]);
 
     const handleDeleteClick = (transaction) => {
         setTransactionToDelete(transaction);
@@ -236,14 +238,22 @@ const Transactions = () => {
                             className={styles.InputModalEdit}
                             placeholder="Selecione a categoria"
                             value={editedCategory}
-                            onChange={(value) => setEditedCategory(value)}
+                            onChange={(value) => setEditedCategory(value)} // Este 'value' é o CategoryId selecionado
                         >
                             {filteredCategories.map((category) => (
-                                <Option key={category.Id} value={category.Id}>
-                                    {category.Name}
+                                <Option key={category.Id} value={category.Id}> {/* Passando CategoryId como value */}
+                                    {category.Category}
                                 </Option>
                             ))}
                         </Select>
+
+
+                        <Input
+                            className={styles.InputModalEdit}
+                            value={editingTransaction?.Type}
+                            disabled
+                            placeholder="Tipo de Lançamento"
+                        />
                     </div>
                 </Modal>
             )}
