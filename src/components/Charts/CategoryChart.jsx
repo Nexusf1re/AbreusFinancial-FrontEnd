@@ -62,7 +62,7 @@ const CategoryChart = () => {
     plugins: {
       title: {
         display: true,
-        text: 'Gastos por Categoria',
+        text: 'Gastos por Categoria Mês Atual',
         font: {
           size: 20,
         },

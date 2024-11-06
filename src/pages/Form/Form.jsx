@@ -28,7 +28,18 @@ const FormComponent = () => {
     ? ['Dinheiro', 'Pix', 'EmConta']
     : ['Dinheiro', 'Pix', 'Debito', 'Credito', 'Boleto', 'EmConta'];
 
-  const filteredCategories = categories.filter(category => category.Type === formData.type);
+    const defaultCategories = [
+      { Category: "Alimentação", Type: "Saida" },
+      { Category: "Transporte", Type: "Saida" },
+      { Category: "Salário", Type: "Entrada" },
+      { Category: "Investimento", Type: "Entrada" }
+    ];
+    
+    const filteredCategories = [
+      ...defaultCategories.filter(category => category.Type === formData.type),
+      ...categories.filter(category => category.Type === formData.type)
+    ];
+    
 
   return (
     <div className={`${styles.body} ${styles.homePage}`}>

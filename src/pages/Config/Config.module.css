@@ -6,6 +6,11 @@
     padding: 20px;
 }
 
+.newLabel label{
+    font-size: 1.3rem !important;
+    font-weight: 600;
+}
+
 .container{
     margin-top: 70px;
 
@@ -20,6 +25,7 @@
     padding: 0px;
     margin: 0px;
     background-color: whitesmoke;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 0.9rem;
+    
 }

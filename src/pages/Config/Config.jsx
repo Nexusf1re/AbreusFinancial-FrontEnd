@@ -67,7 +67,7 @@ const Config = () => {
               layout="vertical"
               onFinish={onFinishCategoria}
             >
-              <Form.Item label="Nova Categoria">
+              <Form.Item className={styles.newLabel} label="Nova Categoria">
                 <Form.Item
                   name="Category"
                   noStyle
