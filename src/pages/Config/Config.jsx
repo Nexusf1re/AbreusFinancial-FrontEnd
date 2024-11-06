@@ -101,6 +101,7 @@ const Config = () => {
 
               <Title level={4}>Entradas</Title>
               <List
+                className={styles.listCategories}
                 bordered
                 dataSource={entradas}
                 renderItem={(item) => (
@@ -119,6 +120,7 @@ const Config = () => {
 
               <Title level={4}>Saídas</Title>
               <List
+              className={styles.listCategories}
                 bordered
                 dataSource={saidas}
                 renderItem={(item) => (
