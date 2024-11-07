@@ -31,8 +31,12 @@ const FormComponent = () => {
     const defaultCategories = [
       { Category: "Alimentação", Type: "Saida" },
       { Category: "Transporte", Type: "Saida" },
+      { Category: "Mercado", Type: "Saida" },
+      { Category: "Contas", Type: "Saida" },
+      { Category: "Variado", Type: "Saida" },
+      { Category: "Fatura", Type: "Saida" },
       { Category: "Salário", Type: "Entrada" },
-      { Category: "Investimento", Type: "Entrada" }
+      { Category: "Variado", Type: "Entrada" },
     ];
     
     const filteredCategories = [
