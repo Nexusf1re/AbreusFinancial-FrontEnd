@@ -4,6 +4,14 @@
     }
 }
 
+.capsLockWarning {
+  
+    text-align: center;
+    color: red;
+    font-weight: 700;
+  }
+  
+
 .signUpPage * {
     margin: 0;
     padding: 0;

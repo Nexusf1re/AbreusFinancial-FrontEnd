@@ -13,6 +13,8 @@ const Login = ({ onLogin }) => {
   const [Password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const [capsLockWarning, setCapsLockWarning] = useState(false);
+
 
   useEffect(() => {
     if (isAuthenticated()) {
@@ -46,6 +48,14 @@ const Login = ({ onLogin }) => {
     setEmail(formattedEmail);
   };
 
+   const handleCapsLock = (e) => {
+    if (e.getModifierState("CapsLock")) {
+      setCapsLockWarning(true);
+    } else {
+      setCapsLockWarning(false);
+    }
+  };
+
   return (
     <div className={`${styles.wrapper} ${styles.loginPage}`}>
       <ToastConfig />
@@ -70,13 +80,21 @@ const Login = ({ onLogin }) => {
           <FaLock className={styles.icon} />
           <input
             className={styles.input}
-            type={showPassword ? "text" : "password"} // Altera o tipo de input dependendo do estado
+            type={showPassword ? "text" : "password"}
             id="password"
             value={Password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Senha"
+            onKeyDown={handleCapsLock} 
             required
           />
+
+          {capsLockWarning && (
+            <div className={styles.capsLockWarning}>
+              <p style={{ fontSize: '18px' }}>Caps Lock está ativado</p>
+            </div>
+          )}
+          
           <div className={styles.eyeIcon} onClick={togglePasswordVisibility}>
             {showPassword ? <FaEyeSlash /> : <FaEye />}
           </div>

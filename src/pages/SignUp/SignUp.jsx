@@ -12,6 +12,7 @@ const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [capsLockWarning, setCapsLockWarning] = useState(false); 
   const { registerUser, loading, error, success } = useRegister();
   const navigate = useNavigate();
 
@@ -25,6 +26,14 @@ const SignUp = () => {
     setEmail(formattedEmail);
   };
 
+  const handleCapsLock = (e) => {
+    if (e.getModifierState("CapsLock")) {
+      setCapsLockWarning(true);
+    } else {
+      setCapsLockWarning(false);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -36,14 +45,14 @@ const SignUp = () => {
     await registerUser({ username, email, password });
   };
 
- // Verifica se o registro foi bem-sucedido e redireciona
- useEffect(() => {
-  if (success) {
-    setTimeout(() => {
-      navigate('/');  
-    }, 1500);
-  }
-}, [success, navigate]);
+  // Verifica se o registro foi bem-sucedido e redireciona
+  useEffect(() => {
+    if (success) {
+      setTimeout(() => {
+        navigate('/');  
+      }, 1500);
+    }
+  }, [success, navigate]);
 
   return (
     <div className={`${styles.wrapper} ${styles.signUpPage}`}>
@@ -85,6 +94,7 @@ const SignUp = () => {
             placeholder="Senha"
             aria-label="Senha"
             required
+            onKeyDown={handleCapsLock} 
           />
         </div>
 
@@ -97,8 +107,15 @@ const SignUp = () => {
             placeholder="Confirme a Senha"
             aria-label="Confirme a Senha"
             required
+            onKeyDown={handleCapsLock}
           />
         </div>
+
+        {capsLockWarning && (
+          <div className={styles.capsLockWarning}>
+            <p style={{ fontSize: '18px' }}>Caps Lock está ativado</p>
+          </div>
+        )}
 
         <button className={styles.btn} type="submit" disabled={loading}>
           {loading ? 'Cadastrando...' : 'Cadastrar'}

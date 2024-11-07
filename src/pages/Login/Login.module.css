@@ -92,6 +92,14 @@
   color: rgb(0, 0, 0);
 }
 
+.capsLockWarning {
+  
+  text-align: center;
+  color: red;
+  font-weight: 700;
+}
+
+
 .eyeIcon{
 
   font-size: 20px;
