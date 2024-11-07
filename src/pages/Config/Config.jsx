@@ -26,11 +26,11 @@ const Config = () => {
 
   // Lista de categorias padrão que não podem ser deletadas
   const defaultCategories = [
-    { Category: "Alimentação", Type: "Saída" },
-    { Category: "Transporte", Type: "Saída" },
-    { Category: "Mercado", Type: "Saída" },
-    { Category: "Contas", Type: "Saída" },
-    { Category: "Variado", Type: "Saída" },
+    { Category: "Alimentação", Type: "Saida" },
+    { Category: "Transporte", Type: "Saida" },
+    { Category: "Mercado", Type: "Saida" },
+    { Category: "Contas", Type: "Saida" },
+    { Category: "Variado", Type: "Saida" },
     { Category: "Salário", Type: "Entrada" },
     { Category: "Variado", Type: "Entrada" }
   ];
@@ -46,9 +46,9 @@ const Config = () => {
     handleDeleteCategory(categoryId);
   };
 
-  // Combina categorias padrão com as categorias dinâmicas (entradas e saídas)
+  // Combina categorias padrão com as categorias dinâmicas (entradas e Saidas)
   const combinedEntradas = [...defaultCategories.filter(cat => cat.Type === 'Entrada'), ...entradas];
-  const combinedSaidas = [...defaultCategories.filter(cat => cat.Type === 'Saída'), ...saidas];
+  const combinedSaidas = [...defaultCategories.filter(cat => cat.Type === 'Saida'), ...saidas];
 
   return (
     <div className={styles.container}>
@@ -77,7 +77,7 @@ const Config = () => {
                   rules={[{ required: true, message: 'Por favor, selecione um tipo!' }]}>
                   <Select placeholder="Tipo" style={{ width: '30%', marginLeft: '5px' }}>
                     <Option value="Entrada">Entrada</Option>
-                    <Option value="Saida">Saída</Option>
+                    <Option value="Saida">Saida</Option>
                   </Select>
                 </Form.Item>
                 <Form.Item>
@@ -117,7 +117,7 @@ const Config = () => {
                 )}
               />
 
-              <Title level={4}>Saídas</Title>
+              <Title level={4}>Saidas</Title>
               <List
                 className={styles.listCategories}
                 bordered
@@ -125,7 +125,7 @@ const Config = () => {
                 renderItem={(item) => (
                   <List.Item
                     actions={
-                      isDefaultCategory(item.Category, "Saída")
+                      isDefaultCategory(item.Category, "Saida")
                         ? [] // Não exibe o botão de exclusão para categorias padrão
                         : [
                             <DeleteOutlined 
