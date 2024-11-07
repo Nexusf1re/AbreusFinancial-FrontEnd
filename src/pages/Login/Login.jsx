@@ -3,13 +3,14 @@ import { useNavigate, Link } from 'react-router-dom';
 import { login, isAuthenticated } from '../../services/authService';
 import styles from './Login.module.css';
 import Slogan from '../../assets/Slogan.png';
-import { FaLock, FaRegEnvelope } from "react-icons/fa6";
+import { FaLock, FaRegEnvelope, FaEye, FaEyeSlash } from "react-icons/fa6"; // Importando os ícones de olho
 import { toast, ToastContainer } from 'react-toastify';
-import Footer from '../../components/Footer/Footer'
+import Footer from '../../components/Footer/Footer';
 
 const Login = ({ onLogin }) => {
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false); // Estado para alternar visibilidade da senha
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,7 +35,10 @@ const Login = ({ onLogin }) => {
       toast.error("Email ou senha incorretos.");
     }
   };
-  
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword); // Alterna a visibilidade da senha
+  };
 
   return (
     <div className={`${styles.wrapper} ${styles.loginPage}`}>
@@ -68,7 +72,7 @@ const Login = ({ onLogin }) => {
         <div className={styles.inputBox}>
           <FaRegEnvelope className={styles.icon} />
           <input
-           className={styles.input}
+            className={styles.input}
             type="email"
             id="email"
             value={Email}
@@ -81,13 +85,16 @@ const Login = ({ onLogin }) => {
           <FaLock className={styles.icon} />
           <input
             className={styles.input}
-            type="password"
+            type={showPassword ? "text" : "password"} // Altera o tipo de input dependendo do estado
             id="password"
             value={Password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Senha"
             required
           />
+          <div className={styles.eyeIcon} onClick={togglePasswordVisibility}>
+            {showPassword ? <FaEyeSlash /> : <FaEye />}
+          </div>
         </div>
         <button className={styles.btn} type="submit">Entrar</button>
       </form>

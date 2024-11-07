@@ -77,7 +77,7 @@ const Config = () => {
                   rules={[{ required: true, message: 'Por favor, selecione um tipo!' }]}>
                   <Select placeholder="Tipo" style={{ width: '30%', marginLeft: '5px' }}>
                     <Option value="Entrada">Entrada</Option>
-                    <Option value="Saída">Saída</Option>
+                    <Option value="Saida">Saída</Option>
                   </Select>
                 </Form.Item>
                 <Form.Item>

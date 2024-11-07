@@ -92,6 +92,16 @@
   color: rgb(0, 0, 0);
 }
 
+.eyeIcon{
+
+  font-size: 20px;
+  position: absolute;
+  top: 26%;
+  right: 17%;
+  color: rgb(0, 0, 0);
+  width: 25px;
+}
+
 .btn {
   display: flex;
   align-items: center;
