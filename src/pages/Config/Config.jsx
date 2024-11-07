@@ -24,9 +24,31 @@ const Config = () => {
     deleteError 
   } = useConfig();
 
+  // Lista de categorias padrão que não podem ser deletadas
+  const defaultCategories = [
+    { Category: "Alimentação", Type: "Saída" },
+    { Category: "Transporte", Type: "Saída" },
+    { Category: "Mercado", Type: "Saída" },
+    { Category: "Contas", Type: "Saída" },
+    { Category: "Variado", Type: "Saída" },
+    { Category: "Salário", Type: "Entrada" },
+    { Category: "Variado", Type: "Entrada" }
+  ];
+
+  // Função para verificar se a categoria é padrão
+  const isDefaultCategory = (category, type) => {
+    return defaultCategories.some(
+      (defaultCat) => defaultCat.Category === category && defaultCat.Type === type
+    );
+  };
+
   const handleDeleteClick = (categoryId) => {
     handleDeleteCategory(categoryId);
   };
+
+  // Combina categorias padrão com as categorias dinâmicas (entradas e saídas)
+  const combinedEntradas = [...defaultCategories.filter(cat => cat.Type === 'Entrada'), ...entradas];
+  const combinedSaidas = [...defaultCategories.filter(cat => cat.Type === 'Saída'), ...saidas];
 
   return (
     <div className={styles.container}>
@@ -37,31 +59,6 @@ const Config = () => {
           <Spin tip="Carregando..." />
         ) : (
           <>
-          {/*
-            <Form
-              form={formNome}
-              layout="vertical"
-              onFinish={onFinishNome}
-            >
-              <Form.Item
-                name="nome"
-                label="Nome"
-                rules={[{ required: true, message: 'Por favor, insira seu nome!' }]}
-                style={{ marginBottom: '10px' }}
-              >
-                <Input />
-              </Form.Item>
-              <Form.Item>
-                <Button type="primary" htmlType="submit">
-                  Salvar Nome
-                </Button>
-              
-              </Form.Item>
-              
-            </Form>
-            */}
-            <hr />
-
             <Form
               form={formCategoria}
               layout="vertical"
@@ -71,18 +68,16 @@ const Config = () => {
                 <Form.Item
                   name="Category"
                   noStyle
-                  rules={[{ required: true, message: 'Por favor, insira uma nova categoria!' }]}
-                >
+                  rules={[{ required: true, message: 'Por favor, insira uma nova categoria!' }]}>
                   <Input placeholder="Nome da nova Categoria" style={{ width: '65%' }} />
                 </Form.Item>
                 <Form.Item
                   name="Type"
                   noStyle
-                  rules={[{ required: true, message: 'Por favor, selecione um tipo!' }]}
-                >
+                  rules={[{ required: true, message: 'Por favor, selecione um tipo!' }]}>
                   <Select placeholder="Tipo" style={{ width: '30%', marginLeft: '5px' }}>
                     <Option value="Entrada">Entrada</Option>
-                    <Option value="Saida">Saída</Option>
+                    <Option value="Saída">Saída</Option>
                   </Select>
                 </Form.Item>
                 <Form.Item>
@@ -103,15 +98,19 @@ const Config = () => {
               <List
                 className={styles.listCategories}
                 bordered
-                dataSource={entradas}
+                dataSource={combinedEntradas}
                 renderItem={(item) => (
                   <List.Item
-                    actions={[
-                      <DeleteOutlined 
-                        style={{ color: 'red' }}
-                        onClick={() => handleDeleteClick(item.Id)}
-                      />
-                    ]}
+                    actions={
+                      isDefaultCategory(item.Category, "Entrada")
+                        ? [] // Não exibe o botão de exclusão para categorias padrão
+                        : [
+                            <DeleteOutlined 
+                              style={{ color: 'red' }}
+                              onClick={() => handleDeleteClick(item.Id)} 
+                            />
+                          ]
+                    }
                   >
                     {item.Category}
                   </List.Item>
@@ -120,17 +119,21 @@ const Config = () => {
 
               <Title level={4}>Saídas</Title>
               <List
-              className={styles.listCategories}
+                className={styles.listCategories}
                 bordered
-                dataSource={saidas}
+                dataSource={combinedSaidas}
                 renderItem={(item) => (
                   <List.Item
-                    actions={[
-                      <DeleteOutlined 
-                        style={{ color: 'red' }}
-                        onClick={() => handleDeleteClick(item.Id)} 
-                      />
-                    ]}
+                    actions={
+                      isDefaultCategory(item.Category, "Saída")
+                        ? [] // Não exibe o botão de exclusão para categorias padrão
+                        : [
+                            <DeleteOutlined 
+                              style={{ color: 'red' }}
+                              onClick={() => handleDeleteClick(item.Id)} 
+                            />
+                          ]
+                    }
                   >
                     {item.Category}
                   </List.Item>
