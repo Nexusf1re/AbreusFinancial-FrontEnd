@@ -4,34 +4,26 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from 'chart.js';
 import useGraph from '../../hooks/useGraph';
 import styles from './CategoryChart.module.css';
+import { getMesAtual } from '../../utils/greetings.js';
 
-// Registrar os componentes necessários
-ChartJS.register(Title, Tooltip, Legend, ArcElement, ChartDataLabels);
+ChartJS.register(Title, Tooltip, Legend, ArcElement);
 
 const CategoryChart = () => {
   const data = useGraph();
 
+  const sortedData = [...data].sort((a, b) => a.valor - b.valor);
+
   const chartData = {
-    labels: data.map(item => item.nome), // Rótulos para o gráfico
+    labels: sortedData.map(item => item.nome),
     datasets: [
       {
         label: 'Gastos por Categoria',
-        data: data.map(item => item.valor), // Valores para cada categoria
+        data: sortedData.map(item => item.valor),
         backgroundColor: [
-          '#FF6384',
-          '#36A2EB',
-          '#FFCE56',
-          '#4BC0C0',
-          '#9966FF',
-          '#FF9F40',
-        ], // Cores para cada segmento
+          '#67ee4c', '#36A2EB', '#FFCE56', '#804bc0', '#ff9666', '#FF9F40'
+        ],
         hoverBackgroundColor: [
-          '#FF6384',
-          '#36A2EB',
-          '#FFCE56',
-          '#4BC0C0',
-          '#9966FF',
-          '#FF9F40',
+          '#67ee4c', '#36A2EB', '#FFCE56', '#804bc0', '#ff9666', '#FF9F40'
         ],
       },
     ],
@@ -40,72 +32,60 @@ const CategoryChart = () => {
   const options = {
     responsive: true,
     layout: {
-      padding: {
-        bottom: 30,
-      },
+      padding: { bottom: 30 },
     },
     animations: {
       arc: {
         type: 'number',
-        duration: 2000,
+        duration: 4000,
         easing: 'easeInOutCubic',
         from: 0,
-        to: 1,
+        to: 2,
       },
       opacity: {
-        duration: 2000,
+        duration: 4000,
         easing: 'easeInOutCubic',
         from: 0,
-        to: 1,
+        to: 2,
       },
     },
     plugins: {
       title: {
         display: true,
-        text: 'Gastos por Categoria Mês Atual',
-        font: {
-          size: 20,
-        },
+        text: `Gastos por Categoria Mês ${getMesAtual()}`,
+        font: { size: 22 },
+        padding: { bottom: 0 },
       },
       tooltip: {
         callbacks: {
           label: function (tooltipItem) {
-            return `${tooltipItem.label}: ${tooltipItem.raw.toLocaleString()}`;
+            return `${tooltipItem.label}: R$ ${tooltipItem.raw.toLocaleString()}`;
           },
         },
       },
-      datalabels: {
-        anchor: 'end',
-        align: 'end',
-        formatter: (value, context) => {
-          const label = context.chart.data.labels[context.dataIndex];
-          return `${label}: ${value.toLocaleString()}`;
-        },
-        color: 'black',
-        font: {
-          size: "11em",
-        },
-        padding: 2,
-        borderColor: 'black',
-        borderWidth: 1,
-        display: true,
-        offset: 10,
-        borderRadius: 4,
-      },
-      legend: {
-        labels: {
-          font: {
-            size: 14,
-          },
-        },
-      },
+      datalabels: false,
+      legend: { display: false },
     },
   };
 
   return (
     <div className={styles.container}>
-      {data.length > 0 ? (
-        <Doughnut data={chartData} options={options} className={styles.canvas} />
+      {sortedData.length > 0 ? (
+        <>
+          <Doughnut data={chartData} options={options} className={styles.canvas} />
+          <div className={styles.categoryList}>
+            {sortedData.map((item, index) => (
+              <div key={index} className={styles.categoryItem}>
+                <div
+                  className={styles.colorBox}
+                  style={{ backgroundColor: chartData.datasets[0].backgroundColor[index] }}
+                ></div>
+                <span className={styles.categoryLabel}>{item.nome}</span>
+                <span className={styles.categoryValue}>: R${item.valor.toLocaleString()}</span>
+              </div>
+            ))}
+          </div>
+        </>
       ) : (
         <div className={styles.emptyMessage}>
           <h4>Nenhuma saída este mês!</h4>

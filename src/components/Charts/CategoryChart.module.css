@@ -5,7 +5,12 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    position: relative; /* Para usar com o canvas absoluto */
+    position: relative;
+    flex-direction: column;
+}
+
+.canvas {
+    max-width: 250px;
 }
 
 .emptyMessage {
@@ -13,21 +18,77 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    color: gray; /* Cor do texto da mensagem */
+    color: gray;
 }
 
+.categoryList {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.categoryItem {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.colorBox {
+    width: 15px;
+    height: 15px;
+    margin-right: 8px;
+    border-radius: 3px;
+}
+
+.categoryLabel {
+    font-weight: bold;
+    margin-right: 4px;
+}
+
+/* Estilos para telas maiores */
 @media screen and (min-width: 575px) {
+    .container {
+        height: auto;
+    }
+
     .canvas {
-        font-size: 30px; /* Tamanho da fonte para telas maiores */
+        max-width: 300px;
     }
 }
 
+/* Estilos para telas menores */
 @media screen and (max-width: 574px) {
+    .container {
+        height: auto;
+        width: 100%;
+    }
+
     .canvas {
-        position: absolute; /* Posiciona o canvas corretamente */
-        top: 0 !important;
-        left: 0;
-        padding-top: 0 !important;
-        margin-top: 0 !important;
+        margin-bottom: -40px;
+    }
+
+    .categoryList {
+        padding: 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .categoryItem {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 4px 0;
+    }
+
+    .colorBox {
+        width: 18px;
+        height: 18px;
+        margin-right: 10px;
+    }
+
+    .categoryLabel, .categoryValue {
+        font-size: 1rem;
     }
 }
