@@ -7,14 +7,15 @@ import { FaLock, FaRegEnvelope, FaEye, FaEyeSlash } from "react-icons/fa6";
 import ToastConfig from '../../components/ToastConfig/ToastConfig';
 import { toast } from 'react-toastify';
 import Footer from '../../components/Footer/Footer';
+import ResetPassword from '../../components/ForgotPass/ResetPassword'; // Importando o componente do modal
 
 const Login = ({ onLogin }) => {
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate();
   const [capsLockWarning, setCapsLockWarning] = useState(false);
-
+  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar o modal
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isAuthenticated()) {
@@ -48,7 +49,7 @@ const Login = ({ onLogin }) => {
     setEmail(formattedEmail);
   };
 
-   const handleCapsLock = (e) => {
+  const handleCapsLock = (e) => {
     if (e.getModifierState("CapsLock")) {
       setCapsLockWarning(true);
     } else {
@@ -56,10 +57,19 @@ const Login = ({ onLogin }) => {
     }
   };
 
+  // Função para abrir o modal
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  // Função para fechar o modal
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div className={`${styles.wrapper} ${styles.loginPage}`}>
       <ToastConfig />
-
       <img src={Slogan} alt="Logo" className={styles.logo} />
       <h1 className={styles.h1}>Login</h1>
       <h3 className={styles.controle}>Controle Financeiro</h3>
@@ -101,9 +111,17 @@ const Login = ({ onLogin }) => {
         </div>
         <button className={styles.btn} type="submit">Entrar</button>
       </form>
+
+      <div className={styles.forgotPassword}>
+        <button onClick={openModal}>Esqueci a senha</button>
+      </div>
+
       <div className={styles.cadastrar}>
         <Link className={styles.a} to="/sign-up"><p className={styles.p}>Não tem uma conta?</p> Cadastre-se</Link>
       </div>
+
+      <ResetPassword isModalOpen={isModalOpen} closeModal={closeModal} />
+
       <Footer />
     </div>
   );

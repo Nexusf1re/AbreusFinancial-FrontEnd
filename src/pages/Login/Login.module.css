@@ -155,3 +155,59 @@
   margin: auto;
 
 }
+
+/* Modal */
+.modal {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%; /* Largura 90% para responsividade */
+  max-width: 500px; /* Tamanho máximo */
+  margin: auto;
+  position: fixed; /* Fixar na tela */
+  top: 50%; /* Centralizar verticalmente */
+  left: 50%; /* Centralizar horizontalmente */
+  transform: translate(-50%, -50%); /* Ajuste para centralizar completamente */
+  z-index: 1000; /* Garantir que o modal fique acima de outros elementos */
+}
+
+/* Overlay (fundo semi-transparente) */
+.overlay {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999; /* Colocar abaixo do modal */
+}
+
+
+.forgotPassword {
+  text-align: center;
+  margin-top: 0px;
+}
+
+.forgotPassword button {
+  background-color: #9c9c9c;
+  color: white;
+  padding: 5px;
+  font-size: 0.8rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  width: 100%; 
+  max-width: 180px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.forgotPassword button:hover {
+  background-color: #1bb820; 
+  transform: translateY(-2px);
+}
+
+.forgotPassword button:focus {
+  outline: none; 
+  box-shadow: 0 0 0 4px rgba(38, 143, 255, 0.5);
+}

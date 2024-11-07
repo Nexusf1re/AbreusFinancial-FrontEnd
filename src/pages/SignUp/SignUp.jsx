@@ -7,13 +7,14 @@ import useRegister from '../../hooks/useRegister';
 import ToastConfig from '../../components/ToastConfig/ToastConfig';
 import { toast } from 'react-toastify';
 
+
 const SignUp = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [capsLockWarning, setCapsLockWarning] = useState(false); 
-  const { registerUser, loading, error, success } = useRegister();
+  const { registerUser, loading, success } = useRegister();
   const navigate = useNavigate();
 
   const handleUsernameChange = (e) => {

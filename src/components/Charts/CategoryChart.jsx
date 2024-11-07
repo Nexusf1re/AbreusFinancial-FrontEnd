@@ -1,6 +1,5 @@
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from 'chart.js';
 import useGraph from '../../hooks/useGraph';
 import styles from './CategoryChart.module.css';
