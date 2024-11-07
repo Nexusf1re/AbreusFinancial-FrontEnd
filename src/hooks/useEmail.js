@@ -1,5 +1,5 @@
+import emailjs from 'emailjs-com';
 import { useState } from 'react';
-import axios from 'axios';
 
 const useEmail = () => {
   const [email, setEmail] = useState('');
@@ -11,16 +11,15 @@ const useEmail = () => {
     setIsLoading(true);
     setError(null);
     setSuccess(false);
-
+  
     try {
-      // Acessando a variável de ambiente para URL da API
-      const apiUrl = process.env.REACT_APP_API_URL;
-      
-      // Enviando a requisição para o backend para enviar o email
-      const response = await axios.post(`${apiUrl}/auth/send-password-reset-email`, {
-        email: email
-      });
-
+      const response = await emailjs.send(
+        process.env.REACT_APP_EMAILJS_SERVICE_ID,
+        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+        { to_email: email }, 
+        process.env.REACT_APP_EMAILJS_USER_ID
+      );
+  
       if (response.status === 200) {
         setSuccess(true);
       } else {
@@ -32,6 +31,7 @@ const useEmail = () => {
       setIsLoading(false);
     }
   };
+  
 
   return {
     email,

@@ -1,20 +1,20 @@
 import React from 'react';
 import { Modal, Button, Input, Spin, message } from 'antd';
-import useEmail from '../../hooks/useEmail'; // Importando o hook de envio de email
-import styles from './ResetPassword.module.css'; // Importando o arquivo de estilo
+import useEmail from '../../hooks/useEmail';
+import styles from './ResetPassword.module.css';
 
 const ResetPassword = ({ isModalOpen, closeModal }) => {
   const { email, setEmail, isLoading, success, error, sendEmail } = useEmail();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    sendEmail(); // Enviar o email
+    sendEmail();
   };
 
   React.useEffect(() => {
     if (success) {
       message.success('Email enviado com sucesso!');
-      closeModal(); // Fecha o modal quando o email for enviado com sucesso
+      closeModal();
     }
     if (error) {
       message.error(error);
