@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import styles from './SignUp.module.css';
 import Slogan from '../../assets/Slogan.png';
 import { FaLock, FaRegEnvelope, FaUser } from "react-icons/fa6";
 import useRegister from '../../hooks/useRegister';
+import ToastConfig from '../../components/ToastConfig/ToastConfig';
+import { toast } from 'react-toastify';
 
 const SignUp = () => {
   const [username, setUsername] = useState('');
@@ -14,28 +16,38 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const handleUsernameChange = (e) => {
-   
-    const formattedUsername = e.target.value.replace(/\s+/g, '').toUpperCase();
+    const formattedUsername = e.target.value.replace(/\s+/g, '').toUpperCase().trim();
     setUsername(formattedUsername);
+  };
+
+  const handleEmailChange = (e) => {
+    const formattedEmail = e.target.value.replace(/\s+/g, '').toLowerCase().trim();
+    setEmail(formattedEmail);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      alert("As senhas não correspondem.");
+      toast.error("As senhas não correspondem.");
       return;
     }
 
     await registerUser({ username, email, password });
-
-    if (success) {
-      navigate('/');
-    }
   };
+
+ // Verifica se o registro foi bem-sucedido e redireciona
+ useEffect(() => {
+  if (success) {
+    setTimeout(() => {
+      navigate('/');  
+    }, 1500);
+  }
+}, [success, navigate]);
 
   return (
     <div className={`${styles.wrapper} ${styles.signUpPage}`}>
+      <ToastConfig />
       <img src={Slogan} alt="Logo" className={styles.logo} />
       <h1>Cadastro</h1>
       <h3 className={styles.controle}>Controle Financeiro</h3>
@@ -57,7 +69,7 @@ const SignUp = () => {
           <input
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleEmailChange}
             placeholder="Email"
             aria-label="Email"
             required
@@ -92,9 +104,6 @@ const SignUp = () => {
           {loading ? 'Cadastrando...' : 'Cadastrar'}
         </button>
       </form>
-
-      {error && <p className={styles.error}>{error}</p>}
-      {success && <p className={styles.success}>{success}</p>}
 
       <div className={styles.cadastrar}>
         <Link to="/"><p>Já tem uma conta?</p> Faça login</Link>

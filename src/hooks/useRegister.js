@@ -1,5 +1,5 @@
-// src/hooks/useRegister.js
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 const useRegister = () => {
   const [loading, setLoading] = useState(false);
@@ -26,9 +26,13 @@ const useRegister = () => {
         throw new Error(data.message || 'Erro ao cadastrar usuário');
       }
 
-      setSuccess(data.message);
+      // Exibindo o toast de sucesso
+      toast.success(data.message || 'Usuário cadastrado com sucesso!');
+      setSuccess(data.message);  
     } catch (err) {
-      setError(err.message);
+      // Exibindo o toast de erro
+      toast.error(err.message || 'Erro ao cadastrar usuário');
+      setError(err.message); 
     } finally {
       setLoading(false);
     }

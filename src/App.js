@@ -7,8 +7,7 @@ import Home from './pages/Home/Home';
 import Form from './pages/Form/Form';
 import Transactions from './pages/Transactions/Transactions';
 import Config from './pages/Config/Config';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import ToastConfig from './components/ToastConfig/ToastConfig';
 import useAuth from './hooks/useAuth';
 
 function App() {
@@ -17,7 +16,7 @@ function App() {
   return (
     <Router>
       <SpeedInsights />
-      <ToastContainer />
+      <ToastConfig />
       <Routes>
         <Route path="/" element={<Login onLogin={handleLogin} />} />
         <Route path="/sign-up" element={<SignUp />} />

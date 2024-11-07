@@ -3,14 +3,15 @@ import { useNavigate, Link } from 'react-router-dom';
 import { login, isAuthenticated } from '../../services/authService';
 import styles from './Login.module.css';
 import Slogan from '../../assets/Slogan.png';
-import { FaLock, FaRegEnvelope, FaEye, FaEyeSlash } from "react-icons/fa6"; // Importando os ícones de olho
-import { toast, ToastContainer } from 'react-toastify';
+import { FaLock, FaRegEnvelope, FaEye, FaEyeSlash } from "react-icons/fa6";
+import ToastConfig from '../../components/ToastConfig/ToastConfig';
+import { toast } from 'react-toastify';
 import Footer from '../../components/Footer/Footer';
 
 const Login = ({ onLogin }) => {
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false); // Estado para alternar visibilidade da senha
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,40 +31,24 @@ const Login = ({ onLogin }) => {
       setTimeout(() => {
         onLogin();
         navigate('/home');
-      }, 500);
+      }, 2500);
     } catch (err) {
       toast.error("Email ou senha incorretos.");
     }
   };
 
   const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword); // Alterna a visibilidade da senha
+    setShowPassword(!showPassword);
+  };
+
+  const handleEmailChange = (e) => {
+    const formattedEmail = e.target.value.replace(/\s+/g, '').toLowerCase().trim();
+    setEmail(formattedEmail);
   };
 
   return (
     <div className={`${styles.wrapper} ${styles.loginPage}`}>
-      <ToastContainer
-        position="top-center"
-        autoClose={1500}
-        hideProgressBar={false}
-        closeOnClick
-        draggable
-        theme="colored"
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "100%",
-          maxWidth: "300px",
-          position: "absolute",
-          top: "1rem",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          textAlign: "center",
-          borderRadius: "8px",
-        }}
-      />
+      <ToastConfig />
 
       <img src={Slogan} alt="Logo" className={styles.logo} />
       <h1 className={styles.h1}>Login</h1>
@@ -76,7 +61,7 @@ const Login = ({ onLogin }) => {
             type="email"
             id="email"
             value={Email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleEmailChange}
             placeholder="Email"
             required
           />
