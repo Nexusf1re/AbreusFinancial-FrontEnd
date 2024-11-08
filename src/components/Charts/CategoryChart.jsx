@@ -19,10 +19,10 @@ const CategoryChart = () => {
         label: 'Gastos por Categoria',
         data: sortedData.map(item => item.valor),
         backgroundColor: [
-          '#67ee4c', '#36A2EB', '#FFCE56', '#804bc0', '#ff9666', '#FF9F40'
+          '#67ee4c', '#36A2EB', '#FFCE56', '#804bc0', '#ff9666', '#FF9F40', '#ff4040', '#e240ff'
         ],
         hoverBackgroundColor: [
-          '#67ee4c', '#36A2EB', '#FFCE56', '#804bc0', '#ff9666', '#FF9F40'
+          '#67ee4c', '#36A2EB', '#FFCE56', '#804bc0', '#ff9666', '#FF9F40', '#ff4040', '#e240ff'
         ],
       },
     ],

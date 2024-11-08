@@ -35,9 +35,9 @@ const ResetPassword = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`, // mantém no header, se necessário
+          'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify({ newPassword, token }), // inclui o token no corpo da requisição
+        body: JSON.stringify({ newPassword, token }),
       });
 
       if (response.ok) {
@@ -56,40 +56,52 @@ const ResetPassword = () => {
     }
   };
 
+  // Função para navegar de volta para o login
+  const goToLogin = () => {
+    navigate('/');
+  };
+
   return (
     <div className={styles.resetPasswordContainer}>
-      <h2>Redefinir Senha</h2>
+      <h2 className={styles.h2}>Redefinir Senha</h2>
 
       {error && <p className={styles.errorMessage}>{error}</p>}
       {success && <p className={styles.successMessage}>Senha redefinida com sucesso! Redirecionando para login...</p>}
 
-      <form onSubmit={(e) => { e.preventDefault(); resetPassword(); }}>
-        <div>
-          <label htmlFor="newPassword">Nova Senha</label>
+      <form onSubmit={(e) => { e.preventDefault(); resetPassword(); }} className={styles.form}>
+        <div className={styles.form}>
+          <label htmlFor="newPassword" className={styles.label}>Nova Senha</label>
           <input
             type="password"
             id="newPassword"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
             required
+            className={styles.input}
           />
         </div>
 
-        <div>
-          <label htmlFor="confirmPassword">Confirmar Senha</label>
+        <div className={styles.form}>
+          <label htmlFor="confirmPassword" className={styles.label}>Confirmar Senha</label>
           <input
             type="password"
             id="confirmPassword"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
+            className={styles.input}
           />
         </div>
 
-        <button type="submit" disabled={isLoading}>
+        <button type="submit" disabled={isLoading} className={styles.button}>
           {isLoading ? 'Carregando...' : 'Redefinir Senha'}
         </button>
       </form>
+
+
+      <button onClick={goToLogin} className={`${styles.button} ${styles.buttonLogin}`}>
+        Voltar para o Login
+      </button>
     </div>
   );
 };

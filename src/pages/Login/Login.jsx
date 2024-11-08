@@ -7,14 +7,14 @@ import { FaLock, FaRegEnvelope, FaEye, FaEyeSlash } from "react-icons/fa6";
 import ToastConfig from '../../components/ToastConfig/ToastConfig';
 import { toast } from 'react-toastify';
 import Footer from '../../components/Footer/Footer';
-import ResetPassword from '../../components/ForgotPass/ResetPassword'; // Importando o componente do modal
+import ResetPassword from '../../components/ForgotPass/ResetPassword';
 
 const Login = ({ onLogin }) => {
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [capsLockWarning, setCapsLockWarning] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar o modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
