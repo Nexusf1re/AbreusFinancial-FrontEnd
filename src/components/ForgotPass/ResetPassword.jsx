@@ -6,6 +6,7 @@ import styles from './ResetPassword.module.css';
 const ResetPassword = ({ isModalOpen, closeModal }) => {
   const { email, setEmail, isLoading, success, error, sendEmail } = useEmail();
 
+
   const handleSubmit = (e) => {
     e.preventDefault();
     sendEmail();
@@ -14,7 +15,7 @@ const ResetPassword = ({ isModalOpen, closeModal }) => {
   React.useEffect(() => {
     if (success) {
       message.success('Email enviado com sucesso!');
-      closeModal();
+      closeModal(); 
     }
     if (error) {
       message.error(error);

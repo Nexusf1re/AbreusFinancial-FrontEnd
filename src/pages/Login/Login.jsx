@@ -26,11 +26,14 @@ const Login = ({ onLogin }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+    
     try {
+      toast.dismiss();
+  
       const response = await login(Email, Password);
       localStorage.setItem('username', response.Username);
       toast.success("Login bem-sucedido!");
+  
       setTimeout(() => {
         onLogin();
         navigate('/home');
@@ -39,6 +42,7 @@ const Login = ({ onLogin }) => {
       toast.error("Email ou senha incorretos.");
     }
   };
+  
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
