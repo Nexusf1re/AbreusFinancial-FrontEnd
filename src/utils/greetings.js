@@ -29,5 +29,6 @@ function getHoraLocal() {
     return meses[mesAtual];
   }
   
+  
   export { saudacao, getMesAtual };
   
