@@ -9,6 +9,8 @@ import Transactions from './pages/Transactions/Transactions';
 import Config from './pages/Config/Config';
 import ToastConfig from './components/ToastConfig/ToastConfig';
 import useAuth from './hooks/useAuth';
+import ResetPass from './pages/ResetPass/ResetPass';
+
 
 function App() {
   const { isLoggedIn, handleLogin, handleLogout } = useAuth();
@@ -24,6 +26,7 @@ function App() {
         <Route path="/form" element={isLoggedIn ? <Form /> : <Navigate to="/" />} />
         <Route path="/transactions" element={isLoggedIn ? <Transactions /> : <Navigate to="/" />} />
         <Route path="/config" element={isLoggedIn ? <Config /> : <Navigate to="/" />} />
+        <Route path="/reset-password" element={<ResetPass />} />
       </Routes>
     </Router>
   );

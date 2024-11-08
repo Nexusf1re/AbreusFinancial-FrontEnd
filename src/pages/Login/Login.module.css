@@ -161,14 +161,14 @@
   background: #fff;
   padding: 20px;
   border-radius: 10px;
-  width: 90%; /* Largura 90% para responsividade */
-  max-width: 500px; /* Tamanho máximo */
+  width: 90%; 
+  max-width: 500px;
   margin: auto;
-  position: fixed; /* Fixar na tela */
-  top: 50%; /* Centralizar verticalmente */
-  left: 50%; /* Centralizar horizontalmente */
-  transform: translate(-50%, -50%); /* Ajuste para centralizar completamente */
-  z-index: 1000; /* Garantir que o modal fique acima de outros elementos */
+  position: fixed;
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  z-index: 1000; 
 }
 
 /* Overlay (fundo semi-transparente) */
@@ -179,7 +179,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 999; /* Colocar abaixo do modal */
+  z-index: 999; 
 }
 
 
