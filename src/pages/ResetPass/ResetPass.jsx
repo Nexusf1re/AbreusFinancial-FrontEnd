@@ -17,6 +17,10 @@ const ResetPassword = () => {
 
   // Função para resetar a senha
   const resetPassword = async () => {
+    console.log('Token:', token);
+    console.log('New Password:', newPassword);
+    console.log('Confirm Password:', confirmPassword);
+
     if (newPassword !== confirmPassword) {
       setError('As senhas não coincidem');
       return;
@@ -31,9 +35,9 @@ const ResetPassword = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          'Authorization': `Bearer ${token}`, // mantém no header, se necessário
         },
-        body: JSON.stringify({ newPassword }),
+        body: JSON.stringify({ newPassword, token }), // inclui o token no corpo da requisição
       });
 
       if (response.ok) {
@@ -55,10 +59,10 @@ const ResetPassword = () => {
   return (
     <div className={styles.resetPasswordContainer}>
       <h2>Redefinir Senha</h2>
-      
+
       {error && <p className={styles.errorMessage}>{error}</p>}
       {success && <p className={styles.successMessage}>Senha redefinida com sucesso! Redirecionando para login...</p>}
-      
+
       <form onSubmit={(e) => { e.preventDefault(); resetPassword(); }}>
         <div>
           <label htmlFor="newPassword">Nova Senha</label>
