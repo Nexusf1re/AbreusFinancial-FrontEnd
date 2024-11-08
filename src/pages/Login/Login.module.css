@@ -185,21 +185,20 @@
 
 .forgotPassword {
   text-align: center;
-  margin-top: 0px;
+  margin-top: -5px;
 }
 
 .forgotPassword button {
-  background-color: #9c9c9c;
-  color: white;
+  background-color: transparent;
+  color: black;
   padding: 5px;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   border-radius: 8px;
   border: none;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
   width: 100%; 
   max-width: 180px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .forgotPassword button:hover {
