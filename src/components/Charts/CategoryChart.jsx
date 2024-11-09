@@ -19,13 +19,13 @@ const CategoryChart = () => {
         label: 'Gastos por Categoria',
         data: sortedData.map(item => item.valor),
         backgroundColor: [
-          '#67ee4c', '#36A2EB', '#FFCE56', '#804bc0', '#ff9666', '#FF9F40', '#ff4040', '#e240ff'
+          '#67ee4c', '#36A2EB', '#FFCE56', '#804bc0', '#b4fff9', '#FF9F40', '#ff4040', '#e240ff'
         ],
         hoverBackgroundColor: [
-          '#67ee4c', '#36A2EB', '#FFCE56', '#804bc0', '#ff9666', '#FF9F40', '#ff4040', '#e240ff'
+          '#67ee4c', '#36A2EB', '#FFCE56', '#804bc0', '#b4fff9', '#FF9F40', '#ff4040', '#e240ff'
         ],
-        borderWidth: 5, // Define a largura da borda para criar o espaçamento
-        borderColor: '#ffffff', // Define a cor da borda (branca ou transparente para destacar o espaço)
+        borderWidth: 5, 
+        borderColor: '#ffffff',
       },
     ],
   };
@@ -55,7 +55,12 @@ const CategoryChart = () => {
       title: {
         display: true,
         text: `Gastos por Categoria Mês ${getMesAtual()}`,
-        font: { size: 22 },
+        font: {
+          family: 'Poppins, sans-serif',
+          size: 22,                  
+          weight: '600',                      
+        },
+        color: '#333333',             
         padding: { bottom: 0 },
       },
       tooltip: {
@@ -69,6 +74,7 @@ const CategoryChart = () => {
       legend: { display: false },
     },
   };
+  
 
   return (
     <div className={styles.container}>
