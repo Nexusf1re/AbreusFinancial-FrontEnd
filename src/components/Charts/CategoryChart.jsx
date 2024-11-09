@@ -24,9 +24,12 @@ const CategoryChart = () => {
         hoverBackgroundColor: [
           '#67ee4c', '#36A2EB', '#FFCE56', '#804bc0', '#ff9666', '#FF9F40', '#ff4040', '#e240ff'
         ],
+        borderWidth: 5, // Define a largura da borda para criar o espaçamento
+        borderColor: '#ffffff', // Define a cor da borda (branca ou transparente para destacar o espaço)
       },
     ],
   };
+  
 
   const options = {
     responsive: true,
