@@ -23,6 +23,26 @@
   margin-bottom: 5px;   
 }
 
+.filtersContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.filtersRow {
+  display: flex;
+  gap: 10px;
+}
+
+.filterSelect {
+  width: 200px;
+}
+
+.filtersRow:last-child .filterSelect {
+  width: 100%; /* Expande o seletor de Método de Pagamento */
+}
+
 .searchInput {
   flex: 1;             
   padding: 6px;

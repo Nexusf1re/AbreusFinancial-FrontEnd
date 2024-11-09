@@ -25,6 +25,11 @@ const Transactions = () => {
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
     const [transactionToDelete, setTransactionToDelete] = useState(null);
 
+    const [typeFilter, setTypeFilter] = useState('');
+    const [paymentMethodFilter, setPaymentMethodFilter] = useState('');
+    const [categoryFilter, setCategoryFilter] = useState('');
+
+
     useEffect(() => {
         fetchData();
     }, []);
@@ -62,9 +67,15 @@ const Transactions = () => {
         return [...transactions].sort((a, b) => new Date(b.Date) - new Date(a.Date));
     }, [transactions]);
 
-    const filteredTransactions = sortedTransactions.filter(transaction =>
-        transaction.Description.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const filteredTransactions = sortedTransactions.filter(transaction => {
+        const matchesSearchTerm = transaction.Description.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesType = typeFilter ? transaction.Type === typeFilter : true;
+        const matchesPaymentMethod = paymentMethodFilter ? transaction.PaymentMethod === paymentMethodFilter : true;
+        const matchesCategory = categoryFilter ? transaction.Category === categoryFilter : true;
+        
+        return matchesSearchTerm && matchesType && matchesPaymentMethod && matchesCategory;
+    });
+    
 
     const groupedTransactions = filteredTransactions.reduce((acc, transaction) => {
         const date = formatDate(transaction.Date);
@@ -80,7 +91,7 @@ const Transactions = () => {
         setEditedDescription(transaction.Description);
         setEditedValue(transaction.Value);
         setEditedCategory(transaction.Category);
-        setEditedDate(dayjs(transaction.Date)); 
+        setEditedDate(dayjs(transaction.Date));
     };
 
     const confirmEdit = async () => {
@@ -92,28 +103,28 @@ const Transactions = () => {
                 Category: editedCategory,
                 Date: editedDate.toISOString(),
             };
-    
+
             await editTransaction(editingTransaction.Id, updatedData);
-    
+
             const updatedTransactions = transactions.map((transaction) => {
                 if (transaction.Id === editingTransaction.Id) {
-                    return updatedData; 
+                    return updatedData;
                 }
                 return transaction;
             });
-    
+
             setTransactions(updatedTransactions);
             setEditingTransaction(null);
         } catch (err) {
             setError(err.message);
         }
     };
-    
+
 
     const filteredCategories = React.useMemo(() => {
         if (!editingTransaction) return [];
-        
-        return categories.filter(category => 
+
+        return categories.filter(category =>
             category.Type?.toLowerCase() === editingTransaction.Type?.toLowerCase()
         );
     }, [categories, editingTransaction]);
@@ -152,6 +163,58 @@ const Transactions = () => {
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
             </div>
+
+            
+            <div className={styles.filtersContainer}>
+    <div className={styles.filtersRow}>
+        {/* Filtro de Tipo */}
+        <Select
+            placeholder="Filtrar por Tipo"
+            value={typeFilter}
+            onChange={(value) => setTypeFilter(value)}
+            className={styles.filterSelect}
+            allowClear
+        >
+            <Option value="Entrada">Entrada</Option>
+            <Option value="Saida">Saída</Option>
+        </Select>
+
+        {/* Filtro de Categoria */}
+        <Select
+            placeholder="Filtrar por Categoria"
+            value={categoryFilter}
+            onChange={(value) => setCategoryFilter(value)}
+            className={styles.filterSelect}
+            allowClear
+        >
+            {categories.map((category) => (
+                <Option key={category.Id} value={category.Category}>
+                    {category.Category}
+                </Option>
+            ))}
+        </Select>
+    </div>
+
+    <div className={styles.filtersRow}>
+        {/* Filtro de Método de Pagamento */}
+        <Select
+            placeholder="Filtrar por Método de Pagamento"
+            value={paymentMethodFilter}
+            onChange={(value) => setPaymentMethodFilter(value)}
+            className={styles.filterSelect}
+            allowClear
+        >
+            <Option value="Dinheiro">Dinheiro</Option>
+            <Option value="Pix">Pix</Option>
+            <Option value="Debito">Débito</Option>
+            <Option value="Credito">Crédito</Option>
+            <Option value="Boleto">Boleto</Option>
+            <Option value="EmConta">Em Conta</Option>
+        </Select>
+    </div>
+</div>
+
+
             <table className={styles.table}>
                 <thead>
                     <tr>
@@ -182,7 +245,7 @@ const Transactions = () => {
                                                     onClick={(e) => {
                                                         e.stopPropagation();
                                                         handleEdit(transaction);
-                                                    }} 
+                                                    }}
                                                     type="primary">
                                                     Editar
                                                 </Button>
@@ -191,7 +254,7 @@ const Transactions = () => {
                                                     onClick={(e) => {
                                                         e.stopPropagation();
                                                         handleDeleteClick(transaction);
-                                                    }} 
+                                                    }}
                                                     type="danger">
                                                     Deletar
                                                 </Button>
@@ -219,7 +282,7 @@ const Transactions = () => {
                             value={editedDescription}
                             onChange={(e) => setEditedDescription(e.target.value)}
                         />
-                        
+
                         <Input
                             className={styles.InputModalEdit}
                             placeholder="Valor"
@@ -239,7 +302,7 @@ const Transactions = () => {
                             className={styles.InputModalEdit}
                             placeholder="Selecione a categoria"
                             value={editedCategory}
-                            onChange={(value) => setEditedCategory(value)} 
+                            onChange={(value) => setEditedCategory(value)}
                         >
                             {filteredCategories.map((category) => (
                                 <Option key={category.Id} value={category.Category}>
