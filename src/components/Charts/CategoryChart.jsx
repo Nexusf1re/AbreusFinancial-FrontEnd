@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
-import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from 'chart.js';
+import { Chart as ChartJS, Tooltip, Legend, ArcElement } from 'chart.js';
 import useGraph from '../../hooks/useGraph';
 import styles from './CategoryChart.module.css';
 
-ChartJS.register(Title, Tooltip, Legend, ArcElement);
+ChartJS.register(Tooltip, Legend, ArcElement);
 
 const CategoryChart = ({ mes, ano }) => {
-  const data = useGraph(mes, ano); // Passe o mês e o ano selecionados para `useGraph`
+  const data = useGraph(mes, ano);
 
+  // Ordenando e calculando o total
   const sortedData = [...data].sort((a, b) => a.valor - b.valor);
+  const totalGasto = sortedData.reduce((acc, item) => acc + item.valor, 0);
 
   const chartData = {
     labels: sortedData.map(item => item.nome),
@@ -23,7 +25,7 @@ const CategoryChart = ({ mes, ano }) => {
         hoverBackgroundColor: [
           '#67ee4c', '#36A2EB', '#FFCE56', '#804bc0', '#b4fff9', '#FF9F40', '#ff4040', '#e240ff', '#3dfe6a', '#5e5e5e', '#ffed25', '#4a40ff'
         ],
-        borderWidth: 5, 
+        borderWidth: 5,
         borderColor: '#ffffff',
       },
     ],
@@ -50,17 +52,7 @@ const CategoryChart = ({ mes, ano }) => {
       },
     },
     plugins: {
-      title: {
-        display: true,
-        text: `Gastos por Categoria Mês ${mes}/${ano}`,
-        font: {
-          family: 'Poppins, sans-serif',
-          size: 22,                  
-          weight: '600',                      
-        },
-        color: '#333333',             
-        padding: { bottom: 0 },
-      },
+      title: { display: false }, // Desativando o título do gráfico
       tooltip: {
         callbacks: {
           label: function (tooltipItem) {
@@ -75,6 +67,7 @@ const CategoryChart = ({ mes, ano }) => {
 
   return (
     <div className={styles.container}>
+      <h2 className={styles.chartTitle}>Gastos por Categoria - Mês {mes}/{ano}</h2>
       {sortedData.length > 0 ? (
         <>
           <Doughnut data={chartData} options={options} className={styles.canvas} />
