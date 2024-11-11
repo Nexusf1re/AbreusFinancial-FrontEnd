@@ -1,27 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { DatePicker } from 'antd';
+import dayjs from 'dayjs';
 import styles from "./Home.module.css";
 import TopBar from '../../components/TopBar/TopBar';
 import BottomBar from '../../components/BottomBar/BottomBar';
 import useFinanceData from '../../hooks/useHome';
 import CountUp from 'react-countup';
 import CategoryChart from '../../components/Charts/CategoryChart';
-import Footer from '../../components/Footer/Footer'
+import Footer from '../../components/Footer/Footer';
 
 const Home = () => {
-  const { totalEntrada, totalSaida, balancoMes, balancoAno } = useFinanceData();
+  const [mes, setMes] = useState(dayjs().month() + 1);
+  const [ano, setAno] = useState(dayjs().year());
 
-  const date = new Date().toLocaleDateString('pt-BR', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric'
-  });
+  const { totalEntrada, totalSaida, balancoMes, balancoAno } = useFinanceData(mes, ano);
+
+  const handleDateChange = (date) => {
+    setMes(date.month() + 1);
+    setAno(date.year());
+  };
 
   return (
     <div className={`${styles.body} ${styles.homePage}`}>
       <TopBar />
 
       <div className={`${styles.date} ${styles.card}`}>
-        {date}
+      <DatePicker
+        className={styles.datePicker}
+        picker="month"
+        onChange={handleDateChange}
+        defaultValue={dayjs()}
+        format="MMMM YYYY"
+        style={{ width: '100%', textAlign: 'center', justifyContent: 'center' }}
+        inputReadOnly
+      />
+
       </div>
 
       <div className={`${styles.annualBalance} ${styles.card}`}>
@@ -83,9 +96,8 @@ const Home = () => {
       </div>
 
       <div className={`${styles.graph} ${styles.card}`}>
-        <CategoryChart />
+        <CategoryChart mes={mes} ano={ano} />
       </div>
-
 
       <BottomBar />
       <Footer />

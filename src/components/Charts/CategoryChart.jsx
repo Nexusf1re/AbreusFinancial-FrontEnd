@@ -1,14 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from 'chart.js';
 import useGraph from '../../hooks/useGraph';
 import styles from './CategoryChart.module.css';
-import { getMesAtual } from '../../utils/greetings.js';
 
 ChartJS.register(Title, Tooltip, Legend, ArcElement);
 
-const CategoryChart = () => {
-  const data = useGraph();
+const CategoryChart = ({ mes, ano }) => {
+  const data = useGraph(mes, ano); // Passe o mês e o ano selecionados para `useGraph`
 
   const sortedData = [...data].sort((a, b) => a.valor - b.valor);
 
@@ -19,17 +18,16 @@ const CategoryChart = () => {
         label: 'Gastos por Categoria',
         data: sortedData.map(item => item.valor),
         backgroundColor: [
-          '#67ee4c', '#36A2EB', '#FFCE56', '#804bc0', '#b4fff9', '#FF9F40', '#ff4040', '#e240ff'
+          '#67ee4c', '#36A2EB', '#FFCE56', '#804bc0', '#b4fff9', '#FF9F40', '#ff4040', '#e240ff', '#3dfe6a', '#5e5e5e', '#ffed25', '#4a40ff'
         ],
         hoverBackgroundColor: [
-          '#67ee4c', '#36A2EB', '#FFCE56', '#804bc0', '#b4fff9', '#FF9F40', '#ff4040', '#e240ff'
+          '#67ee4c', '#36A2EB', '#FFCE56', '#804bc0', '#b4fff9', '#FF9F40', '#ff4040', '#e240ff', '#3dfe6a', '#5e5e5e', '#ffed25', '#4a40ff'
         ],
         borderWidth: 5, 
         borderColor: '#ffffff',
       },
     ],
   };
-  
 
   const options = {
     responsive: true,
@@ -54,7 +52,7 @@ const CategoryChart = () => {
     plugins: {
       title: {
         display: true,
-        text: `Gastos por Categoria Mês ${getMesAtual()}`,
+        text: `Gastos por Categoria Mês ${mes}/${ano}`,
         font: {
           family: 'Poppins, sans-serif',
           size: 22,                  
@@ -74,7 +72,6 @@ const CategoryChart = () => {
       legend: { display: false },
     },
   };
-  
 
   return (
     <div className={styles.container}>
@@ -96,7 +93,7 @@ const CategoryChart = () => {
         </>
       ) : (
         <div className={styles.emptyMessage}>
-          <h4>Nenhuma saída este mês!</h4>
+          <h4>Nenhuma saída para o período selecionado!</h4>
         </div>
       )}
     </div>

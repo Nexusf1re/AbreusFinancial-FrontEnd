@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import Big from 'big.js';
 import dayjs from 'dayjs';
 
-//usegraph
-const useGraph = () => {
+const useGraph = (mes, ano) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -25,14 +24,11 @@ const useGraph = () => {
 
         const transactions = await response.json();
 
-        // Filtrar para o mês atual
-        const currentMonth = dayjs().month();
-        const currentYear = dayjs().year();
-
+        // Filtrar pelos mês e ano selecionados
         const monthlyData = transactions
           .filter(transaction => {
             const date = dayjs(transaction.Date);
-            return date.month() === currentMonth && date.year() === currentYear;
+            return date.month() + 1 === parseInt(mes) && date.year() === parseInt(ano); // Ajusta para o formato do mês (1-12)
           })
           .reduce((acc, transaction) => {
             const category = transaction.Category;
@@ -60,7 +56,7 @@ const useGraph = () => {
     };
 
     fetchData();
-  }, []);
+  }, [mes, ano]); // Atualizar os dados sempre que o mês ou o ano mudar
 
   return data;
 };

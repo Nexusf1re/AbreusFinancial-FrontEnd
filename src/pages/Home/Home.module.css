@@ -138,6 +138,10 @@
     margin: 56px 0px -8vw 0px;
 }
 
+.datePicker{
+    text-align: center;
+}
+
 .name{
     color: var(--font-color) !important;
 }

@@ -64,11 +64,6 @@
         padding: 10px !important;
     }
 
-    .canvas {
-        margin-bottom: -50px;
-        color: #b4fff9, #FF9F40;
-    }
-
     .categoryList {
         padding: 0px;
         display: flex;
