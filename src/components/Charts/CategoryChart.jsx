@@ -11,8 +11,7 @@ const CategoryChart = ({ mes, ano }) => {
 
   // Ordenando e calculando o total
   const sortedData = [...data].sort((a, b) => a.valor - b.valor);
-  const totalGasto = sortedData.reduce((acc, item) => acc + item.valor, 0);
-
+  
   const chartData = {
     labels: sortedData.map(item => item.nome),
     datasets: [
@@ -52,7 +51,7 @@ const CategoryChart = ({ mes, ano }) => {
       },
     },
     plugins: {
-      title: { display: false }, // Desativando o título do gráfico
+      title: { display: false },
       tooltip: {
         callbacks: {
           label: function (tooltipItem) {

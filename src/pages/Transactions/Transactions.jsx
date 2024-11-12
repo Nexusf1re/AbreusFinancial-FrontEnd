@@ -89,36 +89,43 @@ const Transactions = () => {
     const handleEdit = (transaction) => {
         setEditingTransaction(transaction);
         setEditedDescription(transaction.Description);
-        setEditedValue(transaction.Value);
+        
+        // Exibe o valor positivo para edição
+        setEditedValue(transaction.Type === "Saida" ? Math.abs(transaction.Value) : transaction.Value);
+        
         setEditedCategory(transaction.Category);
         setEditedDate(dayjs(transaction.Date));
     };
-
+    
     const confirmEdit = async () => {
         try {
+            // Multiplica por -1 se o tipo for "Saída" ao confirmar a edição
+            const finalValue = editingTransaction.Type === "Saida" ? -Math.abs(editedValue) : editedValue;
+    
             const updatedData = {
                 ...editingTransaction,
                 Description: editedDescription,
-                Value: editedValue,
+                Value: finalValue,
                 Category: editedCategory,
                 Date: editedDate.toISOString(),
             };
-
+    
             await editTransaction(editingTransaction.Id, updatedData);
-
+    
             const updatedTransactions = transactions.map((transaction) => {
                 if (transaction.Id === editingTransaction.Id) {
                     return updatedData;
                 }
                 return transaction;
             });
-
+    
             setTransactions(updatedTransactions);
             setEditingTransaction(null);
         } catch (err) {
             setError(err.message);
         }
     };
+
 
 
     const filteredCategories = React.useMemo(() => {
