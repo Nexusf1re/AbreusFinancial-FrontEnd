@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DatePicker } from 'antd';
 import dayjs from 'dayjs';
 import styles from "./Home.module.css";
@@ -8,33 +8,50 @@ import useFinanceData from '../../hooks/useHome';
 import CountUp from 'react-countup';
 import CategoryChart from '../../components/Charts/CategoryChart';
 import Footer from '../../components/Footer/Footer';
+import FormModal from '../../components/FormModal/FormModal';
+import FormBtn from '../../components/FormModal/FormBtn';
 
 const Home = () => {
+  const [visible, setVisible] = useState(false);
   const [mes, setMes] = useState(dayjs().month() + 1);
   const [ano, setAno] = useState(dayjs().year());
-
   const { totalEntrada, totalSaida, balancoMes, balancoAno } = useFinanceData(mes, ano);
+
+  const showModal = () => setVisible(true);
+  const handleCancel = () => setVisible(false);
 
   const handleDateChange = (date) => {
     setMes(date.month() + 1);
     setAno(date.year());
   };
 
+  const handleFormSubmit = () => {
+    setMes(mes);
+    setAno(ano);
+  };
+
+  useEffect(() => {
+  }, [mes, ano]);
+
   return (
     <div className={`${styles.body} ${styles.homePage}`}>
       <TopBar />
 
-      <div className={`${styles.date} ${styles.card}`}>
-      <DatePicker
-        className={styles.datePicker}
-        picker="month"
-        onChange={handleDateChange}
-        defaultValue={dayjs()}
-        format="MMMM YYYY"
-        style={{ width: '100%', textAlign: 'center', justifyContent: 'center' }}
-        inputReadOnly
-      />
+      <div>
+        <FormBtn onClick={showModal} />
+        <FormModal visible={visible} onCancel={handleCancel} onSuccess={handleFormSubmit} />
+      </div>
 
+      <div className={`${styles.date} ${styles.card}`}>
+        <DatePicker
+          className={styles.datePicker}
+          picker="month"
+          onChange={handleDateChange}
+          defaultValue={dayjs()}
+          format="MMMM YYYY"
+          style={{ width: '100%', textAlign: 'center', justifyContent: 'center' }}
+          inputReadOnly
+        />
       </div>
 
       <div className={`${styles.annualBalance} ${styles.card}`}>
