@@ -42,20 +42,20 @@ const FormModal = ({ visible, onCancel, onSuccess }) => {
   ];
 
   const onFormSubmit = async () => {
-    const success = await handleSubmit();
-
-    if (success) {
+    try {
+      await handleSubmit();
       toast.success("Lançamento enviado com sucesso!");
       onCancel();
       onSuccess();
-    } else {
-      toast.error("Erro ao enviar lançamento!");
+    } catch (error) {
+      console.error("Erro ao enviar o formulário:", error);
     }
   };
+  
 
   return (
     <Modal
-      visible={visible}
+      open={visible}
       onCancel={onCancel}
       footer={null}
       className={styles.modal}
@@ -67,7 +67,20 @@ const FormModal = ({ visible, onCancel, onSuccess }) => {
         closeOnClick
         draggable
         theme="colored"
-      />
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+          maxWidth: "300px",
+          position: "absolute",
+          top: "10%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          textAlign: "center",
+          borderRadius: "8px",
+        }} />
       <Form onFinish={onFormSubmit} className={styles.form}>
         <Title className={styles.title} level={3}>Lançamento de contas</Title>
         <hr style={{ marginBottom: '30px', marginTop: '-10px' }} />

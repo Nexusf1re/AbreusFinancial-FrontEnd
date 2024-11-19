@@ -25,7 +25,7 @@ const ResetPassword = ({ isModalOpen, closeModal }) => {
   return (
     <Modal
       title="Recuperação de Senha"
-      visible={isModalOpen}
+      open={isModalOpen}
       onCancel={closeModal}
       footer={null}
       className={styles.modal}
