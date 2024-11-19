@@ -16,7 +16,7 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        padding: 20px; /* Adiciona padding para um melhor espaçamento */
+        padding: 20px; 
         box-sizing: border-box;
         font-family: "Poppins", sans-serif;
         min-height: 100vh;
@@ -25,10 +25,10 @@
     }
 
     .card {
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Sombra mais pronunciada para desktops */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); 
         overflow: hidden; 
         transition: transform 0.3s, box-shadow 0.3s;
-        margin: 0px; /* Espaçamento entre os cartões */
+        margin: 0px; 
     }
 
     .InOut {
@@ -68,16 +68,16 @@
 
     .annualBalance .p, .monthBalance .p {
         text-align: center;
-        font-size: 20px; /* Tamanho da fonte aumentado */
+        font-size: 20px; 
         font-weight: bold;
     }
 
     .positive {
-        color: green !important; /* Cor para balanço positivo */
+        color: green !important; 
     }
   
     .negative {
-        color: red !important; /* Cor para balanço negativo */
+        color: red !important; 
     }
   
     .graph {
@@ -85,10 +85,10 @@
         color: black !important;
         width: 100%;
         border-radius: 10px;
-        flex: 1; /* Faz a div do gráfico ocupar o espaço restante */
+        flex: 1;
         display: flex;
-        overflow: hidden; /* Esconde qualquer overflow */
-        height: 400px; /* Altura definida para o gráfico */
+        overflow: hidden;
+        height: 400px; 
     }
 
     .p{
@@ -231,11 +231,11 @@
 }
 
   .positive {
-    color: green !important; /* Cor para balanço positivo */
+    color: green !important; 
   }
   
   .negative {
-    color: red !important; /* Cor para balanço negativo */
+    color: red !important; 
   }
   
   .graph {
@@ -243,10 +243,10 @@
     color: black !important;
     width: 100%;
     border-radius: 10px;
-    flex: 1; /* Faz a div do gráfico ocupar o espaço restante */
+    flex: 1; 
     display: flex;
-    overflow: hidden; /* Esconde qualquer overflow */
-    height: auto; /* Altura ajustável */
+    overflow: hidden; 
+    height: auto; 
 }
 
 }
