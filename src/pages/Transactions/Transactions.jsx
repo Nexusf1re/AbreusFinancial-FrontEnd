@@ -144,6 +144,27 @@ const Transactions = () => {
         setShowDeleteConfirm(true);
     };
 
+   // Lista de categorias padrão que não podem ser deletadas
+const defaultCategories = [
+    { Id: '1', Category: "Alimentação", Type: "Saida" },
+    { Id: '2', Category: "Transporte", Type: "Saida" },
+    { Id: '3', Category: "Mercado", Type: "Saida" },
+    { Id: '4', Category: "Contas", Type: "Saida" },
+    { Id: '5', Category: "Variado", Type: "Saida" },
+    { Id: '6', Category: "Salário", Type: "Entrada" },
+    { Id: '7', Category: "Variado", Type: "Entrada" }
+  ];
+
+    // Combina as categorias padrões com as categorias carregadas, garantindo que não haja duplicatas
+    const allCategories = React.useMemo(() => {
+        const categoryNames = new Set(defaultCategories.map((cat) => cat.Category));
+        const mergedCategories = [
+            ...defaultCategories,
+            ...categories.filter((category) => !categoryNames.has(category.Category))
+        ];
+        return mergedCategories;
+    }, [categories]);
+
     const handleDelete = async () => {
         try {
             await deleteTransaction(transactionToDelete.Id);
@@ -208,18 +229,18 @@ const Transactions = () => {
 
         {/* Filtro de Categoria */}
         <Select
-            placeholder="Filtrar por Categoria"
-            value={categoryFilter}
-            onChange={(value) => setCategoryFilter(value)}
-            className={styles.filterSelect}
-            allowClear
-        >
-            {categories.map((category) => (
-                <Option key={category.Id} value={category.Category}>
-                    {category.Category}
-                </Option>
-            ))}
-        </Select>
+                        placeholder="Filtrar por Categoria"
+                        value={categoryFilter}
+                        onChange={(value) => setCategoryFilter(value)}
+                        className={styles.filterSelect}
+                        allowClear
+                    >
+                        {allCategories.map((category) => (
+                            <Option key={category.Id} value={category.Category}>
+                                {category.Category}
+                            </Option>
+                        ))}
+         </Select>
     </div>
 
     <div className={styles.filtersRow}>
