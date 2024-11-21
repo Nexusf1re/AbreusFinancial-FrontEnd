@@ -186,6 +186,33 @@ const defaultCategories = [
         fetchData();         
     };
     
+    const { Option } = Select;
+
+      const [isSelectOpen, setIsSelectOpen] = useState(false);
+    
+      useEffect(() => {
+        if (isSelectOpen) {
+          // Desabilita o scroll quando o Select está aberto
+          document.body.style.overflow = 'hidden';
+        } else {
+          // Restaura o scroll quando o Select está fechado
+          document.body.style.overflow = 'auto';
+        }
+    
+        return () => {
+          // Restaura o scroll quando o componente for desmontado
+          document.body.style.overflow = 'auto';
+        };
+      }, [isSelectOpen]);
+    
+      const handleSelectChange = (value) => {
+        setCategoryFilter(value);
+      };
+    
+      const handleDropdownVisibleChange = (open) => {
+        setIsSelectOpen(open);
+      };
+    
 
     return (
         <div className={styles.container}>
@@ -228,18 +255,19 @@ const defaultCategories = [
 
         {/* Filtro de Categoria */}
         <Select
-                        placeholder="Filtrar por Categoria"
-                        value={categoryFilter}
-                        onChange={(value) => setCategoryFilter(value)}
-                        className={styles.filterSelect}
-                        allowClear
-                    >
-                        {allCategories.map((category) => (
-                            <Option key={category.Id} value={category.Category}>
-                                {category.Category}
-                            </Option>
-                        ))}
-         </Select>
+            placeholder="Filtrar por Categoria"
+            value={categoryFilter}
+            onChange={handleSelectChange}
+            onDropdownVisibleChange={handleDropdownVisibleChange}
+            className={styles.filterSelect}
+            allowClear
+            >
+            {allCategories.map((category) => (
+                <Option key={category.Id} value={category.Category}>
+                {category.Category}
+                </Option>
+            ))}
+        </Select>
     </div>
 
     <div className={styles.filtersRow}>
