@@ -17,7 +17,7 @@ const Home = () => {
   const [mes, setMes] = useState(dayjs().month() + 1);
   const [ano, setAno] = useState(dayjs().year());
   const { totalEntrada, totalSaida, balancoMes, balancoAno, refetch } = useFinanceData(mes, ano);
-  const [chartKey, setChartKey] = useState(0); // Estado para forçar atualização do gráfico
+  const [chartKey, setChartKey] = useState(0); 
     
   const showModal = () => setVisible(true);
   const handleCancel = () => setVisible(false);
@@ -51,6 +51,7 @@ const Home = () => {
           format="MMMM YYYY"
           style={{ width: '100%', textAlign: 'center', justifyContent: 'center' }}
           inputReadOnly
+          allowClear={false}
         />
       </div>
 
@@ -113,7 +114,7 @@ const Home = () => {
       </div>
 
       <div className={`${styles.graph} ${styles.card}`}>
-        <CategoryChart key={chartKey} mes={mes} ano={ano} /> {/* Passa o key dinâmico */}
+        <CategoryChart key={chartKey} mes={mes} ano={ano} />
       </div>
 
       <BottomBar />
