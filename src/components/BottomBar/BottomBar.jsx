@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaHouse, FaBrazilianRealSign, FaFileInvoiceDollar, FaGear } from "react-icons/fa6";
+import { FaHouse, /*FaBrazilianRealSign,*/ FaFileInvoiceDollar, FaGear } from "react-icons/fa6";
 import { useLocation } from 'react-router-dom';
 import styles from './BottomBar.module.css';
 

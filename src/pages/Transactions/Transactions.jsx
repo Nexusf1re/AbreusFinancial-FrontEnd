@@ -11,9 +11,18 @@ import ScrollUp from '../../components/ScrollUp/ScrollUp';
 import Footer from '../../components/Footer/Footer';
 import FormModal from '../../components/FormModal/FormModal';
 import FormBtn from '../../components/FormModal/FormBtn';
-import ToastConfig from '../../components/ToastConfig/ToastConfig'
+import ToastConfig from '../../components/ToastConfig/ToastConfig';
 
-const { Option } = Select;
+
+   // Lista de categorias padrão que não podem ser deletadas
+   const defaultCategories = [
+    { Id: '1', Category: "Alimentação", Type: "Saida" },
+    { Id: '2', Category: "Transporte", Type: "Saida" },
+    { Id: '3', Category: "Mercado", Type: "Saida" },
+    { Id: '4', Category: "Contas", Type: "Saida" },
+    { Id: '6', Category: "Salário", Type: "Entrada" },
+    { Id: '7', Category: "Variado", Type: "Entrada" }   
+  ];
 
 const Transactions = () => {
     const [transactions, setTransactions] = useState([]);
@@ -144,15 +153,6 @@ const Transactions = () => {
         setShowDeleteConfirm(true);
     };
 
-   // Lista de categorias padrão que não podem ser deletadas
-const defaultCategories = [
-    { Id: '1', Category: "Alimentação", Type: "Saida" },
-    { Id: '2', Category: "Transporte", Type: "Saida" },
-    { Id: '3', Category: "Mercado", Type: "Saida" },
-    { Id: '4', Category: "Contas", Type: "Saida" },
-    { Id: '6', Category: "Salário", Type: "Entrada" },
-    { Id: '7', Category: "Variado", Type: "Entrada" }
-  ];
 
     // Combina as categorias padrões com as categorias carregadas, garantindo que não haja duplicatas
     const allCategories = React.useMemo(() => {

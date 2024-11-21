@@ -1,7 +1,5 @@
 import React from 'react';
 import { Modal, Form, Input, Select, Button, DatePicker, Typography, Spin } from 'antd';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import useForm from '../../hooks/useForm';
 import useCategories from '../../hooks/useListCategories';
 import styles from './FormModal.module.css';
