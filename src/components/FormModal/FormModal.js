@@ -44,9 +44,10 @@ const FormModal = ({ visible, onCancel, onSuccess }) => {
   const onFormSubmit = async () => {
     try {
       await handleSubmit();
-      toast.success("Lançamento enviado com sucesso!");
       onCancel();
-      onSuccess();
+      if (onSuccess) {
+        onSuccess(); 
+      }
     } catch (error) {
       console.error("Erro ao enviar o formulário:", error);
     }
@@ -60,27 +61,6 @@ const FormModal = ({ visible, onCancel, onSuccess }) => {
       footer={null}
       className={styles.modal}
     >
-      <ToastContainer
-        position="top-center"
-        autoClose={1500}
-        hideProgressBar={false}
-        closeOnClick
-        draggable
-        theme="colored"
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "100%",
-          maxWidth: "300px",
-          position: "absolute",
-          top: "10%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          textAlign: "center",
-          borderRadius: "8px",
-        }} />
       <Form onFinish={onFormSubmit} className={styles.form}>
         <Title className={styles.title} level={3}>Lançamento de contas</Title>
         <hr style={{ marginBottom: '30px', marginTop: '-10px' }} />

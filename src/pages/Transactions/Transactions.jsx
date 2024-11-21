@@ -9,6 +9,9 @@ import TopBar from '../../components/TopBar/TopBar';
 import BottomBar from '../../components/BottomBar/BottomBar';
 import ScrollUp from '../../components/ScrollUp/ScrollUp';
 import Footer from '../../components/Footer/Footer';
+import FormModal from '../../components/FormModal/FormModal';
+import FormBtn from '../../components/FormModal/FormBtn';
+import ToastConfig from '../../components/ToastConfig/ToastConfig'
 
 const { Option } = Select;
 
@@ -154,9 +157,26 @@ const Transactions = () => {
         }
     };
 
+    const [visible, setVisible] = useState(false);
+    const showModal = () => setVisible(true);
+    const handleCancel = () => setVisible(false);
+
+    const handleSuccess = () => {
+        setVisible(false);  
+        fetchData();         
+    };
+    
+
     return (
         <div className={styles.container}>
             <TopBar />
+            <ToastConfig />
+
+            <div>
+                <FormBtn onClick={showModal} />
+                <FormModal visible={visible} onCancel={handleCancel} onSuccess={handleSuccess} />
+            </div>
+
             <h3 className={styles.title}>Histórico de lançamentos</h3>
 
             {error && <p className={styles.error}>Erro ao carregar transações: {error}</p>}
@@ -278,7 +298,7 @@ const Transactions = () => {
             {editingTransaction && (
                 <Modal
                     title="Editar Transação"
-                    visible={!!editingTransaction}
+                    open={!!editingTransaction}
                     onOk={confirmEdit}
                     onCancel={() => setEditingTransaction(null)}
                 >
@@ -330,7 +350,7 @@ const Transactions = () => {
 
             <Modal
                 title="Confirmar Exclusão"
-                visible={showDeleteConfirm}
+                open={showDeleteConfirm}
                 onOk={handleDelete}
                 onCancel={() => {
                     setShowDeleteConfirm(false);

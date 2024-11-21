@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { DatePicker } from 'antd';
 import dayjs from 'dayjs';
 import styles from "./Home.module.css";
@@ -10,13 +10,15 @@ import CategoryChart from '../../components/Charts/CategoryChart';
 import Footer from '../../components/Footer/Footer';
 import FormModal from '../../components/FormModal/FormModal';
 import FormBtn from '../../components/FormModal/FormBtn';
+import ToastConfig from '../../components/ToastConfig/ToastConfig';
 
 const Home = () => {
   const [visible, setVisible] = useState(false);
   const [mes, setMes] = useState(dayjs().month() + 1);
   const [ano, setAno] = useState(dayjs().year());
-  const { totalEntrada, totalSaida, balancoMes, balancoAno } = useFinanceData(mes, ano);
-
+  const { totalEntrada, totalSaida, balancoMes, balancoAno, refetch } = useFinanceData(mes, ano);
+  const [chartKey, setChartKey] = useState(0); // Estado para forçar atualização do gráfico
+    
   const showModal = () => setVisible(true);
   const handleCancel = () => setVisible(false);
 
@@ -25,21 +27,19 @@ const Home = () => {
     setAno(date.year());
   };
 
-  const handleFormSubmit = () => {
-    setMes(mes);
-    setAno(ano);
+  const handleSuccess = () => {
+    setVisible(false);
+    refetch();
+    setChartKey(prevKey => prevKey + 1);
   };
-
-  useEffect(() => {
-  }, [mes, ano]);
 
   return (
     <div className={`${styles.body} ${styles.homePage}`}>
       <TopBar />
-
+      <ToastConfig />
       <div>
         <FormBtn onClick={showModal} />
-        <FormModal visible={visible} onCancel={handleCancel} onSuccess={handleFormSubmit} />
+        <FormModal visible={visible} onCancel={handleCancel} onSuccess={handleSuccess} />
       </div>
 
       <div className={`${styles.date} ${styles.card}`}>
@@ -113,7 +113,7 @@ const Home = () => {
       </div>
 
       <div className={`${styles.graph} ${styles.card}`}>
-        <CategoryChart mes={mes} ano={ano} />
+        <CategoryChart key={chartKey} mes={mes} ano={ano} /> {/* Passa o key dinâmico */}
       </div>
 
       <BottomBar />

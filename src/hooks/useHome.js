@@ -1,74 +1,82 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import Big from 'big.js';
 import dayjs from 'dayjs';
 
-const useFinanceData = (mes, ano) => { // Adicione mes e ano como parâmetros
+const useFinanceData = (mes, ano) => {
   const [totalEntrada, setTotalEntrada] = useState(new Big(0));
   const [totalSaida, setTotalSaida] = useState(new Big(0));
   const [balancoMes, setBalancoMes] = useState(new Big(0));
   const [balancoAno, setBalancoAno] = useState(new Big(0));
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const apiUrl = process.env.REACT_APP_API_URL; 
-        const token = localStorage.getItem('token');
+  const fetchData = useCallback(async () => {
+    try {
+      const apiUrl = process.env.REACT_APP_API_URL;
+      const token = localStorage.getItem('token');
 
-        const headers = {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        };
-        
-        const entradaResponse = await fetch(`${apiUrl}/calc/Inflows`, { headers });
-        const saidaResponse = await fetch(`${apiUrl}/calc/OutflowsDebit`, { headers });
+      const headers = {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      };
 
-        if (!entradaResponse.ok || !saidaResponse.ok) {
-          throw new Error('Erro ao buscar dados financeiros');
-        }
+      const [entradaResponse, saidaResponse] = await Promise.all([
+        fetch(`${apiUrl}/calc/Inflows`, { headers }),
+        fetch(`${apiUrl}/calc/OutflowsDebit`, { headers }),
+      ]);
 
-        const entradas = await entradaResponse.json();
-        const saidas = await saidaResponse.json();
-
-        const totalEntradaCalc = entradas
-          .filter(entry => {
-            const date = dayjs(entry.Date);
-            return date.month() === mes - 1 && date.year() === ano; // Filtra pelo mês e ano passados
-          })
-          .reduce((acc, entry) => acc.plus(new Big(entry.Value || 0)), new Big(0));
-
-        const totalSaidaCalc = saidas
-          .filter(exit => {
-            const date = dayjs(exit.Date);
-            return date.month() === mes - 1 && date.year() === ano;
-          })
-          .reduce((acc, exit) => acc.plus(new Big(exit.Value || 0)), new Big(0));
-
-        setTotalEntrada(totalEntradaCalc);
-        setTotalSaida(totalSaidaCalc);
-
-        const balancoCalc = totalEntradaCalc.plus(totalSaidaCalc);
-        setBalancoMes(balancoCalc);
-
-        const totalEntradaAnoCalc = entradas
-          .filter(entry => dayjs(entry.Date).year() === ano)
-          .reduce((acc, entry) => acc.plus(new Big(entry.Value || 0)), new Big(0));
-
-        const totalSaidaAnoCalc = saidas
-          .filter(exit => dayjs(exit.Date).year() === ano)
-          .reduce((acc, exit) => acc.plus(new Big(exit.Value || 0)), new Big(0));
-
-        const balancoAnoCalc = totalEntradaAnoCalc.plus(totalSaidaAnoCalc);
-        setBalancoAno(balancoAnoCalc);
-
-      } catch (error) {
-        console.error("Erro ao buscar dados financeiros:", error);
+      if (!entradaResponse.ok || !saidaResponse.ok) {
+        throw new Error('Erro ao buscar dados financeiros');
       }
-    };
 
+      const entradas = await entradaResponse.json();
+      const saidas = await saidaResponse.json();
+
+      const filterByMonthAndYear = (data, month, year) =>
+        data.filter(item => {
+          const date = dayjs(item.Date);
+          return date.month() === month - 1 && date.year() === year;
+        });
+
+      const filterByYear = (data, year) =>
+        data.filter(item => dayjs(item.Date).year() === year);
+
+      const calculateTotal = (data) =>
+        data.reduce((acc, item) => acc.plus(new Big(item.Value || 0)), new Big(0));
+
+      // Cálculo para o mês atual
+      const entradasMes = filterByMonthAndYear(entradas, mes, ano);
+      const saidasMes = filterByMonthAndYear(saidas, mes, ano);
+
+      const totalEntradaCalc = calculateTotal(entradasMes);
+      const totalSaidaCalc = calculateTotal(saidasMes);
+
+      setTotalEntrada(totalEntradaCalc);
+      setTotalSaida(totalSaidaCalc);
+      setBalancoMes(totalEntradaCalc.plus(totalSaidaCalc));
+
+      // Cálculo para o ano
+      const entradasAno = filterByYear(entradas, ano);
+      const saidasAno = filterByYear(saidas, ano);
+
+      const totalEntradaAnoCalc = calculateTotal(entradasAno);
+      const totalSaidaAnoCalc = calculateTotal(saidasAno);
+
+      setBalancoAno(totalEntradaAnoCalc.plus(totalSaidaAnoCalc));
+    } catch (error) {
+      console.error("Erro ao buscar dados financeiros:", error);
+    }
+  }, [mes, ano]);
+
+  useEffect(() => {
     fetchData();
-  }, [mes, ano]); // Adicione mes e ano como dependências
+  }, [fetchData]);
 
-  return { totalEntrada, totalSaida, balancoMes, balancoAno };
+  return { 
+    totalEntrada, 
+    totalSaida, 
+    balancoMes, 
+    balancoAno, 
+    refetch: fetchData 
+  };
 };
 
 export default useFinanceData;

@@ -14,12 +14,14 @@ const BottomBar = () => {
                 </span> 
                 Início
             </a>
+            {/*
             <a className={styles.a} href='/form'>
                 <span className={styles.span}>
                     <FaBrazilianRealSign className={`${styles.lancar} ${location.pathname === '/form' ? styles.activeIcon : ''}`} />
                 </span>
                 Lançar
             </a>
+            */}
             <a className={styles.a} href='/transactions'>
                 <span className={styles.span}>
                     <FaFileInvoiceDollar className={`${styles.historico} ${location.pathname === '/transactions' ? styles.activeIcon : ''}`} />

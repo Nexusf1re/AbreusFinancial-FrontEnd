@@ -1,5 +1,6 @@
 import { Form, Input, Select, Button, Typography, Spin, List } from 'antd';
 import { ToastContainer } from 'react-toastify';
+import React, { useState } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import TopBar from '../../components/TopBar/TopBar';
 import BottomBar from '../../components/BottomBar/BottomBar';
@@ -7,6 +8,9 @@ import { DeleteOutlined } from '@ant-design/icons';
 import useConfig from '../../hooks/useConfig';
 import styles from './Config.module.css';
 import Footer from '../../components/Footer/Footer';
+import FormModal from '../../components/FormModal/FormModal';
+import FormBtn from '../../components/FormModal/FormBtn';
+import ToastConfig from '../../components/ToastConfig/ToastConfig';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -42,6 +46,10 @@ const Config = () => {
     );
   };
 
+  const [visible, setVisible] = useState(false);
+  const showModal = () => setVisible(true);
+  const handleCancel = () => setVisible(false);
+
   const handleDeleteClick = (categoryId) => {
     handleDeleteCategory(categoryId);
   };
@@ -53,6 +61,12 @@ const Config = () => {
   return (
     <div className={styles.container}>
       <TopBar />
+      <ToastConfig />
+      <div>
+                <FormBtn onClick={showModal} />
+                <FormModal visible={visible} onCancel={handleCancel} />
+       </div>
+
       <div className={styles.content}>
         <Title level={2}>Configurações</Title>
         {loading ? (
