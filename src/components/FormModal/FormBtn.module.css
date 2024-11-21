@@ -1,6 +1,12 @@
+:root{
+  --btn-size: 3.5rem;
+}
+
 .floatingButton {
-    position: fixed;
-    bottom: 80px;
-    right: 10px;
-    z-index: 1000;
-  }  
+  position: fixed;
+  bottom: 80px;
+  right: 10px;
+  z-index: 1000;
+  width: var(--btn-size) !important;
+  height: var(--btn-size) !important;
+}

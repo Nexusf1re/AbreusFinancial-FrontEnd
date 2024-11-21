@@ -150,7 +150,6 @@ const defaultCategories = [
     { Id: '2', Category: "Transporte", Type: "Saida" },
     { Id: '3', Category: "Mercado", Type: "Saida" },
     { Id: '4', Category: "Contas", Type: "Saida" },
-    { Id: '5', Category: "Variado", Type: "Saida" },
     { Id: '6', Category: "Salário", Type: "Entrada" },
     { Id: '7', Category: "Variado", Type: "Entrada" }
   ];
