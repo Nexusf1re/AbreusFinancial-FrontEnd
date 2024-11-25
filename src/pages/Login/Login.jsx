@@ -48,7 +48,6 @@ const Login = ({ onLogin }) => {
             navigate('/home');
           }
         } catch (error) {
-          toast.error("Erro ao verificar a assinatura ou não há cadastro de customer.");
           navigate('/payment'); // Redireciona para a página de pagamento se houver erro na verificação
         }
       }, 2500);

@@ -58,7 +58,7 @@ const Payment = () => {
       <div className={styles.productCard}>
         <h2 className={styles.productTitle}>Assinatura Premium</h2>
         <p className={styles.productDescription}>
-          Tenha acesso a todos os recursos por apenas <strong>R$ 29,90/mês</strong>.
+          Tenha acesso a todos os recursos por apenas <br /> <strong>R$ 29,90/mês</strong>.
         </p>
         <ul className={styles.benefitsList}>
           <li>Acesso ilimitado às transações</li>
