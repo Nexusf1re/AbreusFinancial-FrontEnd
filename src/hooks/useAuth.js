@@ -11,7 +11,7 @@ const useAuth = () => {
       if (isLoggedIn) {
         try {
           const subscriptionStatus = await checkSubscriptionStatus();
-          setHasValidSubscription(subscriptionStatus === 'active');
+          setHasValidSubscription(subscriptionStatus === 'active' || subscriptionStatus === 'trialing');
         } catch (err) {
           setHasValidSubscription(false);  // Caso haja algum erro, considera-se que a assinatura não está válida
         }

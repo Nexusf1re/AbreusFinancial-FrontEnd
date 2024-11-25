@@ -28,36 +28,39 @@ const Login = ({ onLogin }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
-  
-      const response = await login(Email, Password);
-      localStorage.setItem('username', response.Username);
-      toast.success("Login bem-sucedido!");
-  
-      setTimeout(async () => {
-        onLogin();
-        // Verifica o status da assinatura após o login
-        try {
-          const subscriptionStatus = await checkSubscriptionStatus();
-          if (subscriptionStatus !== 'active') {
-            // Se a assinatura não estiver ativa ou se não houver assinatura, redireciona para a página de pagamento
-            console.log("Assinatura com status ==!'active'");
-            navigate('/payment');
-          } else {
-            // Caso a assinatura esteja ativa, vai para a home
-            navigate('/home');
-            console.log("Assinatura com status active");
-          }
-        } catch (error) {
-          navigate('/payment'); // Redireciona para a página de pagamento se houver erro na verificação
-          console.log("Erro na verificação");
-        }
-      }, 1500);
+        const response = await login(Email, Password);
+        localStorage.setItem('username', response.Username);
+        toast.success("Login bem-sucedido!");
+
+        // Após o login, verifica o status da assinatura
+        setTimeout(async () => {
+            try {
+                await onLogin();
+
+                const subscriptionStatus = await checkSubscriptionStatus();
+
+                if (subscriptionStatus === 'active' || subscriptionStatus === 'trialing') {
+                    console.log(`Assinatura com status '${subscriptionStatus}'`);
+                    navigate('/home'); // Redireciona para a home
+                } else {
+                    console.log("Assinatura com status != 'active' e != 'trialing'");
+                    navigate('/payment'); // Redireciona para a página de pagamento
+                }
+            } catch (error) {
+                console.error("Erro ao verificar assinatura:", error.message);
+                navigate('/payment');
+                toast.error("Erro ao verificar assinatura. Redirecionando para pagamento.");
+            }
+        }, 1500);
     } catch (err) {
-      toast.error("Email ou senha incorretos.");
+        console.error("Erro durante o login:", err.message);
+        toast.error("Email ou senha incorretos.");
     }
-  };
+};
+
+    
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
