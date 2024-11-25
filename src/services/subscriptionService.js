@@ -1,3 +1,4 @@
+//src/services/subscriptionService.js
 import axios from 'axios';
 
 // Função para verificar o status da assinatura
