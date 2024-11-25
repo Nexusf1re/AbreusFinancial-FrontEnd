@@ -36,21 +36,23 @@ const Login = ({ onLogin }) => {
   
       setTimeout(async () => {
         onLogin();
-        
         // Verifica o status da assinatura após o login
         try {
           const subscriptionStatus = await checkSubscriptionStatus();
           if (subscriptionStatus !== 'active') {
             // Se a assinatura não estiver ativa ou se não houver assinatura, redireciona para a página de pagamento
+            console.log("Assinatura com status ==!'active'");
             navigate('/payment');
           } else {
             // Caso a assinatura esteja ativa, vai para a home
             navigate('/home');
+            console.log("Assinatura com status active");
           }
         } catch (error) {
           navigate('/payment'); // Redireciona para a página de pagamento se houver erro na verificação
+          console.log("Erro na verificação");
         }
-      }, 2500);
+      }, 1500);
     } catch (err) {
       toast.error("Email ou senha incorretos.");
     }

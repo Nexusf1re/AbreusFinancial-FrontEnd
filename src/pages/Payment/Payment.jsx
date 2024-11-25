@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import TopBar from '../../components/TopBar/TopBar';
-import styles from './Payment.module.css'; // Estilização personalizada
+import styles from './Payment.module.css';
 
 const Payment = () => {
   const [loading, setLoading] = useState(false);
@@ -53,7 +53,7 @@ const Payment = () => {
   };
 
   return (
-    <div>
+    <div className={styles.PaymentContainer}>
       <TopBar />
       <div className={styles.productCard}>
         <h2 className={styles.productTitle}>Assinatura Premium</h2>
