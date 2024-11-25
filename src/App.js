@@ -10,10 +10,10 @@ import Config from './pages/Config/Config';
 import ToastConfig from './components/ToastConfig/ToastConfig';
 import useAuth from './hooks/useAuth';
 import ResetPass from './pages/ResetPass/ResetPass';
-import Payment from './pages/Payment/Payment'
+import Payment from './pages/Payment/Payment';
 
 function App() {
-  const { isLoggedIn, handleLogin, handleLogout } = useAuth();
+  const { isLoggedIn, hasValidSubscription, handleLogin, handleLogout } = useAuth();
 
   return (
     <Router>
@@ -22,12 +22,27 @@ function App() {
       <Routes>
         <Route path="/" element={<Login onLogin={handleLogin} />} />
         <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/home" element={isLoggedIn ? <Home onLogout={handleLogout} /> : <Navigate to="/" />} />
-        <Route path="/form" element={isLoggedIn ? <Form /> : <Navigate to="/" />} />
-        <Route path="/transactions" element={isLoggedIn ? <Transactions /> : <Navigate to="/" />} />
-        <Route path="/config" element={isLoggedIn ? <Config /> : <Navigate to="/" />} />
+        <Route 
+          path="/home" 
+          element={isLoggedIn ? (hasValidSubscription ? <Home onLogout={handleLogout} /> : <Navigate to="/payment" />) : <Navigate to="/" />} 
+        />
+        <Route 
+          path="/form" 
+          element={isLoggedIn ? (hasValidSubscription ? <Form /> : <Navigate to="/payment" />) : <Navigate to="/" />} 
+        />
+        <Route 
+          path="/transactions" 
+          element={isLoggedIn ? (hasValidSubscription ? <Transactions /> : <Navigate to="/payment" />) : <Navigate to="/" />} 
+        />
+        <Route 
+          path="/config" 
+          element={isLoggedIn ? (hasValidSubscription ? <Config /> : <Navigate to="/payment" />) : <Navigate to="/" />} 
+        />
         <Route path="/reset-password" element={<ResetPass />} />
-        <Route path="/payment" element={isLoggedIn ? <Payment /> : <Navigate to="/" />} />
+        <Route 
+          path="/payment" 
+          element={isLoggedIn ? <Payment /> : <Navigate to="/" />} 
+        />
       </Routes>
     </Router>
   );

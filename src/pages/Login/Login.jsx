@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { login, isAuthenticated } from '../../services/authService';
+import { checkSubscriptionStatus } from '../../services/subscriptionService'; // Importa a função de verificação de assinatura
 import styles from './Login.module.css';
 import Slogan from '../../assets/Slogan.png';
 import { FaLock, FaRegEnvelope, FaEye, FaEyeSlash } from "react-icons/fa6";
@@ -28,21 +29,33 @@ const Login = ({ onLogin }) => {
     e.preventDefault();
     
     try {
-      toast.dismiss();
   
       const response = await login(Email, Password);
       localStorage.setItem('username', response.Username);
       toast.success("Login bem-sucedido!");
   
-      setTimeout(() => {
+      setTimeout(async () => {
         onLogin();
-        navigate('/home');
+        
+        // Verifica o status da assinatura após o login
+        try {
+          const subscriptionStatus = await checkSubscriptionStatus();
+          if (subscriptionStatus !== 'active') {
+            // Se a assinatura não estiver ativa ou se não houver assinatura, redireciona para a página de pagamento
+            navigate('/payment');
+          } else {
+            // Caso a assinatura esteja ativa, vai para a home
+            navigate('/home');
+          }
+        } catch (error) {
+          toast.error("Erro ao verificar a assinatura ou não há cadastro de customer.");
+          navigate('/payment'); // Redireciona para a página de pagamento se houver erro na verificação
+        }
       }, 2500);
     } catch (err) {
       toast.error("Email ou senha incorretos.");
     }
   };
-  
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);

@@ -1,54 +1,78 @@
-import React, { useEffect } from 'react';
-import styles from './Payment.module.css';
+import React, { useState } from 'react';
+import axios from 'axios';
+import TopBar from '../../components/TopBar/TopBar';
+import styles from './Payment.module.css'; // Estilização personalizada
 
 const Payment = () => {
-  useEffect(() => {
-    // Carregar script da Stripe
-    const stripeScript = document.createElement('script');
-    stripeScript.src = "https://js.stripe.com/v3/buy-button.js";
-    stripeScript.async = true;
-    stripeScript.onload = () => {
-      console.log("Script Stripe carregado com sucesso.");
-    };
-    document.body.appendChild(stripeScript);
+  const [loading, setLoading] = useState(false);
 
-    return () => {
-      document.body.removeChild(stripeScript);
-    };
-  }, []);
+  const handleStripePayment = async () => {
+    setLoading(true);
+
+    try {
+      const token = localStorage.getItem('token');
+
+      if (!token) {
+        console.error("Token não encontrado");
+        return;
+      }
+
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/stripe/create-stripe-customer`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.data.customerId) {
+        const checkoutSession = await axios.post(
+          `${process.env.REACT_APP_API_URL}/stripe/create-checkout-session`,
+          {
+            customerId: response.data.customerId,
+            plan: 'prod_RH1DyFkPbpBYCL', // ID do produto
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        window.location.href = checkoutSession.data.url;
+      } else {
+        console.error("Erro ao criar cliente no Stripe");
+      }
+    } catch (error) {
+      console.error("Erro ao processar pagamento:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div className={styles['payment-container']}>
-      {/* Cabeçalho */}
-      <div className={styles['payment-header']}>
-        <h2>Ative seu Acesso ao Sistema</h2>
-      </div>
-
-      {/* Descrição */}
-      <div className={styles['payment-description']}>
-        <p>
-          Garanta acesso total ao sistema por apenas <strong>R$ 29,90/mês</strong>. 
-          Experimente gratuitamente por <strong>3 dias</strong> antes de ser cobrado.
+    <div>
+      <TopBar />
+      <div className={styles.productCard}>
+        <h2 className={styles.productTitle}>Assinatura Premium</h2>
+        <p className={styles.productDescription}>
+          Tenha acesso a todos os recursos por apenas <strong>R$ 29,90/mês</strong>.
         </p>
-      </div>
-
-      {/* Botão de Pagamento da Stripe */}
-      <div className={styles['stripe-button-container']}>
-        <stripe-buy-button
-          buy-button-id="buy_btn_1QOizlGrkVP6EhhvyUQmrFzz"
-          publishable-key="pk_test_51QNxvcGrkVP6EhhvIc4T41GOUQq89CHi1zYxKiClPKUWAQJt6Y4HpDaU4bDWPYKIoSjkEKyaxq0vDcoh0RO9moTd00YFs278RS"
+        <ul className={styles.benefitsList}>
+          <li>Acesso ilimitado às transações</li>
+          <li>Relatórios avançados</li>
+          <li>Suporte exclusivo</li>
+          <li>3 dias grátis para experimentar!</li>
+        </ul>
+        <button 
+          className={styles.paymentButton} 
+          onClick={handleStripePayment} 
+          disabled={loading}
         >
-        </stripe-buy-button>
-      </div>
-
-      {/* Rodapé */}
-      <div className={styles['payment-footer']}>
-        <p>
-          Após a ativação, você terá acesso completo às funcionalidades do sistema.
-        </p>
-        <p>
-          <a href="/faq">Dúvidas? Consulte nossa FAQ</a>.
-        </p>
+          {loading ? 'Processando...' : 'Assinar Agora'}
+        </button>
       </div>
     </div>
   );
