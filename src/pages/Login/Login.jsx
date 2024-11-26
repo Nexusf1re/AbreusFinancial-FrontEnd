@@ -1,6 +1,8 @@
+//src/pages/Login/Login.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { login, isAuthenticated } from '../../services/authService';
+import { checkSubscriptionStatus } from '../../services/subscriptionService'; // Importa a função de verificação de assinatura
 import styles from './Login.module.css';
 import Slogan from '../../assets/Slogan.png';
 import { FaLock, FaRegEnvelope, FaEye, FaEyeSlash } from "react-icons/fa6";
@@ -26,23 +28,39 @@ const Login = ({ onLogin }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
-      toast.dismiss();
-  
-      const response = await login(Email, Password);
-      localStorage.setItem('username', response.Username);
-      toast.success("Login bem-sucedido!");
-  
-      setTimeout(() => {
-        onLogin();
-        navigate('/home');
-      }, 2500);
+        const response = await login(Email, Password);
+        localStorage.setItem('username', response.Username);
+        toast.success("Login bem-sucedido!");
+
+        // Após o login, verifica o status da assinatura
+        setTimeout(async () => {
+            try {
+                await onLogin();
+
+                const subscriptionStatus = await checkSubscriptionStatus();
+
+                if (subscriptionStatus === 'active' || subscriptionStatus === 'trialing') {
+                    console.log(`Assinatura com status '${subscriptionStatus}'`);
+                    navigate('/home'); // Redireciona para a home
+                } else {
+                    console.log("Assinatura com status != 'active' e != 'trialing'");
+                    navigate('/payment'); // Redireciona para a página de pagamento
+                }
+            } catch (error) {
+                console.error("Erro ao verificar assinatura:", error.message);
+                navigate('/payment');
+                toast.error("Erro ao verificar assinatura. Redirecionando para pagamento.");
+            }
+        }, 1500);
     } catch (err) {
-      toast.error("Email ou senha incorretos.");
+        console.error("Erro durante o login:", err.message);
+        toast.error("Email ou senha incorretos.");
     }
-  };
-  
+};
+
+    
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
