@@ -33,7 +33,7 @@ const usePayment = () => {
           `${process.env.REACT_APP_API_URL}/stripe/create-checkout-session`,
           {
             customerId: response.data.customerId,
-            plan: 'prod_RI0krxXHOBF6Oc', // ID do produto
+            plan: 'prod_RI3op7UcXExuNb', // ID do produto
           },
           {
             headers: {
