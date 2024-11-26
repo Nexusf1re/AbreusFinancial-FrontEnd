@@ -1,6 +1,6 @@
 import { Form, Input, Select, Button, Typography, Spin, List } from 'antd';
 import { ToastContainer } from 'react-toastify';
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import TopBar from '../../components/TopBar/TopBar';
 import BottomBar from '../../components/BottomBar/BottomBar';
@@ -11,32 +11,34 @@ import Footer from '../../components/Footer/Footer';
 import FormModal from '../../components/FormModal/FormModal';
 import FormBtn from '../../components/FormModal/FormBtn';
 import ToastConfig from '../../components/ToastConfig/ToastConfig';
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
 const { Title } = Typography;
 const { Option } = Select;
 
 const Config = () => {
-  const {  
-    formCategoria, 
-    loading, 
-    onFinishCategoria, 
+  const {
+    formCategoria,
+    loading,
+    onFinishCategoria,
     handleDeleteCategory,
-    entradas, 
-    saidas, 
-    createError, 
-    listError, 
-    deleteError 
+    entradas,
+    saidas,
+    createError,
+    listError,
+    deleteError,
   } = useConfig();
 
   // Lista de categorias padrão que não podem ser deletadas
   const defaultCategories = [
-    { Category: "Alimentação", Type: "Saida" },
-    { Category: "Transporte", Type: "Saida" },
-    { Category: "Mercado", Type: "Saida" },
-    { Category: "Contas", Type: "Saida" },
-    { Category: "Variado", Type: "Saida" },
-    { Category: "Salário", Type: "Entrada" },
-    { Category: "Variado", Type: "Entrada" }
+    { Category: 'Alimentação', Type: 'Saida' },
+    { Category: 'Transporte', Type: 'Saida' },
+    { Category: 'Mercado', Type: 'Saida' },
+    { Category: 'Contas', Type: 'Saida' },
+    { Category: 'Variado', Type: 'Saida' },
+    { Category: 'Salário', Type: 'Entrada' },
+    { Category: 'Variado', Type: 'Entrada' },
   ];
 
   // Função para verificar se a categoria é padrão
@@ -54,18 +56,57 @@ const Config = () => {
     handleDeleteCategory(categoryId);
   };
 
-  // Combina categorias padrão com as categorias dinâmicas (entradas e Saidas)
-  const combinedEntradas = [...defaultCategories.filter(cat => cat.Type === 'Entrada'), ...entradas];
-  const combinedSaidas = [...defaultCategories.filter(cat => cat.Type === 'Saida'), ...saidas];
+  // Combina categorias padrão com as categorias dinâmicas (entradas e saídas)
+  const combinedEntradas = useMemo(
+    () => [...defaultCategories.filter((cat) => cat.Type === 'Entrada'), ...entradas],
+    [entradas]
+  );
+
+  const combinedSaidas = useMemo(
+    () => [...defaultCategories.filter((cat) => cat.Type === 'Saida'), ...saidas],
+    [saidas]
+  );
+
+  // Função para acessar o portal do cliente
+  const handleAccessPortal = async () => {
+    try {
+      const token = localStorage.getItem('token'); // Supondo que o token JWT esteja no localStorage
+      if (!token) {
+        toast.error('Token de autenticação não encontrado!');
+        return;
+      }
+
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/stripe/create-portal-session`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Envia o token no cabeçalho Authorization
+          },
+        }
+      );
+
+      const { url } = response.data;
+
+      if (url) {
+        window.location.href = url; // Redireciona para o portal do cliente
+      } else {
+        toast.error('Erro ao acessar o portal do cliente.');
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error('Erro ao acessar o portal do cliente. Tente novamente.');
+    }
+  };
 
   return (
     <div className={styles.container}>
       <TopBar />
       <ToastConfig />
       <div>
-                <FormBtn onClick={showModal} />
-                <FormModal visible={visible} onCancel={handleCancel} />
-       </div>
+        <FormBtn onClick={showModal} />
+        <FormModal visible={visible} onCancel={handleCancel} />
+      </div>
 
       <div className={styles.content}>
         <Title level={2}>Configurações</Title>
@@ -73,17 +114,24 @@ const Config = () => {
           <Spin tip="Carregando..." />
         ) : (
           <>
-            <Form
-              form={formCategoria}
-              layout="vertical"
-              onFinish={onFinishCategoria}
+            <Button
+              type="primary"
+              onClick={handleAccessPortal}
+              style={{ marginBottom: '20px' }}
             >
+              Acessar Portal do Cliente
+            </Button>
+
+            <Form form={formCategoria} layout="vertical" onFinish={onFinishCategoria}>
               <Form.Item className={styles.newLabel} label="Nova Categoria">
                 <Form.Item
                   name="Category"
                   noStyle
                   rules={[{ required: true, message: 'Por favor, insira uma nova categoria!' }]}>
-                  <Input placeholder="Nome da nova Categoria" style={{ width: '65%' }} />
+                  <Input
+                    placeholder="Nome da nova Categoria"
+                    style={{ width: '65%' }}
+                  />
                 </Form.Item>
                 <Form.Item
                   name="Type"
@@ -116,16 +164,19 @@ const Config = () => {
                 renderItem={(item) => (
                   <List.Item
                     actions={
-                      isDefaultCategory(item.Category, "Entrada")
-                        ? [] // Não exibe o botão de exclusão para categorias padrão
-                        : [
-                            <DeleteOutlined 
-                              style={{ color: 'red' }}
-                              onClick={() => handleDeleteClick(item.Id)} 
-                            />
+                      isDefaultCategory(item.Category, 'Entrada')
+                        ? [
+                            <span style={{ color: 'gray', fontSize: '12px' }}>
+                              Padrão
+                            </span>,
                           ]
-                    }
-                  >
+                        : [
+                            <DeleteOutlined
+                              style={{ color: 'red' }}
+                              onClick={() => handleDeleteClick(item.Id)}
+                            />,
+                          ]
+                    }>
                     {item.Category}
                   </List.Item>
                 )}
@@ -139,16 +190,19 @@ const Config = () => {
                 renderItem={(item) => (
                   <List.Item
                     actions={
-                      isDefaultCategory(item.Category, "Saida")
-                        ? [] // Não exibe o botão de exclusão para categorias padrão
-                        : [
-                            <DeleteOutlined 
-                              style={{ color: 'red' }}
-                              onClick={() => handleDeleteClick(item.Id)} 
-                            />
+                      isDefaultCategory(item.Category, 'Saida')
+                        ? [
+                            <span style={{ color: 'gray', fontSize: '12px' }}>
+                              Padrão
+                            </span>,
                           ]
-                    }
-                  >
+                        : [
+                            <DeleteOutlined
+                              style={{ color: 'red' }}
+                              onClick={() => handleDeleteClick(item.Id)}
+                            />,
+                          ]
+                    }>
                     {item.Category}
                   </List.Item>
                 )}
