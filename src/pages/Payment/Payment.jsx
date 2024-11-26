@@ -1,57 +1,11 @@
-//src/pages/Payment/Payment.jsx
-import React, { useState } from 'react';
-import axios from 'axios';
+// src/pages/Payment/Payment.jsx
+import React from 'react';
 import TopBar from '../../components/TopBar/TopBar';
 import styles from './Payment.module.css';
+import usePayment from '../../hooks/usePayment';
 
 const Payment = () => {
-  const [loading, setLoading] = useState(false);
-
-  const handleStripePayment = async () => {
-    setLoading(true);
-
-    try {
-      const token = localStorage.getItem('token');
-
-      if (!token) {
-        console.error("Token não encontrado");
-        return;
-      }
-
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/stripe/create-stripe-customer`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (response.data.customerId) {
-        const checkoutSession = await axios.post(
-          `${process.env.REACT_APP_API_URL}/stripe/create-checkout-session`,
-          {
-            customerId: response.data.customerId,
-            plan: 'prod_RH1DyFkPbpBYCL', // ID do produto
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        window.location.href = checkoutSession.data.url;
-      } else {
-        console.error("Erro ao criar cliente no Stripe");
-      }
-    } catch (error) {
-      console.error("Erro ao processar pagamento:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { loading, handleStripePayment } = usePayment();
 
   return (
     <div className={styles.PaymentContainer}>
