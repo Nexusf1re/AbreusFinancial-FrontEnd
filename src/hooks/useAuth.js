@@ -1,3 +1,4 @@
+//src/hooks/useAuth.js
 import { useState, useEffect } from 'react';
 import { isAuthenticated } from '../services/authService';
 import { checkSubscriptionStatus } from '../services/subscriptionService';
