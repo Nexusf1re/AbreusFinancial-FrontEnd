@@ -3,9 +3,15 @@ import React from 'react';
 import TopBar from '../../components/TopBar/TopBar';
 import styles from './Payment.module.css';
 import usePayment from '../../hooks/usePayment';
+import AccessPortalButton from '../../components/AccessPortalButton/AccessPortalButton';
+import useSubscriptionStatus from '../../hooks/useSubscriptionStatus';
 
 const Payment = () => {
   const { loading, handleStripePayment } = usePayment();
+  const { subscriptionStatus, loading: statusLoading } = useSubscriptionStatus();
+
+  // Verifica se o status da assinatura é válido e se não está carregando
+  const showAccessPortalButton = subscriptionStatus && !statusLoading;
 
   return (
     <div className={styles.PaymentContainer}>
@@ -27,6 +33,12 @@ const Payment = () => {
         >
           {loading ? 'Processando...' : 'Assinar Agora'}
         </button>
+
+        {showAccessPortalButton && (
+          <div className={styles.AccessPortalButton}>
+            <AccessPortalButton />
+          </div>
+        )}
       </div>
     </div>
   );

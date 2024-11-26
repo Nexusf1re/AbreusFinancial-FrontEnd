@@ -1,18 +1,16 @@
+// src/pages/Config/Config.jsx
 import { Form, Input, Select, Button, Typography, Spin, List } from 'antd';
-import { ToastContainer } from 'react-toastify';
 import React, { useState, useMemo } from 'react';
-import 'react-toastify/dist/ReactToastify.css';
-import TopBar from '../../components/TopBar/TopBar';
-import BottomBar from '../../components/BottomBar/BottomBar';
 import { DeleteOutlined } from '@ant-design/icons';
 import useConfig from '../../hooks/useConfig';
 import styles from './Config.module.css';
+import TopBar from '../../components/TopBar/TopBar';
+import BottomBar from '../../components/BottomBar/BottomBar';
 import Footer from '../../components/Footer/Footer';
 import FormModal from '../../components/FormModal/FormModal';
 import FormBtn from '../../components/FormModal/FormBtn';
 import ToastConfig from '../../components/ToastConfig/ToastConfig';
-import { toast } from 'react-toastify';
-import axios from 'axios';
+import AccessPortalButton from '../../components/AccessPortalButton/AccessPortalButton';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -30,7 +28,6 @@ const Config = () => {
     deleteError,
   } = useConfig();
 
-  // Lista de categorias padrão que não podem ser deletadas
   const defaultCategories = [
     { Category: 'Alimentação', Type: 'Saida' },
     { Category: 'Transporte', Type: 'Saida' },
@@ -41,7 +38,6 @@ const Config = () => {
     { Category: 'Variado', Type: 'Entrada' },
   ];
 
-  // Função para verificar se a categoria é padrão
   const isDefaultCategory = (category, type) => {
     return defaultCategories.some(
       (defaultCat) => defaultCat.Category === category && defaultCat.Type === type
@@ -56,7 +52,6 @@ const Config = () => {
     handleDeleteCategory(categoryId);
   };
 
-  // Combina categorias padrão com as categorias dinâmicas (entradas e saídas)
   const combinedEntradas = useMemo(
     () => [...defaultCategories.filter((cat) => cat.Type === 'Entrada'), ...entradas],
     [entradas]
@@ -66,38 +61,6 @@ const Config = () => {
     () => [...defaultCategories.filter((cat) => cat.Type === 'Saida'), ...saidas],
     [saidas]
   );
-
-  // Função para acessar o portal do cliente
-  const handleAccessPortal = async () => {
-    try {
-      const token = localStorage.getItem('token'); // Supondo que o token JWT esteja no localStorage
-      if (!token) {
-        toast.error('Token de autenticação não encontrado!');
-        return;
-      }
-
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/stripe/create-portal-session`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`, // Envia o token no cabeçalho Authorization
-          },
-        }
-      );
-
-      const { url } = response.data;
-
-      if (url) {
-        window.location.href = url; // Redireciona para o portal do cliente
-      } else {
-        toast.error('Erro ao acessar o portal do cliente.');
-      }
-    } catch (error) {
-      console.error(error);
-      toast.error('Erro ao acessar o portal do cliente. Tente novamente.');
-    }
-  };
 
   return (
     <div className={styles.container}>
@@ -114,20 +77,14 @@ const Config = () => {
           <Spin tip="Carregando..." />
         ) : (
           <>
-            <Button
-              type="primary"
-              onClick={handleAccessPortal}
-              style={{ marginBottom: '20px' }}
-            >
-              Acessar Portal do Cliente
-            </Button>
-
+            <AccessPortalButton /> {/* Usando o novo componente */}
+            
             <Form form={formCategoria} layout="vertical" onFinish={onFinishCategoria}>
               <Form.Item className={styles.newLabel} label="Nova Categoria">
                 <Form.Item
                   name="Category"
                   noStyle
-                  rules={[{ required: true, message: 'Por favor, insira uma nova categoria!' }]}>
+                  rules={[{ required: true, message: 'Por favor, insira uma nova categoria!' }]} >
                   <Input
                     placeholder="Nome da nova Categoria"
                     style={{ width: '65%' }}
@@ -136,7 +93,7 @@ const Config = () => {
                 <Form.Item
                   name="Type"
                   noStyle
-                  rules={[{ required: true, message: 'Por favor, selecione um tipo!' }]}>
+                  rules={[{ required: true, message: 'Por favor, selecione um tipo!' }]} >
                   <Select placeholder="Tipo" style={{ width: '30%', marginLeft: '5px' }}>
                     <Option value="Entrada">Entrada</Option>
                     <Option value="Saida">Saida</Option>
@@ -212,7 +169,6 @@ const Config = () => {
         )}
       </div>
       <BottomBar />
-      <ToastContainer />
       <Footer />
     </div>
   );
