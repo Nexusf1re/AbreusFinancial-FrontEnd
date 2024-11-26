@@ -19,7 +19,6 @@ const Payment = () => {
           <li>Acesso ilimitado às transações</li>
           <li>Relatórios avançados</li>
           <li>Suporte exclusivo</li>
-          <li>3 dias grátis para experimentar!</li>
         </ul>
         <button 
           className={styles.paymentButton} 

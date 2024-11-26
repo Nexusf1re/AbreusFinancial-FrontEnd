@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-=======
-//App.js
-import { SpeedInsights } from '@vercel/speed-insights/react';
->>>>>>> a402f28241b164a5427f23c4147f6d8c76a755d3
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { SpeedInsights } from '@vercel/speed-insights/react';
