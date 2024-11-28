@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { login, isAuthenticated } from '../../services/authService';
-import { checkSubscriptionStatus } from '../../services/subscriptionService'; // Importa a função de verificação de assinatura
+import { checkSubscriptionStatus } from '../../services/subscriptionService';
 import styles from './Login.module.css';
 import Slogan from '../../assets/Slogan.png';
 import { FaLock, FaRegEnvelope, FaEye, FaEyeSlash } from "react-icons/fa6";

@@ -11,6 +11,7 @@ import FormModal from '../../components/FormModal/FormModal';
 import FormBtn from '../../components/FormModal/FormBtn';
 import ToastConfig from '../../components/ToastConfig/ToastConfig';
 import AccessPortalButton from '../../components/AccessPortalButton/AccessPortalButton';
+import { defaultCategories } from '../../components/DefaultCategories';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -27,16 +28,6 @@ const Config = () => {
     listError,
     deleteError,
   } = useConfig();
-
-  const defaultCategories = [
-    { Category: 'Alimentação', Type: 'Saida' },
-    { Category: 'Transporte', Type: 'Saida' },
-    { Category: 'Mercado', Type: 'Saida' },
-    { Category: 'Contas', Type: 'Saida' },
-    { Category: 'Variado', Type: 'Saida' },
-    { Category: 'Salário', Type: 'Entrada' },
-    { Category: 'Variado', Type: 'Entrada' },
-  ];
 
   const isDefaultCategory = (category, type) => {
     return defaultCategories.some(
@@ -77,7 +68,7 @@ const Config = () => {
           <Spin tip="Carregando..." />
         ) : (
           <>
-            <AccessPortalButton /> {/* Usando o novo componente */}
+            <AccessPortalButton />
             
             <Form form={formCategoria} layout="vertical" onFinish={onFinishCategoria}>
               <Form.Item className={styles.newLabel} label="Nova Categoria">

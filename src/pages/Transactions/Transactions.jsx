@@ -12,17 +12,7 @@ import Footer from '../../components/Footer/Footer';
 import FormModal from '../../components/FormModal/FormModal';
 import FormBtn from '../../components/FormModal/FormBtn';
 import ToastConfig from '../../components/ToastConfig/ToastConfig';
-
-
-   // Lista de categorias padrão que não podem ser deletadas
-   const defaultCategories = [
-    { Id: '1', Category: "Alimentação", Type: "Saida" },
-    { Id: '2', Category: "Transporte", Type: "Saida" },
-    { Id: '3', Category: "Mercado", Type: "Saida" },
-    { Id: '4', Category: "Contas", Type: "Saida" },
-    { Id: '6', Category: "Salário", Type: "Entrada" },
-    { Id: '7', Category: "Variado", Type: "Entrada" }   
-  ];
+import { defaultCategoriesFilter } from '../../components/DefaultCategories';
 
 const Transactions = () => {
     const [transactions, setTransactions] = useState([]);
@@ -156,9 +146,9 @@ const Transactions = () => {
 
     // Combina as categorias padrões com as categorias carregadas, garantindo que não haja duplicatas
     const allCategories = React.useMemo(() => {
-        const categoryNames = new Set(defaultCategories.map((cat) => cat.Category));
+        const categoryNames = new Set(defaultCategoriesFilter.map((cat) => cat.Category));
         const mergedCategories = [
-            ...defaultCategories,
+            ...defaultCategoriesFilter,
             ...categories.filter((category) => !categoryNames.has(category.Category))
         ];
         return mergedCategories;

@@ -8,6 +8,7 @@ import styles from './Form.module.css';
 import useForm from '../../hooks/useForm';
 import useCategories from '../../hooks/useListCategories';
 import Footer from '../../components/Footer/Footer'
+import { defaultCategories } from '../../components/DefaultCategories'
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -27,17 +28,6 @@ const FormComponent = () => {
   const paymentOptions = formData.type === 'Entrada' 
     ? ['Dinheiro', 'Pix', 'EmConta']
     : ['Dinheiro', 'Pix', 'Debito', 'Credito', 'Boleto', 'EmConta'];
-
-    const defaultCategories = [
-      { Category: "Alimentação", Type: "Saida" },
-      { Category: "Transporte", Type: "Saida" },
-      { Category: "Mercado", Type: "Saida" },
-      { Category: "Contas", Type: "Saida" },
-      { Category: "Variado", Type: "Saida" },
-      { Category: "Fatura", Type: "Saida" },
-      { Category: "Salário", Type: "Entrada" },
-      { Category: "Variado", Type: "Entrada" },
-    ];
     
     const filteredCategories = [
       ...defaultCategories.filter(category => category.Type === formData.type),
