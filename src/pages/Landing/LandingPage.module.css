@@ -1,0 +1,32 @@
+.container {
+    text-align: center;
+    padding: 50px 20px;
+  }
+  
+  .hero {
+    background-color: #f0f0f0;
+    padding: 100px 20px;
+  }
+  
+  .ctaButton {
+    background-color: #29b6f6;
+    color: white;
+    padding: 15px 30px;
+    font-size: 18px;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+  .features {
+    margin-top: 50px;
+  }
+  
+  .feature {
+    margin-bottom: 30px;
+  }
+  
+  .pricing {
+    background-color: #ececec;
+    padding: 50px 20px;
+  }
+  

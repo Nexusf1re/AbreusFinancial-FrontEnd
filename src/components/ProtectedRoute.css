@@ -1,0 +1,24 @@
+.blurred-content {
+    position: relative;
+    filter: blur(5px); /* Aplica o blur enquanto os dados estão carregando */
+    pointer-events: none; /* Impede interação com a página durante o carregamento */
+  }
+  
+  .loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8); /* Fundo semitransparente */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10; /* Garante que o overlay fique acima do conteúdo */
+  }
+  
+  .loading-overlay p {
+    font-size: 1.2rem;
+    color: #333;
+  }
+  

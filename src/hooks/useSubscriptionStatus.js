@@ -1,4 +1,3 @@
-// src/hooks/useSubscriptionStatus.js
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -32,12 +31,35 @@ const useSubscriptionStatus = (interval = 300000) => { // Intervalo padrão: 5 m
   };
 
   useEffect(() => {
-    fetchSubscriptionStatus();
+    let intervalId;
 
-    // Configurar verificação periódica
-    const intervalId = setInterval(fetchSubscriptionStatus, interval);
+    const startValidation = () => {
+      fetchSubscriptionStatus(); // Validação imediata ao entrar na página
 
-    return () => clearInterval(intervalId); // Limpa o intervalo ao desmontar o componente
+      // Configurar validações periódicas somente quando a aba estiver visível
+      intervalId = setInterval(() => {
+        if (document.visibilityState === 'visible') {
+          fetchSubscriptionStatus();
+        }
+      }, interval);
+    };
+
+    startValidation();
+
+    // Listener para eventos de visibilidade da página
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        fetchSubscriptionStatus(); // Validação imediata ao retornar para a aba ativa
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    // Cleanup
+    return () => {
+      clearInterval(intervalId);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
   }, [interval]);
 
   return { subscriptionStatus, loading };

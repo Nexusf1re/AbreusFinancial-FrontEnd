@@ -12,6 +12,7 @@ import Payment from './pages/Payment/Payment';
 import ToastConfig from './components/ToastConfig/ToastConfig';
 import ProtectedRoute from './components/ProtectedRoute';
 import useAuth from './hooks/useAuth';
+import LandingPage from './pages/Landing/LandingPage';
 
 function App() {
   const { isLoggedIn, handleLogin } = useAuth();
@@ -25,6 +26,7 @@ function App() {
         <Route path="/" element={<Login onLogin={handleLogin} />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/reset-password" element={<ResetPass />} />
+        <Route path="/landing" element={<LandingPage />} />
 
         {/* Rotas protegidas */}
         <Route
