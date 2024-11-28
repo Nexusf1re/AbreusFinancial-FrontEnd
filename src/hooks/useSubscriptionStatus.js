@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const useSubscriptionStatus = (interval = 300000) => { // Intervalo padrão: 5 minutos
-  const [subscriptionStatus, setSubscriptionStatus] = useState(null);
-  const [loading, setLoading] = useState(true);
+const useSubscriptionStatus = (interval = 9000) => { 
+  const [subscriptionStatus, setSubscriptionStatus] = useState(() => {
+    // Tenta carregar o status da assinatura do localStorage
+    const cachedStatus = localStorage.getItem('subscriptionStatus');
+    return cachedStatus ? JSON.parse(cachedStatus) : null;
+  });
+  const [loading, setLoading] = useState(subscriptionStatus === null); // Se o status não estiver em cache, começa com loading
 
   const fetchSubscriptionStatus = async () => {
     try {
@@ -22,6 +26,7 @@ const useSubscriptionStatus = (interval = 300000) => { // Intervalo padrão: 5 m
       if (response.status === 200) {
         const { subscriptionStatus } = response.data;
         setSubscriptionStatus(subscriptionStatus);
+        localStorage.setItem('subscriptionStatus', JSON.stringify(subscriptionStatus)); // Armazena no localStorage
       }
     } catch (error) {
       console.error("Erro ao buscar status da assinatura:", error);
@@ -31,25 +36,24 @@ const useSubscriptionStatus = (interval = 300000) => { // Intervalo padrão: 5 m
   };
 
   useEffect(() => {
+    if (!subscriptionStatus) {
+      fetchSubscriptionStatus(); // Só faz a chamada inicial se não tiver status em cache
+    }
+
     let intervalId;
 
-    const startValidation = () => {
-      fetchSubscriptionStatus(); // Validação imediata ao entrar na página
-
-      // Configurar validações periódicas somente quando a aba estiver visível
+    // Verifica se o status da assinatura está válido e se está na validade do intervalo
+    if (subscriptionStatus) {
       intervalId = setInterval(() => {
         if (document.visibilityState === 'visible') {
-          fetchSubscriptionStatus();
+          fetchSubscriptionStatus(); // Atualiza o status ao retornar à página
         }
       }, interval);
-    };
+    }
 
-    startValidation();
-
-    // Listener para eventos de visibilidade da página
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'visible') {
-        fetchSubscriptionStatus(); // Validação imediata ao retornar para a aba ativa
+        fetchSubscriptionStatus(); // Valida ao voltar para a aba
       }
     };
 
@@ -60,7 +64,7 @@ const useSubscriptionStatus = (interval = 300000) => { // Intervalo padrão: 5 m
       clearInterval(intervalId);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
-  }, [interval]);
+  }, [subscriptionStatus, interval]);
 
   return { subscriptionStatus, loading };
 };
