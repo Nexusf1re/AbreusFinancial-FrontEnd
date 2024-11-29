@@ -1,4 +1,5 @@
 @media screen and (min-width: 575px) {
+    /*Desktop*/
     .date {
         font-size: 18px;
         font-weight: bold;
@@ -99,7 +100,7 @@
 
 
 @media screen and (max-width: 574px) {
-
+    
 
 .body {
     display: flex;

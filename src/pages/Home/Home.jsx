@@ -72,7 +72,7 @@ const Home = () => {
       <div className={styles.InOut}>
         <div className={`${styles.income} ${styles.p} ${styles.card}`}>
           <p className={`${styles.name} ${styles.p}`}>Total Entrada</p>
-          <p className={`${styles.icomeValue} ${styles.p}`}>
+          <p className={`${styles.icomeValue} ${styles.p} ${totalEntrada < 0 ? styles.negative : styles.positive}`}>
             R$
             <CountUp
               end={totalEntrada}
@@ -86,7 +86,7 @@ const Home = () => {
 
         <div className={`${styles.outgoing} ${styles.card}`}>
           <p className={`${styles.name} ${styles.p}`}>Total Saída</p>
-          <p className={`${styles.outgoingValue} ${styles.p}`}>
+          <p className={`${styles.outgoingValue} ${styles.p} ${totalSaida < 0 ? styles.negative : styles.positive}`}>
             R$
             <CountUp
               end={totalSaida}
