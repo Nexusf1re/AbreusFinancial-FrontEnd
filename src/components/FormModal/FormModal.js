@@ -44,9 +44,8 @@ const FormModal = ({ visible, onCancel, onSuccess }) => {
     }
   };
   
-  // Função atualizada para formatar o valor em tempo real
   const formatCurrency = (value) => {
-    if (!value) return '';
+    if (!value) return '0,00';
     
     // Remove tudo que não for número
     let numericValue = value.replace(/\D/g, '');
@@ -59,30 +58,40 @@ const FormModal = ({ visible, onCancel, onSuccess }) => {
     const centavos = numericValue.slice(-2);
     
     // Formata os reais com pontos para milhares
-    let formattedReais = '';
-    if (reais.length > 3) {
-      formattedReais = reais.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
-    } else {
-      formattedReais = reais;
+    let formattedReais = reais;
+    if (formattedReais.length > 3) {
+      formattedReais = formattedReais.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
     }
     
-    // Remove zero à esquerda desnecessário
+    // Remove zeros à esquerda desnecessários
     formattedReais = formattedReais.replace(/^0+/, '') || '0';
     
-    // Retorna o valor formatado
     return `${formattedReais},${centavos}`;
   };
 
-  // Handler atualizado para o campo de valor
   const handleValueChange = (e) => {
-    const rawValue = e.target.value.replace(/\D/g, '');
-    const formattedValue = formatCurrency(rawValue);
+    let value = e.target.value;
     
-    // Atualiza o estado do input com o valor formatado
+    // Permite apenas números, vírgula e ponto
+    value = value.replace(/[^\d.,]/g, '');
+    
+    // Substitui múltiplas vírgulas ou pontos por uma única vírgula
+    value = value.replace(/[.,]/g, ',').replace(/,+/g, ',');
+    
+    // Garante apenas uma vírgula
+    const parts = value.split(',');
+    if (parts.length > 2) {
+      value = parts[0] + ',' + parts[1];
+    }
+    
+    // Remove pontos existentes para reformatar
+    const cleanValue = value.replace(/\./g, '').replace(',', '');
+    const formattedValue = formatCurrency(cleanValue);
+    
     setInputValue(formattedValue);
     
     // Converte para o formato numérico antes de salvar no estado do formulário
-    const numericValue = (parseFloat(rawValue) / 100).toString();
+    const numericValue = cleanValue ? (parseFloat(cleanValue) / 100).toString() : '0';
     handleChange('value', numericValue);
   };
 
@@ -109,6 +118,14 @@ const FormModal = ({ visible, onCancel, onSuccess }) => {
               onChange={handleValueChange}
               style={{ fontSize: '20px', padding: '0 12px', height: '40px' }}
               placeholder="0,00"
+              inputMode="numeric"
+              pattern="[0-9]*"
+              onKeyPress={(e) => {
+                // Previne qualquer tecla que não seja número
+                if (!/[0-9]/.test(e.key)) {
+                  e.preventDefault();
+                }
+              }}
             />
           </Form.Item>
 

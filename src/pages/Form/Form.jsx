@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Input, Select, Button, DatePicker, Typography, Spin } from 'antd';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
@@ -16,6 +16,7 @@ const { Option } = Select;
 const FormComponent = () => {
   const { formData, handleChange, handleSubmit, loading } = useForm();
   const { categories, error } = useCategories();
+  const [inputValue, setInputValue] = useState('');
 
   if (loading) {
     return <Spin size="large" style={{ display: 'block', margin: '20px auto' }} />;
@@ -34,6 +35,59 @@ const FormComponent = () => {
       ...categories.filter(category => category.Type === formData.type)
     ];
     
+
+  // Função para formatar o valor em tempo real
+  const formatCurrency = (value) => {
+    if (!value) return '0,00';
+    
+    // Remove tudo que não for número
+    let numericValue = value.replace(/\D/g, '');
+    
+    // Adiciona zeros à esquerda se necessário
+    numericValue = numericValue.padStart(3, '0');
+    
+    // Divide o valor em reais e centavos
+    const reais = numericValue.slice(0, -2);
+    const centavos = numericValue.slice(-2);
+    
+    // Formata os reais com pontos para milhares
+    let formattedReais = reais;
+    if (formattedReais.length > 3) {
+      formattedReais = formattedReais.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+    }
+    
+    // Remove zeros à esquerda desnecessários
+    formattedReais = formattedReais.replace(/^0+/, '') || '0';
+    
+    return `${formattedReais},${centavos}`;
+  };
+
+  // Handler para o campo de valor
+  const handleValueChange = (e) => {
+    let value = e.target.value;
+    
+    // Permite apenas números, vírgula e ponto
+    value = value.replace(/[^\d.,]/g, '');
+    
+    // Substitui múltiplas vírgulas ou pontos por uma única vírgula
+    value = value.replace(/[.,]/g, ',').replace(/,+/g, ',');
+    
+    // Garante apenas uma vírgula
+    const parts = value.split(',');
+    if (parts.length > 2) {
+      value = parts[0] + ',' + parts[1];
+    }
+    
+    // Remove pontos existentes para reformatar
+    const cleanValue = value.replace(/\./g, '').replace(',', '');
+    const formattedValue = formatCurrency(cleanValue);
+    
+    setInputValue(formattedValue);
+    
+    // Converte para o formato numérico antes de salvar no estado do formulário
+    const numericValue = cleanValue ? (parseFloat(cleanValue) / 100).toString() : '0';
+    handleChange('value', numericValue);
+  };
 
   return (
     <div className={`${styles.body} ${styles.homePage}`}>
@@ -71,10 +125,17 @@ const FormComponent = () => {
             rules={[{ required: true, message: 'Por favor insira um valor!' }]}
           >
             <Input
-              type="number"
-              value={formData.value}
-              onChange={(e) => handleChange('value', e.target.value)}
+              value={inputValue}
+              onChange={handleValueChange}
               style={{ fontSize: '20px', padding: '0 12px', height: '40px' }}
+              placeholder="0,00"
+              inputMode="numeric"
+              pattern="[0-9]*"
+              onKeyPress={(e) => {
+                if (!/[0-9]/.test(e.key)) {
+                  e.preventDefault();
+                }
+              }}
             />
           </Form.Item>
 
