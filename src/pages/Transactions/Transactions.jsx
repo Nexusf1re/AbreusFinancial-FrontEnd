@@ -234,7 +234,7 @@ const Transactions = () => {
         {/* Filtro de Tipo */}
         <Select
             placeholder="Filtrar por Tipo"
-            value={typeFilter}
+            value={typeFilter || undefined}
             onChange={(value) => setTypeFilter(value)}
             className={`${styles.filterSelect} ${styles.tipoCategoria}`}
             allowClear
@@ -246,7 +246,7 @@ const Transactions = () => {
         {/* Filtro de Categoria */}
         <Select
             placeholder="Filtrar por Categoria"
-            value={categoryFilter}
+            value={categoryFilter || undefined}
             onChange={handleSelectChange}
             onDropdownVisibleChange={handleDropdownVisibleChange}
             className={`${styles.filterSelect} ${styles.tipoCategoria}`}
@@ -264,7 +264,7 @@ const Transactions = () => {
         {/* Filtro de Método de Pagamento */}
         <Select
             placeholder="Filtrar por Método de Pagamento"
-            value={paymentMethodFilter}
+            value={paymentMethodFilter || undefined}
             onChange={(value) => setPaymentMethodFilter(value)}
             className={styles.filterSelect}
             allowClear
