@@ -88,7 +88,7 @@ Compromisso com melhorias constantes:
 - Otimizações de performance
 - Atualizações de segurança
 - Correções e aprimoramentos
-
+<!--
 ## 📸 Screenshots
 
 <div align="center">
@@ -98,12 +98,10 @@ Compromisso com melhorias constantes:
 ![Relatórios](URL_DA_IMAGEM_RELATORIOS)
 
 </div>
-
+-->
 ## 🌐 Links Úteis
 
 - [Website](https://abreusfinancial.vercel.app)
-- [Documentação](URL_DA_DOCUMENTACAO)
-- [Política de Privacidade](URL_DA_POLITICA)
 
 ## 📄 Licença
 
@@ -113,6 +111,6 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 <div align="center">
 
-Desenvolvido com ❤️ por [Abreu's Enterprise](https://github.com/abreumatheu)
+Desenvolvido com ❤️ por [Abreu's Enterprise](https://github.com/Nexusf1re)
 
 </div>
