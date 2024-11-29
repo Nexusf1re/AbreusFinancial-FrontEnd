@@ -236,7 +236,7 @@ const Transactions = () => {
             placeholder="Filtrar por Tipo"
             value={typeFilter}
             onChange={(value) => setTypeFilter(value)}
-            className={styles.filterSelect}
+            className={`${styles.filterSelect} ${styles.tipoCategoria}`}
             allowClear
         >
             <Option value="Entrada">Entrada</Option>
@@ -249,7 +249,7 @@ const Transactions = () => {
             value={categoryFilter}
             onChange={handleSelectChange}
             onDropdownVisibleChange={handleDropdownVisibleChange}
-            className={styles.filterSelect}
+            className={`${styles.filterSelect} ${styles.tipoCategoria}`}
             allowClear
             >
             {allCategories.map((category) => (

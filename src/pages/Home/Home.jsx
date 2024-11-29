@@ -36,11 +36,7 @@ const Home = () => {
   return (
     <div className={`${styles.container}`}>
       <TopBar />
-      <ToastConfig />
-      <div>
-        <FormBtn onClick={showModal} />
-        <FormModal visible={visible} onCancel={handleCancel} onSuccess={handleSuccess} />
-      </div>
+  
 
       <div className={`${styles.date} ${styles.card}`}>
         <DatePicker
@@ -116,7 +112,11 @@ const Home = () => {
       <div className={`${styles.graph} ${styles.card}`}>
         <CategoryChart key={chartKey} mes={mes} ano={ano} />
       </div>
-
+      <ToastConfig />
+      <div>
+        <FormBtn onClick={showModal} />
+        <FormModal visible={visible} onCancel={handleCancel} onSuccess={handleSuccess} />
+      </div>
       <BottomBar />
       <Footer />
     </div>
