@@ -32,6 +32,44 @@ const FormModal = ({ visible, onCancel, onSuccess }) => {
     ...categories.filter(category => category.Type === formData.type)
   ];
 
+  const formatCurrency = (value) => {
+    if (!value) return '0,00';
+
+    // Remove zeros à esquerda
+    const numericValue = value.replace(/^0+/, '') || '0';
+
+    // Formata com separadores de milhares e vírgula para centavos
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+      minimumFractionDigits: 2,
+    })
+      .format(parseFloat(numericValue) / 100)
+      .replace('R$', ''); // Remove o símbolo 'R$' para manter o campo apenas numérico
+  };
+
+  const handleValueChange = (e) => {
+    let value = e.target.value;
+  
+    // Remove tudo que não for número
+    const cleanValue = value.replace(/\D/g, ''); // Apenas dígitos
+  
+    // Formata o valor como moeda
+    const formattedValue = new Intl.NumberFormat('pt-BR', {
+      style: 'decimal',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(parseFloat(cleanValue) / 100);
+  
+    // Atualiza o estado do input com o valor formatado
+    setInputValue(formattedValue);
+  
+    // Atualiza o valor bruto (não formatado) no estado do formulário
+    const numericValue = cleanValue ? (parseFloat(cleanValue) / 100).toFixed(2) : '0.00';
+    handleChange('value', numericValue);
+  };
+  
+
   const onFormSubmit = async () => {
     try {
       await handleSubmit();
@@ -42,57 +80,6 @@ const FormModal = ({ visible, onCancel, onSuccess }) => {
     } catch (error) {
       console.error("Erro ao enviar o formulário:", error);
     }
-  };
-  
-  const formatCurrency = (value) => {
-    if (!value) return '0,00';
-    
-    // Remove tudo que não for número
-    let numericValue = value.replace(/\D/g, '');
-    
-    // Adiciona zeros à esquerda se necessário
-    numericValue = numericValue.padStart(3, '0');
-    
-    // Divide o valor em reais e centavos
-    const reais = numericValue.slice(0, -2);
-    const centavos = numericValue.slice(-2);
-    
-    // Formata os reais com pontos para milhares
-    let formattedReais = reais;
-    if (formattedReais.length > 3) {
-      formattedReais = formattedReais.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
-    }
-    
-    // Remove zeros à esquerda desnecessários
-    formattedReais = formattedReais.replace(/^0+/, '') || '0';
-    
-    return `${formattedReais},${centavos}`;
-  };
-
-  const handleValueChange = (e) => {
-    let value = e.target.value;
-    
-    // Permite apenas números, vírgula e ponto
-    value = value.replace(/[^\d.,]/g, '');
-    
-    // Substitui múltiplas vírgulas ou pontos por uma única vírgula
-    value = value.replace(/[.,]/g, ',').replace(/,+/g, ',');
-    
-    // Garante apenas uma vírgula
-    const parts = value.split(',');
-    if (parts.length > 2) {
-      value = parts[0] + ',' + parts[1];
-    }
-    
-    // Remove pontos existentes para reformatar
-    const cleanValue = value.replace(/\./g, '').replace(',', '');
-    const formattedValue = formatCurrency(cleanValue);
-    
-    setInputValue(formattedValue);
-    
-    // Converte para o formato numérico antes de salvar no estado do formulário
-    const numericValue = cleanValue ? (parseFloat(cleanValue) / 100).toString() : '0';
-    handleChange('value', numericValue);
   };
 
   return (
@@ -116,17 +103,12 @@ const FormModal = ({ visible, onCancel, onSuccess }) => {
             <Input
               value={inputValue}
               onChange={handleValueChange}
-              style={{ fontSize: '20px', padding: '0 12px', height: '40px' }}
               placeholder="0,00"
-              inputMode="numeric"
-              pattern="[0-9]*"
-              onKeyDown={(e) => {
-                // Permite números, vírgula e ponto
-                  if (!/[0-9,.]/.test(e.key)) {
-                  e.preventDefault();
-                }
-              }}
+              inputMode="decimal"
+              pattern="[0-9]*" // Permite apenas números
+              style={{ fontSize: '20px', padding: '0 12px', height: '40px' }}
             />
+
           </Form.Item>
 
           <Form.Item
