@@ -60,14 +60,6 @@
         margin: 0px; 
     }
 
-    .InOut {
-        padding: 0;
-        margin-top: -460px;
-        margin-left: 9px;
-        display: flex;
-        gap: 10px; 
-        align-items: center;
-    }
 
     .income, .outgoing {
         background-color: var(--back-color);
@@ -89,11 +81,20 @@
     }
 
     .annualBalance{
-        margin-top: -160px !important;
+        margin-top: -135px !important;
+    }
+
+    .InOut {
+        padding: 0;
+        margin-top: -380px;
+        margin-left: 9px;
+        display: flex;
+        gap: 10px; 
+        align-items: center;
     }
 
     .monthBalance{
-        margin-top: -250px !important;
+        margin-top: -220px !important;
     }
 
     .annualBalance, .monthBalance {

@@ -118,7 +118,7 @@
 .cadastrar a {
     padding-top: 10px;
     text-decoration: none;
-    color: #000000;
+    color: var(--font-color);
     font-weight: bold;
     display: block;
     text-align: center;

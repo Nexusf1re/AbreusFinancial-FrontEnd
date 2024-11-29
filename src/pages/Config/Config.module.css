@@ -1,11 +1,13 @@
 @media screen and (min-width: 575px) {
     .container {
       margin: 60px 0px 0px 85px !important; /* top, right, bottom, left */
+      background: var(--back-color);
     }
   }
 
 .container{
     margin: 70px 0px 55px 0px; /* top, right, bottom, left */
+    background: var(--back-color);
 }
 
 .newLabel label{
@@ -37,12 +39,13 @@
   .container {
     margin: 0px;
     padding: 0px;
+    background: var(--back-color);
   }
 }
 
 .content {
   padding: 2px;
-  background: #fff;
+  background: var(--back-color);
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
@@ -68,40 +71,68 @@
 }
 
 .categorySection {
-  background: #f5f5f5;
-  padding: 8px;
+  background: var(--back-color-secondary);
+  padding: 15px;
   border-radius: 8px;
-  margin-bottom: 32px;
+  margin-bottom: 20px;
 }
 
 .newCategoryForm {
-  margin-bottom: 0;
+  background-color: var(--back-color);
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.newCategoryForm label {
+  color: var(--font-color) !important;
+  font-weight: 500;
 }
 
 .formInputs {
   display: flex;
-  gap: 16px;
-  margin-bottom: 16px;
+  gap: 10px;
+  margin-bottom: 15px;
 }
 
 .categoryInput {
-  flex: 2;
-  height: 40px;
+  background-color: var(--back-color-secondary) !important;
+  color: var(--font-color) !important;
+  border-color: var(--label-color) !important;
+}
+
+.categoryInput::placeholder {
+  color: var(--font-color) !important;
+  opacity: 0.7;
 }
 
 .typeSelect {
-  flex: 1;
-  height: 40px;
+  background-color: var(--back-color-secondary) !important;
+  color: var(--font-color) !important;
+}
+
+.typeSelect .ant-select-selector {
+  background-color: var(--back-color-secondary) !important;
+  border-color: var(--label-color) !important;
 }
 
 .submitButton {
+  background-color: var(--back-color-tertiary) !important;
+  color: var(--font-color) !important;
+  border-color: var(--label-color) !important;
   width: 100%;
   height: 40px;
-  font-weight: 600;
+  font-weight: 500;
+}
+
+.submitButton:hover {
+  background-color: var(--back-color-secondary) !important;
+  border-color: var(--label-color) !important;
+  opacity: 0.9;
 }
 
 .categoriesContainer {
-  background: #fff;
+  background: var(--back-color);
   padding: 8px;
   border-radius: 8px;
 }
@@ -134,7 +165,7 @@
 }
 
 .categoryList {
-  background: #f5f5f5;
+  background: var(--back-color);
   padding: 6px;
   border-radius: 8px;
 }
@@ -146,11 +177,14 @@
 }
 
 .list {
-  background: white;
+  background: var(--back-color-secondary);
   border-radius: 4px;
 }
 
 .listItem {
+  background: var(--back-color);
+  margin: 5px 0;
+  border-radius: 4px;
   display: flex !important;
   justify-content: space-between !important;
   align-items: center !important;
@@ -159,11 +193,12 @@
 
 .categoryName {
   font-weight: 500;
+  color: var(--font-color);
 }
 
 .defaultBadge {
-  background: #e6f7ff;
-  color: #1890ff;
+  background: var(--back-color);
+  color: var(--font-color);
   padding: 2px 8px;
   border-radius: 4px;
   font-size: 12px;

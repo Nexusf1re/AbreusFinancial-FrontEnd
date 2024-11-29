@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import Login from './pages/Login/Login';
@@ -13,9 +13,15 @@ import ToastConfig from './components/ToastConfig/ToastConfig';
 import ProtectedRoute from './components/ProtectedRoute';
 import useAuth from './hooks/useAuth';
 import LandingPage from './pages/Landing/LandingPage';
+import useTheme from './hooks/useTheme';
 
 function App() {
   const { isLoggedIn, handleLogin } = useAuth();
+  const { initTheme } = useTheme();
+
+  useEffect(() => {
+    initTheme();
+  }, [initTheme]);
 
   return (
     <Router>

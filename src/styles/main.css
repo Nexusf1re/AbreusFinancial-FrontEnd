@@ -4,6 +4,8 @@
     --topBar: rgb(255, 255, 255, 0.95);
     --bottomBar: rgb(255, 255, 255, 0.95);
     --back-color: rgba(255, 255, 255, 0.95);
+    --back-color-secondary: rgba(245, 245, 245, 0.95);
+    --back-color-tertiary: rgba(235, 235, 235, 0.95);
     --font-color: rgba(0, 0, 0, 0.9);
     --label-color: rgba(51, 51, 51, 1);
     --mainBackground: rgb(230, 230, 230);
@@ -15,8 +17,10 @@
     --topBar: rgba(21, 21, 21, 0.95);
     --bottomBar: rgba(21, 21, 21, 0.95);
     --back-color: rgba(64, 64, 64, 0.95);
-    --font-color: rgba(229, 229, 229, 0.9);
-    --label-color: rgb(218, 218, 218);
+    --back-color-secondary: rgba(54, 54, 54, 0.95);
+    --back-color-tertiary: rgba(44, 44, 44, 0.95);
+    --font-color: rgba(255, 255, 255, 0.95);
+    --label-color: rgba(255, 255, 255, 0.9);
     --mainBackground: rgba(132, 132, 132, 0.9);
 }
 
@@ -26,4 +30,206 @@ body {
 
 input, textarea, select {
     touch-action: manipulation;
+}
+
+/* Sobrescrevendo estilos do Ant Design */
+.ant-modal-content,
+.ant-modal-header {
+    background-color: var(--back-color) !important;
+    color: var(--font-color) !important;
+}
+
+.ant-modal-title {
+    color: var(--font-color) !important;
+}
+
+.ant-modal-close-icon {
+    color: var(--font-color) !important;
+}
+
+.ant-select-dropdown {
+    background-color: var(--back-color) !important;
+}
+
+.ant-select-item-option {
+    color: var(--font-color) !important;
+}
+
+.ant-select-item-option-selected {
+    background-color: var(--back-color-secondary) !important;
+}
+
+.ant-picker-dropdown {
+    background-color: var(--back-color) !important;
+}
+
+.ant-picker-panel-container {
+    background-color: var(--back-color) !important;
+}
+
+.ant-picker-header {
+    color: var(--font-color) !important;
+}
+
+.ant-picker-header button {
+    color: var(--font-color) !important;
+}
+
+.ant-picker-cell {
+    color: var(--font-color) !important;
+}
+
+.ant-picker-cell-in-view {
+    color: var(--font-color) !important;
+}
+
+/* Estilos para os Selects do Ant Design */
+.ant-select-selector {
+    background-color: var(--back-color) !important;
+    color: var(--font-color) !important;
+    border-color: var(--label-color) !important;
+}
+
+.ant-select-selection-item {
+    color: var(--font-color) !important;
+}
+
+.ant-select-dropdown {
+    background-color: var(--back-color) !important;
+    border: 1px solid var(--label-color) !important;
+}
+
+.ant-select-item {
+    color: var(--font-color) !important;
+}
+
+.ant-select-item-option-content {
+    color: var(--font-color) !important;
+}
+
+.ant-select-item-option {
+    background-color: var(--back-color) !important;
+}
+
+.ant-select-item-option-active {
+    background-color: var(--back-color-secondary) !important;
+}
+
+.ant-select-item-option-selected {
+    background-color: var(--back-color-tertiary) !important;
+}
+
+/* Ícone do select */
+.ant-select-arrow {
+    color: var(--font-color) !important;
+}
+
+/* Placeholder do select */
+.ant-select-selection-placeholder {
+    color: var(--font-color) !important;
+    opacity: 0.5;
+}
+
+/* Estado de foco do select */
+.ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+    border-color: var(--label-color) !important;
+}
+
+.ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input) .ant-select-selector {
+    border-color: var(--label-color) !important;
+    box-shadow: 0 0 0 2px rgba(var(--label-color), 0.2) !important;
+}
+
+/* Estado desabilitado */
+.ant-select-disabled .ant-select-selector {
+    background-color: var(--back-color-tertiary) !important;
+    color: var(--font-color) !important;
+    opacity: 0.5;
+}
+
+/* Remove background dos inputs de data */
+.ant-picker {
+    background-color: var(--back-color) !important;
+    border-color: var(--label-color) !important;
+}
+
+.ant-picker-input > input {
+    background: transparent !important;
+    color: var(--font-color) !important;
+}
+
+/* Ajusta o ícone do calendário */
+.ant-picker-suffix {
+    color: var(--font-color) !important;
+}
+
+/* Remove background do painel do calendário */
+.ant-picker-panel {
+    background: var(--back-color) !important;
+}
+
+.ant-picker-cell-in-view {
+    background: transparent !important;
+}
+
+.ant-picker-cell:hover:not(.ant-picker-cell-selected):not(.ant-picker-cell-range-start):not(.ant-picker-cell-range-end):not(.ant-picker-cell-range-hover-start):not(.ant-picker-cell-range-hover-end) .ant-picker-cell-inner {
+    background: var(--back-color-secondary) !important;
+}
+
+/* Ajusta a cor do dia selecionado */
+.ant-picker-cell-selected .ant-picker-cell-inner {
+    background: var(--back-color-tertiary) !important;
+    color: var(--font-color) !important;
+}
+
+/* Ajuste específico para os selects no tema escuro */
+.dark-theme .ant-select-selection-item,
+.dark-theme .ant-select-item-option-content,
+.dark-theme .ant-picker-input > input,
+.dark-theme .ant-input {
+    color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.dark-theme .ant-select-selection-placeholder,
+.dark-theme .ant-picker-suffix,
+.dark-theme .ant-select-arrow {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Ajuste dos placeholders */
+.dark-theme input::placeholder,
+.dark-theme textarea::placeholder,
+.dark-theme .ant-select-selection-placeholder,
+.dark-theme .ant-picker-input > input::placeholder {
+    color: rgba(255, 255, 255, 0.7) !important; /* Placeholder mais visível no tema escuro */
+    opacity: 1 !important;
+}
+
+/* Ajuste para inputs e selects */
+.dark-theme .ant-input,
+.dark-theme .ant-input-number-input,
+.dark-theme .ant-select-selection-placeholder,
+.dark-theme .ant-picker-input > input::placeholder,
+.dark-theme .ant-select-selector::placeholder {
+    color: rgba(255, 255, 255, 0.95) !important; /* Texto mais brilhante */
+}
+
+/* Ajuste para o texto selecionado */
+.dark-theme .ant-select-selection-item {
+    color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Ajuste para as opções do dropdown */
+.dark-theme .ant-select-item {
+    color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Ajuste para o hover nas opções */
+.dark-theme .ant-select-item-option-active {
+    background-color: var(--back-color-secondary) !important;
+}
+
+/* Ajuste para a opção selecionada */
+.dark-theme .ant-select-item-option-selected {
+    background-color: var(--back-color-tertiary) !important;
 }

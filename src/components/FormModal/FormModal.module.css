@@ -136,3 +136,59 @@
     text-align: center;
 }
 }
+
+.modal {
+    background-color: var(--back-color) !important;
+    color: var(--font-color) !important;
+    margin-top: -80px !important;
+    padding: 0 !important;
+}
+
+.form {
+    margin-top: 20px;
+    background-color: var(--back-color-secondary);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.title {
+    color: var(--font-color);
+    text-align: center;
+}
+
+.formInput label {
+    color: var(--label-color) !important;
+}
+
+.formInput input,
+.formInput .ant-select-selector,
+.formInput .ant-picker,
+.formInput .ant-input-number,
+.formInput .ant-select-selection-item {
+    background-color: var(--back-color-tertiary) !important;
+    color: var(--font-color) !important;
+    border-color: var(--label-color) !important;
+}
+
+/* Estilo para as opções do select */
+.ant-select-dropdown {
+    background-color: var(--back-color) !important;
+}
+
+.ant-select-item {
+    color: var(--font-color) !important;
+}
+
+.ant-select-item-option-selected {
+    background-color: var(--back-color-secondary) !important;
+}
+
+/* Estilo para o calendário */
+.ant-picker-panel {
+    background-color: var(--back-color) !important;
+}
+
+.ant-picker-content th,
+.ant-picker-content td {
+    color: var(--font-color) !important;
+}
