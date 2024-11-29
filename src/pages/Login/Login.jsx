@@ -89,10 +89,20 @@ const Login = ({ onLogin }) => {
     setIsModalOpen(false);
   };
 
+  const handleLogoClick = () => {
+    navigate('/landing');
+  };
+
   return (
     <div className={`${styles.wrapper} ${styles.loginPage}`}>
       <ToastConfig />
-      <img src={Slogan} alt="Logo" className={styles.logo} />
+      <img 
+        src={Slogan} 
+        alt="Logo" 
+        className={styles.logo} 
+        onClick={handleLogoClick}
+        style={{ cursor: 'pointer' }}
+      />
       <h1 className={styles.h1}>Login</h1>
       <h3 className={styles.controle}>Controle Financeiro</h3>
       <form onSubmit={handleSubmit}>

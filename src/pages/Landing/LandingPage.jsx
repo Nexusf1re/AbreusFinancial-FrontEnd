@@ -1,10 +1,19 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import styles from './LandingPage.module.css';
-import { FaChartLine, FaLock, FaMobileAlt } from 'react-icons/fa';
+import { FaChartLine, FaLock, FaMobileAlt, FaWhatsapp } from 'react-icons/fa';
 
 const LandingPage = () => {
   return (
     <div className={styles.container}>
+      <Helmet>
+        <title>Abreu's Financial | Gestão Financeira Profissional</title>
+        <meta name="description" content="Sistema de gestão financeira profissional. Controle suas finanças pessoais, investimentos e despesas com nossa plataforma intuitiva." />
+        <meta name="keywords" content="gestão financeira, controle financeiro, finanças pessoais, investimentos, planejamento financeiro, educação financeira, controle de gastos, orçamento pessoal" />
+        <meta property="og:title" content="Abreu's Financial - Sua Solução em Gestão Financeira" />
+        <meta property="og:description" content="Transforme sua vida financeira com nossa plataforma completa de gestão financeira." />
+      </Helmet>
+
       <nav className={styles.navbar}>
         <div className={styles.logo}>Abreu's Financial</div>
         <div className={styles.navLinks}>
@@ -17,11 +26,21 @@ const LandingPage = () => {
 
       <section className={styles.hero}>
         <div className={styles.heroContent}>
-          <h1>Excelência em Gestão Financeira</h1>
-          <p>Soluções profissionais para o controle completo da sua vida financeira</p>
+          <h1>Transforme Sua Vida Financeira</h1>
+          <p>A plataforma mais completa para gestão financeira pessoal e profissional</p>
           <div className={styles.ctaButtons}>
-            <a href="/sign-up" className={styles.primaryButton}>Iniciar Agora</a>
-            {/*<a href="#demo" className={styles.secondaryButton}>Conhecer Mais</a>*/}
+            <a href="/sign-up" className={styles.primaryButton}>
+              Comece Grátis
+              <span className={styles.buttonSubtext}>2 dias de teste</span>
+            </a>
+            <a 
+              href="https://wa.me/62993773456" 
+              className={styles.whatsappButton}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaWhatsapp /> Fale Conosco
+            </a>
           </div>
         </div>
       </section>

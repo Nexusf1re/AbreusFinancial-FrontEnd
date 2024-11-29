@@ -65,6 +65,7 @@ const SignUp = () => {
         <div className={styles.inputBox}>
           <FaUser className={styles.icon} />
           <input
+            className={styles.input}
             type="text"
             value={username}
             onChange={handleUsernameChange}
@@ -77,6 +78,7 @@ const SignUp = () => {
         <div className={styles.inputBox}>
           <FaRegEnvelope className={styles.icon} />
           <input
+            className={styles.input}
             type="email"
             value={email}
             onChange={handleEmailChange}
@@ -89,6 +91,7 @@ const SignUp = () => {
         <div className={styles.inputBox}>
           <FaLock className={styles.icon} />
           <input
+            className={styles.input}
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -102,6 +105,7 @@ const SignUp = () => {
         <div className={styles.inputBox}>
           <FaLock className={styles.icon} />
           <input
+            className={styles.input}
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}

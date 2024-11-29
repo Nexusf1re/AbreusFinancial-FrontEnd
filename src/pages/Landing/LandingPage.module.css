@@ -15,6 +15,7 @@
   font-family: 'Inter', sans-serif;
   color: var(--text-primary);
   width: 100%;
+  margin: 0;
 }
 
 .navbar {
@@ -28,7 +29,6 @@
   width: 100%;
   top: 0;
   z-index: 1000;
-  max-width: 90vw;
 }
 
 .logo {
@@ -70,9 +70,29 @@
 
 .hero {
   background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-  padding: 8rem 5% 6rem;
+  padding: 10rem 5% 8rem;
   color: var(--white);
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.1;
+  z-index: 1;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .heroContent h1 {
@@ -352,5 +372,30 @@
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
+}
+
+.whatsappButton {
+  padding: 1rem 2rem;
+  background: #25D366;
+  color: var(--white);
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.whatsappButton:hover {
+  background: #128C7E;
+  transform: translateY(-2px);
+}
+
+.buttonSubtext {
+  display: block;
+  font-size: 0.8rem;
+  opacity: 0.8;
+  margin-top: 0.2rem;
 }
   

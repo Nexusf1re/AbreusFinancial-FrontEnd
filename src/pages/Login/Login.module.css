@@ -27,9 +27,9 @@
 .wrapper {
   max-width: 420px; 
   backdrop-filter: blur(4px);
-  background-color: var(--authPages);
+  background-color: #ffffff !important;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  color: #000;
+  color: #000000 !important;
   border-radius: 12px;
   padding: 30px 25px 0px;
   margin-top: 10vh !important;
@@ -41,11 +41,11 @@
 .wrapper .h1 {
   font-size: 36px;
   text-align: center;  
-  color: rgb(0, 0, 0);
+  color: #000000 !important;
 }
 
 .controle {
-  color: #2c2c2c;
+  color: #2c2c2c !important;
   text-align: center;
   font-size: 20px;
 }
@@ -67,15 +67,15 @@
   border: 1px solid rgba(95, 95, 95, 0.2);
   border-radius: 18px;
   font-size: 18px;
-  color: #000;
+  color: #000000 !important;
   padding: 20px 20px 20px;
   padding-right: 16%;
-  background-color: rgba(242, 242, 242, 0.3);
+  background-color: rgba(242, 242, 242, 0.3) !important;
   box-shadow: 4px 5px 10px rgba(0, 0, 0, 0.5), 1px 1px 10px rgba(255, 255, 255, 0.3);
 }
 
 .inputBox .input::placeholder {
-  color: #000;
+  color: #000000 !important;
   text-transform: uppercase;  
 }
 
@@ -89,7 +89,7 @@
   position: absolute;
   top: 26%;
   right: 10%;
-  color: rgb(0, 0, 0);
+  color: #000000 !important;
 }
 
 .capsLockWarning {
@@ -106,7 +106,7 @@
   position: absolute;
   top: 26%;
   right: 17%;
-  color: rgb(0, 0, 0);
+  color: #000000 !important;
   width: 25px;
 }
 
@@ -116,13 +116,13 @@
   justify-content: center;
   width: 60%;
   height: 45px;
-  background-image: linear-gradient(to top, #d8dbd8 0%, #fff 80%, #FDFDFD 100%);
+  background-image: linear-gradient(to top, #d8dbd8 0%, #fff 80%, #FDFDFD 100%) !important;
   border-radius: 18px;
-  border: 1px solid #8F9092;
+  border: 1px solid #8F9092 !important;
   transition: all 0.4s ease;
   font-size: 15px;
   font-weight: bold;
-  color: #000;
+  color: #000000 !important;
   text-shadow: 0 1px #fff;
   margin: 0 auto;
   margin-bottom: 25px;
@@ -139,7 +139,7 @@
 .cadastrar .a {
   padding-top: 10px;
   text-decoration: none;
-  color: #707070;
+  color: #707070 !important;
   font-weight: bold;
   text-align: center;
   justify-content: center;
@@ -148,7 +148,7 @@
 }
 
 .cadastrar, .p {
-  color: #000;
+  color: #000000 !important;
   text-align: center;
   justify-content: center;
   display: flex;
