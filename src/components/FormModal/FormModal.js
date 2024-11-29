@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Modal, Form, Input, Select, Button, DatePicker, Typography, Spin } from 'antd';
 import useForm from '../../hooks/useForm';
 import useCategories from '../../hooks/useListCategories';
@@ -13,7 +13,6 @@ const { Option } = Select;
 const FormModal = ({ visible, onCancel, onSuccess }) => {
   const { formData, handleChange, handleSubmit, loading } = useForm();
   const { categories, error } = useCategories();
-  const [inputValue, setInputValue] = useState('');
 
   if (loading) {
     return <Spin size="large" style={{ display: 'block', margin: '20px auto' }} />;
@@ -32,44 +31,6 @@ const FormModal = ({ visible, onCancel, onSuccess }) => {
     ...categories.filter(category => category.Type === formData.type)
   ];
 
-  const formatCurrency = (value) => {
-    if (!value) return '0,00';
-
-    // Remove zeros à esquerda
-    const numericValue = value.replace(/^0+/, '') || '0';
-
-    // Formata com separadores de milhares e vírgula para centavos
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-      minimumFractionDigits: 2,
-    })
-      .format(parseFloat(numericValue) / 100)
-      .replace('R$', ''); // Remove o símbolo 'R$' para manter o campo apenas numérico
-  };
-
-  const handleValueChange = (e) => {
-    let value = e.target.value;
-  
-    // Remove tudo que não for número
-    const cleanValue = value.replace(/\D/g, ''); // Apenas dígitos
-  
-    // Formata o valor como moeda
-    const formattedValue = new Intl.NumberFormat('pt-BR', {
-      style: 'decimal',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    }).format(parseFloat(cleanValue) / 100);
-  
-    // Atualiza o estado do input com o valor formatado
-    setInputValue(formattedValue);
-  
-    // Atualiza o valor bruto (não formatado) no estado do formulário
-    const numericValue = cleanValue ? (parseFloat(cleanValue) / 100).toFixed(2) : '0.00';
-    handleChange('value', numericValue);
-  };
-  
-
   const onFormSubmit = async () => {
     try {
       await handleSubmit();
@@ -81,6 +42,7 @@ const FormModal = ({ visible, onCancel, onSuccess }) => {
       console.error("Erro ao enviar o formulário:", error);
     }
   };
+  
 
   return (
     <Modal
@@ -101,14 +63,11 @@ const FormModal = ({ visible, onCancel, onSuccess }) => {
             name="value"
             rules={[{ required: true, message: 'Por favor insira um valor!' }]}>
             <Input
-              value={inputValue}
-              onChange={handleValueChange}
-              placeholder="0,00"
-              inputMode="decimal"
-              pattern="[0-9]*" // Permite apenas números
+              type="number"
+              value={formData.value}
+              onChange={(e) => handleChange('value', e.target.value)}
               style={{ fontSize: '20px', padding: '0 12px', height: '40px' }}
             />
-
           </Form.Item>
 
           <Form.Item
