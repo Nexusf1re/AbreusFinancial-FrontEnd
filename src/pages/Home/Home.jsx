@@ -34,7 +34,7 @@ const Home = () => {
   };
 
   return (
-    <div className={`${styles.body} ${styles.homePage}`}>
+    <div className={`${styles.container}`}>
       <TopBar />
       <ToastConfig />
       <div>

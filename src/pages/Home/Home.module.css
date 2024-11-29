@@ -13,7 +13,7 @@
         margin-top: 40px !important;
     }
 
-    .body {
+    .container {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -22,7 +22,7 @@
         font-family: "Poppins", sans-serif;
         min-height: 100vh;
         overflow-y: auto;
-        margin-bottom: 50px;
+        margin: 0px 0px 50px 0px; /* top, right, bottom, left */
     }
 
     .card {
@@ -102,7 +102,7 @@
 @media screen and (max-width: 574px) {
     
 
-.body {
+.container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
