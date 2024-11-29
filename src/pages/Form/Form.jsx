@@ -132,7 +132,7 @@ const FormComponent = () => {
               inputMode="numeric"
               pattern="[0-9]*"
               onKeyPress={(e) => {
-                if (!/[0-9]/.test(e.key)) {
+                if (!/[0-9,.]/.test(e.key)) {
                   e.preventDefault();
                 }
               }}

@@ -120,9 +120,9 @@ const FormModal = ({ visible, onCancel, onSuccess }) => {
               placeholder="0,00"
               inputMode="numeric"
               pattern="[0-9]*"
-              onKeyPress={(e) => {
-                // Previne qualquer tecla que não seja número
-                if (!/[0-9]/.test(e.key)) {
+              onKeyDown={(e) => {
+                // Permite números, vírgula e ponto
+                  if (!/[0-9,.]/.test(e.key)) {
                   e.preventDefault();
                 }
               }}
@@ -135,6 +135,7 @@ const FormModal = ({ visible, onCancel, onSuccess }) => {
             name="description"
             rules={[{ required: false, message: 'Por favor insira uma descrição!' }]}>
             <Input
+              placeholder="Descrição"
               value={formData.description}
               onChange={(e) => handleChange('description', e.target.value)}
               style={{ fontSize: '20px', padding: '0 12px', height: '40px' }}
