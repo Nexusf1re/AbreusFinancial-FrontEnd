@@ -52,7 +52,7 @@
 
 .pageTitle {
   margin-bottom: 32px !important;
-  color: var(--font-color);
+  color: var(--font-color) !important;
   text-align: center;
 }
 
@@ -138,7 +138,7 @@
 }
 
 .sectionTitle {
-  color: var(--font-color);
+  color: var(--font-color) !important;
   margin-bottom: 24px !important;
   text-align: center;
 }
@@ -171,7 +171,7 @@
 }
 
 .listTitle {
-  color: var(--font-color);
+  color: var(--font-color) !important;
   margin-bottom: 16px !important;
   text-align: center;
 }
@@ -193,12 +193,12 @@
 
 .categoryName {
   font-weight: 500;
-  color: var(--font-color);
+  color: var(--font-color) !important;
 }
 
 .defaultBadge {
   background: var(--back-color);
-  color: var(--font-color);
+  color: var(--font-color) !important;
   padding: 2px 8px;
   border-radius: 4px;
   font-size: 12px;
