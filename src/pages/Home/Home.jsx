@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { DatePicker } from 'antd';
 import dayjs from 'dayjs';
+import locale from 'antd/es/date-picker/locale/pt_BR';
+import 'dayjs/locale/pt-br';
 import styles from "./Home.module.css";
 import TopBar from '../../components/TopBar/TopBar';
 import BottomBar from '../../components/BottomBar/BottomBar';
@@ -44,6 +46,7 @@ const Home = () => {
           picker="month"
           onChange={handleDateChange}
           defaultValue={dayjs()}
+          locale={locale}
           format="MMMM YYYY"
           style={{ width: '100%', textAlign: 'center', justifyContent: 'center' }}
           inputReadOnly

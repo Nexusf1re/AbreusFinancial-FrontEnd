@@ -31,6 +31,19 @@ const Transactions = () => {
     const [paymentMethodFilter, setPaymentMethodFilter] = useState('');
     const [categoryFilter, setCategoryFilter] = useState('');
 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    useEffect(() => {
+        if (isModalOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+
+        return () => {
+            document.body.style.overflow = 'auto';
+        };
+    }, [isModalOpen]);
 
     useEffect(() => {
         fetchData();
@@ -168,12 +181,19 @@ const Transactions = () => {
     };
 
     const [visible, setVisible] = useState(false);
-    const showModal = () => setVisible(true);
-    const handleCancel = () => setVisible(false);
+    const showModal = () => {
+        setVisible(true);
+        setIsModalOpen(true);
+    };
+    const handleCancel = () => {
+        setVisible(false);
+        setIsModalOpen(false);
+    };
 
     const handleSuccess = () => {
-        setVisible(false);  
-        fetchData();         
+        setVisible(false);
+        setIsModalOpen(false);
+        fetchData();
     };
     
     const { Option } = Select;
@@ -211,7 +231,11 @@ const Transactions = () => {
 
             <div>
                 <FormBtn onClick={showModal} />
-                <FormModal visible={visible} onCancel={handleCancel} onSuccess={handleSuccess} />
+                <FormModal 
+                    visible={visible} 
+                    onCancel={handleCancel} 
+                    onSuccess={handleSuccess} 
+                />
             </div>
 
             <h3 className={styles.title}>Histórico de lançamentos</h3>

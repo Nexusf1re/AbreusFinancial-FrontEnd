@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Modal, Form, Input, Select, Button, DatePicker, Typography, Spin } from 'antd';
 import useForm from '../../hooks/useForm';
 import useCategories from '../../hooks/useListCategories';
 import styles from './FormModal.module.css';
 import { defaultCategories } from '../../components/DefaultCategories';
+import locale from 'antd/es/date-picker/locale/pt_BR';
+import 'dayjs/locale/pt-br';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -11,6 +13,7 @@ const { Option } = Select;
 const FormModal = ({ visible, onCancel, onSuccess }) => {
   const { formData, handleChange, handleSubmit, loading } = useForm();
   const { categories, error } = useCategories();
+  const [inputValue, setInputValue] = useState('');
 
   if (loading) {
     return <Spin size="large" style={{ display: 'block', margin: '20px auto' }} />;
@@ -41,6 +44,47 @@ const FormModal = ({ visible, onCancel, onSuccess }) => {
     }
   };
   
+  // Função atualizada para formatar o valor em tempo real
+  const formatCurrency = (value) => {
+    if (!value) return '';
+    
+    // Remove tudo que não for número
+    let numericValue = value.replace(/\D/g, '');
+    
+    // Adiciona zeros à esquerda se necessário
+    numericValue = numericValue.padStart(3, '0');
+    
+    // Divide o valor em reais e centavos
+    const reais = numericValue.slice(0, -2);
+    const centavos = numericValue.slice(-2);
+    
+    // Formata os reais com pontos para milhares
+    let formattedReais = '';
+    if (reais.length > 3) {
+      formattedReais = reais.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+    } else {
+      formattedReais = reais;
+    }
+    
+    // Remove zero à esquerda desnecessário
+    formattedReais = formattedReais.replace(/^0+/, '') || '0';
+    
+    // Retorna o valor formatado
+    return `${formattedReais},${centavos}`;
+  };
+
+  // Handler atualizado para o campo de valor
+  const handleValueChange = (e) => {
+    const rawValue = e.target.value.replace(/\D/g, '');
+    const formattedValue = formatCurrency(rawValue);
+    
+    // Atualiza o estado do input com o valor formatado
+    setInputValue(formattedValue);
+    
+    // Converte para o formato numérico antes de salvar no estado do formulário
+    const numericValue = (parseFloat(rawValue) / 100).toString();
+    handleChange('value', numericValue);
+  };
 
   return (
     <Modal
@@ -61,10 +105,10 @@ const FormModal = ({ visible, onCancel, onSuccess }) => {
             name="value"
             rules={[{ required: true, message: 'Por favor insira um valor!' }]}>
             <Input
-              type="number"
-              value={formData.value}
-              onChange={(e) => handleChange('value', e.target.value)}
+              value={inputValue}
+              onChange={handleValueChange}
               style={{ fontSize: '20px', padding: '0 12px', height: '40px' }}
+              placeholder="0,00"
             />
           </Form.Item>
 
@@ -137,12 +181,13 @@ const FormModal = ({ visible, onCancel, onSuccess }) => {
             <DatePicker
               className={styles.formDate}
               style={{ height: '40px' }}
-              format="DD-MM-YYYY"
+              format="DD/MM/YYYY"
               value={formData.date}
               onChange={(date) => handleChange('date', date)}
               disabled={false}
               allowClear={false}
               inputReadOnly
+              locale={locale}
             />
           </Form.Item>
         </div>
