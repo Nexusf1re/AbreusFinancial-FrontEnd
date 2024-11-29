@@ -1,32 +1,356 @@
+:root {
+  --primary-color: #1a237e; /* Azul marinho profundo */
+  --primary-light: #534bae;
+  --primary-dark: #000051;
+  --accent-color: #ffd700; /* Dourado */
+  --text-primary: #333333;
+  --text-secondary: #666666;
+  --background-light: #f5f6fa;
+  --white: #ffffff;
+  --gray-light: #e0e0e0;
+  --gray-dark: #424242;
+}
+
 .container {
-    text-align: center;
-    padding: 50px 20px;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-primary);
+  width: 100%;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 5%;
+  background: var(--white);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  max-width: 90vw;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-right: 85px;
+}
+
+.navLinks a {
+  text-decoration: none;
+  color: var(--text-primary);
+  font-weight: 500;
+  transition: color 0.3s;
+  white-space: nowrap;
+}
+
+.navLinks a:hover {
+  color: var(--primary-light);
+}
+
+.loginButton {
+  padding: 0.5rem 1.5rem;
+  background: var(--primary-color);
+  color: var(--white) !important;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.loginButton:hover {
+  background: var(--primary-light);
+}
+
+.hero {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  padding: 8rem 5% 6rem;
+  color: var(--white);
+  text-align: center;
+}
+
+.heroContent h1 {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+.heroContent p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.ctaButtons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.primaryButton {
+  padding: 1rem 2rem;
+  background: var(--accent-color);
+  color: var(--primary-dark);
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.primaryButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.secondaryButton {
+  padding: 1rem 2rem;
+  border: 2px solid var(--white);
+  color: var(--white);
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.secondaryButton:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.features {
+  padding: 5rem 5%;
+  text-align: center;
+  background: var(--background-light);
+}
+
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.featureCard {
+  padding: 2rem;
+  background: var(--white);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+  margin: 2rem;
+}
+
+.featureCard:hover {
+  transform: translateY(-5px);
+}
+
+.icon {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.statistics {
+  background: var(--white);
+  padding: 4rem 5%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  text-align: center;
+}
+
+.statItem h3 {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.pricing {
+  padding: 5rem 5%;
+  text-align: center;
+  background: var(--background-light);
+}
+
+.pricingCard {
+  max-width: 350px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: var(--white);
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  border: 1px solid var(--gray-light);
+}
+
+.price {
+  font-size: 3rem;
+  color: var(--primary-color);
+  margin: 1.5rem 0;
+}
+
+.currency {
+  font-size: 1.5rem;
+  vertical-align: super;
+  color: var(--primary-color);
+}
+
+.period {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.features {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0;
+  background: var(--white);
+}
+
+.features li {
+  margin: 0.8rem 0;
+  color: var(--text-secondary);
+}
+
+.features li:before {
+  content: "✓";
+  color: var(--primary-color);
+  margin-right: 8px;
+}
+
+.footer {
+  background: var(--primary-dark);
+  color: var(--white);
+  padding: 3rem 5% 1rem;
+}
+
+.footerContent {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footerSection h4 {
+  color: var(--accent-color);
+  margin-bottom: 1rem;
+}
+
+.copyright {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem 3%;
   }
   
-  .hero {
-    background-color: #f0f0f0;
-    padding: 100px 20px;
+  .navLinks {
+    margin-right: 1rem;
+    gap: 1rem;
   }
   
-  .ctaButton {
-    background-color: #29b6f6;
-    color: white;
-    padding: 15px 30px;
-    font-size: 18px;
-    text-decoration: none;
-    border-radius: 5px;
+  .logo {
+    font-size: 1.2rem;
   }
   
-  .features {
-    margin-top: 50px;
+  .navLinks a {
+    font-size: 0.9rem;
   }
   
-  .feature {
-    margin-bottom: 30px;
+  .loginButton {
+    padding: 0.4rem 1rem;
   }
   
-  .pricing {
-    background-color: #ececec;
-    padding: 50px 20px;
+  .heroContent h1 {
+    font-size: 2rem;
   }
+  
+  .ctaButtons {
+    flex-direction: column;
+  }
+  
+  .statistics {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .navLinks a:not(.loginButton) {
+    display: none;
+  }
+  
+  .navLinks {
+    margin-right: 0.5rem;
+  }
+}
+
+.credentials {
+  padding: 4rem 2rem;
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+.credentials h2 {
+  color: #2c3e50;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  font-weight: 600;
+}
+
+.credentialGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.credentialCard {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.credentialCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.credentialCard h4 {
+  color: #1a73e8;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.credentialCard p {
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+  .credentials {
+    padding: 3rem 1rem;
+  }
+
+  .credentials h2 {
+    font-size: 2rem;
+  }
+
+  .credentialGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
   
