@@ -20,6 +20,7 @@
   }
 
   .greeting{
+    display: none;
     font-size: 19px;
     position: fixed;
     left: 220px !important;
