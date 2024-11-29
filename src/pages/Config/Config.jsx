@@ -57,108 +57,115 @@ const Config = () => {
     <div className={styles.container}>
       <TopBar />
       <ToastConfig />
-      <div>
-        <FormBtn onClick={showModal} />
-        <FormModal visible={visible} onCancel={handleCancel} />
-      </div>
-
+      
       <div className={styles.content}>
-        <Title level={2}>Configurações</Title>
+        <Title level={2} className={styles.pageTitle}>Configurações</Title>
+        
         {loading ? (
-          <Spin tip="Carregando..." />
+          <div className={styles.loadingContainer}>
+            <Spin tip="Carregando..." size="large" />
+          </div>
         ) : (
           <>
-            <AccessPortalButton />
-            
-            <Form form={formCategoria} layout="vertical" onFinish={onFinishCategoria}>
-              <Form.Item className={styles.newLabel} label="Nova Categoria">
-                <Form.Item
-                  name="Category"
-                  noStyle
-                  rules={[{ required: true, message: 'Por favor, insira uma nova categoria!' }]} >
-                  <Input
-                    placeholder="Nome da nova Categoria"
-                    style={{ width: '65%' }}
-                  />
-                </Form.Item>
-                <Form.Item
-                  name="Type"
-                  noStyle
-                  rules={[{ required: true, message: 'Por favor, selecione um tipo!' }]} >
-                  <Select placeholder="Tipo" style={{ width: '30%', marginLeft: '5px' }}>
-                    <Option value="Entrada">Entrada</Option>
-                    <Option value="Saida">Saida</Option>
-                  </Select>
-                </Form.Item>
-                <Form.Item>
-                  <Button type="primary" htmlType="submit" style={{ marginTop: '10px' }}>
-                    Salvar
+            <div className={styles.topSection}>
+              <AccessPortalButton />
+              <FormBtn onClick={showModal} className={styles.formButton} />
+            </div>
+
+            <div className={styles.categorySection}>
+              <Form form={formCategoria} layout="vertical" onFinish={onFinishCategoria}>
+                <Form.Item className={styles.newCategoryForm} label="Nova Categoria">
+                  <div className={styles.formInputs}>
+                    <Form.Item
+                      name="Category"
+                      noStyle
+                      rules={[{ required: true, message: 'Por favor, insira uma nova categoria!' }]}
+                    >
+                      <Input
+                        placeholder="Nome da nova Categoria"
+                        className={styles.categoryInput}
+                      />
+                    </Form.Item>
+                    <Form.Item
+                      name="Type"
+                      noStyle
+                      rules={[{ required: true, message: 'Por favor, selecione um tipo!' }]}
+                    >
+                      <Select placeholder="Tipo" className={styles.typeSelect}>
+                        <Option value="Entrada">Entrada</Option>
+                        <Option value="Saida">Saída</Option>
+                      </Select>
+                    </Form.Item>
+                  </div>
+                  <Button type="primary" htmlType="submit" className={styles.submitButton}>
+                    Adicionar Categoria
                   </Button>
                 </Form.Item>
-              </Form.Item>
-            </Form>
+              </Form>
+            </div>
 
-            <div className={styles.categoriesList}>
-              <Title level={3}>Categorias Cadastradas</Title>
-              {createError && <p style={{ color: 'red' }}>{createError}</p>}
-              {listError && <p style={{ color: 'red' }}>{listError}</p>}
-              {deleteError && <p style={{ color: 'red' }}>{deleteError}</p>}
+            <div className={styles.categoriesContainer}>
+              <Title level={3} className={styles.sectionTitle}>
+                Categorias Cadastradas
+              </Title>
+              
+              <div className={styles.errorMessages}>
+                {createError && <p className={styles.errorText}>{createError}</p>}
+                {listError && <p className={styles.errorText}>{listError}</p>}
+                {deleteError && <p className={styles.errorText}>{deleteError}</p>}
+              </div>
 
-              <Title level={4}>Entradas</Title>
-              <List
-                className={styles.listCategories}
-                bordered
-                dataSource={combinedEntradas}
-                renderItem={(item) => (
-                  <List.Item
-                    actions={
-                      isDefaultCategory(item.Category, 'Entrada')
-                        ? [
-                            <span style={{ color: 'gray', fontSize: '12px' }}>
-                              Padrão
-                            </span>,
-                          ]
-                        : [
-                            <DeleteOutlined
-                              style={{ color: 'red' }}
-                              onClick={() => handleDeleteClick(item.Id)}
-                            />,
-                          ]
-                    }>
-                    {item.Category}
-                  </List.Item>
-                )}
-              />
+              <div className={styles.listsContainer}>
+                <div className={styles.categoryList}>
+                  <Title level={4} className={styles.listTitle}>Entradas</Title>
+                  <List
+                    className={styles.list}
+                    bordered
+                    dataSource={combinedEntradas}
+                    renderItem={(item) => (
+                      <List.Item className={styles.listItem}>
+                        <span className={styles.categoryName}>{item.Category}</span>
+                        {isDefaultCategory(item.Category, 'Entrada') ? (
+                          <span className={styles.defaultBadge}>Padrão</span>
+                        ) : (
+                          <DeleteOutlined
+                            className={styles.deleteIcon}
+                            onClick={() => handleDeleteClick(item.Id)}
+                          />
+                        )}
+                      </List.Item>
+                    )}
+                  />
+                </div>
 
-              <Title level={4}>Saidas</Title>
-              <List
-                className={styles.listCategories}
-                bordered
-                dataSource={combinedSaidas}
-                renderItem={(item) => (
-                  <List.Item
-                    actions={
-                      isDefaultCategory(item.Category, 'Saida')
-                        ? [
-                            <span style={{ color: 'gray', fontSize: '12px' }}>
-                              Padrão
-                            </span>,
-                          ]
-                        : [
-                            <DeleteOutlined
-                              style={{ color: 'red' }}
-                              onClick={() => handleDeleteClick(item.Id)}
-                            />,
-                          ]
-                    }>
-                    {item.Category}
-                  </List.Item>
-                )}
-              />
+                <div className={styles.categoryList}>
+                  <Title level={4} className={styles.listTitle}>Saídas</Title>
+                  <List
+                    className={styles.list}
+                    bordered
+                    dataSource={combinedSaidas}
+                    renderItem={(item) => (
+                      <List.Item className={styles.listItem}>
+                        <span className={styles.categoryName}>{item.Category}</span>
+                        {isDefaultCategory(item.Category, 'Saida') ? (
+                          <span className={styles.defaultBadge}>Padrão</span>
+                        ) : (
+                          <DeleteOutlined
+                            className={styles.deleteIcon}
+                            onClick={() => handleDeleteClick(item.Id)}
+                          />
+                        )}
+                      </List.Item>
+                    )}
+                  />
+                </div>
+              </div>
             </div>
           </>
         )}
       </div>
+      
+      <FormModal visible={visible} onCancel={handleCancel} />
       <BottomBar />
       <Footer />
     </div>
