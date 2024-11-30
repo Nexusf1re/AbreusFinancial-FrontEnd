@@ -117,7 +117,7 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <div className={`${styles.wrapper} ${styles.loginPage}`}>
+    <div className={styles.container}>
       <ToastConfig />
       <div style={{ position: 'absolute', top: '20px', right: '20px', zIndex: '9999' }}>
         <ThemeToggle />

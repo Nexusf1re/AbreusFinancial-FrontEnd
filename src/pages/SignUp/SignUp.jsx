@@ -82,7 +82,7 @@ const SignUp = () => {
   }, []);
 
   return (
-    <div className={`${styles.wrapper} ${styles.signUpPage}`}>
+    <div className={styles.container}>
       <ToastConfig />
       <div style={{ position: 'absolute', top: '20px', right: '20px', zIndex: '9999' }}>
         <ThemeToggle />
@@ -163,7 +163,8 @@ const SignUp = () => {
       </form>
 
       <div className={styles.cadastrar}>
-        <Link to="/"><p>Já tem uma conta?</p> Faça login</Link>
+        <p className={styles.text}>Já tem uma conta?</p>
+        <Link className={styles.link} to="/">Faça login</Link>
       </div>
     </div>
   );
