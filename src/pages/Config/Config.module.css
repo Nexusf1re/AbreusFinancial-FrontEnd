@@ -80,13 +80,13 @@
   background: var(--back-color-secondary);
   padding: 15px;
   border-radius: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
 }
 
 .newCategoryForm {
   padding: 0px;
   border-radius: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
 }
 
 .newCategoryForm label {
@@ -144,7 +144,7 @@
 
 .sectionTitle {
   color: var(--font-color) !important;
-  margin-bottom: 24px !important;
+  margin-bottom: 0px !important;
   text-align: center;
 }
 
@@ -178,6 +178,7 @@
 .list {
   background: var(--back-color-secondary);
   border-radius: 4px;
+  padding: 2px;
 }
 
 .listItem {
@@ -187,7 +188,7 @@
   display: flex !important;
   justify-content: space-between !important;
   align-items: center !important;
-  padding: 12px 16px !important;
+  padding: 8px 20px !important;
   margin: 4px;
 }
 
