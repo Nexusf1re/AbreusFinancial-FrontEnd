@@ -26,6 +26,42 @@ export const useTransactions = () => {
 
     const { categories } = useCategories();
 
+    const allCategories = useMemo(() => {
+        
+        if (!categories) return defaultCategoriesFilter;
+        
+        try {
+            const customCategories = categories.map(cat => ({
+                Id: cat.Id,
+                Category: cat.Category,
+                Type: cat.Type
+            }));
+
+            const combinedCategories = [
+                ...defaultCategoriesFilter,
+                ...customCategories
+            ];
+
+            return combinedCategories;
+        } catch (error) {
+            console.error('Erro ao processar categorias:', error);
+            return defaultCategoriesFilter;
+        }
+    }, [categories]);
+
+    const filteredCategories = useMemo(() => {
+        if (!allCategories) return [];
+        
+        if (editingTransaction) {
+            const filtered = allCategories.filter(category => 
+                category.Type?.toLowerCase() === editingTransaction.Type?.toLowerCase()
+            );
+            return filtered;
+        }
+        
+        return allCategories;
+    }, [allCategories, editingTransaction]);
+
     useEffect(() => {
         fetchData();
     }, []);
@@ -157,6 +193,18 @@ export const useTransactions = () => {
         setEditedCategory(value);
     }, []);
 
+    const handleEditedDescription = useCallback((e) => {
+        setEditedDescription(e.target.value);
+    }, []);
+
+    const handleEditedValue = useCallback((e) => {
+        setEditedValue(e.target.value);
+    }, []);
+
+    const handleEditedDate = useCallback((date) => {
+        setEditedDate(date);
+    }, []);
+
     useEffect(() => {
         const shouldDisableScroll = editingTransaction || showDeleteConfirm || isModalOpen || isSelectOpen;
         
@@ -199,6 +247,11 @@ export const useTransactions = () => {
         setTransactionToDelete,
         setEditingTransaction,
         fetchData,
-        handleEditedCategory
+        handleEditedCategory,
+        handleEditedDescription,
+        handleEditedValue,
+        handleEditedDate,
+        allCategories,
+        filteredCategories
     };
 };

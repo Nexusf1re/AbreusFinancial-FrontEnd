@@ -40,7 +40,13 @@ const Transactions = () => {
         setEditedDescription,
         setEditedValue,
         setEditedCategory,
-        setEditedDate
+        setEditedDate,
+        allCategories,
+        filteredCategories,
+        handleEditedCategory,
+        handleEditedDescription,
+        handleEditedValue,
+        handleEditedDate
     } = useTransactions();
 
     return (
@@ -92,7 +98,14 @@ const Transactions = () => {
                         className={`${styles.filterSelect} ${styles.tipoCategoria}`}
                         allowClear
                     >
-                        {/* As categorias serão fornecidas pelo hook */}
+                        {filteredCategories?.map((category, index) => (
+                            <Option 
+                                key={category.Id || `${category.Category}-${index}`}
+                                value={category.Category || ''}
+                            >
+                                {category.Category || ''}
+                            </Option>
+                        ))}
                     </Select>
                 </div>
 
@@ -189,34 +202,42 @@ const Transactions = () => {
                     open={!!editingTransaction}
                     onOk={confirmEdit}
                     onCancel={() => setEditingTransaction(null)}
+                    maskClosable={false}
                 >
                     <div className={styles.modalEditContent}>
                         <Input
                             className={styles.InputModalEdit}
                             placeholder="Descrição"
                             value={editedDescription}
-                            onChange={(e) => setEditedDescription(e.target.value)}
+                            onChange={handleEditedDescription}
                         />
                         <Input
                             className={styles.InputModalEdit}
                             placeholder="Valor"
                             type="number"
                             value={editedValue}
-                            onChange={(e) => setEditedValue(e.target.value)}
+                            onChange={handleEditedValue}
                         />
                         <DatePicker
                             className={styles.InputModalEdit}
                             value={editedDate}
-                            onChange={(date) => setEditedDate(date)}
+                            onChange={handleEditedDate}
                             format="DD/MM/YYYY"
                         />
                         <Select
                             className={styles.InputModalEdit}
                             placeholder="Selecione a categoria"
-                            value={editedCategory}
-                            onChange={(value) => setEditedCategory(value)}
+                            value={editedCategory || undefined}
+                            onChange={handleEditedCategory}
                         >
-                            {/* As categorias filtradas serão fornecidas pelo hook */}
+                            {filteredCategories?.map((category, index) => (
+                                <Option 
+                                    key={category.Id || `${category.Category}-${index}`}
+                                    value={category.Category || ''}
+                                >
+                                    {category.Category || ''}
+                                </Option>
+                            ))}
                         </Select>
                         <Input
                             className={styles.InputModalEdit}
