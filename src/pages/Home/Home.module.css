@@ -54,6 +54,7 @@
 
     .card {
         background-color: var(--back-color);
+        color: var(--font-color) !important;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); 
         overflow: hidden; 
         transition: transform 0.3s, box-shadow 0.3s;
@@ -119,7 +120,7 @@
   
     .graph {
         background-color: var(--back-color);
-        color: black !important;
+        color: var(--font-color) !important;
         width: 100%;
         border-radius: 10px;
         flex: 1;
@@ -276,7 +277,7 @@
   
   .graph {
     background-color: var(--back-color);
-    color: black !important;
+    color: var(--font-color) !important;
     width: 100%;
     border-radius: 10px;
     flex: 1; 

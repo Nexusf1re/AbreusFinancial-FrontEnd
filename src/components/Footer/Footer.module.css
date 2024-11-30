@@ -3,7 +3,7 @@
     text-align: center;
     padding: 0.5rem;
     font-size: 0.875rem;
-    color: #777;
+    color: var(--font-color) !important;
     margin-top: auto;
     margin-bottom: 20px;
   }
@@ -14,7 +14,7 @@
     text-align: center;
     padding: 1rem;
     font-size: 1.25rem;
-    color: #777;
+    color: var(--font-color) !important;
     margin-top: auto;
     margin-bottom: 20px;
   }

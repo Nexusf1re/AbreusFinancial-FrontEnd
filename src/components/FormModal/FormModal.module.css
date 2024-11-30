@@ -11,6 +11,10 @@
   .formDate {
     width: 100%;
   }
+
+  .container{
+    overflow: hidden !important;
+  }
   
 
 @media (min-width: 575px) {
@@ -18,6 +22,7 @@
     .container {
         max-width: 1500px;
         margin: 0 auto;
+        overflow: hidden;
     }
 
     .form{
@@ -27,13 +32,15 @@
     .modal{
         margin-top: -80px !important;
         padding: 0 !important;
+        border-radius: 10px;
     }
     
 
     .title {
         font-size: 2rem;
         margin-bottom: 20px;
-        margin-top: 0;
+        margin-top: -30px !important;
+        color: var(--font-color) !important;
     }
 
     .formGroup {
@@ -83,10 +90,12 @@
 .modal{
     margin-top: -70px !important;
     padding: 0 !important;
+    border-radius: 10px;
 }
 
 .title{
-    margin-top: -25px !important;
+    color: var(--font-color) !important;
+    margin-top: -45px !important;
     margin-bottom: 10px !important;
 }
 
