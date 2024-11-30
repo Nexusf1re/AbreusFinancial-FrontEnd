@@ -3,6 +3,26 @@ import { Helmet } from 'react-helmet';
 import styles from './LandingPage.module.css';
 import { FaChartLine, FaLock, FaMobileAlt, FaWhatsapp } from 'react-icons/fa';
 
+const handleScroll = (event) => {
+  event.preventDefault(); // Impede o comportamento padrão do link
+  const targetId = event.currentTarget.getAttribute('href').substring(1);
+  const target = document.getElementById(targetId);
+  const offset = parseInt(event.currentTarget.getAttribute('data-offset'), 10) || 100;
+
+  if (target) {
+    const bodyRect = document.body.getBoundingClientRect().top;
+    const elementRect = target.getBoundingClientRect().top;
+    const elementPosition = elementRect - bodyRect;
+    const offsetPosition = elementPosition - offset;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "smooth",
+    });
+  }
+};
+
+
 const LandingPage = () => {
   return (
     <div className={styles.container}>
@@ -17,9 +37,8 @@ const LandingPage = () => {
       <nav className={styles.navbar}>
         <div className={styles.logo}>Abreu's Financial</div>
         <div className={styles.navLinks}>
-          <a href="#features">Funcionalidades</a>
-          <a href="#benefits">Benefícios</a>
-          <a href="#pricing">Preços</a>
+        <a href="#features" data-offset="180" onClick={handleScroll}>Funcionalidades</a>
+        <a href="#pricing" data-offset="50" onClick={handleScroll}>Preços</a>
           <a href="/" className={styles.loginButton}>Login</a>
         </div>
       </nav>
@@ -45,8 +64,8 @@ const LandingPage = () => {
         </div>
       </section>
 
-      <section id="features" className={styles.features}>
-        <h2 className={styles.featuresTitle}>Funcionalidades Principais</h2>
+      <section className={styles.features}>
+        <h2 id="features" className={styles.featuresTitle}>Funcionalidades Principais</h2>
         <div className={styles.featureGrid}>
           <div className={styles.featureCard}>
             <FaChartLine className={styles.icon} />
