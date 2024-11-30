@@ -11,6 +11,67 @@
   --gray-dark: #424242;
 }
 
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem 1%;
+  }
+  
+  .navLinks {
+    margin-right: 1rem;
+    gap: 1rem;
+  }
+  
+  .logo {
+    font-size: 1.2rem;
+  }
+  
+  .navLinks a {
+    font-size: 0.9rem;
+  }
+  
+  .loginButton {
+    padding: 0.4rem 1rem;
+  }
+  
+  .heroContent h1 {
+    font-size: 2rem;
+  }
+  
+  .ctaButtons {
+    flex-direction: column;
+  }
+  
+  .statistics {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 565px) {
+  .navLinks a:not(.loginButton) {
+    display: none;
+  }
+  
+  .navLinks {
+    margin-right: 0.5rem;
+  }
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+  .credentials {
+    padding: 3rem 1rem;
+  }
+
+  .credentials h2 {
+    font-size: 2rem;
+  }
+
+  .credentialGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
 .container {
   font-family: 'Inter', sans-serif;
   color: var(--text-primary);
@@ -222,6 +283,10 @@
   color: var(--text-secondary);
 }
 
+.featuresTitle {
+  padding-top: 15px;
+}
+
 .features {
   list-style: none;
   padding: 0;
@@ -266,51 +331,6 @@
   opacity: 0.7;
 }
 
-@media (max-width: 768px) {
-  .navbar {
-    padding: 1rem 3%;
-  }
-  
-  .navLinks {
-    margin-right: 1rem;
-    gap: 1rem;
-  }
-  
-  .logo {
-    font-size: 1.2rem;
-  }
-  
-  .navLinks a {
-    font-size: 0.9rem;
-  }
-  
-  .loginButton {
-    padding: 0.4rem 1rem;
-  }
-  
-  .heroContent h1 {
-    font-size: 2rem;
-  }
-  
-  .ctaButtons {
-    flex-direction: column;
-  }
-  
-  .statistics {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 480px) {
-  .navLinks a:not(.loginButton) {
-    display: none;
-  }
-  
-  .navLinks {
-    margin-right: 0.5rem;
-  }
-}
-
 .credentials {
   padding: 4rem 2rem;
   background-color: #f8f9fa;
@@ -320,6 +340,7 @@
 .credentials h2 {
   color: #2c3e50;
   font-size: 2.5rem;
+  margin-top: 2rem;
   margin-bottom: 3rem;
   font-weight: 600;
 }
@@ -356,22 +377,6 @@
   color: #666;
   font-size: 1rem;
   line-height: 1.6;
-}
-
-/* Responsividade para telas menores */
-@media (max-width: 768px) {
-  .credentials {
-    padding: 3rem 1rem;
-  }
-
-  .credentials h2 {
-    font-size: 2rem;
-  }
-
-  .credentialGrid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
 }
 
 .whatsappButton {

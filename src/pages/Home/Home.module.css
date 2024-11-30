@@ -148,7 +148,7 @@
     height: auto;
     min-height: 100vh;
     overflow-y: auto;
-    margin-bottom: 50px;
+    margin: 2px 4px 5px 4px;
 }
 
 .p{

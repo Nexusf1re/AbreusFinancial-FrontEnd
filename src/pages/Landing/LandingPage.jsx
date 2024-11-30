@@ -46,7 +46,7 @@ const LandingPage = () => {
       </section>
 
       <section id="features" className={styles.features}>
-        <h2>Funcionalidades Principais</h2>
+        <h2 className={styles.featuresTitle}>Funcionalidades Principais</h2>
         <div className={styles.featureGrid}>
           <div className={styles.featureCard}>
             <FaChartLine className={styles.icon} />

@@ -1,16 +1,15 @@
 @media screen and (min-width: 575px) {
   .container {
-    margin: 40px 0px 0px 85px !important; /* top, right, bottom, left */
+    margin: 40px 5px 0px 85px !important; /* top, right, bottom, left */
   }
 }
 .container {
-  margin-top: 45px;
   padding: 2px;
   overflow-x: auto;
   font-family: "Poppins", sans-serif;
   box-sizing: border-box;
   padding-bottom: 60px;
-  margin: 38px 0px 80px 0px; /* top, right, bottom, left */
+  margin: 38px 4px 80px 4px; /* top, right, bottom, left */
 }
 
 .title{

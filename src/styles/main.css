@@ -50,6 +50,7 @@
 
 body {
     background-color: var(--mainBackground) !important;
+    margin: 0;
 }
 
 input, textarea, select {
