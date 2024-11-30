@@ -37,11 +37,6 @@ const Transactions = () => {
         setShowDeleteConfirm,
         setTransactionToDelete,
         setEditingTransaction,
-        setEditedDescription,
-        setEditedValue,
-        setEditedCategory,
-        setEditedDate,
-        allCategories,
         filteredCategories,
         handleEditedCategory,
         handleEditedDescription,
@@ -225,7 +220,7 @@ const Transactions = () => {
                             format="DD/MM/YYYY"
                         />
                         <Select
-                            className={styles.InputModalEdit}
+                            className={`${styles.InputModalEdit} ${styles.InputCategoryEdit}`}
                             placeholder="Selecione a categoria"
                             value={editedCategory || undefined}
                             onChange={handleEditedCategory}

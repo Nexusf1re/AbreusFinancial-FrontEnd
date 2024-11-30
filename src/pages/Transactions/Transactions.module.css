@@ -206,6 +206,12 @@
     border-radius: 4px;
 }
 
+.InputCategoryEdit{
+  width:30%;
+  text-align: center;
+  margin-left: 10px;
+}
+
 /* Estilos para os botões do modal */
 .modalButtons {
     display: flex;
