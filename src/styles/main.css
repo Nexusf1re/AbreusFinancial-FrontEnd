@@ -10,6 +10,17 @@
     --label-color: rgba(51, 51, 51, 1);
     --mainBackground: rgb(230, 230, 230);
     --bottomBar-font-color: rgba(64, 64, 64, 0.9);
+    --background-color: rgba(255, 255, 255, 0.95);
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --border-color: rgba(0, 0, 0, 0.2);
+    --highlight-color: rgba(255, 255, 255, 0.8);
+    --input-background: rgba(255, 255, 255, 0.95);
+    --secondary-text-color: rgba(64, 64, 64, 0.9);
+    --error-color: rgb(220, 53, 69);
+    --success-color: rgba(40, 167, 69, 0.2);
+    --focus-color: rgba(0, 123, 255, 0.25);
+    --overlay-color: rgba(0, 0, 0, 0.5);
+    --button-gradient: linear-gradient(to right, rgba(255, 255, 255, 0.9), rgba(245, 245, 245, 0.9));
 }
 
 .dark-theme{
@@ -24,6 +35,17 @@
     --label-color: rgba(255, 255, 255, 0.9);
     --mainBackground: rgba(132, 132, 132, 0.9);
     --bottomBar-font-color: rgba(195, 195, 195, 0.95);
+    --background-color: rgba(29, 29, 29, 0.95);
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --border-color: rgba(255, 255, 255, 0.2);
+    --highlight-color: rgba(255, 255, 255, 0.1);
+    --input-background: rgba(54, 54, 54, 0.95);
+    --secondary-text-color: rgba(195, 195, 195, 0.95);
+    --error-color: rgb(220, 53, 69);
+    --success-color: rgba(40, 167, 69, 0.2);
+    --focus-color: rgba(0, 123, 255, 0.25);
+    --overlay-color: rgba(0, 0, 0, 0.7);
+    --button-gradient: linear-gradient(to right, rgba(54, 54, 54, 0.9), rgba(44, 44, 44, 0.9));
 }
 
 body {

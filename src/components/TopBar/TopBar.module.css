@@ -96,13 +96,12 @@
     color: var(--font-color);
   }
 
-  .themeToggle {
+  .themeToggleContainer {
     display: inline;
     position: fixed;
     right: 65px;
     text-align: center;
     font-size: 19px;
-    margin-top: 4px;
     padding: 0;
     text-decoration: none;
     color: var(--font-color);
@@ -112,7 +111,7 @@
     transition: transform 0.3s ease;
   }
 
-  .themeToggle:hover {
+  .themeToggleContainer:hover {
     transform: scale(1.1);
   }
 

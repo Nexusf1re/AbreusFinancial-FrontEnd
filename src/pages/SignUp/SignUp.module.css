@@ -5,12 +5,10 @@
 }
 
 .capsLockWarning {
-  
     text-align: center;
-    color: red;
+    color: var(--error-color);
     font-weight: 700;
-  }
-  
+}
 
 .signUpPage * {
     margin: 0;
@@ -28,9 +26,9 @@
 .wrapper {
     max-width: 420px; 
     backdrop-filter: blur(4px);
-    background-color: #ffffff !important;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    color: #000000 !important;
+    background-color: var(--background-color) !important;
+    box-shadow: 0 0 10px var(--shadow-color);
+    color: var(--font-color) !important;
     border-radius: 12px;
     padding: 30px 25px 20px 30px;
     margin: auto;
@@ -41,11 +39,11 @@
 .wrapper h1 {
     font-size: 36px;
     text-align: center;  
-    color: #000000 !important;
+    color: var(--font-color) !important;
 }
 
 .controle {
-    color: #2c2c2c !important;
+    color: var(--secondary-text-color) !important;
     text-align: center;
     font-size: 20px;
 }
@@ -64,23 +62,25 @@
     background: transparent;
     border: none;
     outline: none;
-    border: 1px solid rgba(95, 95, 95, 0.2);
+    border: 1px solid var(--border-color);
     border-radius: 18px;
     font-size: 18px;
-    color: #000000 !important;
+    color: var(--font-color) !important;
     padding: 20px 20px 20px;
     padding-right: 16%;
-    background-color: rgba(242, 242, 242, 0.3) !important;
-    box-shadow: 4px 5px 10px rgba(0, 0, 0, 0.5), 1px 1px 10px rgba(255, 255, 255, 0.3);
+    background-color: var(--input-background) !important;
+    box-shadow: 4px 5px 1px var(--shadow-color), 1px 1px 1px var(--highlight-color);
 }
 
 .inputBox input:focus {
     transform: scale(1.01);
-    box-shadow: 6px 6px 8px rgba(0, 0, 0, 0.4), inset 2px 2px 10px rgba(0, 0, 0, 0.446), inset -1px -1px 5px rgba(255, 255, 255, 0.6);
-  }
+    box-shadow: 6px 6px 2px var(--shadow-color), 
+                inset 2px 2px 1px var(--shadow-color), 
+                inset -1px -1px 5px var(--highlight-color);
+}
 
 .inputBox input::placeholder {
-    color: #000000 !important;
+    color: var(--font-color) !important;
     text-transform: uppercase;  
 }
 
@@ -89,7 +89,7 @@
     position: absolute;
     top: 26%;
     right: 15px;
-    color: #000000 !important;
+    color: var(--font-color) !important;
 }
 
 .btn {
@@ -101,30 +101,29 @@
     margin: auto;
     width: 60%;
     height: 45px;
-    background-image: linear-gradient(to top, #D8D9DB 0%, #fff 80%, #FDFDFD 100%) !important;
+    background-image: var(--button-gradient) !important;
     border-radius: 18px;
-    border: 1px solid #8F9092 !important;
+    border: 1px solid var(--border-color) !important;
     transition: all 0.4s ease;
     font-size: 15px;
     font-weight: bold;
-    color: #000000 !important;
-    text-shadow: 0 1px #fff;
+    color: var(--font-color) !important;
+    text-shadow: 0 1px var(--highlight-color);
 }
 
-
 .inputBox .input::placeholder {
-    color: #000000 !important;
+    color: var(--font-color) !important;
     text-transform: uppercase;  
-  }
+}
 
 .btn:hover {
-    box-shadow: 0px 0px 3px 10px #0000001b, inset 8px 8px 3px 3px #cecfd110;
+    box-shadow: 0px 0px 3px 10px var(--shadow-color), inset 8px 8px 3px 3px var(--highlight-color);
 }
 
 .cadastrar a {
     padding-top: 10px;
     text-decoration: none;
-    color: #333333 !important;
+    color: var(--secondary-text-color) !important;
     font-weight: bold;
     display: block;
     text-align: center;

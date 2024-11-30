@@ -4,12 +4,14 @@ import { useNavigate, Link } from 'react-router-dom';
 import { login, isAuthenticated } from '../../services/authService';
 import { checkSubscriptionStatus } from '../../services/subscriptionService';
 import styles from './Login.module.css';
-import Slogan from '../../assets/Slogan.png';
+import SloganDark from '../../assets/Slogan.png';
+import SloganWhite from '../../assets/Slogan White.png';
 import { FaLock, FaRegEnvelope, FaEye, FaEyeSlash } from "react-icons/fa6";
 import ToastConfig from '../../components/ToastConfig/ToastConfig';
 import { toast } from 'react-toastify';
 import Footer from '../../components/Footer/Footer';
 import ResetPassword from '../../components/ForgotPass/ResetPassword';
+import ThemeToggle from '../../components/ThemeToggle/ThemeToggle';
 
 const Login = ({ onLogin }) => {
   const [Email, setEmail] = useState('');
@@ -17,6 +19,10 @@ const Login = ({ onLogin }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [capsLockWarning, setCapsLockWarning] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentSlogan, setCurrentSlogan] = useState(() => {
+    const savedTheme = localStorage.getItem('theme');
+    return savedTheme === 'dark' ? SloganWhite : SloganDark;
+  });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,6 +31,23 @@ const Login = ({ onLogin }) => {
       navigate('/home');
     }
   }, [navigate, onLogin]);
+
+  useEffect(() => {
+    const handleThemeChange = () => {
+      const isDarkTheme = document.body.classList.contains('dark-theme');
+      setCurrentSlogan(isDarkTheme ? SloganWhite : SloganDark);
+    };
+
+    // Observador de mudanças na classe do body
+    const observer = new MutationObserver(handleThemeChange);
+    observer.observe(document.body, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+
+    // Limpeza do observador
+    return () => observer.disconnect();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -96,8 +119,11 @@ const Login = ({ onLogin }) => {
   return (
     <div className={`${styles.wrapper} ${styles.loginPage}`}>
       <ToastConfig />
+      <div style={{ position: 'absolute', top: '20px', right: '20px', zIndex: '9999' }}>
+        <ThemeToggle />
+      </div>
       <img 
-        src={Slogan} 
+        src={currentSlogan} 
         alt="Logo" 
         className={styles.logo} 
         onClick={handleLogoClick}

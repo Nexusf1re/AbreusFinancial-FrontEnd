@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import styles from './SignUp.module.css';
-import Slogan from '../../assets/Slogan.png';
+import SloganDark from '../../assets/Slogan.png';
+import SloganWhite from '../../assets/Slogan White.png';
 import { FaLock, FaRegEnvelope, FaUser } from "react-icons/fa6";
 import useRegister from '../../hooks/useRegister';
 import ToastConfig from '../../components/ToastConfig/ToastConfig';
 import { toast } from 'react-toastify';
-
+import ThemeToggle from '../../components/ThemeToggle/ThemeToggle';
 
 const SignUp = () => {
   const [username, setUsername] = useState('');
@@ -16,6 +17,14 @@ const SignUp = () => {
   const [capsLockWarning, setCapsLockWarning] = useState(false); 
   const { registerUser, loading, success } = useRegister();
   const navigate = useNavigate();
+  const [currentSlogan, setCurrentSlogan] = useState(() => {
+    const savedTheme = localStorage.getItem('theme');
+    return savedTheme === 'dark' ? SloganWhite : SloganDark;
+  });
+
+  const handleLogoClick = () => {
+    navigate('/landing');
+  };
 
   const handleUsernameChange = (e) => {
     const formattedUsername = e.target.value.replace(/\s+/g, '').toUpperCase().trim();
@@ -55,10 +64,36 @@ const SignUp = () => {
     }
   }, [success, navigate]);
 
+  useEffect(() => {
+    const handleThemeChange = () => {
+      const isDarkTheme = document.body.classList.contains('dark-theme');
+      setCurrentSlogan(isDarkTheme ? SloganWhite : SloganDark);
+    };
+
+    // Observador de mudanças na classe do body
+    const observer = new MutationObserver(handleThemeChange);
+    observer.observe(document.body, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+
+    // Limpeza do observador
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className={`${styles.wrapper} ${styles.signUpPage}`}>
       <ToastConfig />
-      <img src={Slogan} alt="Logo" className={styles.logo} />
+      <div style={{ position: 'absolute', top: '20px', right: '20px', zIndex: '9999' }}>
+        <ThemeToggle />
+      </div>
+      <img 
+        src={currentSlogan} 
+        alt="Logo" 
+        className={styles.logo} 
+        onClick={handleLogoClick}
+        style={{ cursor: 'pointer' }}
+      />
       <h1>Cadastro</h1>
       <h3 className={styles.controle}>Controle Financeiro</h3>
       <form onSubmit={handleSubmit}>
