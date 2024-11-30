@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Logo](https://github.com/abreumatheu/AbreusFinancial-FrontEnd/raw/main/public/logo192.png)
+![Logo](https://github.com/Nexusf1re/AbreusFinancial-FrontEnd/raw/main/public/logo192.png)
 
 *Sua solução completa para gestão financeira pessoal*
 
