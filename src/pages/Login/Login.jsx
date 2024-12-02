@@ -136,6 +136,7 @@ const Login = ({ onLogin }) => {
             onChange={handleEmailChange}
             placeholder="Email"
             required
+            autoComplete="email"
           />
         </div>
         <div className={styles.inputBox}>
@@ -149,6 +150,7 @@ const Login = ({ onLogin }) => {
             placeholder="Senha"
             onKeyDown={handleCapsLock} 
             required
+            autoComplete="current-password"
           />
 
           {capsLockWarning && (
