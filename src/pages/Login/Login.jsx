@@ -55,30 +55,24 @@ const Login = ({ onLogin }) => {
     try {
         const response = await login(Email, Password);
         localStorage.setItem('username', response.Username);
-        toast.success("Login bem-sucedido!");
+        
+        await onLogin();  // Aguarda o login ser completado
 
-        // Após o login, verifica o status da assinatura
-        setTimeout(async () => {
-            try {
-                await onLogin();
-
-                const subscriptionStatus = await checkSubscriptionStatus();
-
-                if (subscriptionStatus === 'active' || subscriptionStatus === 'trialing') {
-                    console.log(`Assinatura com status '${subscriptionStatus}'`);
-                    navigate('/home'); // Redireciona para a home
-                } else {
-                    console.log("Assinatura com status != 'active' e != 'trialing'");
-                    navigate('/payment'); // Redireciona para a página de pagamento
-                }
-            } catch (error) {
-                console.error("Erro ao verificar assinatura:", error.message);
+        try {
+            const subscriptionStatus = await checkSubscriptionStatus();
+            
+            if (subscriptionStatus === 'active' || subscriptionStatus === 'trialing') {
+                toast.success("Login bem-sucedido!");
+                navigate('/home');
+            } else {
                 navigate('/payment');
-                toast.error("Erro ao verificar assinatura. Redirecionando para pagamento.");
             }
-        }, 1500);
+        } catch (error) {
+            console.error("Erro ao verificar assinatura:", error);
+            navigate('/payment');
+        }
     } catch (err) {
-        console.error("Erro durante o login:", err.message);
+        console.error("Erro durante o login:", err);
         toast.error("Email ou senha incorretos.");
     }
 };

@@ -8,15 +8,14 @@ const ProtectedRoute = ({ children }) => {
 
   if (loading) {
     return (
-      <div className="blurred-content">
-        {children}
-
+      <div className="loading-overlay">
+        <div className="loading-spinner">Carregando...</div>
       </div>
     );
   }
 
-  if (subscriptionStatus !== 'active' && subscriptionStatus !== 'trialing') {
-    return <Navigate to="/payment" />; 
+  if (!subscriptionStatus || (subscriptionStatus !== 'active' && subscriptionStatus !== 'trialing')) {
+    return <Navigate to="/payment" />;
   }
 
   return children;

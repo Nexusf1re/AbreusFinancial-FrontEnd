@@ -4,9 +4,9 @@ import axios from 'axios';
 const useSubscriptionStatus = (interval = 9000) => { 
   const [subscriptionStatus, setSubscriptionStatus] = useState(() => {
     const cachedStatus = localStorage.getItem('subscriptionStatus');
-    return cachedStatus ? JSON.parse(cachedStatus) : null;
+    return cachedStatus ? JSON.parse(cachedStatus) : 'pending';
   });
-  const [loading, setLoading] = useState(subscriptionStatus === null);
+  const [loading, setLoading] = useState(true);
 
   const fetchSubscriptionStatus = async () => {
     try {
