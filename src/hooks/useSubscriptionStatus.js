@@ -3,11 +3,10 @@ import axios from 'axios';
 
 const useSubscriptionStatus = (interval = 9000) => { 
   const [subscriptionStatus, setSubscriptionStatus] = useState(() => {
-    // Tenta carregar o status da assinatura do localStorage
     const cachedStatus = localStorage.getItem('subscriptionStatus');
     return cachedStatus ? JSON.parse(cachedStatus) : null;
   });
-  const [loading, setLoading] = useState(subscriptionStatus === null); // Se o status não estiver em cache, começa com loading
+  const [loading, setLoading] = useState(subscriptionStatus === null);
 
   const fetchSubscriptionStatus = async () => {
     try {
@@ -18,15 +17,15 @@ const useSubscriptionStatus = (interval = 9000) => {
       }
 
       const response = await axios.get(`${process.env.REACT_APP_API_URL}/stripe/check-subscription`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
       });
 
-      if (response.status === 200) {
+      if (response.status === 200 && response.data.subscriptionStatus) {
         const { subscriptionStatus } = response.data;
         setSubscriptionStatus(subscriptionStatus);
-        localStorage.setItem('subscriptionStatus', JSON.stringify(subscriptionStatus)); // Armazena no localStorage
+        localStorage.setItem('subscriptionStatus', JSON.stringify(subscriptionStatus));
+      } else {
+        console.error("Status da assinatura inválido ou não retornado pela API.");
       }
     } catch (error) {
       console.error("Erro ao buscar status da assinatura:", error);
@@ -36,35 +35,27 @@ const useSubscriptionStatus = (interval = 9000) => {
   };
 
   useEffect(() => {
-    if (!subscriptionStatus) {
-      fetchSubscriptionStatus(); // Só faz a chamada inicial se não tiver status em cache
-    }
+    fetchSubscriptionStatus(); // Sempre busca o status na inicialização
 
-    let intervalId;
-
-    // Verifica se o status da assinatura está válido e se está na validade do intervalo
-    if (subscriptionStatus) {
-      intervalId = setInterval(() => {
-        if (document.visibilityState === 'visible') {
-          fetchSubscriptionStatus(); // Atualiza o status ao retornar à página
-        }
-      }, interval);
-    }
+    const intervalId = setInterval(() => {
+      if (document.visibilityState === 'visible') {
+        fetchSubscriptionStatus();
+      }
+    }, interval);
 
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'visible') {
-        fetchSubscriptionStatus(); // Valida ao voltar para a aba
+        fetchSubscriptionStatus();
       }
     };
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
-    // Cleanup
     return () => {
       clearInterval(intervalId);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
-  }, [subscriptionStatus, interval]);
+  }, [interval]);
 
   return { subscriptionStatus, loading };
 };
