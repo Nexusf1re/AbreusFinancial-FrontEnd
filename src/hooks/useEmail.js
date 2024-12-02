@@ -1,5 +1,5 @@
 import emailjs from 'emailjs-com';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const useEmail = () => {
   const [email, setEmail] = useState('');
@@ -52,6 +52,7 @@ const useEmail = () => {
 
       if (response.status === 200) {
         setSuccess(true);
+        setEmail(''); // Limpa o email após sucesso
       } else {
         throw new Error('Falha ao enviar email');
       }
@@ -62,12 +63,21 @@ const useEmail = () => {
     }
   };
 
+  // Reseta os estados quando o componente é desmontado
+  useEffect(() => {
+    return () => {
+      setError(null);
+      setSuccess(false);
+      setIsLoading(false);
+    };
+  }, []);
+
   return {
     email,
     setEmail,
     isLoading,
-    success,
     error,
+    success,
     sendEmail,
   };
 };

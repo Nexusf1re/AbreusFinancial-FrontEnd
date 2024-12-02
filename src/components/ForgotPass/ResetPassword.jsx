@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Modal, Button, Input, Spin, message } from 'antd';
 import useEmail from '../../hooks/useEmail';
 import styles from './ResetPassword.module.css';
@@ -6,21 +6,29 @@ import styles from './ResetPassword.module.css';
 const ResetPassword = ({ isModalOpen, closeModal }) => {
   const { email, setEmail, isLoading, success, error, sendEmail } = useEmail();
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
     sendEmail();
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (success) {
       message.success('Email enviado com sucesso!');
-      closeModal(); 
+      closeModal();
     }
+  }, [success, closeModal]);
+
+  useEffect(() => {
     if (error) {
       message.error(error);
     }
-  }, [success, error, closeModal]);
+  }, [error]);
+
+  useEffect(() => {
+    if (!isModalOpen) {
+      setEmail('');
+    }
+  }, [isModalOpen, setEmail]);
 
   return (
     <Modal
