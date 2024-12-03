@@ -10,6 +10,7 @@
   
   .formDate {
     width: 100%;
+    background-color: var(--back-color-tertiary);
   }
 
   .container{
@@ -153,10 +154,89 @@
     padding: 0 !important;
 }
 
+.modalEnter {
+    animation: modalFadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.modalExit {
+    animation: modalFadeOut 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    pointer-events: none;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes modalFadeOut {
+    from {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.95) translateY(20px);
+    }
+}
+
+/* Animação do overlay */
+:global(.ant-modal-mask) {
+    backdrop-filter: blur(5px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+:global(.ant-modal-content) {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Animação para o conteúdo do modal */
 .form {
     margin-top: 20px;
     padding: 15px;
     border-radius: 8px;
+    animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: top center;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animação suave para os inputs */
+.formInput {
+    opacity: 0;
+    animation: fadeIn 0.3s forwards;
+}
+
+.formInput:nth-child(1) { animation-delay: 0.1s; }
+.formInput:nth-child(2) { animation-delay: 0.15s; }
+.formInput:nth-child(3) { animation-delay: 0.2s; }
+.formInput:nth-child(4) { animation-delay: 0.25s; }
+.formInput:nth-child(5) { animation-delay: 0.3s; }
+.formInput:nth-child(6) { animation-delay: 0.35s; }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .title {
@@ -176,6 +256,24 @@
     background-color: var(--back-color-tertiary) !important;
     color: var(--font-color) !important;
     border-color: var(--label-color) !important;
+    transition: all 0.2s ease-in-out !important;
+}
+
+.formInput input:focus,
+.formInput .ant-select-selector:hover,
+.formInput .ant-picker:hover,
+.formInput .ant-input-number:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.formSubmit {
+  transition: all 0.3s ease-in-out !important;
+}
+
+.formSubmit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* Estilo para as opções do select */
@@ -185,6 +283,7 @@
 
 .ant-select-item {
     color: var(--font-color) !important;
+    transition: background-color 0.2s ease-in-out !important;
 }
 
 .ant-select-item-option-selected {
@@ -199,4 +298,27 @@
 .ant-picker-content th,
 .ant-picker-content td {
     color: var(--font-color) !important;
+}
+
+.ant-picker-cell {
+  transition: background-color 0.2s ease-in-out !important;
+}
+
+/* Animação para os inputs quando estão em foco */
+.formInput input:focus,
+.formInput .ant-select-focused .ant-select-selector,
+.formInput .ant-picker-focused {
+  animation: inputPulse 0.3s ease-in-out;
+}
+
+@keyframes inputPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

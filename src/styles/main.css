@@ -258,3 +258,26 @@ input, textarea, select {
 .dark-theme .ant-select-item-option-selected {
     background-color: var(--back-color-tertiary) !important;
 }
+
+
+/* Esconde a barra de rolagem mas mantém a funcionalidade */
+* {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer e Edge */
+}
+
+/* Esconde a barra de rolagem do WebKit (Chrome, Safari, etc) */
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/* Mantém o comportamento de rolagem suave */
+html {
+  scroll-behavior: smooth;
+  overflow-y: scroll; /* Força a rolagem mesmo com a barra invisível */
+}
+
+body {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* Para rolagem suave em dispositivos iOS */
+}

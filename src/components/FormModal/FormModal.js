@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Modal, Form, Input, Select, Button, DatePicker, Typography, Spin } from 'antd';
 import useForm from '../../hooks/useForm';
 import useCategories from '../../hooks/useListCategories';
@@ -13,6 +13,15 @@ const { Option } = Select;
 const FormModal = ({ visible, onCancel, onSuccess }) => {
   const { formData, handleChange, handleSubmit, loading } = useForm();
   const { categories, error } = useCategories();
+  const [isClosing, setIsClosing] = useState(false);
+
+  const handleCancel = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setIsClosing(false);
+      onCancel();
+    }, 300); // Tempo da animação
+  };
 
   if (loading) {
     return <Spin size="large" style={{ display: 'block', margin: '20px auto' }} />;
@@ -47,9 +56,13 @@ const FormModal = ({ visible, onCancel, onSuccess }) => {
   return (
     <Modal
       open={visible}
-      onCancel={onCancel}
+      onCancel={handleCancel}
       footer={null}
-      className={styles.modal}
+      className={`${styles.modal} ${isClosing ? styles.modalExit : styles.modalEnter}`}
+      maskClosable={false}
+      destroyOnClose={false}
+      transitionName=""
+      maskTransitionName=""
     >
       <Form onFinish={onFormSubmit} className={styles.form}>
         <Title className={styles.title} level={3}>Lançamento de contas</Title>
