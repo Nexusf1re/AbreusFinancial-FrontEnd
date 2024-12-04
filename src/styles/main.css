@@ -21,6 +21,32 @@
     --focus-color: rgba(0, 123, 255, 0.25);
     --overlay-color: rgba(0, 0, 0, 0.5);
     --button-gradient: linear-gradient(to right, rgba(255, 255, 255, 0.9), rgba(245, 245, 245, 0.9));
+
+    /* Novas variáveis de tipografia */
+    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-secondary: 'Poppins', sans-serif;
+    
+    /* Tamanhos de fonte */
+    --font-size-xs: 0.75rem;    /* 12px */
+    --font-size-sm: 0.875rem;   /* 14px */
+    --font-size-base: 1rem;     /* 16px */
+    --font-size-md: 1.125rem;   /* 18px */
+    --font-size-lg: 1.25rem;    /* 20px */
+    --font-size-xl: 1.5rem;     /* 24px */
+    --font-size-2xl: 1.875rem;  /* 30px */
+    
+    /* Pesos de fonte */
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    
+    /* Tamanhos de ícones */
+    --icon-size-xs: 1rem;      /* 16px */
+    --icon-size-sm: 1.25rem;   /* 20px */
+    --icon-size-md: 1.5rem;    /* 24px */
+    --icon-size-lg: 2rem;      /* 32px */
+    --icon-size-xl: 2.5rem;    /* 40px */
 }
 
 .dark-theme{
@@ -51,6 +77,12 @@
 body {
     background-color: var(--mainBackground) !important;
     margin: 0;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-normal);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 input, textarea, select {
@@ -280,4 +312,51 @@ html {
 body {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch; /* Para rolagem suave em dispositivos iOS */
+}
+
+/* Estilos globais de tipografia */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-secondary);
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+h1 { font-size: var(--font-size-2xl); }
+h2 { font-size: var(--font-size-xl); }
+h3 { font-size: var(--font-size-lg); }
+h4 { font-size: var(--font-size-md); }
+
+/* Estilos para ícones */
+.icon-xs { font-size: var(--icon-size-xs); }
+.icon-sm { font-size: var(--icon-size-sm); }
+.icon-md { font-size: var(--icon-size-md); }
+.icon-lg { font-size: var(--icon-size-lg); }
+.icon-xl { font-size: var(--icon-size-xl); }
+
+/* Ajustes específicos para componentes */
+.ant-btn {
+    font-family: var(--font-primary);
+    font-weight: var(--font-weight-medium);
+}
+
+.ant-input {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-base);
+}
+
+.ant-select {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-base);
+}
+
+/* Ajustes responsivos */
+@media screen and (max-width: 575px) {
+    :root {
+        --font-size-2xl: 1.5rem;
+        --font-size-xl: 1.25rem;
+        --font-size-lg: 1.125rem;
+        --icon-size-xl: 2rem;
+        --icon-size-lg: 1.75rem;
+    }
 }

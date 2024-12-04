@@ -25,8 +25,8 @@
 }
 
 .newLabel label{
-    font-size: 1.3rem !important;
-    font-weight: 600;
+    font-size: var(--font-size-lg) !important;
+    font-weight: var(--font-weight-semibold);
 }
 
 .categoriesList{
@@ -37,8 +37,8 @@
     padding: 2px;
     margin: 2px;
     background-color: whitesmoke;
-    font-weight: 600;
-    font-size: 0.9rem;
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-sm);
     
 }
 

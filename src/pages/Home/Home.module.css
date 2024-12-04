@@ -8,7 +8,7 @@
         gap: 20px;
         padding: 20px 30px;
         box-sizing: border-box;
-        font-family: "Poppins", sans-serif;
+        font-family: var(--font-primary);
         overflow-y: auto;
         margin: 65px 0px 0px 55px; /* top, right, bottom, left */
         max-width: 1400px;
@@ -106,8 +106,8 @@
 
     .annualBalance .p, .monthBalance .p {
         text-align: center;
-        font-size: 20px; 
-        font-weight: bold;
+        font-size: var(--font-size-md);
+        font-weight: var(--font-weight-semibold);
     }
 
     .positive {
@@ -144,7 +144,7 @@
     justify-content: flex-start;
     padding: 0;
     box-sizing: border-box !important;
-    font-family: "Poppins", sans-serif;
+    font-family: var(--font-primary);
     height: auto;
     min-height: 100vh;
     overflow-y: auto;
@@ -263,8 +263,8 @@
 
 .monthBalance .p {
     text-align: center;
-    font-size: 18px;
-    font-weight: bold;
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
 }
 
   .positive {

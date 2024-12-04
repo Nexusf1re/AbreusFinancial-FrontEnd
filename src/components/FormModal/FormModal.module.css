@@ -52,15 +52,17 @@
     }
 
     .formInput label {
-        font-size: 1.2rem;
+        font-family: var(--font-primary);
+        font-size: var(--font-size-md);
+        font-weight: var(--font-weight-medium);
         margin-bottom: 5px;
     }
 
     .formInput input,
     .formInput .ant-select,
     .formInput .ant-picker {
-        font-size: 1rem;
-        height: 45px;
+        font-size: var(--font-size-base);
+        height: 40px;
         padding: 0 12px;
     }
 

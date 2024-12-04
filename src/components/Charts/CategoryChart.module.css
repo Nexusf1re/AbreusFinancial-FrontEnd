@@ -10,7 +10,9 @@
 .chartTitle{
     margin: 0;
     padding: 0;
-    font-size: 1.2rem;
+    font-size: var(--font-size-md);
+    font-family: var(--font-primary);
+    font-weight: var(--font-weight-medium);
 }
 
 .canvas {
@@ -46,7 +48,8 @@
 }
 
 .categoryLabel {
-    font-weight: bold;
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-sm);
     margin-right: 4px;
 }
 

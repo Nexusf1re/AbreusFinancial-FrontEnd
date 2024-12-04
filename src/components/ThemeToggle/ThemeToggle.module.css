@@ -18,8 +18,8 @@
 }
 
 .themeToggle svg {
-    width: 20px;
-    height: 20px;
+    width: var(--icon-size-sm);
+    height: var(--icon-size-sm);
 }
 
 .dark {

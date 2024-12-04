@@ -18,7 +18,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+    font-family: var(--font-primary);
+
     max-width: 450px; 
     max-height: 600px;
     backdrop-filter: blur(4px);
@@ -105,8 +106,8 @@
     border-radius: 18px;
     border: 1px solid var(--border-color) !important;
     transition: all 0.4s ease;
-    font-size: 15px;
-    font-weight: bold;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
     color: var(--font-color) !important;
     text-shadow: 0 1px var(--highlight-color);
 }
@@ -125,12 +126,12 @@
     margin: 0;
     text-decoration: none;
     color: var(--secondary-text-color) !important;
-    font-weight: bold;
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-medium);
     display: block;
     text-align: center;
     justify-content: center;
     text-align: center;
-    font-size: 18px;
 }
 
 .text {

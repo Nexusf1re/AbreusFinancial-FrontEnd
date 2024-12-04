@@ -12,7 +12,9 @@
 
     /* Título */
     .title {
-        font-size: 2rem;
+        font-size: var(--font-size-2xl);
+        font-family: var(--font-secondary);
+        font-weight: var(--font-weight-semibold);
         margin-bottom: 20px;
     }
 
@@ -26,7 +28,8 @@
 
     /* Ajustes para campos de input */
     .formInput label {
-        font-size: 1.2rem;
+        font-size: var(--font-size-md) !important;
+        font-weight: var(--font-weight-semibold);
         margin-bottom: 5px;
     }
 
@@ -41,7 +44,7 @@
     /* Alinha o botão de envio centralizado */
     .formSubmit {
         margin: 20px auto 0;
-        font-size: 1.2rem;
+        font-size: var(--font-size-lg);
         padding: 14px 24px;
         width: auto;
     }
@@ -68,7 +71,8 @@
 } 
 
 .formInput label {
-    font-size: 19px !important;
+    font-size: var(--font-size-md) !important;
+    font-weight: var(--font-weight-semibold);
     margin-bottom: -10px !important;    
     margin-top: 5px !important;
     color: var(--label-color); 
@@ -77,7 +81,7 @@
 }
 
 .selectOption{
-    font-size: 17px !important;
+    font-size: var(--font-size-md) !important;
 }
 
 /* Aplica o estilo ao valor selecionado no Select */
@@ -99,7 +103,7 @@
     margin: auto;
     width: 100px;
     margin-top: 5px;
-    font-size: 22px;
+    font-size: var(--font-size-lg);
     padding: 16px;
 }
 

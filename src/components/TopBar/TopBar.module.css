@@ -5,7 +5,7 @@
   }
   
   .usericon{
-    font-size: 45px;
+    font-size: var(--icon-size-xl);
     display: flex;
     left: 14px !important;
     position: fixed;
@@ -13,7 +13,8 @@
   }
 
   .welcome{
-    font-size: 20px;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-medium);
     position: fixed;
     left: 85px !important;
     color: var(--font-color);
@@ -21,7 +22,7 @@
 
   .greeting{
     display: none;
-    font-size: 19px;
+    font-size: var(--font-size-md);
     position: fixed;
     left: 220px !important;
     color: var(--font-color);
@@ -40,7 +41,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: "Poppins", sans-serif;
+    font-family: var(--font-primary);
+
     transition: all 0.6s ease !important;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     overflow: hidden; 
@@ -54,7 +56,7 @@
   
 
   .usericon{
-    font-size: 45px;
+    font-size: var(--icon-size-xl);
     display: flex;
     left: 0;
     position: fixed;
@@ -66,7 +68,8 @@
     position: fixed;
     right: 10px;
     text-align: center;
-    font-size: 18px;
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-medium);
     margin: 0;
     padding: 0;
     text-decoration: none;
@@ -82,7 +85,8 @@
   }
 
   .welcome{
-    font-size: 20px;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-medium);
     position: fixed;
     left: 14%;
     color: var(--font-color);
@@ -90,7 +94,7 @@
 
   .greeting{
     display: none;
-    font-size: 19px;
+    font-size: var(--font-size-md);
     position: fixed;
     right: 25%;
     color: var(--font-color);
