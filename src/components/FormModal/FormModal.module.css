@@ -335,7 +335,7 @@
 
 :global(.ant-modal) {
   margin: 0; /* Remove qualquer margem que possa estar deslocando o modal */
-  top: 5%; /* Remove o top fixo */
+  top: auto; /* Remove o top fixo */
   transform: none !important; /* Remove a transformação de translação */
   padding-bottom: 0 !important; /* Remove o padding inferior */
 }
