@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal, Form, Input, Select, Button, DatePicker, Typography, Spin } from 'antd';
 import useForm from '../../hooks/useForm';
 import useCategories from '../../hooks/useListCategories';
@@ -15,12 +15,28 @@ const FormModal = ({ visible, onCancel, onSuccess }) => {
   const { categories, error } = useCategories();
   const [isClosing, setIsClosing] = useState(false);
 
-  const handleCancel = () => {
+  useEffect(() => {
+    if (visible) {
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+    }
+
+    return () => {
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+    };
+  }, [visible]);
+
+  const handleClose = () => {
     setIsClosing(true);
     setTimeout(() => {
       setIsClosing(false);
       onCancel();
-    }, 300); // Tempo da animação
+    }, 300);
   };
 
   if (loading) {
@@ -56,11 +72,11 @@ const FormModal = ({ visible, onCancel, onSuccess }) => {
   return (
     <Modal
       open={visible}
-      onCancel={handleCancel}
+      onCancel={handleClose}
       footer={null}
       className={`${styles.modal} ${isClosing ? styles.modalExit : styles.modalEnter}`}
-      maskClosable={false}
-      destroyOnClose={false}
+      maskClosable={true}
+      destroyOnClose={true}
       transitionName=""
       maskTransitionName=""
     >
