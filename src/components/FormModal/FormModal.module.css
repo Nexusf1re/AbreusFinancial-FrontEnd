@@ -334,10 +334,10 @@
 }
 
 :global(.ant-modal) {
-  padding-bottom: 0 !important;
-  margin: 0;
-  top: auto !important; /* Remove o top fixo */
+  margin: 0; /* Remove qualquer margem que possa estar deslocando o modal */
+  top: 5%; /* Remove o top fixo */
   transform: none !important; /* Remove a transformação de translação */
+  padding-bottom: 0 !important; /* Remove o padding inferior */
 }
 
 :global(.ant-modal-mask) {

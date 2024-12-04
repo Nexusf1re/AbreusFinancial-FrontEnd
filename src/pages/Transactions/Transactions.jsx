@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Input, Modal, Select, DatePicker } from 'antd';
 import { useTransactions } from '../../hooks/useTransactions';
 import TopBar from '../../components/TopBar/TopBar';
@@ -43,6 +43,47 @@ const Transactions = () => {
         handleEditedValue,
         handleEditedDate
     } = useTransactions();
+
+    useEffect(() => {
+        const handleOverflow = (shouldLock) => {
+            const html = document.documentElement;
+            const body = document.body;
+            
+            if (shouldLock) {
+                // Guarda a posição atual do scroll
+                const scrollY = window.scrollY;
+                
+                // Aplica múltiplas propriedades para garantir o bloqueio
+                html.style.position = 'fixed';
+                html.style.top = `-${scrollY}px`;
+                body.style.position = 'fixed';
+                body.style.top = `-${scrollY}px`;
+                body.style.overflow = 'hidden';
+                body.style.width = '100%';
+            } else {
+                // Restaura o scroll e remove as propriedades
+                const scrollY = Math.abs(parseInt(body.style.top || '0', 10));
+                html.style.position = '';
+                html.style.top = '';
+                body.style.position = '';
+                body.style.top = '';
+                body.style.overflow = '';
+                body.style.width = '';
+                
+                window.scrollTo(0, scrollY);
+            }
+        };
+
+        if (editingTransaction) {
+            handleOverflow(true);
+        } else {
+            handleOverflow(false);
+        }
+
+        return () => {
+            handleOverflow(false);
+        };
+    }, [editingTransaction]);
 
     return (
         <div className={styles.container}>
@@ -197,7 +238,13 @@ const Transactions = () => {
                     open={!!editingTransaction}
                     onOk={confirmEdit}
                     onCancel={() => setEditingTransaction(null)}
-                    maskClosable={false}
+                    maskClosable={true}
+                    destroyOnClose={true}
+                    transitionName=""
+                    maskTransitionName=""
+                    className={styles.modalAnimation}
+                    centered
+                    maskStyle={{ backdropFilter: 'blur(4px)' }}
                 >
                     <div className={styles.modalEditContent}>
                         <Input
@@ -214,7 +261,7 @@ const Transactions = () => {
                             onChange={handleEditedValue}
                         />
                         <DatePicker
-                            className={styles.InputModalEdit}
+                            className={`${styles.InputModalEdit} ${styles.InputDateEdit}`}
                             value={editedDate}
                             onChange={handleEditedDate}
                             format="DD/MM/YYYY"
