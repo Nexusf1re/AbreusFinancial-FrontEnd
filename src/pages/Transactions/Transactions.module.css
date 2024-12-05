@@ -168,6 +168,10 @@
   background-color: transparent !important;
 }
 
+.InputDateEdit{
+  margin-right: 10px !important;
+}
+
 .footer1{
   padding-top: 30px;
   margin-top: 30px;
@@ -218,7 +222,6 @@
 .InputCategoryEdit{
   width:50%;
   text-align: center;
-  margin-left: 10px;
 }
 
 /* Estilos para os botões do modal */
