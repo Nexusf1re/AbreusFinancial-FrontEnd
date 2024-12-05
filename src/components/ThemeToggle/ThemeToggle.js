@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { FaSun, FaMoon } from 'react-icons/fa';
+import { FaMoon } from 'react-icons/fa';
+import { ImSun  } from "react-icons/im";
 import styles from './ThemeToggle.module.css';
 
 const ThemeToggle = () => {
@@ -31,7 +32,7 @@ const ThemeToggle = () => {
             onClick={toggleTheme}
             aria-label="Alternar tema"
         >
-            {theme === 'light' ? <FaSun /> : <FaMoon />}
+            {theme === 'light' ? <ImSun /> : <FaMoon />}
         </button>
     );
 };
