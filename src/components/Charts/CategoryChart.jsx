@@ -109,7 +109,24 @@ const CategoryChart = ({ mes, ano }) => {
         </>
       ) : (
         <div className={styles.emptyMessage}>
-          <h4>Nenhuma {tipoTransacao === 'despesas' ? 'saída' : 'entrada'} para o período selecionado!</h4>
+           <div className={styles.toggleWrapper}>
+            <input
+              type="checkbox"
+              id="toggle"
+              className={styles.toggleInput}
+              checked={tipoTransacao === 'receitas'}
+              onChange={(e) => setTipoTransacao(e.target.checked ? 'receitas' : 'despesas')}
+            />
+            <label htmlFor="toggle" className={styles.toggleLabel}>
+              <span className={styles.toggleText}>
+                {tipoTransacao === 'despesas' ? 'Despesas' : 'Receitas'}
+              </span>
+            </label>
+          </div>
+
+          <h4>
+            Nenhuma {tipoTransacao === 'despesas' ? 'saída' : 'entrada'} para o período selecionado!
+          </h4>
         </div>
       )}
     </div>

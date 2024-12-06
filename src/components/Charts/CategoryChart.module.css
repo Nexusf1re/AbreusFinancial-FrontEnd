@@ -159,3 +159,12 @@
 .toggleLabel:active::before {
   transform: scale(0.95);
 }
+
+.emptyMessage{
+  display: list-item;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: gray;
+  
+}
