@@ -75,7 +75,7 @@ const CategoryChart = ({ mes, ano }) => {
   return (
     <div className={styles.container}>
       <h2 className={styles.chartTitle}>
-        {tipoTransacao === 'despesas' ? 'Despesas' : 'Receitas'} por Categoria - Mês {mes}/{ano}
+        {tipoTransacao === 'despesas' ? 'Despesas' : 'Receitas'} por Categoria - {mes}/{ano}
       </h2>
       {sortedData.length > 0 ? (
         <>
