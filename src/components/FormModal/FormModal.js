@@ -85,9 +85,7 @@ const FormModal = ({ visible, onCancel, onSuccess }) => {
       maskTransitionName=""
     >
       <Form onFinish={onFormSubmit} className={styles.form}>
-        <Title className={styles.title} level={3}>Lançamento de contas</Title>
-        <hr style={{ marginBottom: '30px', marginTop: '-10px' }} />
-        
+        <Title className={styles.title} level={3}>Lançamento de contas</Title>        
         <div className={styles.formGroup}>
           <Form.Item
             style={{ marginTop: '-15px' }}

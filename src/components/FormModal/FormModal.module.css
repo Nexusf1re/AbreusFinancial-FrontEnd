@@ -1,22 +1,3 @@
-.formGroup {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .formInput {
-    margin-bottom: 15px;
-  }
-  
-  .formDate {
-    width: 100%;
-    background-color: var(--back-color-tertiary);
-  }
-
-  .container{
-    overflow: hidden !important;
-  }
-  
 /*Desktop*/
 @media (min-width: 575px) {
     .container {
@@ -25,18 +6,18 @@
         overflow: hidden;
     }
 
-    .form{
+    .form {
         margin-top: 20px;
     }
-    
-    .modal{
+
+    .modal {
         margin-top: -80px !important;
         padding: 0 !important;
         border-radius: 10px;
     }
-    
 
-    .title{
+
+    .title {
         color: var(--font-color) !important;
         margin-top: -40px !important;
         margin-bottom: 45px !important;
@@ -69,7 +50,7 @@
         padding: 0 12px;
     }
 
-    .formSubmit{
+    .formSubmit {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -87,75 +68,88 @@
     }
 }
 
+/*Mobile*/
+@media screen and (max-width: 574px) {
+    .form {
+        margin-top: 5px;
+    }
 
-@media screen and (max-width: 574px){
-.form{
-    margin-top: 20px;
+    .modal {
+        padding: 0 !important;
+        border-radius: 10px;
+    }
+
+    .title {
+        color: var(--font-color) !important;
+        margin-top: -35px !important;
+        margin-bottom: 10px !important;
+        border-radius: 10px;
+        width: 95%;
+        margin: auto;
+        padding: 5px;
+    }
+
+    .formInput {
+        margin-bottom: -10px;
+    }
+
+    .formInput label {
+        font-size: var(--font-size-base) !important;
+        margin-bottom: -10px !important;
+        margin-top: 0px !important;
+        padding: 0px !important;
+        color: var(--label-color);
+        font-weight: bold;
+        display: block;
+    }
+
+    .selectOption {
+        font-size: 17px !important;
+    }
+
+
+    .customSelect .ant-select-selection-item {
+        font-size: var(--font-size-sm);
+        padding: 0px;
+        display: flex;
+        align-items: center;
+    }
+
+    .formSubmit {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin: auto;
+        width: 100px;
+        margin-top: 15px;
+        font-size: 22px;
+        padding: 16px;
+    }
+
+    .formDate {
+        width: 100%;
+        margin-bottom: 15px;
+        text-align: center;
+    }
 }
 
-.modal{
-    margin-top: -70px !important;
-    padding: 0 !important;
-    border-radius: 10px;
-}
-
-.title{
-    color: var(--font-color) !important;
-    margin-top: -40px !important;
-    margin-bottom: 20px !important;
-    background-color: var(--back-color-secondary);
-    border-radius: 10px;
-    width: 95%;
-    margin: auto;
-    padding: 5px;
-}
-
-.formInput{
-    margin-bottom: -10px;
-} 
-
-.formInput label {
-    font-size: 19px !important;
-    margin-bottom: -10px !important;    
-    margin-top: 0px !important;
-    color: var(--label-color); 
-    font-weight: bold;      
-    display: block;          
-}
-
-.selectOption{
-    font-size: 17px !important;
-}
-
-
-.customSelect .ant-select-selection-item {
-    font-size: 20px; 
-    padding: 0px; 
-    height: 30px;
+/*General*/
+.formGroup {
     display: flex;
-    align-items: center;
-  }
-  
-  
-
-.formSubmit{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin: auto;
-    width: 100px;
-    margin-top: 15px;
-    font-size: 22px;
-    padding: 16px;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.formDate{
+.formDate {
     width: 100%;
-    margin-bottom: 15px;
-    text-align: center;
+    background-color: var(--back-color-tertiary);
 }
+
+.container {
+    overflow: hidden !important;
 }
+
 
 .modal {
     background-color: var(--back-color) !important;
@@ -178,6 +172,7 @@
         opacity: 0;
         transform: scale(0.95) translateY(-20px);
     }
+
     to {
         opacity: 1;
         transform: scale(1) translateY(0);
@@ -189,6 +184,7 @@
         opacity: 1;
         transform: scale(1) translateY(0);
     }
+
     to {
         opacity: 0;
         transform: scale(0.95) translateY(20px);
@@ -207,11 +203,11 @@
 
 /* Animação para o conteúdo do modal */
 .form {
-    margin-top: 20px;
-    margin-bottom: -40px;
-    padding: 15px;
-    border-radius: 8px;
-    animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-top: 35px;
+    margin-bottom: -35px;
+    padding: 0px;
+    border-radius: 10px;
+    animation: slideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     transform-origin: top center;
 }
 
@@ -220,6 +216,7 @@
         opacity: 0;
         transform: translateY(-20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -232,18 +229,36 @@
     animation: fadeIn 0.3s forwards;
 }
 
-.formInput:nth-child(1) { animation-delay: 0.1s; }
-.formInput:nth-child(2) { animation-delay: 0.15s; }
-.formInput:nth-child(3) { animation-delay: 0.2s; }
-.formInput:nth-child(4) { animation-delay: 0.25s; }
-.formInput:nth-child(5) { animation-delay: 0.3s; }
-.formInput:nth-child(6) { animation-delay: 0.35s; }
+.formInput:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.formInput:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.formInput:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.formInput:nth-child(4) {
+    animation-delay: 0.25s;
+}
+
+.formInput:nth-child(5) {
+    animation-delay: 0.3s;
+}
+
+.formInput:nth-child(6) {
+    animation-delay: 0.35s;
+}
 
 @keyframes fadeIn {
     from {
         opacity: 0;
         transform: translateY(10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -274,17 +289,17 @@
 .formInput .ant-select-selector:hover,
 .formInput .ant-picker:hover,
 .formInput .ant-input-number:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .formSubmit {
-  transition: all 0.3s ease-in-out !important;
+    transition: all 0.3s ease-in-out !important;
 }
 
 .formSubmit:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* Estilo para as opções do select */
@@ -312,44 +327,51 @@
 }
 
 .ant-picker-cell {
-  transition: background-color 0.2s ease-in-out !important;
+    transition: background-color 0.2s ease-in-out !important;
 }
 
 /* Animação para os inputs quando estão em foco */
 .formInput input:focus,
 .formInput .ant-select-focused .ant-select-selector,
 .formInput .ant-picker-focused {
-  animation: inputPulse 0.3s ease-in-out;
+    animation: inputPulse 0.3s ease-in-out;
 }
 
 @keyframes inputPulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.02);
-  }
-  100% {
-    transform: scale(1);
-  }
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.02);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 /* Ajuste para centralizar o modal */
 :global(.ant-modal-wrap) {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh; /* Garante que o modal esteja sempre centralizado verticalmente */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    /* Garante que o modal esteja sempre centralizado verticalmente */
 }
 
 :global(.ant-modal) {
-  margin: 0; /* Remove qualquer margem que possa estar deslocando o modal */
-  top: auto; /* Remove o top fixo */
-  transform: none !important; /* Remove a transformação de translação */
-  padding-bottom: 0 !important; /* Remove o padding inferior */
+    margin: 0;
+    /* Remove qualquer margem que possa estar deslocando o modal */
+    top: auto;
+    /* Remove o top fixo */
+    transform: none !important;
+    /* Remove a transformação de translação */
+    padding-bottom: 0 !important;
+    /* Remove o padding inferior */
 }
 
 :global(.ant-modal-mask) {
-  backdrop-filter: blur(5px);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
