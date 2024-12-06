@@ -95,8 +95,8 @@
   text-align: center;
 }
 
-th {
-  width: min-content;
+.thvalor {
+  min-width: 100px;
 }
 
 .table tr th:first-child,

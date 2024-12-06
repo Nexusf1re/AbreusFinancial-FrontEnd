@@ -180,7 +180,7 @@ const Transactions = () => {
                 <thead>
                     <tr>
                         <th className={styles.th}>Descrição</th>
-                        <th className={styles.th}>Valor</th>
+                        <th className={`${styles.th} ${styles.thvalor}`}>Valor</th>
                     </tr>
                 </thead>
                 <tbody>
