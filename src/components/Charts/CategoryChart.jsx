@@ -23,10 +23,10 @@ const CategoryChart = ({ mes, ano }) => {
           return percentage < 2 ? total * 0.015 : item.valor;
         }),
         backgroundColor: [
-          '#67ee4c', '#36A2EB', '#FFCE56', '#804bc0', '#b4fff9', '#FF9F40', '#ff4040', '#e240ff', '#3dfe6a', '#5e5e5e', '#ffed25', '#4a40ff'
+          '#67ee4c', '#36A2EB', '#FFCE56', '#804bc0', '#b4fff9', '#FF9F40', '#ff4040', '#e240ff', '#3dfe6a', '#5e5e5e', '#ffed25', '#4a40ff', '#000000'
         ],
         hoverBackgroundColor: [
-          '#67ee4c', '#36A2EB', '#FFCE56', '#804bc0', '#b4fff9', '#FF9F40', '#ff4040', '#e240ff', '#3dfe6a', '#5e5e5e', '#ffed25', '#4a40ff'
+          '#67ee4c', '#36A2EB', '#FFCE56', '#804bc0', '#b4fff9', '#FF9F40', '#ff4040', '#e240ff', '#3dfe6a', '#5e5e5e', '#ffed25', '#4a40ff', '#000000'
         ],
         borderWidth: 5,
         borderColor: '#ffffff',
