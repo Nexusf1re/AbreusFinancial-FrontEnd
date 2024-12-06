@@ -134,7 +134,7 @@ const Transactions = () => {
                                 key={category}
                                 value={category}
                             >
-                                {category}
+                                {category.Category || ''}
                             </Option>
                         ))}
                     </Select>
@@ -267,12 +267,12 @@ const Transactions = () => {
                             value={editedCategory || undefined}
                             onChange={handleEditedCategory}
                         >
-                            {uniqueCategories.map((category) => (
+                            {filteredCategories?.map((category, index) => (
                                 <Option 
-                                    key={category}
-                                    value={category}
+                                    key={category.Id || `${category.Category}-${index}`}
+                                    value={category.Category || ''}
                                 >
-                                    {category}
+                                    {category.Category || ''}
                                 </Option>
                             ))}
                         </Select>
@@ -294,6 +294,13 @@ const Transactions = () => {
                     setShowDeleteConfirm(false);
                     setTransactionToDelete(null);
                 }}
+                maskClosable={true}
+                destroyOnClose={true}
+                transitionName=""
+                maskTransitionName=""
+                className={styles.modalAnimation}
+                centered
+                maskStyle={{ backdropFilter: 'blur(4px)' }}
             >
                 <p>Tem certeza que deseja excluir esta transação?</p>
             </Modal>
