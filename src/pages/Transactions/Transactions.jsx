@@ -257,7 +257,7 @@ const Transactions = () => {
                 maskTransitionName=""
                 className={styles.modalAnimation}
                 centered
-                maskStyle={{ backdropFilter: 'blur(4px)' }}
+                styles={{ mask: { backdropFilter: 'blur(4px)' } }}
             >
                 <div className={styles.modalEditContent}>
                     <Input
@@ -322,6 +322,14 @@ const Transactions = () => {
                     setShowDeleteConfirm(false);
                     setTransactionToDelete(null);
                 }}
+                maskClosable={true}
+                destroyOnClose={true}
+                transitionName=""
+                maskTransitionName=""
+                className={styles.modalAnimation}
+                centered
+                styles={{ mask: { backdropFilter: 'blur(4px)' } }}
+                okButtonProps={{ danger: true }}
             >
                 <p>Tem certeza que deseja excluir esta transação?</p>
             </Modal>

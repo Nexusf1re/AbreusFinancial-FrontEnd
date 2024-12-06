@@ -67,7 +67,7 @@ const FormModal = ({ visible, onCancel, onSuccess }) => {
   };
   
   const handleValueChange = (values) => {
-    const { formattedValue, value } = values;
+    const { value } = values;
     // Mantém o valor em centavos
     const numericValue = value || '0';
     handleChange('value', numericValue);
@@ -111,7 +111,7 @@ const FormModal = ({ visible, onCancel, onSuccess }) => {
                 if (!val) return '';
                 // Garante que temos pelo menos 3 dígitos (incluindo zero à esquerda se necessário)
                 const number = val.replace(/\D/g, '').padStart(3, '0');
-                const numberLength = number.length;
+                
                 
                 const decimalPart = number.slice(-2);
                 const integerPart = number.slice(0, -2).replace(/^0+/, '') || '0';
