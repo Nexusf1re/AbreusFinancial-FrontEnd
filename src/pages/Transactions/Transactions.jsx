@@ -44,6 +44,12 @@ const Transactions = () => {
         handleEditedDate
     } = useTransactions();
 
+    const uniqueCategories = [...new Set(Object.values(transactions)
+        .flat()
+        .map(t => t.Category))]
+        .filter(Boolean)
+        .sort();
+
     useEffect(() => {
         const handleOverflow = (shouldLock) => {
             const body = document.body;
@@ -123,12 +129,12 @@ const Transactions = () => {
                         className={`${styles.filterSelect} ${styles.tipoCategoria}`}
                         allowClear
                     >
-                        {filteredCategories?.map((category, index) => (
+                        {uniqueCategories.map((category) => (
                             <Option 
-                                key={category.Id || `${category.Category}-${index}`}
-                                value={category.Category || ''}
+                                key={category}
+                                value={category}
                             >
-                                {category.Category || ''}
+                                {category}
                             </Option>
                         ))}
                     </Select>
@@ -261,12 +267,12 @@ const Transactions = () => {
                             value={editedCategory || undefined}
                             onChange={handleEditedCategory}
                         >
-                            {filteredCategories?.map((category, index) => (
+                            {uniqueCategories.map((category) => (
                                 <Option 
-                                    key={category.Id || `${category.Category}-${index}`}
-                                    value={category.Category || ''}
+                                    key={category}
+                                    value={category}
                                 >
-                                    {category.Category || ''}
+                                    {category}
                                 </Option>
                             ))}
                         </Select>
