@@ -81,7 +81,7 @@ const FormModal = ({ visible, onCancel, onSuccess }) => {
     >
       <Form onFinish={onFormSubmit} className={styles.form}>
         <Title className={styles.title} level={3}>Lançamento de contas</Title>
-        <hr style={{ marginBottom: '30px', marginTop: '-10px' }} />
+    
         
         <div className={styles.formGroup}>
           <Form.Item

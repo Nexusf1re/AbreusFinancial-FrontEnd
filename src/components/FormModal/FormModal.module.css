@@ -98,8 +98,13 @@
 
 .title{
     color: var(--font-color) !important;
-    margin-top: -45px !important;
-    margin-bottom: 10px !important;
+    margin-top: -40px !important;
+    margin-bottom: 20px !important;
+    background-color: var(--back-color-secondary);
+    border-radius: 10px;
+    width: 95%;
+    margin: auto;
+    padding: 5px;
 }
 
 .formInput{
@@ -137,7 +142,7 @@
     text-align: center;
     margin: auto;
     width: 100px;
-    margin-top: 5px;
+    margin-top: 15px;
     font-size: 22px;
     padding: 16px;
 }
@@ -200,6 +205,7 @@
 /* Animação para o conteúdo do modal */
 .form {
     margin-top: 20px;
+    margin-bottom: -40px;
     padding: 15px;
     border-radius: 8px;
     animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -255,7 +261,7 @@
 .formInput .ant-picker,
 .formInput .ant-input-number,
 .formInput .ant-select-selection-item {
-    background-color: var(--back-color-tertiary) !important;
+    background-color: var(--back-color) !important;
     color: var(--font-color) !important;
     border-color: var(--label-color) !important;
     transition: all 0.2s ease-in-out !important;
