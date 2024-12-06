@@ -46,31 +46,20 @@ const Transactions = () => {
 
     useEffect(() => {
         const handleOverflow = (shouldLock) => {
-            const html = document.documentElement;
             const body = document.body;
             
             if (shouldLock) {
-                // Guarda a posição atual do scroll
-                const scrollY = window.scrollY;
-                
-                // Aplica múltiplas propriedades para garantir o bloqueio
-                html.style.position = 'fixed';
-                html.style.top = `-${scrollY}px`;
-                body.style.position = 'fixed';
-                body.style.top = `-${scrollY}px`;
                 body.style.overflow = 'hidden';
+                body.style.position = 'fixed';
                 body.style.width = '100%';
+                body.style.height = '100%';
+                body.style.touchAction = 'none';
             } else {
-                // Restaura o scroll e remove as propriedades
-                const scrollY = Math.abs(parseInt(body.style.top || '0', 10));
-                html.style.position = '';
-                html.style.top = '';
-                body.style.position = '';
-                body.style.top = '';
                 body.style.overflow = '';
+                body.style.position = '';
                 body.style.width = '';
-                
-                window.scrollTo(0, scrollY);
+                body.style.height = '';
+                body.style.touchAction = '';
             }
         };
 
