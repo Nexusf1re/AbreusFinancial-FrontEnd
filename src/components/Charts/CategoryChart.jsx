@@ -88,9 +88,8 @@ const CategoryChart = ({ mes, ano }) => {
               onChange={(e) => setTipoTransacao(e.target.checked ? 'receitas' : 'despesas')}
             />
             <label htmlFor="toggle" className={styles.toggleLabel}>
-              <span className={styles.toggleText}>
-                {tipoTransacao === 'despesas' ? 'Despesas' : 'Receitas'}
-              </span>
+              <span className={styles.toggleText}>Despesas</span>
+              <span className={styles.toggleText}>Receitas</span>
             </label>
           </div>
           <Doughnut data={chartData} options={options} className={styles.canvas} />
@@ -118,9 +117,8 @@ const CategoryChart = ({ mes, ano }) => {
               onChange={(e) => setTipoTransacao(e.target.checked ? 'receitas' : 'despesas')}
             />
             <label htmlFor="toggle" className={styles.toggleLabel}>
-              <span className={styles.toggleText}>
-                {tipoTransacao === 'despesas' ? 'Despesas' : 'Receitas'}
-              </span>
+              <span className={styles.toggleText}>Despesas</span>
+              <span className={styles.toggleText}>Receitas</span>
             </label>
           </div>
 
