@@ -6,6 +6,7 @@ import styles from './FormModal.module.css';
 import { defaultCategories } from '../../components/DefaultCategories';
 import locale from 'antd/es/date-picker/locale/pt_BR';
 import 'dayjs/locale/pt-br';
+import { NumericFormat } from 'react-number-format';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -17,19 +18,17 @@ const FormModal = ({ visible, onCancel, onSuccess }) => {
 
   useEffect(() => {
     if (visible) {
+      document.documentElement.style.overflow = 'hidden';
       document.body.style.overflow = 'hidden';
       document.body.style.position = 'fixed';
       document.body.style.width = '100%';
-      document.body.style.height = '100%';
-      document.body.style.touchAction = 'none';
     }
 
     return () => {
+      document.documentElement.style.overflow = '';
       document.body.style.overflow = '';
       document.body.style.position = '';
       document.body.style.width = '';
-      document.body.style.height = '';
-      document.body.style.touchAction = '';
     };
   }, [visible]);
 
@@ -67,6 +66,12 @@ const FormModal = ({ visible, onCancel, onSuccess }) => {
     }
   };
   
+  const handleValueChange = (values) => {
+    const { formattedValue, value } = values;
+    // Mantém o valor em centavos
+    const numericValue = value || '0';
+    handleChange('value', numericValue);
+  };
 
   return (
     <Modal
@@ -81,7 +86,7 @@ const FormModal = ({ visible, onCancel, onSuccess }) => {
     >
       <Form onFinish={onFormSubmit} className={styles.form}>
         <Title className={styles.title} level={3}>Lançamento de contas</Title>
-    
+        <hr style={{ marginBottom: '30px', marginTop: '-10px' }} />
         
         <div className={styles.formGroup}>
           <Form.Item
@@ -90,11 +95,32 @@ const FormModal = ({ visible, onCancel, onSuccess }) => {
             label="Valor"
             name="value"
             rules={[{ required: true, message: 'Por favor insira um valor!' }]}>
-            <Input
-              type="number"
-              value={formData.value}
-              onChange={(e) => handleChange('value', e.target.value)}
+            <NumericFormat
+              customInput={Input}
+              thousandSeparator="."
+              decimalSeparator=","
+              decimalScale={2}
+              fixedDecimalScale
+              allowNegative={false}
+              onValueChange={handleValueChange}
               style={{ fontSize: '20px', padding: '0 12px', height: '40px' }}
+              placeholder="0,00"
+              prefix="R$ "
+              mask="_"
+              format={(val) => {
+                if (!val) return '';
+                // Garante que temos pelo menos 3 dígitos (incluindo zero à esquerda se necessário)
+                const number = val.replace(/\D/g, '').padStart(3, '0');
+                const numberLength = number.length;
+                
+                const decimalPart = number.slice(-2);
+                const integerPart = number.slice(0, -2).replace(/^0+/, '') || '0';
+                
+                const formattedInteger = integerPart.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+                
+                return `R$ ${formattedInteger},${decimalPart}`;
+              }}
+              value={formData.value ? (parseFloat(formData.value) * 100).toString() : ''}
             />
           </Form.Item>
 

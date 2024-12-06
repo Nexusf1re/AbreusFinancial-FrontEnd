@@ -17,9 +17,8 @@
     overflow: hidden !important;
   }
   
-
+/*Desktop*/
 @media (min-width: 575px) {
-
     .container {
         max-width: 1500px;
         margin: 0 auto;
@@ -37,11 +36,15 @@
     }
     
 
-    .title {
-        font-size: 2rem;
-        margin-bottom: 20px;
-        margin-top: -30px !important;
+    .title{
         color: var(--font-color) !important;
+        margin-top: -40px !important;
+        margin-bottom: 45px !important;
+        background-color: var(--back-color-secondary);
+        border-radius: 10px;
+        width: 95%;
+        margin: auto;
+        padding: 5px;
     }
 
     .formGroup {

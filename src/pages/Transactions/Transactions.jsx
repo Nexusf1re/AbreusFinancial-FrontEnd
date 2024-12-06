@@ -9,6 +9,7 @@ import FormModal from '../../components/FormModal/FormModal';
 import FormBtn from '../../components/FormModal/FormBtn';
 import ToastConfig from '../../components/ToastConfig/ToastConfig';
 import styles from './Transactions.module.css';
+import { NumericFormat } from 'react-number-format';
 
 const Transactions = () => {
     const { Option } = Select;
@@ -27,7 +28,6 @@ const Transactions = () => {
         editedValue,
         editedCategory,
         editedDate,
-        formatValue,
         toggleTransaction,
         handleEdit,
         confirmEdit,
@@ -79,6 +79,24 @@ const Transactions = () => {
             handleOverflow(false);
         };
     }, [editingTransaction]);
+
+    const formatValue = (value) => {
+        if (!value) return 'R$ 0,00';
+        
+        // Converte para número e fixa 2 casas decimais
+        const numValue = Math.abs(Number(value)).toFixed(2);
+        
+        // Separa parte inteira e decimal
+        const [integerPart, decimalPart] = numValue.split('.');
+        
+        // Adiciona pontos para milhares na parte inteira
+        const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        
+        // Reconstrói o valor com o sinal negativo se necessário
+        const signal = value < 0 ? '-' : '';
+        
+        return `${signal}R$ ${formattedInteger},${decimalPart}`;
+    };
 
     return (
         <div className={styles.container}>
@@ -228,63 +246,73 @@ const Transactions = () => {
             </table>
 
             {editingTransaction && (
-                <Modal
-                    title="Editar Transação"
-                    open={!!editingTransaction}
-                    onOk={confirmEdit}
-                    onCancel={() => setEditingTransaction(null)}
-                    maskClosable={true}
-                    destroyOnClose={true}
-                    transitionName=""
-                    maskTransitionName=""
-                    className={styles.modalAnimation}
-                    centered
-                    maskStyle={{ backdropFilter: 'blur(4px)' }}
-                >
-                    <div className={styles.modalEditContent}>
-                        <Input
-                            className={styles.InputModalEdit}
-                            placeholder="Descrição"
-                            value={editedDescription}
-                            onChange={handleEditedDescription}
-                        />
-                        <Input
-                            className={styles.InputModalEdit}
-                            placeholder="Valor"
-                            type="number"
-                            value={editedValue}
-                            onChange={handleEditedValue}
-                        />
-                        <DatePicker
-                            className={`${styles.InputModalEdit} ${styles.InputDateEdit}`}
-                            value={editedDate}
-                            onChange={handleEditedDate}
-                            format="DD/MM/YYYY"
-                        />
-                        <Select
-                            className={`${styles.InputModalEdit} ${styles.InputCategoryEdit}`}
-                            placeholder="Selecione a categoria"
-                            value={editedCategory || undefined}
-                            onChange={handleEditedCategory}
-                        >
-                            {filteredCategories?.map((category, index) => (
-                                <Option 
-                                    key={category.Id || `${category.Category}-${index}`}
-                                    value={category.Category || ''}
-                                >
-                                    {category.Category || ''}
-                                </Option>
-                            ))}
-                        </Select>
-                        <Input
-                            className={styles.InputModalEdit}
-                            value={editingTransaction?.Type}
-                            disabled
-                            placeholder="Tipo de Lançamento"
-                        />
-                    </div>
-                </Modal>
-            )}
+            <Modal
+                title="Editar Transação"
+                open={!!editingTransaction}
+                onOk={confirmEdit}
+                onCancel={() => setEditingTransaction(null)}
+                maskClosable={true}
+                destroyOnClose={true}
+                transitionName=""
+                maskTransitionName=""
+                className={styles.modalAnimation}
+                centered
+                maskStyle={{ backdropFilter: 'blur(4px)' }}
+            >
+                <div className={styles.modalEditContent}>
+                    <Input
+                        className={styles.InputModalEdit}
+                        placeholder="Descrição"
+                        value={editedDescription}
+                        onChange={handleEditedDescription}
+                    />
+                    <NumericFormat
+                        customInput={Input}
+                        className={styles.InputModalEdit}
+                        placeholder="Valor"
+                        thousandSeparator="."
+                        decimalSeparator=","
+                        decimalScale={2}
+                        fixedDecimalScale
+                        allowNegative={false}
+                        value={editedValue}
+                        onValueChange={(values) => {
+                            const { value } = values;
+                            handleEditedValue({ target: { value } });
+                        }}
+                        prefix="R$ "
+                        style={{ fontSize: '20px', padding: '0 12px', height: '40px' }}
+                    />
+                    <DatePicker
+                        className={`${styles.InputModalEdit} ${styles.InputDateEdit}`}
+                        value={editedDate}
+                        onChange={handleEditedDate}
+                        format="DD/MM/YYYY"
+                    />
+                    <Select
+                        className={`${styles.InputModalEdit} ${styles.InputCategoryEdit}`}
+                        placeholder="Selecione a categoria"
+                        value={editedCategory || undefined}
+                        onChange={handleEditedCategory}
+                    >
+                        {filteredCategories?.map((category, index) => (
+                            <Option 
+                                key={category.Id || `${category.Category}-${index}`}
+                                value={category.Category || ''}
+                            >
+                                {category.Category || ''}
+                            </Option>
+                        ))}
+                    </Select>
+                    <Input
+                        className={styles.InputModalEdit}
+                        value={editingTransaction?.Type}
+                        disabled
+                        placeholder="Tipo de Lançamento"
+                    />
+                </div>
+            </Modal>
+        )}
 
             <Modal
                 title="Confirmar Exclusão"
@@ -294,13 +322,6 @@ const Transactions = () => {
                     setShowDeleteConfirm(false);
                     setTransactionToDelete(null);
                 }}
-                maskClosable={true}
-                destroyOnClose={true}
-                transitionName=""
-                maskTransitionName=""
-                className={styles.modalAnimation}
-                centered
-                maskStyle={{ backdropFilter: 'blur(4px)' }}
             >
                 <p>Tem certeza que deseja excluir esta transação?</p>
             </Modal>
