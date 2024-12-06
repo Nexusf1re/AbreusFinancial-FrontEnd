@@ -33,10 +33,7 @@ const FormModal = ({ visible, onCancel, onSuccess }) => {
 
   const handleClose = () => {
     setIsClosing(true);
-    setTimeout(() => {
-      setIsClosing(false);
-      onCancel();
-    }, 300);
+    onCancel();
   };
 
   if (loading) {
