@@ -97,7 +97,7 @@
 
 .toggleWrapper {
   position: relative;
-  margin: 15px 0px -10px 0px !important;
+  margin: 15px 0px -4px 0px !important;
 }
 
 .toggleInput {
@@ -126,14 +126,14 @@
   width: 70px;
   height: 36px;
   border-radius: 45px;
-  background: #4CAF50;
+  background: #f63737;
   transition: all 0.3s ease;
   transform: translateX(0);
 }
 
 .toggleInput:checked + .toggleLabel::before {
   transform: translateX(66px);
-  background: #2196F3;
+  background: #21f348;
 }
 
 .toggleText {
