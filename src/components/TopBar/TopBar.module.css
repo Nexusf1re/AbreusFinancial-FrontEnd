@@ -7,7 +7,7 @@
   .usericon{
     font-size: var(--icon-size-xl);
     display: flex;
-    left: 14px !important;
+    left: 24px !important;
     position: fixed;
     padding-left: 2px !important ;
   }

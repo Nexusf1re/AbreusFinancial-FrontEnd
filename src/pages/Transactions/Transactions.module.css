@@ -1,6 +1,7 @@
+/* Desktop */
 @media screen and (min-width: 575px) {
   .container {
-    margin: 40px 5px 0px 85px !important; /* top, right, bottom, left */
+    margin: 40px 5px 0px 95px !important; /* top, right, bottom, left */
   }
 }
 .container {

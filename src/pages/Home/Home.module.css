@@ -9,7 +9,7 @@
         box-sizing: border-box;
         font-family: var(--font-primary);
         overflow-y: auto;
-        margin: 65px 0px 0px 55px; /* top, right, bottom, left */
+        margin: 65px 0px 0px 65px; /* top, right, bottom, left */
         
         padding-top: 0;
     }
