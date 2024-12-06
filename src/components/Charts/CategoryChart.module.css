@@ -94,3 +94,68 @@
         font-size: 1rem;
     }
 }
+
+.toggleWrapper {
+  position: relative;
+  margin: 20px 0;
+}
+
+.toggleInput {
+  position: absolute;
+  left: -9999px;
+}
+
+.toggleLabel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 140px;
+  height: 40px;
+  background: var(--back-color-secondary);
+  border-radius: 100px;
+  transition: all 0.3s ease;
+  margin: 0 auto;
+}
+
+.toggleLabel::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  width: 70px;
+  height: 36px;
+  border-radius: 45px;
+  background: #4CAF50;
+  transition: all 0.3s ease;
+  transform: translateX(0);
+}
+
+.toggleInput:checked + .toggleLabel::before {
+  transform: translateX(66px);
+  background: #2196F3;
+}
+
+.toggleText {
+  color: var(--font-color);
+  font-size: 14px;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+/* Efeito hover */
+.toggleLabel:hover::before {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Efeito de foco para acessibilidade */
+.toggleInput:focus + .toggleLabel {
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Animação suave ao clicar */
+.toggleLabel:active::before {
+  transform: scale(0.95);
+}

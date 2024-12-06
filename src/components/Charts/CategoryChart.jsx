@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, Tooltip, Legend, ArcElement } from 'chart.js';
 import useGraph from '../../hooks/useGraph';
@@ -7,7 +7,9 @@ import styles from './CategoryChart.module.css';
 ChartJS.register(Tooltip, Legend, ArcElement);
 
 const CategoryChart = ({ mes, ano }) => {
-  const data = useGraph(mes, ano);
+  const [tipoTransacao, setTipoTransacao] = useState('despesas');
+
+  const data = useGraph(mes, ano, tipoTransacao);
 
   // Ordenando e calculando o total
   const sortedData = [...data].sort((a, b) => a.valor - b.valor);
@@ -72,9 +74,25 @@ const CategoryChart = ({ mes, ano }) => {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.chartTitle}>Gastos por Categoria - Mês {mes}/{ano}</h2>
+      <h2 className={styles.chartTitle}>
+        {tipoTransacao === 'despesas' ? 'Despesas' : 'Receitas'} por Categoria - Mês {mes}/{ano}
+      </h2>
       {sortedData.length > 0 ? (
         <>
+          <div className={styles.toggleWrapper}>
+            <input
+              type="checkbox"
+              id="toggle"
+              className={styles.toggleInput}
+              checked={tipoTransacao === 'receitas'}
+              onChange={(e) => setTipoTransacao(e.target.checked ? 'receitas' : 'despesas')}
+            />
+            <label htmlFor="toggle" className={styles.toggleLabel}>
+              <span className={styles.toggleText}>
+                {tipoTransacao === 'despesas' ? 'Despesas' : 'Receitas'}
+              </span>
+            </label>
+          </div>
           <Doughnut data={chartData} options={options} className={styles.canvas} />
           <div className={styles.categoryList}>
             {sortedData.map((item, index) => (
@@ -91,7 +109,7 @@ const CategoryChart = ({ mes, ano }) => {
         </>
       ) : (
         <div className={styles.emptyMessage}>
-          <h4>Nenhuma saída para o período selecionado!</h4>
+          <h4>Nenhuma {tipoTransacao === 'despesas' ? 'saída' : 'entrada'} para o período selecionado!</h4>
         </div>
       )}
     </div>

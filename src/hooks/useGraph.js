@@ -2,21 +2,22 @@ import { useEffect, useState } from 'react';
 import Big from 'big.js';
 import dayjs from 'dayjs';
 
-const useGraph = (mes, ano) => {
+const useGraph = (mes, ano, tipoTransacao) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const apiUrl = process.env.REACT_APP_API_URL; 
+        const apiUrl = process.env.REACT_APP_API_URL;
         const token = localStorage.getItem('token');
+        const endpoint = tipoTransacao === 'despesas' ? 'Outflows' : 'Inflows';
 
         const headers = {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         };
 
-        const response = await fetch(`${apiUrl}/calc/Outflows`, { headers });
+        const response = await fetch(`${apiUrl}/calc/${endpoint}`, { headers });
 
         if (!response.ok) {
           throw new Error('Erro ao buscar dados');
@@ -56,7 +57,7 @@ const useGraph = (mes, ano) => {
     };
 
     fetchData();
-  }, [mes, ano]); // Atualizar os dados sempre que o mês ou o ano mudar
+  }, [mes, ano, tipoTransacao]); // Atualizar os dados sempre que o mês, o ano ou o tipo de transação mudar
 
   return data;
 };
