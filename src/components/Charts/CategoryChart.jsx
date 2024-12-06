@@ -17,7 +17,11 @@ const CategoryChart = ({ mes, ano }) => {
     datasets: [
       {
         label: 'Gastos por Categoria',
-        data: sortedData.map(item => item.valor),
+        data: sortedData.map(item => {
+          const total = sortedData.reduce((acc, curr) => acc + curr.valor, 0);
+          const percentage = (item.valor / total) * 100;
+          return percentage < 2 ? total * 0.015 : item.valor;
+        }),
         backgroundColor: [
           '#67ee4c', '#36A2EB', '#FFCE56', '#804bc0', '#b4fff9', '#FF9F40', '#ff4040', '#e240ff', '#3dfe6a', '#5e5e5e', '#ffed25', '#4a40ff'
         ],
@@ -32,6 +36,7 @@ const CategoryChart = ({ mes, ano }) => {
 
   const options = {
     responsive: true,
+    cutout: '60%',
     layout: {
       padding: { bottom: 30 },
     },
@@ -55,7 +60,8 @@ const CategoryChart = ({ mes, ano }) => {
       tooltip: {
         callbacks: {
           label: function (tooltipItem) {
-            return `${tooltipItem.label}: R$ ${tooltipItem.raw.toLocaleString()}`;
+            const originalValue = sortedData[tooltipItem.dataIndex].valor;
+            return `${tooltipItem.label}: R$ ${originalValue.toLocaleString()}`;
           },
         },
       },
