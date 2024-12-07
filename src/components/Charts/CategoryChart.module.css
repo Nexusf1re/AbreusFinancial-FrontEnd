@@ -1,99 +1,100 @@
 .container {
-    height: auto;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    position: relative;
-    flex-direction: column;
+  height: auto;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  flex-direction: column;
 }
 
-.chartTitle{
-    margin: 0;
-    padding: 0;
-    font-size: var(--font-size-md);
-    font-family: var(--font-primary);
-    font-weight: var(--font-weight-medium);
+.chartTitle {
+  margin: 0;
+  padding: 0;
+  font-size: var(--font-size-md);
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-medium);
 }
 
 .canvas {
-    max-width: 19rem;
-    max-height: 19rem;
-    margin: 15px 0px 15px 0px !important;
+  max-width: 19rem;
+  max-height: 19rem;
+  margin: 15px 0px 15px 0px !important;
 }
 
 .emptyMessage {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    color: gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: gray;
 }
 
 .categoryList {
-    margin-top: -30px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+  margin-top: -30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .categoryItem {
-    display: flex;
-    align-items: center;
-    margin: 5px 0;
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
 }
 
 .colorBox {
-    width: 15px;
-    height: 15px;
-    margin-right: 8px;
-    border-radius: 3px;
+  width: 15px;
+  height: 15px;
+  margin-right: 8px;
+  border-radius: 3px;
 }
 
 .categoryLabel {
-    font-weight: var(--font-weight-semibold);
-    font-size: var(--font-size-sm);
-    margin-right: 4px;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+  margin-right: 4px;
 }
 
 /* Estilos para telas maiores */
 @media screen and (min-width: 575px) {
-    .container {
-        padding-left: 20px;
-        height: auto;
-    }
+  .container {
+    padding-left: 20px;
+    height: auto;
+  }
 }
 
 /* Estilos para telas menores */
 @media screen and (max-width: 574px) {
-    .container {
-        height: auto;
-        min-height: 600px;
-        width: 100%;
-        padding: 10px !important;
-    }
+  .container {
+    height: auto;
+    min-height: 600px;
+    width: 100%;
+    padding: 10px !important;
+  }
 
-    .categoryList {
-        padding: 0px;
-        display: flex;
-        flex-direction: column;
-    }
+  .categoryList {
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+  }
 
-    .categoryItem {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin: 4px 0;
-    }
+  .categoryItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 4px 0;
+  }
 
-    .colorBox {
-        width: 18px;
-        height: 18px;
-        margin-right: 10px;
-    }
+  .colorBox {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+  }
 
-    .categoryLabel, .categoryValue {
-        font-size: 1rem;
-    }
+  .categoryLabel,
+  .categoryValue {
+    font-size: 1rem;
+  }
 }
 
 .toggleWrapper {
@@ -143,11 +144,11 @@
   transform: translateX(0);
 }
 
-.toggleInput:checked + .toggleLabel .toggleText:first-child {
+.toggleInput:checked+.toggleLabel .toggleText:first-child {
   transform: translateX(-90px);
 }
 
-.toggleInput:checked + .toggleLabel .toggleText:last-child {
+.toggleInput:checked+.toggleLabel .toggleText:last-child {
   transform: translateX(-90px);
 }
 
@@ -163,7 +164,7 @@
   transform: translateX(0);
 }
 
-.toggleInput:checked + .toggleLabel::before {
+.toggleInput:checked+.toggleLabel::before {
   transform: translateX(86px);
   background: #21f348;
 }
@@ -174,7 +175,7 @@
 }
 
 /* Efeito de foco para acessibilidade */
-.toggleInput:focus + .toggleLabel {
+.toggleInput:focus+.toggleLabel {
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
 }
 
@@ -183,11 +184,11 @@
   transform: scale(0.95);
 }
 
-.emptyMessage{
+.emptyMessage {
   display: list-item;
   justify-content: center;
   align-items: center;
   text-align: center;
   color: gray;
-  
+
 }

@@ -13,7 +13,7 @@ const CategoryChart = ({ mes, ano }) => {
 
   // Ordenando e calculando o total
   const sortedData = [...data].sort((a, b) => a.valor - b.valor);
-  
+
   const chartData = {
     labels: sortedData.map(item => item.nome),
     datasets: [
@@ -30,7 +30,7 @@ const CategoryChart = ({ mes, ano }) => {
         hoverBackgroundColor: [
           '#67ee4c', '#36A2EB', '#FFCE56', '#804bc0', '#b4fff9', '#FF9F40', '#ff4040', '#e240ff', '#3dfe6a', '#5e5e5e', '#ffed25', '#4a40ff', '#000000'
         ],
-        borderWidth: 5,
+        borderWidth: 1.5,
         borderColor: '#ffffff',
       },
     ],
@@ -108,7 +108,7 @@ const CategoryChart = ({ mes, ano }) => {
         </>
       ) : (
         <div className={styles.emptyMessage}>
-           <div className={styles.toggleWrapper}>
+          <div className={styles.toggleWrapper}>
             <input
               type="checkbox"
               id="toggle"

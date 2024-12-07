@@ -11,7 +11,7 @@ const BottomBar = () => {
             <a className={styles.a} href='/home'>
                 <span className={styles.span}>
                     <FaHouse className={`${styles.home} ${location.pathname === '/home' ? styles.activeIcon : ''}`} />
-                </span> 
+                </span>
                 Início
             </a>
             {/*

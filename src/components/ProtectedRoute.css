@@ -1,26 +1,27 @@
 .blurred-content {
-    position: relative;
-    filter: blur(5px); /* Aplica o blur enquanto os dados estão carregando */
-    pointer-events: none; /* Impede interação com a página durante o carregamento */
-  }
-  
-  .loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.9);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-  }
-  
-  .loading-spinner {
-    padding: 20px;
-    border-radius: 8px;
-    background: white;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  }
-  
+  position: relative;
+  filter: blur(5px);
+  /* Aplica o blur enquanto os dados estão carregando */
+  pointer-events: none;
+  /* Impede interação com a página durante o carregamento */
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.loading-spinner {
+  padding: 20px;
+  border-radius: 8px;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}

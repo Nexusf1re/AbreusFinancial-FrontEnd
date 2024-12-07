@@ -9,13 +9,13 @@ const useCreateCategory = () => {
     setLoading(true);
     setError(null);
 
-   
-    const apiUrl = process.env.REACT_APP_API_URL; 
-  
-    const token = localStorage.getItem('token');  
+
+    const apiUrl = process.env.REACT_APP_API_URL;
+
+    const token = localStorage.getItem('token');
 
     try {
-      const response = await fetch(`${apiUrl}/category/register`, { 
+      const response = await fetch(`${apiUrl}/category/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ const useCreateCategory = () => {
       }
 
       const result = await response.json();
-      return result; 
+      return result;
     } catch (err) {
       setError(err.message);
     } finally {
@@ -38,7 +38,7 @@ const useCreateCategory = () => {
     }
   };
 
-  return { createCategory, loading, error }; 
+  return { createCategory, loading, error };
 };
 
 export default useCreateCategory;

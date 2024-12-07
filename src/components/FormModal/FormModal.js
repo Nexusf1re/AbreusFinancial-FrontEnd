@@ -59,13 +59,13 @@ const FormModal = ({ visible, onCancel, onSuccess }) => {
       await handleSubmit();
       onCancel();
       if (onSuccess) {
-        onSuccess(); 
+        onSuccess();
       }
     } catch (error) {
       console.error("Erro ao enviar o formulário:", error);
     }
   };
-  
+
   const handleValueChange = (values) => {
     const { value } = values;
     // Mantém o valor em centavos
@@ -85,7 +85,7 @@ const FormModal = ({ visible, onCancel, onSuccess }) => {
       maskTransitionName=""
     >
       <Form onFinish={onFormSubmit} className={styles.form}>
-        <Title className={styles.title} level={3}>Lançamento de contas</Title>        
+        <Title className={styles.title} level={3}>Lançamento de contas</Title>
         <div className={styles.formGroup}>
           <Form.Item
             style={{ marginTop: '-15px' }}
@@ -109,13 +109,13 @@ const FormModal = ({ visible, onCancel, onSuccess }) => {
                 if (!val) return '';
                 // Garante que temos pelo menos 3 dígitos (incluindo zero à esquerda se necessário)
                 const number = val.replace(/\D/g, '').padStart(3, '0');
-                
-                
+
+
                 const decimalPart = number.slice(-2);
                 const integerPart = number.slice(0, -2).replace(/^0+/, '') || '0';
-                
+
                 const formattedInteger = integerPart.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
-                
+
                 return `R$ ${formattedInteger},${decimalPart}`;
               }}
               value={formData.value ? (parseFloat(formData.value) * 100).toString() : ''}

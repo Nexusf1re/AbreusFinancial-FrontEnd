@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Input, Select, Button, DatePicker, Typography, Spin } from 'antd';
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; 
+import 'react-toastify/dist/ReactToastify.css';
 import TopBar from '../../components/TopBar/TopBar';
 import BottomBar from '../../components/BottomBar/BottomBar';
 import styles from './Form.module.css';
@@ -26,64 +26,64 @@ const FormComponent = () => {
     return <div>Erro ao carregar categorias: {error}</div>;
   }
 
-  const paymentOptions = formData.type === 'Entrada' 
+  const paymentOptions = formData.type === 'Entrada'
     ? ['Dinheiro', 'Pix', 'EmConta']
     : ['Dinheiro', 'Pix', 'Debito', 'Credito', 'Boleto', 'EmConta'];
-    
-    const filteredCategories = [
-      ...defaultCategories.filter(category => category.Type === formData.type),
-      ...categories.filter(category => category.Type === formData.type)
-    ];
-    
+
+  const filteredCategories = [
+    ...defaultCategories.filter(category => category.Type === formData.type),
+    ...categories.filter(category => category.Type === formData.type)
+  ];
+
 
   // Função para formatar o valor em tempo real
   const formatCurrency = (value) => {
     if (!value) return '0,00';
-    
+
     // Remove tudo que não for número
     let numericValue = value.replace(/\D/g, '');
-    
+
     // Adiciona zeros à esquerda se necessário
     numericValue = numericValue.padStart(3, '0');
-    
+
     // Divide o valor em reais e centavos
     const reais = numericValue.slice(0, -2);
     const centavos = numericValue.slice(-2);
-    
+
     // Formata os reais com pontos para milhares
     let formattedReais = reais;
     if (formattedReais.length > 3) {
       formattedReais = formattedReais.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
     }
-    
+
     // Remove zeros à esquerda desnecessários
     formattedReais = formattedReais.replace(/^0+/, '') || '0';
-    
+
     return `${formattedReais},${centavos}`;
   };
 
   // Handler para o campo de valor
   const handleValueChange = (e) => {
     let value = e.target.value;
-    
+
     // Permite apenas números, vírgula e ponto
     value = value.replace(/[^\d.,]/g, '');
-    
+
     // Substitui múltiplas vírgulas ou pontos por uma única vírgula
     value = value.replace(/[.,]/g, ',').replace(/,+/g, ',');
-    
+
     // Garante apenas uma vírgula
     const parts = value.split(',');
     if (parts.length > 2) {
       value = parts[0] + ',' + parts[1];
     }
-    
+
     // Remove pontos existentes para reformatar
     const cleanValue = value.replace(/\./g, '').replace(',', '');
     const formattedValue = formatCurrency(cleanValue);
-    
+
     setInputValue(formattedValue);
-    
+
     // Converte para o formato numérico antes de salvar no estado do formulário
     const numericValue = cleanValue ? (parseFloat(cleanValue) / 100).toString() : '0';
     handleChange('value', numericValue);
@@ -208,22 +208,22 @@ const FormComponent = () => {
           </Form.Item>
 
           <Form.Item
-    className={styles.formInput}
-    label="Data da movimentação"
-    name="date"
-    rules={[{ required: true, message: 'Por favor selecione uma data!' }]}
->
-    <DatePicker
-        className={styles.formDate}
-        style={{ height: '40px' }}
-        format="DD-MM-YYYY"
-        value={formData.date}
-        onChange={(date) => handleChange('date', date)}
-        disabled={false} 
-        allowClear={false}
-        inputReadOnly
-    />
-</Form.Item>
+            className={styles.formInput}
+            label="Data da movimentação"
+            name="date"
+            rules={[{ required: true, message: 'Por favor selecione uma data!' }]}
+          >
+            <DatePicker
+              className={styles.formDate}
+              style={{ height: '40px' }}
+              format="DD-MM-YYYY"
+              value={formData.date}
+              onChange={(date) => handleChange('date', date)}
+              disabled={false}
+              allowClear={false}
+              inputReadOnly
+            />
+          </Form.Item>
 
         </div>
         <Form.Item>

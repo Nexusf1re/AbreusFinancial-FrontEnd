@@ -14,7 +14,7 @@ const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [capsLockWarning, setCapsLockWarning] = useState(false); 
+  const [capsLockWarning, setCapsLockWarning] = useState(false);
   const { registerUser, loading, success } = useRegister();
   const navigate = useNavigate();
   const [currentSlogan, setCurrentSlogan] = useState(() => {
@@ -59,7 +59,7 @@ const SignUp = () => {
   useEffect(() => {
     if (success) {
       setTimeout(() => {
-        navigate('/');  
+        navigate('/');
       }, 1500);
     }
   }, [success, navigate]);
@@ -87,10 +87,10 @@ const SignUp = () => {
       <div style={{ position: 'absolute', top: '20px', right: '20px', zIndex: '9999' }}>
         <ThemeToggle />
       </div>
-      <img 
-        src={currentSlogan} 
-        alt="Logo" 
-        className={styles.logo} 
+      <img
+        src={currentSlogan}
+        alt="Logo"
+        className={styles.logo}
         onClick={handleLogoClick}
         style={{ cursor: 'pointer' }}
       />
@@ -133,7 +133,7 @@ const SignUp = () => {
             placeholder="Senha"
             aria-label="Senha"
             required
-            onKeyDown={handleCapsLock} 
+            onKeyDown={handleCapsLock}
           />
         </div>
 

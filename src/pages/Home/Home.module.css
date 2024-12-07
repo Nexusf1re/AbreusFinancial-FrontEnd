@@ -9,8 +9,9 @@
         box-sizing: border-box;
         font-family: var(--font-primary);
         overflow-y: auto;
-        margin: 65px 0px 0px 65px; /* top, right, bottom, left */
-        
+        margin: 65px 0px 0px 65px;
+        /* top, right, bottom, left */
+
         padding-top: 0;
     }
 
@@ -32,28 +33,30 @@
     .card {
         background-color: var(--back-color);
         color: var(--font-color) !important;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); 
-        overflow: hidden; 
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
         transition: transform 0.3s, box-shadow 0.3s;
-        margin: 0px; 
+        margin: 0px;
     }
 
-    .income, .outgoing {
+    .income,
+    .outgoing {
         background-color: var(--back-color);
         border-radius: 10px;
-        width: calc(50% - 10px); 
+        width: calc(50% - 10px);
         height: 80px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding: 5px; 
+        padding: 5px;
         margin: 0;
     }
 
-    .income .p, .outgoing .p {
+    .income .p,
+    .outgoing .p {
         text-align: center;
-        font-size: var(--font-size-lg); 
+        font-size: var(--font-size-lg);
         font-weight: var(--font-weight-medium);
     }
 
@@ -65,7 +68,7 @@
         padding: 0;
         margin: 4px 0;
         display: flex;
-        gap: 10px; 
+        gap: 10px;
         align-items: center;
     }
 
@@ -73,26 +76,28 @@
         margin: 4px 0;
     }
 
-    .annualBalance, .monthBalance {
+    .annualBalance,
+    .monthBalance {
         border-radius: 10px;
         height: 80px;
         padding: 10px;
     }
 
-    .annualBalance .p, .monthBalance .p {
+    .annualBalance .p,
+    .monthBalance .p {
         text-align: center;
         font-size: var(--font-size-md);
         font-weight: var(--font-weight-semibold);
     }
 
     .positive {
-        color: green !important; 
+        color: green !important;
     }
-  
+
     .negative {
-        color: red !important; 
+        color: red !important;
     }
-  
+
     .graph {
         background-color: var(--back-color);
         color: var(--font-color) !important;
@@ -106,161 +111,163 @@
         justify-content: center;
     }
 
-    .p{
+    .p {
         margin: auto;
     }
-    
+
 }
 
 
 @media screen and (max-width: 574px) {
+
     /*Mobile*/
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 0;
-    box-sizing: border-box !important;
-    font-family: var(--font-primary);
-    height: auto;
-    min-height: 100vh;
-    overflow-y: auto;
-    margin: 2px 4px 5px 4px;  /* top, right, bottom, left */
-}
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 0;
+        box-sizing: border-box !important;
+        font-family: var(--font-primary);
+        height: auto;
+        min-height: 100vh;
+        overflow-y: auto;
+        margin: 2px 4px 5px 4px;
+        /* top, right, bottom, left */
+    }
 
-.p{
-    margin: auto;
-}
-
-
-.card {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.217);
-    overflow: hidden; 
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.date {
-    font-size: 18px;
-    font-weight: bold;
-    background-color: var(--back-color);
-    color: var(--font-color);
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    padding: 7px;
-    border-radius: 12px;
-    margin: 56px 0px -8vw 0px;
-}
-
-.datePicker{
-    text-align: center;
-}
-
-.name{
-    color: var(--font-color) !important;
-}
-
-.InOut {
-    padding: 0;
-    margin-top: -7vw !important;
-    display: flex;
-    gap: 10px;
-}
-
-.income {
-    background-color: var(--back-color);
-    border-radius: 10px;
-    width: 50%;
-    height: 65px;
-    margin-top: 10%;
-    margin-left: 0px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
+    .p {
+        margin: auto;
+    }
 
 
-.income .p {
-    text-align: center;
-    font-size: var(--font-size-md);
-    font-weight: var(--font-weight-medium);
-    color: green;
-}
+    .card {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.217);
+        overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
 
-.outgoing {
-    background-color: var(--back-color);
-    border-radius: 10px;
-    width: 50%;
-    height: 65px;
-    margin-top: 10%;
-    margin-right: 0px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
+    .date {
+        font-size: 18px;
+        font-weight: bold;
+        background-color: var(--back-color);
+        color: var(--font-color);
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        padding: 7px;
+        border-radius: 12px;
+        margin: 56px 0px -8vw 0px;
+    }
 
-.outgoing .p {
-    text-align: center;
-    font-size: var(--font-size-md);
-    font-weight: var(--font-weight-medium);
-    color: rgb(193, 1, 1);
-}
+    .datePicker {
+        text-align: center;
+    }
 
-.annualBalance {
-    margin: 10vw 0px 0px 0px;
-    background-color: var(--back-color);
-    border-radius: 10px;
-    padding: 2px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+    .name {
+        color: var(--font-color) !important;
+    }
 
-.annualBalance .p{
-    text-align: center;
-    font-size: var(--font-size-md);
-    font-weight: var(--font-weight-semibold);
-}
+    .InOut {
+        padding: 0;
+        margin-top: -7vw !important;
+        display: flex;
+        gap: 10px;
+    }
 
-.monthBalance {
-    margin: 10px 0px 10px 0px;
-    background-color: var(--back-color);
-    border-radius: 10px;
-    padding: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+    .income {
+        background-color: var(--back-color);
+        border-radius: 10px;
+        width: 50%;
+        height: 65px;
+        margin-top: 10%;
+        margin-left: 0px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 
-.monthBalance .name {
-    margin-top: -5px;
-}
 
-.monthBalance .p {
-    text-align: center;
-    font-size: var(--font-size-md);
-    font-weight: var(--font-weight-semibold);
-}
+    .income .p {
+        text-align: center;
+        font-size: var(--font-size-md);
+        font-weight: var(--font-weight-medium);
+        color: green;
+    }
 
-  .positive {
-    color: green !important; 
-  }
-  
-  .negative {
-    color: red !important; 
-  }
-  
-  .graph {
-    background-color: var(--back-color);
-    color: var(--font-color) !important;
-    width: 100%;
-    border-radius: 10px;
-    flex: 1; 
-    display: flex;
-    overflow: hidden; 
-    height: auto; 
-}
+    .outgoing {
+        background-color: var(--back-color);
+        border-radius: 10px;
+        width: 50%;
+        height: 65px;
+        margin-top: 10%;
+        margin-right: 0px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .outgoing .p {
+        text-align: center;
+        font-size: var(--font-size-md);
+        font-weight: var(--font-weight-medium);
+        color: rgb(193, 1, 1);
+    }
+
+    .annualBalance {
+        margin: 10vw 0px 0px 0px;
+        background-color: var(--back-color);
+        border-radius: 10px;
+        padding: 2px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .annualBalance .p {
+        text-align: center;
+        font-size: var(--font-size-md);
+        font-weight: var(--font-weight-semibold);
+    }
+
+    .monthBalance {
+        margin: 10px 0px 10px 0px;
+        background-color: var(--back-color);
+        border-radius: 10px;
+        padding: 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .monthBalance .name {
+        margin-top: -5px;
+    }
+
+    .monthBalance .p {
+        text-align: center;
+        font-size: var(--font-size-md);
+        font-weight: var(--font-weight-semibold);
+    }
+
+    .positive {
+        color: green !important;
+    }
+
+    .negative {
+        color: red !important;
+    }
+
+    .graph {
+        background-color: var(--back-color);
+        color: var(--font-color) !important;
+        width: 100%;
+        border-radius: 10px;
+        flex: 1;
+        display: flex;
+        overflow: hidden;
+        height: auto;
+    }
 
 }

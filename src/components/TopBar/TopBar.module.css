@@ -1,18 +1,19 @@
 @media screen and (min-width: 575px) {
+
   /*desktop*/
-  .topbar{
+  .topbar {
     transition: all 0.6s ease !important;
   }
-  
-  .usericon{
+
+  .usericon {
     font-size: var(--icon-size-xl);
     display: flex;
     left: 24px !important;
     position: fixed;
-    padding-left: 2px !important ;
+    padding-left: 2px !important;
   }
 
-  .welcome{
+  .welcome {
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-medium);
     position: fixed;
@@ -20,7 +21,7 @@
     color: var(--font-color);
   }
 
-  .greeting{
+  .greeting {
     display: none;
     font-size: var(--font-size-md);
     position: fixed;
@@ -30,95 +31,91 @@
 
 }
 
-.topbar{
-    background-color: var(--topBar);
-    color: var(--font-color);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 55px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: var(--font-primary);
+.topbar {
+  background-color: var(--topBar);
+  color: var(--font-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--font-primary);
 
-    transition: all 0.6s ease !important;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    overflow: hidden; 
-    transition: transform 0.3s, box-shadow 0.3s;
-    z-index: 999 !important;
-  }
+  transition: all 0.6s ease !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  z-index: 999 !important;
+}
 
-  .topbar .p{
-    margin: auto !important;
-  }
-  
+.topbar .p {
+  margin: auto !important;
+}
 
-  .usericon{
-    font-size: var(--icon-size-xl);
-    display: flex;
-    left: 0;
-    position: fixed;
-    padding-left: 2px !important ;
-  }
 
-  .exit{
-    display: inline;
-    position: fixed;
-    right: 10px;
-    text-align: center;
-    font-size: var(--font-size-md);
-    font-weight: var(--font-weight-medium);
-    margin: 0;
-    padding: 0;
-    text-decoration: none;
-    color: var(--font-color);
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-  }
+.usericon {
+  font-size: calc(var(--icon-size-md) * 1.9);
+  display: flex;
+  left: 6px;
+  position: fixed;
+  padding-left: 2px !important;
+}
 
-  .exit .p {
-   margin-top: -5px;
-   color: var(--font-color);
-  }
+.exit {
+  display: inline;
+  position: fixed;
+  right: 10px;
+  text-align: center;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  color: var(--font-color);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
 
-  .welcome{
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-medium);
-    position: fixed;
-    left: 14%;
-    color: var(--font-color);
-  }
+.exit .p {
+  margin-top: -5px;
+  color: var(--font-color);
+}
 
-  .greeting{
-    display: none;
-    font-size: var(--font-size-md);
-    position: fixed;
-    right: 25%;
-    color: var(--font-color);
-  }
+.welcome {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  position: fixed;
+  left: 65px;
+  color: var(--font-color);
+}
 
-  .themeToggleContainer {
-    display: inline;
-    position: fixed;
-    right: 65px;
-    text-align: center;
-    font-size: 19px;
-    padding: 0;
-    text-decoration: none;
-    color: var(--font-color);
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-  }
+.greeting {
+  display: none;
+  font-size: var(--font-size-md);
+  position: fixed;
+  right: 25%;
+  color: var(--font-color);
+}
 
-  .themeToggleContainer:hover {
-    transform: scale(1.1);
-  }
+.themeToggleContainer {
+  display: inline;
+  position: fixed;
+  right: 65px;
+  text-align: center;
+  font-size: 19px;
+  padding: 0;
+  text-decoration: none;
+  color: var(--font-color);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
 
-  
-
-  
+.themeToggleContainer:hover {
+  transform: scale(1.1);
+}

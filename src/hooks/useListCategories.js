@@ -8,7 +8,7 @@ const useCategories = () => {
     const fetchCategories = async () => {
       try {
         const apiUrl = process.env.REACT_APP_API_URL;
-        const token = localStorage.getItem('token');  
+        const token = localStorage.getItem('token');
 
         const headers = {
           'Content-Type': 'application/json',

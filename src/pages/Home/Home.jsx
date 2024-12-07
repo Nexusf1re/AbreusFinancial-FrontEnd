@@ -18,7 +18,7 @@ const Home = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedMonth, setSelectedMonth] = useState(dayjs().month() + 1);
   const [selectedYear, setSelectedYear] = useState(dayjs().year());
-  const { 
+  const {
     totalEntrada: totalIncome,
     totalSaida: totalExpenses,
     balancoMes: monthlyBalance,
@@ -104,19 +104,19 @@ const Home = () => {
       </div>
 
       <div className={`${styles.graph} ${styles.card}`}>
-        <CategoryChart 
-          key={chartKey} 
-          mes={selectedMonth} 
-          ano={selectedYear} 
+        <CategoryChart
+          key={chartKey}
+          mes={selectedMonth}
+          ano={selectedYear}
         />
       </div>
       <ToastConfig />
       <div>
         <FormBtn onClick={handleModalShow} />
-        <FormModal 
-          visible={isModalVisible} 
-          onCancel={handleModalClose} 
-          onSuccess={handleFormSuccess} 
+        <FormModal
+          visible={isModalVisible}
+          onCancel={handleModalClose}
+          onSuccess={handleFormSuccess}
         />
       </div>
       <BottomBar />

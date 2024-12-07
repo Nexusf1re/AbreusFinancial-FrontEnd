@@ -31,7 +31,7 @@ export const getUsernameFromToken = () => {
     }
 
     const decodedToken = jwtDecode(token);
-    return decodedToken.username; 
+    return decodedToken.username;
 };
 
 // Função para buscar dados financeiros

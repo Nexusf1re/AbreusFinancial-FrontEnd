@@ -1,4 +1,4 @@
-:root{
+:root {
     /* White Theme*/
     --authPages: rgb(255, 255, 255, 0.9);
     --topBar: rgb(255, 255, 255, 0.95);
@@ -6,9 +6,13 @@
     --back-color: rgba(255, 255, 255, 0.95);
     --back-color-secondary: rgba(235, 235, 235, 0.95);
     --back-color-tertiary: rgba(235, 235, 235, 0.95);
+    --back-color-quaternary: rgba(255, 255, 255, 0.95);
     --font-color: rgba(0, 0, 0, 0.9);
     --label-color: rgba(51, 51, 51, 1);
     --mainBackground: rgb(230, 230, 230);
+    --th: rgb(37, 37, 37);
+    --dateTitle: rgba(245, 245, 245);
+    --tr: rgb(200, 200, 200);
     --bottomBar-font-color: rgba(64, 64, 64, 0.9);
     --background-color: rgba(255, 255, 255, 0.95);
     --shadow-color: rgba(0, 0, 0, 0.1);
@@ -25,31 +29,43 @@
     /* Novas variáveis de tipografia */
     --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-secondary: 'Poppins', sans-serif;
-    
+
     /* Tamanhos de fonte */
-    --font-size-xs: 0.75rem;    /* 12px */
-    --font-size-sm: 0.875rem;   /* 14px */
-    --font-size-base: 1rem;     /* 16px */
-    --font-size-md: 1.125rem;   /* 18px */
-    --font-size-lg: 1.25rem;    /* 20px */
-    --font-size-xl: 1.5rem;     /* 24px */
-    --font-size-2xl: 1.875rem;  /* 30px */
-    
+    --font-size-xs: 0.75rem;
+    /* 12px */
+    --font-size-sm: 0.875rem;
+    /* 14px */
+    --font-size-base: 1rem;
+    /* 16px */
+    --font-size-md: 1.125rem;
+    /* 18px */
+    --font-size-lg: 1.25rem;
+    /* 20px */
+    --font-size-xl: 1.5rem;
+    /* 24px */
+    --font-size-2xl: 1.875rem;
+    /* 30px */
+
     /* Pesos de fonte */
     --font-weight-normal: 400;
     --font-weight-medium: 500;
     --font-weight-semibold: 600;
     --font-weight-bold: 700;
-    
+
     /* Tamanhos de ícones */
-    --icon-size-xs: 1rem;      /* 16px */
-    --icon-size-sm: 1.25rem;   /* 20px */
-    --icon-size-md: 1.40rem;    /* 24px */
-    --icon-size-lg: 2rem;      /* 32px */
-    --icon-size-xl: 2.5rem;    /* 40px */
+    --icon-size-xs: 1rem;
+    /* 16px */
+    --icon-size-sm: 1.25rem;
+    /* 20px */
+    --icon-size-md: 1.40rem;
+    /* 24px */
+    --icon-size-lg: 2rem;
+    /* 32px */
+    --icon-size-xl: 2.5rem;
+    /* 40px */
 }
 
-.dark-theme{
+.dark-theme {
     /* Black Theme*/
     --authPages: rgb(255, 255, 255, 0.9);
     --topBar: rgba(21, 21, 21, 0.95);
@@ -57,9 +73,13 @@
     --back-color: rgb(29, 29, 29);
     --back-color-secondary: rgba(54, 54, 54, 0.727);
     --back-color-tertiary: rgba(44, 44, 44, 0.95);
+    --back-color-quaternary: rgba(0, 0, 0, 0.95);
     --font-color: rgba(255, 255, 255, 0.95);
     --label-color: rgba(255, 255, 255, 0.9);
     --mainBackground: rgba(132, 132, 132, 0.9);
+    --th: rgb(15, 15, 15);
+    --dateTitle: rgba(48, 48, 48, 0.9);
+    --tr: rgba(71, 71, 71, 0.9);
     --bottomBar-font-color: rgba(195, 195, 195, 0.95);
     --background-color: rgba(29, 29, 29, 0.95);
     --shadow-color: rgba(0, 0, 0, 0.3);
@@ -83,9 +103,16 @@ body {
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-synthesis: none;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
 }
 
-input, textarea, select {
+input,
+textarea,
+select {
     touch-action: manipulation;
 }
 
@@ -210,7 +237,7 @@ input, textarea, select {
     border-color: var(--label-color) !important;
 }
 
-.ant-picker-input > input {
+.ant-picker-input>input {
     background: transparent !important;
     color: var(--font-color) !important;
 }
@@ -242,7 +269,7 @@ input, textarea, select {
 /* Ajuste específico para os selects no tema escuro */
 .dark-theme .ant-select-selection-item,
 .dark-theme .ant-select-item-option-content,
-.dark-theme .ant-picker-input > input,
+.dark-theme .ant-picker-input>input,
 .dark-theme .ant-input {
     color: rgba(255, 255, 255, 0.95) !important;
 }
@@ -257,8 +284,9 @@ input, textarea, select {
 .dark-theme input::placeholder,
 .dark-theme textarea::placeholder,
 .dark-theme .ant-select-selection-placeholder,
-.dark-theme .ant-picker-input > input::placeholder {
-    color: rgba(255, 255, 255, 0.7) !important; /* Placeholder mais visível no tema escuro */
+.dark-theme .ant-picker-input>input::placeholder {
+    color: rgba(255, 255, 255, 0.7) !important;
+    /* Placeholder mais visível no tema escuro */
     opacity: 1 !important;
 }
 
@@ -266,9 +294,10 @@ input, textarea, select {
 .dark-theme .ant-input,
 .dark-theme .ant-input-number-input,
 .dark-theme .ant-select-selection-placeholder,
-.dark-theme .ant-picker-input > input::placeholder,
+.dark-theme .ant-picker-input>input::placeholder,
 .dark-theme .ant-select-selector::placeholder {
-    color: rgba(255, 255, 255, 0.95) !important; /* Texto mais brilhante */
+    color: rgba(255, 255, 255, 0.95) !important;
+    /* Texto mais brilhante */
 }
 
 /* Ajuste para o texto selecionado */
@@ -294,45 +323,82 @@ input, textarea, select {
 
 /* Esconde a barra de rolagem mas mantém a funcionalidade */
 * {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer e Edge */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* Internet Explorer e Edge */
 }
 
 /* Esconde a barra de rolagem do WebKit (Chrome, Safari, etc) */
 *::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 
 /* Mantém o comportamento de rolagem suave */
 html {
-  scroll-behavior: smooth;
-  overflow-y: scroll; /* Força a rolagem mesmo com a barra invisível */
+    scroll-behavior: smooth;
+    overflow-y: scroll;
+    /* Força a rolagem mesmo com a barra invisível */
 }
 
 body {
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch; /* Para rolagem suave em dispositivos iOS */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    /* Para rolagem suave em dispositivos iOS */
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* Estilos globais de tipografia */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: var(--font-secondary);
     font-weight: var(--font-weight-semibold);
     line-height: 1.2;
     margin-bottom: 1rem;
 }
 
-h1 { font-size: var(--font-size-2xl); }
-h2 { font-size: var(--font-size-xl); }
-h3 { font-size: var(--font-size-lg); }
-h4 { font-size: var(--font-size-md); }
+h1 {
+    font-size: var(--font-size-2xl);
+}
+
+h2 {
+    font-size: var(--font-size-xl);
+}
+
+h3 {
+    font-size: var(--font-size-lg);
+}
+
+h4 {
+    font-size: var(--font-size-md);
+}
 
 /* Estilos para ícones */
-.icon-xs { font-size: var(--icon-size-xs); }
-.icon-sm { font-size: var(--icon-size-sm); }
-.icon-md { font-size: var(--icon-size-md); }
-.icon-lg { font-size: var(--icon-size-lg); }
-.icon-xl { font-size: var(--icon-size-xl); }
+.icon-xs {
+    font-size: var(--icon-size-xs);
+}
+
+.icon-sm {
+    font-size: var(--icon-size-sm);
+}
+
+.icon-md {
+    font-size: var(--icon-size-md);
+}
+
+.icon-lg {
+    font-size: var(--icon-size-lg);
+}
+
+.icon-xl {
+    font-size: var(--icon-size-xl);
+}
 
 /* Ajustes específicos para componentes */
 .ant-btn {
@@ -359,4 +425,34 @@ h4 { font-size: var(--font-size-md); }
         --icon-size-xl: 2rem;
         --icon-size-lg: 1.75rem;
     }
+}
+
+/* Melhorias nas transições globais */
+* {
+    transition: all 0.6s all;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* Melhorias na rolagem */
+html {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Melhorias na seleção de texto */
+::selection {
+    background: var(--highlight-color);
+    color: var(--font-color);
+}
+
+/* Melhorias nos inputs */
+input,
+textarea,
+select,
+button {
+    font-smooth: always;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }

@@ -9,18 +9,20 @@
     color: var(--error-color);
     font-weight: 700;
 }
+
 .logo {
     width: 220px;
     margin: -20px auto 0px;
     display: block;
 }
+
 .container {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: var(--font-primary);
 
-    max-width: 450px; 
+    max-width: 450px;
     max-height: 600px;
     backdrop-filter: blur(4px);
     background-color: var(--background-color) !important;
@@ -36,7 +38,7 @@
 
 .container h1 {
     font-size: 1.75rem;
-    text-align: center;  
+    text-align: center;
     color: var(--font-color) !important;
     margin: 0;
 }
@@ -75,14 +77,14 @@
 
 .inputBox input:focus {
     transform: scale(1.01);
-    box-shadow: 6px 6px 2px var(--shadow-color), 
-                inset 2px 2px 1px var(--shadow-color), 
-                inset -1px -1px 5px var(--highlight-color);
+    box-shadow: 6px 6px 2px var(--shadow-color),
+        inset 2px 2px 1px var(--shadow-color),
+        inset -1px -1px 5px var(--highlight-color);
 }
 
 .inputBox input::placeholder {
     color: var(--font-color) !important;
-    text-transform: uppercase;  
+    text-transform: uppercase;
 }
 
 .icon {
@@ -114,7 +116,7 @@
 
 .inputBox .input::placeholder {
     color: var(--font-color) !important;
-    text-transform: uppercase;  
+    text-transform: uppercase;
 }
 
 .btn:hover {

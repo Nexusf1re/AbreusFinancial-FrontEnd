@@ -26,9 +26,9 @@ const Payment = () => {
           <li>Relatórios avançados</li>
           <li>Suporte exclusivo</li>
         </ul>
-        <button 
-          className={styles.paymentButton} 
-          onClick={handleStripePayment} 
+        <button
+          className={styles.paymentButton}
+          onClick={handleStripePayment}
           disabled={loading}
         >
           {loading ? 'Processando...' : 'Assinar Agora'}

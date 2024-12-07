@@ -1,4 +1,5 @@
 @media (min-width: 575px) {
+
     /* Centraliza o container no desktop */
     .container {
         max-width: 800px;
@@ -21,7 +22,8 @@
     /* Ajusta o grupo de formulários */
     .formGroup {
         display: grid;
-        grid-template-columns: 1fr; /* 2 colunas lado a lado */
+        grid-template-columns: 1fr;
+        /* 2 colunas lado a lado */
         column-gap: 20px;
         row-gap: 15px;
     }
@@ -56,60 +58,63 @@
 }
 
 
-@media screen and (max-width: 574px){
-.body{
-    margin-top: 62px;
-    margin-bottom: 85px;
-}
+@media screen and (max-width: 574px) {
+    .body {
+        margin-top: 62px;
+        margin-bottom: 85px;
+    }
 
-.title{
-    margin-bottom: 0px !important;
-}
+    .title {
+        margin-bottom: 0px !important;
+    }
 
-.formInput{
-    margin-bottom: -2px;
-} 
+    .formInput {
+        margin-bottom: -2px;
+    }
 
-.formInput label {
-    font-size: var(--font-size-md) !important;
-    font-weight: var(--font-weight-semibold);
-    margin-bottom: -10px !important;    
-    margin-top: 5px !important;
-    color: var(--label-color); 
-    font-weight: bold;      
-    display: block;          
-}
+    .formInput label {
+        font-size: var(--font-size-md) !important;
+        font-weight: var(--font-weight-semibold);
+        margin-bottom: -10px !important;
+        margin-top: 5px !important;
+        color: var(--label-color);
+        font-weight: bold;
+        display: block;
+    }
 
-.selectOption{
-    font-size: var(--font-size-md) !important;
-}
+    .selectOption {
+        font-size: var(--font-size-md) !important;
+    }
 
-/* Aplica o estilo ao valor selecionado no Select */
-.customSelect .ant-select-selection-item {
-    font-size: 20px; /* Ajusta o tamanho da fonte */
-    padding: 0 12px; /* Ajusta o padding */
-    height: 40px; /* Garante o alinhamento com o Select */
-    display: flex;
-    align-items: center;
-  }
-  
-  
+    /* Aplica o estilo ao valor selecionado no Select */
+    .customSelect .ant-select-selection-item {
+        font-size: 20px;
+        /* Ajusta o tamanho da fonte */
+        padding: 0 12px;
+        /* Ajusta o padding */
+        height: 40px;
+        /* Garante o alinhamento com o Select */
+        display: flex;
+        align-items: center;
+    }
 
-.formSubmit{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin: auto;
-    width: 100px;
-    margin-top: 5px;
-    font-size: var(--font-size-lg);
-    padding: 16px;
-}
 
-.formDate{
-    width: 100%;
-    margin-bottom: 15px;
-    text-align: center;
-}
+
+    .formSubmit {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin: auto;
+        width: 100px;
+        margin-top: 5px;
+        font-size: var(--font-size-lg);
+        padding: 16px;
+    }
+
+    .formDate {
+        width: 100%;
+        margin-bottom: 15px;
+        text-align: center;
+    }
 }

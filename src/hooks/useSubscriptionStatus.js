@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const useSubscriptionStatus = (interval = 9000) => { 
+const useSubscriptionStatus = (interval = 9000) => {
   const [subscriptionStatus, setSubscriptionStatus] = useState(() => {
     const cachedStatus = localStorage.getItem('subscriptionStatus');
     return cachedStatus ? JSON.parse(cachedStatus) : 'pending';

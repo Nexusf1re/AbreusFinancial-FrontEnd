@@ -13,7 +13,7 @@ const useRegister = () => {
 
     try {
       const apiUrl = process.env.REACT_APP_API_URL;
-      
+
       const response = await fetch(`${apiUrl}/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -28,11 +28,11 @@ const useRegister = () => {
 
       // Exibindo o toast de sucesso
       toast.success(data.message || 'Usuário cadastrado com sucesso!');
-      setSuccess(data.message);  
+      setSuccess(data.message);
     } catch (err) {
       // Exibindo o toast de erro
       toast.error(err.message || 'Erro ao cadastrar usuário');
-      setError(err.message); 
+      setError(err.message);
     } finally {
       setLoading(false);
     }

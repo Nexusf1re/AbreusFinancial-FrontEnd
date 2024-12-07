@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaMoon } from 'react-icons/fa';
-import { ImSun  } from "react-icons/im";
+import { ImSun } from "react-icons/im";
 import styles from './ThemeToggle.module.css';
 
 const ThemeToggle = () => {
@@ -12,7 +12,7 @@ const ThemeToggle = () => {
     useEffect(() => {
         document.documentElement.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
-        
+
         // Adiciona ou remove a classe dark-theme
         if (theme === 'dark') {
             document.body.classList.add('dark-theme');
@@ -27,12 +27,12 @@ const ThemeToggle = () => {
     };
 
     return (
-        <button 
-            className={`${styles.themeToggle} ${theme === 'dark' ? styles.dark : ''}`} 
+        <button
+            className={`${styles.themeToggle} ${theme === 'dark' ? styles.dark : ''}`}
             onClick={toggleTheme}
             aria-label="Alternar tema"
         >
-            {theme === 'light' ? <ImSun /> : <FaMoon />}
+            {theme === 'light' ? <ImSun className={styles.sun} style={{ fontSize: '35px' }} /> : <FaMoon className={styles.moon} />}
         </button>
     );
 };

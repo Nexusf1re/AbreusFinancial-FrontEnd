@@ -53,31 +53,31 @@ const Login = ({ onLogin }) => {
     e.preventDefault();
 
     try {
-        const response = await login(Email, Password);
-        localStorage.setItem('username', response.Username);
-        
-        await onLogin();  // Aguarda o login ser completado
+      const response = await login(Email, Password);
+      localStorage.setItem('username', response.Username);
 
-        try {
-            const subscriptionStatus = await checkSubscriptionStatus();
-            
-            if (subscriptionStatus === 'active' || subscriptionStatus === 'trialing') {
-                toast.success("Login bem-sucedido!");
-                navigate('/home');
-            } else {
-                navigate('/payment');
-            }
-        } catch (error) {
-            console.error("Erro ao verificar assinatura:", error);
-            navigate('/payment');
+      await onLogin();  // Aguarda o login ser completado
+
+      try {
+        const subscriptionStatus = await checkSubscriptionStatus();
+
+        if (subscriptionStatus === 'active' || subscriptionStatus === 'trialing') {
+          toast.success("Login bem-sucedido!");
+          navigate('/home');
+        } else {
+          navigate('/payment');
         }
+      } catch (error) {
+        console.error("Erro ao verificar assinatura:", error);
+        navigate('/payment');
+      }
     } catch (err) {
-        console.error("Erro durante o login:", err);
-        toast.error("Email ou senha incorretos.");
+      console.error("Erro durante o login:", err);
+      toast.error("Email ou senha incorretos.");
     }
-};
+  };
 
-    
+
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -116,10 +116,10 @@ const Login = ({ onLogin }) => {
       <div style={{ position: 'absolute', top: '20px', right: '20px', zIndex: '9999' }}>
         <ThemeToggle />
       </div>
-      <img 
-        src={currentSlogan} 
-        alt="Logo" 
-        className={styles.logo} 
+      <img
+        src={currentSlogan}
+        alt="Logo"
+        className={styles.logo}
         onClick={handleLogoClick}
         style={{ cursor: 'pointer' }}
       />
@@ -148,7 +148,7 @@ const Login = ({ onLogin }) => {
             value={Password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Senha"
-            onKeyDown={handleCapsLock} 
+            onKeyDown={handleCapsLock}
             required
             autoComplete="current-password"
           />
@@ -158,7 +158,7 @@ const Login = ({ onLogin }) => {
               <p style={{ fontSize: '18px' }}>Caps Lock está ativado</p>
             </div>
           )}
-          
+
           <div className={styles.eyeIcon} onClick={togglePasswordVisibility}>
             {showPassword ? <FaEyeSlash /> : <FaEye />}
           </div>

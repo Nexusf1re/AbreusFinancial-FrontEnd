@@ -16,10 +16,12 @@
     cursor: pointer;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     transition: background-color 0.3s, transform 0.3s;
-    z-index: 1000; /* Para garantir que o botão fique acima de outros elementos */
+    z-index: 1000;
+    /* Para garantir que o botão fique acima de outros elementos */
 }
 
 .scrollToTop:hover {
     background-color: #0056b3;
-    transform: scale(1.1); /* Efeito de hover */
+    transform: scale(1.1);
+    /* Efeito de hover */
 }

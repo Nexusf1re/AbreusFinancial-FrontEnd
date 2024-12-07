@@ -27,9 +27,9 @@ export const useTransactions = () => {
     const { categories } = useCategories();
 
     const allCategories = useMemo(() => {
-        
+
         if (!categories) return defaultCategoriesFilter;
-        
+
         try {
             const customCategories = categories.map(cat => ({
                 Id: cat.Id,
@@ -51,14 +51,14 @@ export const useTransactions = () => {
 
     const filteredCategories = useMemo(() => {
         if (!allCategories) return [];
-        
+
         if (editingTransaction) {
-            const filtered = allCategories.filter(category => 
+            const filtered = allCategories.filter(category =>
                 category.Type?.toLowerCase() === editingTransaction.Type?.toLowerCase()
             );
             return filtered;
         }
-        
+
         return allCategories;
     }, [allCategories, editingTransaction]);
 
@@ -93,11 +93,11 @@ export const useTransactions = () => {
         return [...transactions].sort((a, b) => {
             const dateA = new Date(a.Date);
             const dateB = new Date(b.Date);
-            
+
             if (dateA.getTime() === dateB.getTime()) {
                 return b.Id - a.Id;
             }
-            
+
             return dateB.getTime() - dateA.getTime();
         });
     }, [transactions]);
@@ -108,7 +108,7 @@ export const useTransactions = () => {
             const matchesType = typeFilter ? transaction.Type === typeFilter : true;
             const matchesPaymentMethod = paymentMethodFilter ? transaction.PaymentMethod === paymentMethodFilter : true;
             const matchesCategory = categoryFilter ? transaction.Category === categoryFilter : true;
-            
+
             return matchesSearchTerm && matchesType && matchesPaymentMethod && matchesCategory;
         });
     }, [sortedTransactions, searchTerm, typeFilter, paymentMethodFilter, categoryFilter]);
@@ -144,7 +144,7 @@ export const useTransactions = () => {
             };
 
             await editTransaction(editingTransaction.Id, updatedData);
-            setTransactions(prev => prev.map(transaction => 
+            setTransactions(prev => prev.map(transaction =>
                 transaction.Id === editingTransaction.Id ? updatedData : transaction
             ));
             setEditingTransaction(null);
@@ -207,7 +207,7 @@ export const useTransactions = () => {
 
     useEffect(() => {
         const shouldDisableScroll = editingTransaction || showDeleteConfirm || isModalOpen || isSelectOpen;
-        
+
         if (shouldDisableScroll) {
             document.body.style.overflow = 'hidden';
         } else {

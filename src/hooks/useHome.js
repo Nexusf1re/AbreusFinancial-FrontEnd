@@ -70,12 +70,12 @@ const useFinanceData = (mes, ano) => {
     fetchData();
   }, [fetchData]);
 
-  return { 
-    totalEntrada, 
-    totalSaida, 
-    balancoMes, 
-    balancoAno, 
-    refetch: fetchData 
+  return {
+    totalEntrada,
+    totalSaida,
+    balancoMes,
+    balancoAno,
+    refetch: fetchData
   };
 };
 

@@ -8,7 +8,7 @@ const useConfig = () => {
   const [formCategoria] = useState(null);
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]); // Adicionei o estado aqui
-  
+
   // Carregue as categorias assim que o hook for montado
   const { categories: fetchedCategories, error: listError } = useListCategories();
   useEffect(() => {
@@ -63,7 +63,7 @@ const useConfig = () => {
     try {
       await deleteCategory(categoryId);
       // Remove diretamente a categoria do estado local
-      setCategories((prevCategories) => 
+      setCategories((prevCategories) =>
         prevCategories.filter(category => category.Id !== categoryId)
       ); // Atualiza o estado local
     } catch (error) {

@@ -37,8 +37,8 @@ const LandingPage = () => {
       <nav className={styles.navbar}>
         <div className={styles.logo}>Abreu's Financial</div>
         <div className={styles.navLinks}>
-        <a href="#features" data-offset="180" onClick={handleScroll}>Funcionalidades</a>
-        <a href="#pricing" data-offset="50" onClick={handleScroll}>Preços</a>
+          <a href="#features" data-offset="180" onClick={handleScroll}>Funcionalidades</a>
+          <a href="#pricing" data-offset="50" onClick={handleScroll}>Preços</a>
           <a href="/" className={styles.loginButton}>Login</a>
         </div>
       </nav>
@@ -52,8 +52,8 @@ const LandingPage = () => {
               Comece Grátis
               <span className={styles.buttonSubtext}>2 dias de teste</span>
             </a>
-            <a 
-              href="https://wa.me/62993773456" 
+            <a
+              href="https://wa.me/62993773456"
               className={styles.whatsappButton}
               target="_blank"
               rel="noopener noreferrer"

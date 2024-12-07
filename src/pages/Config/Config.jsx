@@ -57,10 +57,10 @@ const Config = () => {
     <div className={styles.container}>
       <TopBar />
       <ToastConfig />
-      
+
       <div className={styles.content}>
         <Title level={2} className={styles.pageTitle}>Configurações</Title>
-        
+
         {loading ? (
           <div className={styles.loadingContainer}>
             <Spin tip="Carregando..." size="large" />
@@ -108,7 +108,7 @@ const Config = () => {
               <Title level={3} className={styles.sectionTitle}>
                 Categorias Cadastradas
               </Title>
-              
+
               <div className={styles.errorMessages}>
                 {createError && <p className={styles.errorText}>{createError}</p>}
                 {listError && <p className={styles.errorText}>{listError}</p>}
@@ -164,7 +164,7 @@ const Config = () => {
           </>
         )}
       </div>
-      
+
       <FormModal visible={visible} onCancel={handleCancel} />
       <BottomBar />
       <Footer />

@@ -2,7 +2,7 @@ import React from 'react';
 import { FaCircleUser, FaArrowRightFromBracket } from "react-icons/fa6";
 import styles from "./TopBar.module.css";
 import { useNavigate } from 'react-router-dom';
-import { saudacao }  from '../../utils/greetings.js';
+import { saudacao } from '../../utils/greetings.js';
 import { getUsernameFromToken, logout } from '../../services/authService';
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
 
@@ -11,7 +11,7 @@ const TopBar = () => {
     const username = getUsernameFromToken();
 
     const handleLogout = () => {
-        logout(); 
+        logout();
         navigate('/');
     };
 

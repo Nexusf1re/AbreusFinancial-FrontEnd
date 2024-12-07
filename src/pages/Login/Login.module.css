@@ -2,10 +2,11 @@
 
 @media screen and (max-width: 480px) {
   .container {
-      max-width: 95vw !important;
+    max-width: 95vw !important;
   }
 }
-.customToastContainer{
+
+.customToastContainer {
   border-radius: 20px !important;
 }
 
@@ -15,7 +16,7 @@
   box-sizing: border-box;
   font-family: var(--font-primary);
 
-  max-width: 450px; 
+  max-width: 450px;
   max-height: 600px;
   backdrop-filter: blur(4px);
   background-color: var(--background-color) !important;
@@ -32,7 +33,7 @@
 .container .h1 {
   font-size: 1.75;
   margin: 0;
-  text-align: center;  
+  text-align: center;
   color: var(--font-color);
 }
 
@@ -76,14 +77,14 @@
 
 .inputBox .input::placeholder {
   color: var(--font-color);
-  text-transform: uppercase;  
+  text-transform: uppercase;
 }
 
 .inputBox .input:focus {
   transform: scale(1.01);
-  box-shadow: 6px 6px 2px var(--shadow-color), 
-              inset 2px 2px 1px var(--shadow-color), 
-              inset -1px -1px 5px var(--highlight-color);
+  box-shadow: 6px 6px 2px var(--shadow-color),
+    inset 2px 2px 1px var(--shadow-color),
+    inset -1px -1px 5px var(--highlight-color);
 }
 
 .icon {
@@ -100,7 +101,7 @@
   font-weight: 700;
 }
 
-.eyeIcon{
+.eyeIcon {
   font-size: 20px;
   position: absolute;
   top: 26%;
@@ -150,7 +151,8 @@
   margin-bottom: 10px;
 }
 
-.cadastrar, .p {
+.cadastrar,
+.p {
   color: var(--font-color);
   text-align: center;
   justify-content: center;
@@ -163,14 +165,14 @@
   background: var(--background-color);
   padding: 20px;
   border-radius: 10px;
-  width: 90%; 
+  width: 90%;
   max-width: 500px;
   margin: auto;
   position: fixed;
-  top: 50%; 
-  left: 50%; 
-  transform: translate(-50%, -50%); 
-  z-index: 1000; 
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
 }
 
 /* Overlay (fundo semi-transparente) */
@@ -181,7 +183,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 999; 
+  z-index: 999;
 }
 
 .forgotPassword {
@@ -198,16 +200,16 @@
   border: none;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
-  width: 100%; 
+  width: 100%;
   max-width: 180px;
 }
 
 .forgotPassword button:hover {
-  background-color: var(--success-color); 
+  background-color: var(--success-color);
   transform: translateY(-2px);
 }
 
 .forgotPassword button:focus {
-  outline: none; 
+  outline: none;
   box-shadow: 0 0 0 4px var(--focus-color);
 }

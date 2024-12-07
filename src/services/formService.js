@@ -8,7 +8,7 @@ export const insertTransaction = async (transactionData) => {
         console.error("Token não encontrado. Usuário não autenticado.");
         throw new Error("Usuário não autenticado.");
     }
-   
+
     try {
         const response = await axios.post(`${API_URL}/transactions/insert`, transactionData, {
             headers: {
