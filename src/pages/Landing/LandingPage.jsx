@@ -107,7 +107,7 @@ const LandingPage = () => {
             <h3>Premium</h3>
             <div className={styles.price}>
               <span className={styles.currency}>R$</span>
-              <span className={styles.amount}>29</span>
+              <span className={styles.amount}>29.90</span>
               <span className={styles.period}>/mês</span>
             </div>
             <ul className={styles.features}>
