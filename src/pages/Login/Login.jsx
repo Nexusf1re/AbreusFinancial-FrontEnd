@@ -60,7 +60,7 @@ const Login = ({ onLogin }) => {
 
       try {
         const subscriptionStatus = await checkSubscriptionStatus();
-
+        await new Promise(resolve => setTimeout(resolve, 1000));
         if (subscriptionStatus === 'active' || subscriptionStatus === 'trialing') {
           toast.success("Login bem-sucedido!");
           navigate('/home');
