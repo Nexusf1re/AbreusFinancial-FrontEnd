@@ -1,5 +1,6 @@
 import React from 'react';
-import { FaHouse, /*FaBrazilianRealSign,*/ FaFileInvoiceDollar, FaGear } from "react-icons/fa6";
+import { FaGear } from "react-icons/fa6";
+import { BiHomeAlt , BiHistory } from "react-icons/bi";
 import { useLocation } from 'react-router-dom';
 import styles from './BottomBar.module.css';
 
@@ -10,7 +11,7 @@ const BottomBar = () => {
         <div className={styles.bottombar}>
             <a className={styles.a} href='/home'>
                 <span className={styles.span}>
-                    <FaHouse className={`${styles.home} ${location.pathname === '/home' ? styles.activeIcon : ''}`} />
+                    <BiHomeAlt className={`${styles.home} ${location.pathname === '/home' ? styles.activeIcon : ''}`} />
                 </span>
                 Início
             </a>
@@ -24,7 +25,7 @@ const BottomBar = () => {
             */}
             <a className={styles.a} href='/transactions'>
                 <span className={styles.span}>
-                    <FaFileInvoiceDollar className={`${styles.historico} ${location.pathname === '/transactions' ? styles.activeIcon : ''}`} />
+                    <BiHistory className={`${styles.historico} ${location.pathname === '/transactions' ? styles.activeIcon : ''}`} />
                 </span>
                 Histórico
             </a>
