@@ -60,6 +60,7 @@
   .container {
     padding-left: 20px;
     height: auto;
+    min-height: 600px;
   }
 }
 
