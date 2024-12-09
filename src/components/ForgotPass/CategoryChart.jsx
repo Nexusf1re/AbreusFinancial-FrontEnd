@@ -63,7 +63,7 @@ const CategoryChart = ({ mes, ano }) => {
         callbacks: {
           label: function (tooltipItem) {
             const originalValue = sortedData[tooltipItem.dataIndex].valor;
-            return `${tooltipItem.label}: Total: R$ ${originalValue.toLocaleString()}`;
+            return `${tooltipItem.label}: R$ ${originalValue.toLocaleString()}`;
           },
         },
       },
@@ -81,10 +81,7 @@ const CategoryChart = ({ mes, ano }) => {
       ctx.font = '16px Arial';
       
       const total = sortedData.reduce((acc, curr) => acc + curr.valor, 0);
-      ctx.fillText(`R$ ${total.toLocaleString('pt-BR', {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-      })}`, centerX, centerY);
+      ctx.fillText(`${total.toLocaleString()}`, centerX, centerY);
       ctx.restore();
     }
   };
@@ -112,12 +109,7 @@ const CategoryChart = ({ mes, ano }) => {
           <div className={styles.chartWrapper}>
             <Doughnut data={chartData} options={options} className={styles.canvas} />
             <div className={styles.totalValue}>
-              R$ {sortedData.reduce((acc, curr) => acc + curr.valor, 0).toLocaleString('pt-BR', {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-              })}
-              <br />
-              Total
+              R$ {sortedData.reduce((acc, curr) => acc + curr.valor, 0).toLocaleString()}
             </div>
           </div>
           <div className={styles.categoryList}>

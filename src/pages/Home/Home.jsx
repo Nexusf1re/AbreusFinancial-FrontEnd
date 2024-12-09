@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { DatePicker } from 'antd';
+import { DatePicker, Tooltip, Collapse } from 'antd';
 import dayjs from 'dayjs';
 import locale from 'antd/es/date-picker/locale/pt_BR';
 import 'dayjs/locale/pt-br';
@@ -13,6 +13,7 @@ import Footer from '../../components/Footer/Footer';
 import FormModal from '../../components/FormModal/FormModal';
 import FormBtn from '../../components/FormModal/FormBtn';
 import ToastConfig from '../../components/ToastConfig/ToastConfig';
+import { InfoCircleOutlined } from '@ant-design/icons';
 
 const Home = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -61,6 +62,13 @@ const Home = () => {
     separator: "."
   };
 
+  const cardDescriptions = {
+    annualBalance: "Mostra o saldo total do ano atual, considerando todas as entradas e saídas",
+    income: "Exibe o total de entradas (receitas) do mês selecionado",
+    outgoing: "Exibe o total de saídas (despesas) do mês selecionado",
+    monthBalance: "Mostra o saldo do mês selecionado (entradas - saídas)"
+  };
+
   return (
     <div className={`${styles.container}`}>
       <TopBar />
@@ -70,38 +78,78 @@ const Home = () => {
       </div>
 
       <div className={`${styles.annualBalance} ${styles.card}`}>
-        <p className={`${styles.name} ${styles.p}`}>Balanço Ano Atual</p>
+        <p className={`${styles.name} ${styles.p}`}>
+          Balanço Ano Atual
+          <Tooltip title={cardDescriptions.annualBalance}>
+            <InfoCircleOutlined style={{ marginLeft: '8px', cursor: 'pointer' }} />
+          </Tooltip>
+        </p>
         <p className={`${styles.balanceValue} ${styles.p} ${yearlyBalance < 0 ? styles.negative : styles.positive}`}>
-          R$
-          <CountUp {...countUpProps} end={yearlyBalance} />
+          R$ <CountUp {...countUpProps} end={yearlyBalance} />
         </p>
       </div>
 
       <div className={styles.InOut}>
         <div className={`${styles.income} ${styles.p} ${styles.card}`}>
-          <p className={`${styles.name} ${styles.p}`}>Total Entrada</p>
+          <p className={`${styles.name} ${styles.p}`}>
+            Total Entrada
+            <Tooltip title={cardDescriptions.income}>
+              <InfoCircleOutlined style={{ marginLeft: '8px', cursor: 'pointer' }} />
+            </Tooltip>
+          </p>
           <p className={`${styles.icomeValue} ${styles.p} ${totalIncome < 0 ? styles.negative : styles.positive}`}>
-            R$
-            <CountUp {...countUpProps} end={totalIncome} duration={1} />
+            R$ <CountUp {...countUpProps} end={totalIncome} duration={1} />
           </p>
         </div>
 
         <div className={`${styles.outgoing} ${styles.card}`}>
-          <p className={`${styles.name} ${styles.p}`}>Total Saída</p>
+          <p className={`${styles.name} ${styles.p}`}>
+            Total Saída
+            <Tooltip title={cardDescriptions.outgoing}>
+              <InfoCircleOutlined style={{ marginLeft: '8px', cursor: 'pointer' }} />
+            </Tooltip>
+          </p>
           <p className={`${styles.outgoingValue} ${styles.p} ${totalExpenses < 0 ? styles.negative : styles.positive}`}>
-            R$
-            <CountUp {...countUpProps} end={totalExpenses} duration={1} />
+            R$ <CountUp {...countUpProps} end={totalExpenses} duration={1} />
           </p>
         </div>
       </div>
-
       <div className={`${styles.monthBalance} ${styles.card}`}>
-        <p className={`${styles.name} ${styles.p}`}>Balanço Mês Atual</p>
+        <p className={`${styles.name} ${styles.p}`}>
+          Balanço Mês Atual
+          <Tooltip title={cardDescriptions.monthBalance}>
+            <InfoCircleOutlined style={{ marginLeft: '8px', cursor: 'pointer' }} />
+          </Tooltip>
+        </p>
         <p className={`${styles.balanceValue} ${styles.p} ${monthlyBalance < 0 ? styles.negative : styles.positive}`}>
-          R$
-          <CountUp {...countUpProps} end={monthlyBalance} />
+          R$ <CountUp {...countUpProps} end={monthlyBalance} />
         </p>
       </div>
+
+      <Collapse
+        className={`${styles.creditInfo} ${styles.card}`}
+        expandIconPosition="end"
+        ghost
+        items={[
+          {
+            key: '1',
+            label: (
+              <div className={styles.cardHeader}>
+                <span className={`${styles.name} ${styles.p}`}>
+                  Como funciona o cartão de crédito?
+                  <InfoCircleOutlined style={{ marginLeft: '8px' }} />
+                </span>
+              </div>
+            ),
+            children: (
+              <div className={styles.creditInfoContent}>
+                <p>💡 As despesas no cartão de crédito só são contabilizadas quando você registra o pagamento da fatura.</p>
+                <p>📊 Exemplo: Uma compra de R$ 100 no crédito só aparecerá nas suas despesas quando você lançar o pagamento da fatura.</p>
+              </div>
+            ),
+          },
+        ]}
+      />
 
       <div className={`${styles.graph} ${styles.card}`}>
         <CategoryChart

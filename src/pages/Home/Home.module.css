@@ -1,6 +1,5 @@
+/*Desktop*/
 @media screen and (min-width: 575px) {
-    /*Desktop*/
-
     .container {
         display: flex;
         flex-direction: column;
@@ -117,10 +116,8 @@
 
 }
 
-
+/*Mobile*/
 @media screen and (max-width: 574px) {
-
-    /*Mobile*/
     .container {
         display: flex;
         flex-direction: column;
@@ -269,5 +266,35 @@
         overflow: hidden;
         height: auto;
     }
+    .creditInfo {
+        margin: -4px 0px 5px 0px !important; /*top, right, bottom, left*/
+    }
 
+}
+
+/*General*/
+
+.creditInfo {
+    margin: 0px 0px 0px 0px; /*top, right, bottom, left*/
+    border-radius: 10px;
+    background-color: var(--back-color);
+    border-left: 4px solid #1890ff;
+}
+
+.creditInfo :global(.ant-collapse-header) {
+    padding: 8px 16px !important;
+}
+
+.creditInfo :global(.ant-collapse-content-box) {
+    padding: 0 16px 16px !important;
+}
+
+.creditInfoContent {
+    font-size: var(--font-size-base);
+    color: var(--font-color);
+}
+
+.creditInfoContent p {
+    margin: 5px 0;
+    line-height: 1.4;
 }
