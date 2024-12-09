@@ -79,6 +79,9 @@
   border: none;
   cursor: pointer;
 }
+.exiticon{
+  scale: 1.2;
+}
 
 .exit .p {
   margin-top: -5px;

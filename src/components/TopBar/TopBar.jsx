@@ -1,5 +1,6 @@
 import React from 'react';
-import { FaCircleUser, FaArrowRightFromBracket } from "react-icons/fa6";
+import { FaArrowRightFromBracket } from "react-icons/fa6";
+import { BiUserCircle } from "react-icons/bi";
 import styles from "./TopBar.module.css";
 import { useNavigate } from 'react-router-dom';
 import { saudacao } from '../../utils/greetings.js';
@@ -17,7 +18,7 @@ const TopBar = () => {
 
     return (
         <div className={styles.topbar}>
-            <FaCircleUser className={styles.usericon} />
+            <BiUserCircle className={styles.usericon} />
             <p className={styles.welcome}>Olá {username}</p>
             <p className={styles.greeting}>{saudacao()}</p>
             <div className={styles.themeToggleContainer}>
