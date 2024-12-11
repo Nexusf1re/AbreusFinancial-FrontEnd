@@ -143,9 +143,12 @@ const Home = () => {
             ),
             children: (
               <div className={styles.creditInfoContent}>
-                <p>💡 As despesas no cartão de crédito só são contabilizadas quando você registra o pagamento da fatura.</p>
-                <p>📊 Exemplo: Uma compra de R$ 100 no crédito só aparecerá nas suas despesas quando você lançar o pagamento da fatura.</p>
-              </div>
+              <p>💡 <span style={{ fontWeight: 'bold' }}>Importante:</span> Compras no cartão de crédito não são contabilizadas como despesas até o pagamento da fatura.</p>
+              <p>📊 <span style={{ fontWeight: 'bold' }}>Exemplo:</span> Se você fizer uma compra de R$ 100 no crédito, ela só será registrada nas suas saídas quando lançar o pagamento da fatura.</p>
+              <p>💬 Isso ajuda você a acompanhar melhor seus gastos reais e prever o impacto do cartão de crédito nas suas finanças.</p>
+
+            </div>
+            
             ),
           },
         ]}
