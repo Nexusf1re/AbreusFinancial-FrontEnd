@@ -3,7 +3,7 @@ import { fetchFinancialData, editTransaction, deleteTransaction } from '../servi
 import useCategories from '../hooks/useListCategories';
 import dayjs from 'dayjs';
 import Big from 'big.js';
-import { defaultCategoriesFilter } from '../components/DefaultCategories';
+import { defaultCategoriesFilter } from '../utils/DefaultCategories';
 
 export const useTransactions = () => {
     const [transactions, setTransactions] = useState([]);

@@ -3,7 +3,7 @@ import { Modal, Form, Input, Select, Button, DatePicker, Typography, Spin } from
 import useForm from '../../hooks/useForm';
 import useCategories from '../../hooks/useListCategories';
 import styles from './FormModal.module.css';
-import { defaultCategories } from '../../components/DefaultCategories';
+import { defaultCategories } from '../../utils/DefaultCategories';
 import locale from 'antd/es/date-picker/locale/pt_BR';
 import 'dayjs/locale/pt-br';
 import { NumericFormat } from 'react-number-format';

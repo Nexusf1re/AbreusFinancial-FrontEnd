@@ -11,7 +11,7 @@ import FormModal from '../../components/FormModal/FormModal';
 import FormBtn from '../../components/FormModal/FormBtn';
 import ToastConfig from '../../components/ToastConfig/ToastConfig';
 import AccessPortalButton from '../../components/AccessPortalButton/AccessPortalButton';
-import { defaultCategories } from '../../components/DefaultCategories';
+import { defaultCategories } from '../../utils/DefaultCategories';
 
 const { Title } = Typography;
 const { Option } = Select;

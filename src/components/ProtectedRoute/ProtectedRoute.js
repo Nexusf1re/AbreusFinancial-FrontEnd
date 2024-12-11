@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import useSubscriptionStatus from '../hooks/useSubscriptionStatus';
+import useSubscriptionStatus from '../../hooks/useSubscriptionStatus';
 import './ProtectedRoute.css'; // Arquivo CSS para aplicar o blur
 
 const ProtectedRoute = ({ children }) => {
@@ -26,8 +26,12 @@ const ProtectedRoute = ({ children }) => {
 
   if (loading && showLoading) {
     return (
-      <div className="loading-overlay">
-        <div className="loading-spinner">Carregando...</div>
+      <div className="protected-route-container">
+        <div className="interaction-blocker"></div>
+        <div className="blur-overlay">
+          {children}
+        </div>
+        <div className="loading-spinner"></div>
       </div>
     );
   }

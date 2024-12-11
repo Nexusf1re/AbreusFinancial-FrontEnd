@@ -10,7 +10,7 @@ import Config from './pages/Config/Config';
 import ResetPass from './pages/ResetPass/ResetPass';
 import Payment from './pages/Payment/Payment';
 import ToastConfig from './components/ToastConfig/ToastConfig';
-import ProtectedRoute from './components/ProtectedRoute';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import useAuth from './hooks/useAuth';
 import LandingPage from './pages/Landing/LandingPage';
 import useTheme from './hooks/useTheme';

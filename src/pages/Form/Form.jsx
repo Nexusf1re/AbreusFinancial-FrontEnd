@@ -8,7 +8,7 @@ import styles from './Form.module.css';
 import useForm from '../../hooks/useForm';
 import useCategories from '../../hooks/useListCategories';
 import Footer from '../../components/Footer/Footer'
-import { defaultCategories } from '../../components/DefaultCategories'
+import { defaultCategories } from '../../utils/DefaultCategories'
 
 const { Title } = Typography;
 const { Option } = Select;

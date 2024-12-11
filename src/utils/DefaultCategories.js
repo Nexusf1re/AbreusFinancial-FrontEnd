@@ -1,4 +1,4 @@
-// src/components/DefaultCategories.js
+// src/utils/DefaultCategories.js
 
 export const defaultCategories = [
   { Category: 'Alimentação', Type: 'Saida' },
