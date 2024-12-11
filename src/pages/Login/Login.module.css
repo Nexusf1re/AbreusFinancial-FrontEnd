@@ -6,6 +6,13 @@
   }
 }
 
+@media screen and (min-width: 575px) {
+  .container {
+    padding-top: 3rem !important;
+    padding-bottom:1rem !important;
+  }
+}
+
 .customToastContainer {
   border-radius: 20px !important;
 }
@@ -15,7 +22,6 @@
   padding: 0;
   box-sizing: border-box;
   font-family: var(--font-primary);
-
   max-width: 450px;
   max-height: 600px;
   backdrop-filter: blur(4px);

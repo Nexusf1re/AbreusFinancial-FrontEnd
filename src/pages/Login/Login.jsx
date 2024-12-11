@@ -111,73 +111,74 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <div className={styles.container}>
-      <ToastConfig />
-      <div style={{ position: 'absolute', top: '20px', right: '20px', zIndex: '9999' }}>
-        <ThemeToggle />
-      </div>
-      <img
-        src={currentSlogan}
-        alt="Logo"
-        className={styles.logo}
-        onClick={handleLogoClick}
-        style={{ cursor: 'pointer' }}
-      />
-      <h1 className={styles.h1}>Login</h1>
-      <h3 className={styles.controle}>Controle Financeiro</h3>
-      <form onSubmit={handleSubmit}>
-        <div className={styles.inputBox}>
-          <FaRegEnvelope className={styles.icon} />
-          <input
-            className={styles.input}
-            type="email"
-            id="email"
-            value={Email}
-            onChange={handleEmailChange}
-            placeholder="Email"
-            required
-            autoComplete="email"
-          />
+    <>
+      <div className={styles.container}>
+        <ToastConfig />
+        <div style={{ position: 'absolute', top: '20px', right: '20px', zIndex: '9999' }}>
+          <ThemeToggle />
         </div>
-        <div className={styles.inputBox}>
-          <FaLock className={styles.icon} />
-          <input
-            className={styles.input}
-            type={showPassword ? "text" : "password"}
-            id="password"
-            value={Password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Senha"
-            onKeyDown={handleCapsLock}
-            required
-            autoComplete="current-password"
-          />
-
-          {capsLockWarning && (
-            <div className={styles.capsLockWarning}>
-              <p style={{ fontSize: '18px' }}>Caps Lock está ativado</p>
-            </div>
-          )}
-
-          <div className={styles.eyeIcon} onClick={togglePasswordVisibility}>
-            {showPassword ? <FaEyeSlash /> : <FaEye />}
+        <img
+          src={currentSlogan}
+          alt="Logo"
+          className={styles.logo}
+          onClick={handleLogoClick}
+          style={{ cursor: 'pointer' }}
+        />
+        <h1 className={styles.h1}>Login</h1>
+        <h3 className={styles.controle}>Controle Financeiro</h3>
+        <form onSubmit={handleSubmit}>
+          <div className={styles.inputBox}>
+            <FaRegEnvelope className={styles.icon} />
+            <input
+              className={styles.input}
+              type="email"
+              id="email"
+              value={Email}
+              onChange={handleEmailChange}
+              placeholder="Email"
+              required
+              autoComplete="email"
+            />
           </div>
+          <div className={styles.inputBox}>
+            <FaLock className={styles.icon} />
+            <input
+              className={styles.input}
+              type={showPassword ? "text" : "password"}
+              id="password"
+              value={Password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Senha"
+              onKeyDown={handleCapsLock}
+              required
+              autoComplete="current-password"
+            />
+
+            {capsLockWarning && (
+              <div className={styles.capsLockWarning}>
+                <p style={{ fontSize: '18px' }}>Caps Lock está ativado</p>
+              </div>
+            )}
+
+            <div className={styles.eyeIcon} onClick={togglePasswordVisibility}>
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </div>
+          </div>
+          <button className={styles.btn} type="submit">Entrar</button>
+        </form>
+
+        <div className={styles.forgotPassword}>
+          <button onClick={openModal}>Esqueci a senha</button>
         </div>
-        <button className={styles.btn} type="submit">Entrar</button>
-      </form>
 
-      <div className={styles.forgotPassword}>
-        <button onClick={openModal}>Esqueci a senha</button>
+        <div className={styles.cadastrar}>
+          <Link className={styles.a} to="/sign-up"><p className={styles.p}>Não tem uma conta?</p> Cadastre-se</Link>
+        </div>
+
+        <ResetPassword isModalOpen={isModalOpen} closeModal={closeModal} />
       </div>
-
-      <div className={styles.cadastrar}>
-        <Link className={styles.a} to="/sign-up"><p className={styles.p}>Não tem uma conta?</p> Cadastre-se</Link>
-      </div>
-
-      <ResetPassword isModalOpen={isModalOpen} closeModal={closeModal} />
-
       <Footer />
-    </div>
+    </>
   );
 };
 
