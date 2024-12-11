@@ -283,6 +283,7 @@
 
 .creditInfo :global(.ant-collapse-header) {
     padding: 8px 16px !important;
+    color: var(--font-color) !important;
 }
 
 .creditInfo :global(.ant-collapse-content-box) {
